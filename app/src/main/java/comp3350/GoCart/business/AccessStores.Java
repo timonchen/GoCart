@@ -1,4 +1,4 @@
-package comp3350.gocart.business;
+package comp3350.GoCart.business;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,10 +17,9 @@ public class AccessStores{
 
 
     public AccessStores(){
-        StorePersistence = Services.getStorePersistence();
+        storePersistence = Services.getStorePersistence();
         stores = null;
         store = null;
         currentStore = 0;
-        
     }
 }

@@ -4,7 +4,7 @@ android {
     compileSdkVersion 33
 
     defaultConfig {
-        applicationId "comp3350.srsys"
+        applicationId "comp3350.GoCart"
         minSdkVersion 19
         targetSdkVersion 33
         versionCode 1
@@ -16,7 +16,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    namespace 'comp3350.srsys'
+    namespace 'comp3350.GoCart'
 }
 
 dependencies {
