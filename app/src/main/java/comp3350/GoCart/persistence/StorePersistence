@@ -1,0 +1,14 @@
+package comp3350.gocart.persistence;
+
+import java.util.List;
+
+import copmp3350.objects.Store;
+
+public interface StorePersistence {
+    List<Store> getStore(Store currentStore);
+
+    //likely wont be needed
+    Store insertStore(Store currentStore);
+    Store updateStore(Store currentStore);
+    void deleteStore(Store currentStore);
+}
