@@ -1,13 +1,14 @@
-package comp3350.gocart.application;
+package comp3350.GoCart.application;
 
-import comp3350.GoCart.StorePersistence;
-import comp3350.GoCart.ProductPersistence;
-import comp3350.GoCart.StorePersistenceStub;
-import comp3350.GoCart.ProductPersistenceStub;
+import comp3350.GoCart.persistence.StorePersistence;
+import comp3350.GoCart.persistence.stubs.ProductPersistenceStub;
+import comp3350.GoCart.persistence.stubs.StorePersistenceStub;
+import comp3350.GoCart.persistence.ProductPersistence;
 
-Public class Services{
-    private static StorePersistence StorePersistence = null;
-    private static ProductPersistence ProductPersistence = null;
+
+public class Services{
+    private static StorePersistence storePersistence = null;
+    private static ProductPersistence productPersistence = null;
 
     public static synchronized StorePersistence getStorePersistence(){
         if (storePersistence == null){
@@ -18,7 +19,7 @@ Public class Services{
     }
     public static synchronized ProductPersistence getProductPersistence(){
         if (productPersistence == null){
-            productPersistence = new productPersistenceStub();
+            productPersistence = new ProductPersistenceStub();
         }
         return productPersistence;
 

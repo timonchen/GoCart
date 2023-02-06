@@ -1,17 +1,12 @@
-package comp3350.gocart.objects;
+package comp3350.GoCart.objects;
 
-import java.util.objects;
 import java.math.BigDecimal;
 
-public class Product{
-
-    
+public class Product {
     private final String productName;
     private final BigDecimal productPrice;
-    //private final arraylist<string> allergen?
 
-    public Product(final int newIndex, final String newProductName, final BigDecimal newProductPrice){
-        productindex = newIndex;
+    public Product(final String newProductName, final BigDecimal newProductPrice){
         productName = newProductName;
         productPrice = newProductPrice;
     }
@@ -21,11 +16,22 @@ public class Product{
         return productName;
     }
 
-    public Bigdecimal getProductPrice(){
+    public BigDecimal getProductPrice(){
         return productPrice;
     }
 
 
+    public boolean equals(Object other) {
+        if(other instanceof Product) {
+            Product toCheck = (Product) other;
+            return productName.equals(toCheck.productName);
+        }
 
+        return false;
+    }
+
+    public String toString(){
+        return "Product: " + productName + "price: " + productPrice;
+    }
 
 }   

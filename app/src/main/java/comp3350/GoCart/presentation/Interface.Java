@@ -1,4 +1,4 @@
-package comp3350.gocart.presentation;
+package comp3350.GoCart.presentation;
 
 public class Interface{
 

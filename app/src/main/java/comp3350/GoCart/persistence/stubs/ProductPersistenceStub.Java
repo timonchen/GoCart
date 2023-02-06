@@ -1,49 +1,58 @@
-package comp3350.gocart.persistence.stubs;
+package comp3350.GoCart.persistence.stubs;
 
+import java.math.BigDecimal;
+import java.security.ProtectionDomain;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.HashMap;
 
-import comp3350.gocart.objects.product;
-import comp3350.gocart.persistence.productPersistence;
+import comp3350.GoCart.objects.Product;
+import comp3350.GoCart.persistence.ProductPersistence;
 
-public class productPersistenceStub implements productPersistence{
+public class ProductPersistenceStub implements ProductPersistence{
 
-    // dont need hashmap with index
-    ** private ArrayList<ArrayList<Product>>  products;
-    
+    private List<Product> products;
 
-    /
+    public ProductPersistenceStub(){
+        products = new ArrayList<>();
 
-    public productPersistenceStub(){
-        this.products = new Arraylist<ArrayList<Product>>();
-        //store 1
-        ArrayList<Product> s1 = new ArrayList<product>();
-        //HashMap<Product> s1 = new HashMap<product>();
-        s1.add(new Product("apple",2))
-        s1.add(new Product("bannana",1.8))
- 
-        this.products.add(s1);
+        products.add(new Product("Banana", new BigDecimal("1.05")));
+        products.add(new Product("Rye Bread", new BigDecimal("1.45")));
+        products.add(new Product("Lucky Charms", new BigDecimal("3.99")));
+        products.add(new Product("Beef Jerkey", new BigDecimal("9.99")));
+        products.add(new Product("12 cookies", new BigDecimal("12.99")));
+        products.add(new Product("toilet paper", new BigDecimal("15.99")));
 
-
-        //store 2
-        ArrayList<Product> s2 = new ArrayList<product>();
-        s2.add(new Product("apple",2.1))
-
-        this.products.add(s2);
     }
 
     // int or store, store seems awkward
-    public List<Product> getProduct<int currentStore, Product currentProduct{
-        final List<Product> product = new ArrayList<>();
-        product.add(this.products.get(currentStore).get(currentProduct.getProductIndex()));
-    
-    {
+    @Override
+    public List<Product> getProduct(Product currentProduct) {
+        int index = products.indexOf(currentProduct);
+        List<Product> toReturn = new ArrayList<>();
+        if(index > -1) {
+            toReturn.add(products.get(index));
+        }
 
+        return toReturn;
     }
 
+    @Override
+    public Product insertProduct(Product toInsert) {
+        products.add(toInsert);
+        return toInsert;
+    }
 
+    @Override
+    public Product updateProduct(Product toUpdate) {
+        int index = products.indexOf(toUpdate);
+        if(index > -1) {
+            products.set(index, toUpdate);
+        }
+        return toUpdate;
+    }
 
-
+    @Override
+    public boolean deleteProduct(Product toDelete) {
+        return products.remove(toDelete);
+    }
 }
