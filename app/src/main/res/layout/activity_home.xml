@@ -31,7 +31,8 @@
             android:text="@string/find_stores"
             android:id="@+id/buttonCourses"
             android:layout_marginTop="60dp"
-            android:layout_marginBottom="60dp" />
+            android:layout_marginBottom="60dp"
+            android:onClick=""/>
 
 
     </LinearLayout>

@@ -1,6 +1,5 @@
-package comp3350.gocart.application;
+package comp3350.GoCart.application;
 
-import comp3350.gocart.presentation.Interface;
 
 public class Main{
     public static void main(String[] args){

@@ -12,6 +12,7 @@ public class ProductPersistenceStub implements ProductPersistence{
 
     private List<Product> products;
 
+
     public ProductPersistenceStub(){
         products = new ArrayList<>();
 

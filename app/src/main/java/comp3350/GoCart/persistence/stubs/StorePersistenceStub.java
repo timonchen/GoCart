@@ -22,7 +22,6 @@ public class StorePersistenceStub implements StorePersistence {
 
         stores.add(new Store("Safeway", "2025 Corydon Ave"));
         stores.add(new Store("Safeway", "655 Osborne"));
-
     }
 
     @Override
