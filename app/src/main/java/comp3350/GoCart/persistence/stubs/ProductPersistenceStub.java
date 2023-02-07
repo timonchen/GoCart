@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.security.ProtectionDomain;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import comp3350.GoCart.objects.Product;
 import comp3350.GoCart.persistence.ProductPersistence;
@@ -18,6 +19,7 @@ public class ProductPersistenceStub implements ProductPersistence{
 
         products.add(new Product("Banana", new BigDecimal("1.05"),false));
         products.add(new Product("Rye Bread", new BigDecimal("1.45"),true));
+        products.add(new Product("Whole Wheat Bread", new BigDecimal("1.45"),true));
         products.add(new Product("Lucky Charms", new BigDecimal("3.99"),true));
         products.add(new Product("Beef Jerkey", new BigDecimal("9.99"),false));
         products.add(new Product("12 cookies", new BigDecimal("12.99"),true));
@@ -48,6 +50,24 @@ public class ProductPersistenceStub implements ProductPersistence{
         }
         return restrictedProducts;
 
+    }
+
+    @Override
+    public List<Product> searchProductsByName(String productName) {
+        List<Product> matchingProducts = new ArrayList<>();
+
+        if (productName != null)
+        {
+            for (int i = 0; i < products.size(); i++)
+            {
+                if (products.get(i).getProductName().toLowerCase().contains(productName.toLowerCase()))
+                {
+                    matchingProducts.add(products.get(i));
+                }
+            }
+        }
+
+        return matchingProducts;
     }
 
     @Override
