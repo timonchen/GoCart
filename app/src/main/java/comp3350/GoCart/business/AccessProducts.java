@@ -29,4 +29,9 @@ public class AccessProducts{
         products = productPersistence.getDietaryRestrictedProducts();
         return Collections.unmodifiableList(products);
     }
+
+    public List<Product> searchProductsByName(String productName) {
+        products = productPersistence.searchProductsByName(productName);
+        return Collections.unmodifiableList(products);
+    }
 }
