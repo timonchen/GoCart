@@ -9,12 +9,12 @@ import comp3350.GoCart.persistence.ProductPersistence;
 
 public class AccessProducts{
 
-    private ProductPersistence productPersistence;
+    private final ProductPersistence productPersistence;
 
     private List<Product> products; // list of stores of products.
     
-    private Product product;
-    private int currentProduct;
+    private final Product product;
+    private final int currentProduct;
 
 
     public AccessProducts(){
@@ -23,5 +23,15 @@ public class AccessProducts{
         product = null;
         currentProduct = 0;
         
+    }
+    public List<Product> getDietaryProducts()
+    {
+        products = productPersistence.getDietaryRestrictedProducts();
+        return Collections.unmodifiableList(products);
+    }
+
+    public List<Product> searchProductsByName(String productName) {
+        products = productPersistence.searchProductsByName(productName);
+        return Collections.unmodifiableList(products);
     }
 }

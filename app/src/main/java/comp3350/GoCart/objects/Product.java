@@ -6,9 +6,11 @@ public class Product {
     private final String productName;
     private final BigDecimal productPrice;
 
-    public Product(final String newProductName, final BigDecimal newProductPrice){
+    private  final boolean peanutAllergy;
+    public Product(final String newProductName, final BigDecimal newProductPrice, boolean peanutAllergy){
         productName = newProductName;
         productPrice = newProductPrice;
+        this.peanutAllergy = peanutAllergy;
     }
 
 
@@ -20,7 +22,7 @@ public class Product {
         return productPrice;
     }
 
-
+    public boolean hasPeanutAllergy(){return peanutAllergy ;   }
     public boolean equals(Object other) {
         if(other instanceof Product) {
             Product toCheck = (Product) other;
@@ -31,7 +33,7 @@ public class Product {
     }
 
     public String toString(){
-        return "Product: " + productName + "price: " + productPrice;
+        return "Product: " + productName + "price: " + productPrice+" Peanut Allergy:" +hasPeanutAllergy();
     }
 
 }   
