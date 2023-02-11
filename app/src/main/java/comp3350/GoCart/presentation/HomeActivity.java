@@ -1,7 +1,9 @@
 package comp3350.GoCart.presentation;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import comp3350.GoCart.R;
 
@@ -18,5 +20,8 @@ public class HomeActivity extends Activity {
         super.onDestroy();
     }
 
-
+    public void buttonFindStoreOnClick(View v){
+        Intent storesIntent = new Intent(HomeActivity.this, FindStoreActivity.class);
+        HomeActivity.this.startActivity(storesIntent);
+    }
 }
