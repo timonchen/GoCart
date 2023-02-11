@@ -1,6 +1,7 @@
 package comp3350.GoCart.business;
 
 
+import java.nio.file.attribute.AclEntry;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -32,19 +33,6 @@ public class AccessStores{
     public List<Store> getStores() {
         stores = storePersistence.getAllStores();
         return Collections.unmodifiableList(stores);
-    }
-
-    public List<Store> getStoresByName(String storeName) {
-        List<Store> storeList = getStores();
-        List<Store> storesWanted = new ArrayList<>();
-
-        for (int i = 0; i < storeList.size(); i++) {
-            if (storeList.get(i).getStoreName().equals(storeName)) {
-                storesWanted.add(storeList.get(i));
-            }
-        }
-
-        return storesWanted;
     }
 
     /*

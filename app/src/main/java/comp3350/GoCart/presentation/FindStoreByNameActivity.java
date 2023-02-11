@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import comp3350.GoCart.business.AccessStores;
+import comp3350.GoCart.business.GetByName;
 import comp3350.GoCart.objects.Store;
 import comp3350.GoCart.R;
 
@@ -50,7 +51,9 @@ public class FindStoreByNameActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String input = searchBar.getText().toString();  // Get the text from the text box
-                List<Store> searchResults = accessStores.getStoresByName(input);
+                List<Store> stores = accessStores.getStores();  // Get our list of stores from db
+
+                List<Store> searchResults = GetByName.stores(input, storeList);    // Find stores in our list with name given
 
                 // Display search results in the recycler viewer
                 adapter.setStores(searchResults);
