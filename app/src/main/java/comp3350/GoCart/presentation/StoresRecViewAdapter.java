@@ -8,6 +8,8 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -49,6 +51,10 @@ public class StoresRecViewAdapter extends RecyclerView.Adapter<StoresRecViewAdap
         notifyDataSetChanged();
     }
 
+    protected List<Store> getStores(){
+        return stores;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView txtName;
@@ -56,6 +62,9 @@ public class StoresRecViewAdapter extends RecyclerView.Adapter<StoresRecViewAdap
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtName = itemView.findViewById(R.id.txtName); // Since we are not in the activity, we have to go through itemView
+        }
+        protected TextView getTxtName() {
+            return txtName;
         }
     }
 }

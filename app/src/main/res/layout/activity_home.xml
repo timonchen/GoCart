@@ -28,7 +28,8 @@
             android:layout_height="wrap_content"
             android:text="@string/find_stores"
             android:id="@+id/findStoreButton"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:onClick="buttonFindStoreOnClick"/>
     </RelativeLayout>
 
 </RelativeLayout>
