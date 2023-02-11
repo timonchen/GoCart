@@ -46,11 +46,11 @@ public class DistanceCalculatorTest extends TestCase {
         assertTrue(secondCheck.size() == stores.size());
 
         for(int i = 0 ; i < stores.size(); i++) {
-            assertTrue(firstCheck.get(i).equals(stores.get(i)));
+            assertTrue("each store should be the same as all the stores in the list",firstCheck.get(i).equals(stores.get(i)));
         }
 
         for(int i = 0 ; i < stores.size(); i++) {
-            assertTrue(secondCheck.get(i).equals(stores.get(i)));
+            assertTrue("each store should be the same as all the stores in the list",secondCheck.get(i).equals(stores.get(i)));
         }
     }
 
@@ -61,17 +61,17 @@ public class DistanceCalculatorTest extends TestCase {
         List<Store> firstCheck = stub.calculateNearestStores("50 shoreview bay", stores);
         List<Store> secondCheck = api.calculateNearestStores("50 shoreview bay", stores);
 
-        assertTrue(firstCheck.size() == stores.size());
-        assertTrue(secondCheck.size() == stores.size());
+        assertTrue("sizes should equal",firstCheck.size() == stores.size());
+        assertTrue("sizes should equal",secondCheck.size() == stores.size());
 
         //stub version will return a randomized distance list so we'll verify that they aren't 0
         for(int i = 0 ; i < stores.size() - 1; i++) {
-            assertTrue(firstCheck.get(i).getDistToUser() != 0);
+            assertTrue("should have a randomized distance",firstCheck.get(i).getDistToUser() != 0);
         }
 
-        //do the same for the api version
+        //do the same for the api version as it should
         for(int i = 0 ; i < stores.size(); i++) {
-            assertTrue(firstCheck.get(i).getDistToUser() != 0);
+            assertTrue("should have a randomized distance",firstCheck.get(i).getDistToUser() != 0);
         }
     }
 
@@ -83,7 +83,7 @@ public class DistanceCalculatorTest extends TestCase {
         try{
             List<Store> secondCheck = api.calculateNearestStores("", stores);
         } catch (Exception e) {
-            assertTrue(e.getClass() == JSONException.class);
+            assertTrue("should throw a JSON Exception",e.getClass() == JSONException.class);
         }
 
         List<Store> firstCheck = stub.calculateNearestStores("", stores);
@@ -94,7 +94,7 @@ public class DistanceCalculatorTest extends TestCase {
 
         //stub version will still return a randomized distance list so we'll verify that they aren't 0
         for(int i = 0 ; i < stores.size() - 1; i++) {
-            assertTrue(firstCheck.get(i).getDistToUser() != 0);
+            assertTrue("should have a randomized distance",firstCheck.get(i).getDistToUser() != 0);
         }
 
     }
@@ -107,7 +107,7 @@ public class DistanceCalculatorTest extends TestCase {
         try{
             List<Store> secondCheck = api.calculateNearestStores("50 shorev", stores);
         } catch (Exception e) {
-            assertTrue(e.getClass() == JSONException.class);
+            assertTrue("should throw a JSON Exception",e.getClass() == JSONException.class);
         }
 
         List<Store> firstCheck = stub.calculateNearestStores("50 shorev", stores);
@@ -118,7 +118,7 @@ public class DistanceCalculatorTest extends TestCase {
 
         //stub version will still return a randomized distance list so we'll verify that they aren't 0
         for(int i = 0 ; i < stores.size() - 1; i++) {
-            assertTrue(firstCheck.get(i).getDistToUser() != 0);
+            assertTrue("should have a randomized distance",firstCheck.get(i).getDistToUser() != 0);
         }
     }
 
@@ -130,8 +130,8 @@ public class DistanceCalculatorTest extends TestCase {
         List<Store> secondCheck = api.calculateNearestStores("50 shoreview bay", new ArrayList<>());
 
         //list should be empty
-        assertTrue(firstCheck.size() == 0);
-        assertTrue(secondCheck.size() == 0);
+        assertTrue("sizes should equal to 0",firstCheck.size() == 0);
+        assertTrue("sizes should equal to 0",secondCheck.size() == 0);
     }
 
 }
