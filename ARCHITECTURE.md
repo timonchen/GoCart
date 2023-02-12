@@ -28,7 +28,7 @@ Due: February 12th, 2023
 ### Diagram of Layers
 #### Note:
 Our class names and their functionalities will be changed to more generic in the next milestone.
-```plantuml
+```mermaid
 classDiagram
     Main <|--|> objects
     Main <|--|> persistence 
