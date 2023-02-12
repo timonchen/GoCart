@@ -24,7 +24,7 @@ public class ProductPersistenceStub implements ProductPersistence{
         products.add(new Product("Beef Jerkey", new BigDecimal("9.99"),false));
         products.add(new Product("12 cookies", new BigDecimal("12.99"),true));
         products.add(new Product("toilet paper", new BigDecimal("15.99"),false));
-
+        products.add(new Product("Ice-cream", new BigDecimal("5.99"), false));
     }
 
     // int or store, store seems awkward
@@ -53,6 +53,7 @@ public class ProductPersistenceStub implements ProductPersistence{
     }
 
     @Override
+    // Method to return a list of all the products matching the productName that is passed as parameter
     public List<Product> searchProductsByName(String productName) {
         List<Product> matchingProducts = new ArrayList<>();
 
@@ -60,7 +61,7 @@ public class ProductPersistenceStub implements ProductPersistence{
         {
             for (int i = 0; i < products.size(); i++)
             {
-                if (products.get(i).getProductName().toLowerCase().contains(productName.toLowerCase()))
+                if (products.get(i).getProductName().toLowerCase().contains(productName.toLowerCase()))     //case should not affect the search process
                 {
                     matchingProducts.add(products.get(i));
                 }

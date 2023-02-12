@@ -30,6 +30,8 @@ public class AccessProducts{
         return Collections.unmodifiableList(products);
     }
 
+    //Method to search for a product by name.
+    //productName: the name of the product passed to the method which has to be searched.
     public List<Product> searchProductsByName(String productName) {
         products = productPersistence.searchProductsByName(productName);
         return Collections.unmodifiableList(products);
