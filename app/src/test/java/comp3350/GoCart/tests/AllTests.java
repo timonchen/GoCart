@@ -17,12 +17,8 @@ import comp3350.GoCart.tests.business.SearchStoresByNameTest;
         DietaryRestrictionTest.class,
         SearchProductsByNameTest.class,
         DistanceCalculatorTest.class,
-<<<<<<< app/src/test/java/comp3350/GoCart/tests/AllTests.java
-        SearchStoresByNameTest.class
-=======
-
+        SearchStoresByNameTest.class,
         GetClosetStoresTest.class
->>>>>>> app/src/test/java/comp3350/GoCart/tests/AllTests.java
 })
 
 public class AllTests {
