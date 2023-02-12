@@ -27,6 +27,12 @@ public class GetClosetStoresTest {
 
 
 
+    @Test
+    public void testInvalidAddress() {
+        System.out.println("\nStarting GetClosestStores: Empty address");
+
+        List<Store> nearestStores = accessStores.getNearestStores("501 fa");
+
         assertTrue("Invalid address should return empty list", nearestStores.size() == 0);
     }
 
