@@ -75,6 +75,8 @@ UserAccountActivity
 CheckoutActivity
 
 }
+```
+```mermaid
  class DSO{
 classDiagram
 
