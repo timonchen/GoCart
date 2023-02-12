@@ -22,11 +22,10 @@ public class AccessStores{
     private DistanceCalculator calculator;
 
 
-    //uncomment the first line for the api call
+
     public AccessStores(){
         storePersistence = Services.getStorePersistence();
-        calculator = new DistanceCalculatorAPI();
-//        calculator = new DistanceCalculatorStub();
+        calculator = new DistanceCalculatorAPI(); //using the API
         stores = null;
     }
 

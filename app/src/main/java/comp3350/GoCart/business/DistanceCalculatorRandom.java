@@ -8,7 +8,7 @@ import java.util.Random;
 
 import comp3350.GoCart.objects.Store;
 
-public class DistanceCalculatorStub implements DistanceCalculator{
+public class DistanceCalculatorRandom implements DistanceCalculator{
 
     private static final double MIN = 0.1;
     private static final double MAX = 15.0;
