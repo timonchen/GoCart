@@ -1,7 +1,6 @@
 package comp3350.GoCart.business;
 
 import java.math.BigDecimal;
-import java.nio.file.ClosedFileSystemException;
 import java.util.List;
 
 import comp3350.GoCart.objects.Product;
@@ -9,10 +8,10 @@ import comp3350.GoCart.objects.Store;
 
 //likely to  be moved to different class in future, possibly checkout
 
-public class calculateCheapestStore {
+public class CalculateCheapestStore {
 
     //
-    public calculateCheapestStore(){
+    public CalculateCheapestStore(){
     }
 
     /*

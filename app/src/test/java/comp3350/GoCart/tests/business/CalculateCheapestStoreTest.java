@@ -10,7 +10,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import comp3350.GoCart.business.calculateCheapestStore;
+import comp3350.GoCart.business.CalculateCheapestStore;
 
 import comp3350.GoCart.objects.Product;
 import comp3350.GoCart.objects.Store;
@@ -43,7 +43,7 @@ public class CalculateCheapestStoreTest extends TestCase
         products.add(new Product("Beef Jerkey"));
         products.add(new Product("12 cookies"));
         products.add(new Product("toilet paper"));
-        result = calculateCheapestStore.returnCheapestStore(products,stores);
+        result = CalculateCheapestStore.returnCheapestStore(products,stores);
         assertNotNull(result);
         assertEquals("Second Store is cheaper" , priceChange,result);
         System.out.println("End Test: valid data \n");
@@ -55,7 +55,7 @@ public class CalculateCheapestStoreTest extends TestCase
         products = new ArrayList<>();
         products.add(new Product("Banana"));
         products.add(new Product("Rye Bread"));
-        result = calculateCheapestStore.returnCheapestStore(products,null);
+        result = CalculateCheapestStore.returnCheapestStore(products,null);
         assertNotNull(result);
         assertEquals("no store returned/no stores given",result.getStoreName()," ");
         System.out.println("End Test: null store list \n");
@@ -67,7 +67,7 @@ public class CalculateCheapestStoreTest extends TestCase
         System.out.println("Start Test: null product list ");
         stores = new ArrayList<>();
         stores.add(new Store("StoreMart","123 fake st"));
-        result = calculateCheapestStore.returnCheapestStore(null,stores);
+        result = CalculateCheapestStore.returnCheapestStore(null,stores);
         assertNotNull(result);
         assertEquals("no store returned/no products given",result.getStoreName()," ");
         System.out.println("End Test: null product list \n");
@@ -81,7 +81,7 @@ public class CalculateCheapestStoreTest extends TestCase
         products = new ArrayList<>();
         products.add(new Product("Banana"));
         products.add(new Product("Rye Bread"));
-        result = calculateCheapestStore.returnCheapestStore(products,stores);
+        result = CalculateCheapestStore.returnCheapestStore(products,stores);
         assertNotNull(result);
         assertEquals("no store returned/no stores given" ,result.getStoreName()," ");
         System.out.println("End Test: empty store list \n");
@@ -93,7 +93,7 @@ public class CalculateCheapestStoreTest extends TestCase
         stores = new ArrayList<>();
         stores.add(new Store("StoreMart","123 fake st"));
         products = new ArrayList<>();
-        result = calculateCheapestStore.returnCheapestStore(products,stores);
+        result = CalculateCheapestStore.returnCheapestStore(products,stores);
         assertNotNull(result);
         assertEquals("no store returned/no products given",result.getStoreName()," ");
         System.out.println("End Test: empty product list \n");
@@ -107,7 +107,7 @@ public class CalculateCheapestStoreTest extends TestCase
         products = new ArrayList<>();
         products.add(new Product("Banana"));
         products.add(new Product("Rye Bread"));
-        result = calculateCheapestStore.returnCheapestStore(products,stores);
+        result = CalculateCheapestStore.returnCheapestStore(products,stores);
         assertNotNull(result);
         assertEquals("no store returned/no stores given" ,result.getStoreName()," ");
         System.out.println("End Test: null store object \n");
@@ -124,7 +124,7 @@ public class CalculateCheapestStoreTest extends TestCase
         stores.add(priceChange);
         products = new ArrayList<>();
         products.add(null);
-        result = calculateCheapestStore.returnCheapestStore(products,stores);
+        result = CalculateCheapestStore.returnCheapestStore(products,stores);
         assertNotNull(result);
         assertEquals("no store returned/no product given",result.getStoreName()," ");
         System.out.println("End Test: null product object \n");
@@ -143,7 +143,7 @@ public class CalculateCheapestStoreTest extends TestCase
         products = new ArrayList<>();
         products.add(new Product("Pepper"));
         products.add(new Product("Pokemon Trading Cards"));
-        result = calculateCheapestStore.returnCheapestStore(products,stores);
+        result = CalculateCheapestStore.returnCheapestStore(products,stores);
         assertNotNull(result);
         assertEquals("no store returned/wrong products given",result.getStoreName()," ");
 
@@ -166,7 +166,7 @@ public class CalculateCheapestStoreTest extends TestCase
         products.add(new Product("Pokemon Trading Cards"));
         products.add(new Product("Banana"));
         products.add(new Product("Rye Bread"));
-        result = calculateCheapestStore.returnCheapestStore(products,stores);
+        result = CalculateCheapestStore.returnCheapestStore(products,stores);
         assertNotNull(result);
         assertEquals("First Store is cheapest",result.getStoreName(),"StoreMart");
         System.out.println("End Test: some wrong product name \n");
