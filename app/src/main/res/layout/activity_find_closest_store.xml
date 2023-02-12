@@ -11,7 +11,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:hint="Enter your address"
+        android:hint="66 Chancellors Cir, Winnipeg"
         android:id="@+id/searchBar"/>
 
     <Button
