@@ -4,13 +4,13 @@ import junit.framework.TestCase;
 
 import org.json.JSONException;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
+
 import static org.junit.Assert.fail;
 
 import comp3350.GoCart.business.AccessStores;
 import comp3350.GoCart.business.DistanceCalculator;
 import comp3350.GoCart.business.DistanceCalculatorAPI;
-import comp3350.GoCart.business.DistanceCalculatorStub;
+import comp3350.GoCart.business.DistanceCalculatorRandom;
 import comp3350.GoCart.objects.Store;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class DistanceCalculatorTest extends TestCase {
     public DistanceCalculatorTest() {
         super();
         api = new DistanceCalculatorAPI();
-        stub = new DistanceCalculatorStub();
+        stub = new DistanceCalculatorRandom();
         accessStores = new AccessStores();
         stores = accessStores.getStores();
     }
