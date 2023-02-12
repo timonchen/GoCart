@@ -77,13 +77,14 @@ CheckoutActivity
 }
 ```
 ```mermaid
- class DSO{
+ 
 classDiagram
 
     DSO <|-- Store
     DSO <|-- Product
 
-    }
+class DSO{  
+  }
 
 class Product{
 String productName
