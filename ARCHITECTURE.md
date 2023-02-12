@@ -26,6 +26,8 @@ Due: February 12th, 2023
 
 
 ### Diagram of Layers
+#### Note
+Our class names and their functionalities will be changed to more generic in the next milestone.
 ```mermaid
 classDiagram
    
@@ -46,7 +48,7 @@ classDiagram
 	AccessStrores
 	DistanceCalculator
 	DistaanceCalculatorAPIs
-	DistanceCalculatorStub
+	DistanceCalculatorRandom
 CartManager
 
 
@@ -57,9 +59,10 @@ Product
 Store
 }
 
-class persistence{
-ProductPresistence
-StorePresistence
+class Persistence{
+ProductPersistence
+StorePersistence
+UserPresistence
 }
 
 class presentation{
@@ -69,6 +72,9 @@ FindStoreActivity
 FindStoreByNameActivity
 HomeActivity
 StoresRecViewAdapter
+UserAccountActivity
+CheckoutActivity
+
 }
  class DSO{
     }
