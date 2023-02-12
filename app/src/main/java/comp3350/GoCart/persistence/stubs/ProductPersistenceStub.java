@@ -11,7 +11,7 @@ import comp3350.GoCart.persistence.ProductPersistence;
 
 public class ProductPersistenceStub implements ProductPersistence{
 
-    private final List<Product> products;
+    private List<Product> products;
 
 
     public ProductPersistenceStub(){
@@ -27,7 +27,25 @@ public class ProductPersistenceStub implements ProductPersistence{
 
     }
 
-    // int or store, store seems awkward
+    public List<Product> getProductsStubForTesting(){
+        return products;
+    }
+    //Alters prices used to test Calculate Store Prices
+    public void productAlternatePrices(){
+        products = new ArrayList<>();
+
+        products.add(new Product("Banana", new BigDecimal("1.06"),false));
+        products.add(new Product("Rye Bread", new BigDecimal("1.46"),true));
+        products.add(new Product("Whole Wheat Bread", new BigDecimal("1.46"),true));
+        products.add(new Product("Lucky Charms", new BigDecimal("3.98"),true));
+        products.add(new Product("Beef Jerkey", new BigDecimal("9.98"),false));
+        products.add(new Product("12 cookies", new BigDecimal("12.98"),true));
+        products.add(new Product("toilet paper", new BigDecimal("15.98"),false));
+
+
+    }
+
+
     @Override
     public List<Product> getProduct(Product currentProduct) {
         int index = products.indexOf(currentProduct);

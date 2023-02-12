@@ -3,6 +3,11 @@ package comp3350.GoCart.objects;
 
 import androidx.annotation.NonNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import comp3350.GoCart.persistence.stubs.ProductPersistenceStub;
+
 public class Store {
     
 
@@ -11,12 +16,20 @@ public class Store {
 
     private double distToUser;
 
+
+    private final ProductPersistenceStub productStub;
+
     public Store(final String newStoreName, final String newStoreAddress){
         storeAddress = newStoreAddress;
         storeName = newStoreName;
         distToUser = 0;
+        productStub = new ProductPersistenceStub();
+
     }
 
+    public ProductPersistenceStub getProductsStubForTesting(){
+        return productStub;
+    }
 
     public String getStoreName(){
         return storeName;
@@ -34,6 +47,10 @@ public class Store {
         }
 
         return false;
+    }
+
+    public List<Product> getStoreProducts(){
+        return productStub.getProductsStubForTesting();
     }
 
     public String toString() {
