@@ -76,6 +76,7 @@ CheckoutActivity
 
 }
 ```
+
 ```mermaid
  
 classDiagram
@@ -85,7 +86,6 @@ classDiagram
 
 class DSO{  
   }
-
 class Product{
 String productName
 BigDecimal productPrice
@@ -98,7 +98,6 @@ boolean equals(Object other)
 toString()
 
 }
-
 class Store{
 String storeName
 String storeAddress
