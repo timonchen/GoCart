@@ -4,7 +4,6 @@ import junit.framework.TestCase;
 
 import org.junit.*;
 
-import comp3350.GoCart.business.AccessStores;
 import comp3350.GoCart.business.GetByName;
 import comp3350.GoCart.objects.Store;
 import java.util.List;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 public class SearchStoresByNameTest extends TestCase {
     private List<Store> stores;
 
-    public SearchProductsByNameTest() {
+    public SearchStoresByNameTest() {
         super();
     }
 
