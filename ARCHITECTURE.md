@@ -77,7 +77,7 @@ class Product{
  +String productName
 +BigDecimal productPrice
 +boolean peanutAllergy
-+Product(final String newProductName, final BigDecimal newProductPrice, boolean peanutAllergy)
++Product(newProductName, newProductPrice, boolean peanutAllergy)
 +String getProductName()
 +BigDecimal getProductPrice()
 +hasPeanutAllergy()
