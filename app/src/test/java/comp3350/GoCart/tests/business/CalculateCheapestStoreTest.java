@@ -150,6 +150,7 @@ public class CalculateCheapestStoreTest extends TestCase
         System.out.println("End Test: Invalid product name \n");
     }
 
+
     // some matching products, gives result for matches
     // unlikely to happens as we will pull product list from internal database
     @Test
