@@ -19,10 +19,10 @@ Authors:  Benedict Agupitan, Hridai Mehta, Rishavjot Singh, Ryan Petrillo, Tim C
 ## Diagram of Layers
 ```mermaid
 classDiagram
-    Main <|-- LoginValidator
+   
     Main <|--|> business
     Main <|--|> objects
-    Main <|--|> presistence
+    Main <|--|> peresistence
     Main <|--|> presentation
     DSO <|-- Store
     DSO <|-- Product
@@ -34,7 +34,7 @@ classDiagram
 	+AccessProducts
 	+AccessStrores
 	+DistanceCalculator
-	+DistaanceCalculatorAPI
+	+DistaanceCalculatorAPIs
 	+DistanceCalculatorStub
 	+CartManager
 
@@ -46,8 +46,8 @@ class objects{
 }
 
 class persistence{
-+ProductPresistence
-+StorePresistence
+ +ProductPresistence
+ +StorePresistence
 }
 
 class presentation{
