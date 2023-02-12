@@ -75,11 +75,8 @@ UserAccountActivity
 CheckoutActivity
 
 }
-```
 
-```mermaid
- 
-classDiagram1
+
 
     DSO <|-- Store
     DSO <|-- Product
