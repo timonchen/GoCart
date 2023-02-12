@@ -41,7 +41,7 @@ public class FindStoreByNameActivity extends Activity {
         accessStores = new AccessStores();
         storeList = accessStores.getStores();
 
-        // Connect recView adapter to the recView in activity_find_store
+        // Connect recView adapter to the recView in activity_find_store_by_name
         StoresRecViewAdapter adapter = new StoresRecViewAdapter();
         storesRecView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -51,7 +51,7 @@ public class FindStoreByNameActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String input = searchBar.getText().toString();  // Get the text from the text box
-                List<Store> stores = accessStores.getStores();  // Get our list of stores from db
+                storeList = accessStores.getStores();  // Get/Update our list of stores from db
 
                 List<Store> searchResults = GetByName.stores(input, storeList);    // Find stores in our list with name given
 

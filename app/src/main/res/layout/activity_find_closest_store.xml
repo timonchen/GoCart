@@ -11,7 +11,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:hint="Search"
+        android:hint="Enter your address"
         android:id="@+id/searchBar"/>
 
     <Button

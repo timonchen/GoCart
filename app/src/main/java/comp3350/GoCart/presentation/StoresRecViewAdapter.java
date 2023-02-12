@@ -37,7 +37,7 @@ public class StoresRecViewAdapter extends RecyclerView.Adapter<StoresRecViewAdap
     // Modify views here
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.txtName.setText(stores.get(position).getStoreName());
+        holder.txtName.setText(stores.get(position).getStoreName() + " " + stores.get(position).getStoreName());
     }
 
     @Override
