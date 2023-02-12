@@ -37,8 +37,9 @@ classDiagram
     Main <|--|> presentation
     DSO <|-- Store
     DSO <|-- Product
-	business --|> presentation
-persistence <|-- business
+    business --|> presentation
+    persistence <|-- business
+    objects --|> persistence
     class Main{
     }
 
