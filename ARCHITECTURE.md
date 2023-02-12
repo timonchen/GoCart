@@ -31,13 +31,14 @@ Authors:  Benedict Agupitan, Hridai Mehta, Rishavjot Singh, Ryan Petrillo, Tim C
 ```mermaid
 classDiagram
    
-    Main <|--|> business --|> presentation
+    Main <|--|> business
     Main <|--|> objects
-    Main <|--|> persistence <|-- business
+    Main <|--|> persistence 
     Main <|--|> presentation
     DSO <|-- Store
     DSO <|-- Product
-
+	business --|> presentation
+persistence <|-- business
     class Main{
     }
 
