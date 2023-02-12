@@ -35,8 +35,7 @@ classDiagram
     Main <|--|> objects
     Main <|--|> persistence 
     Main <|--|> presentation
-    DSO <|-- Store
-    DSO <|-- Product
+
     business --|> presentation
     persistence --|> business
     objects --|> persistence
@@ -77,6 +76,11 @@ CheckoutActivity
 
 }
  class DSO{
+classDiagram
+
+    DSO <|-- Store
+    DSO <|-- Product
+
     }
 
 class Product{
