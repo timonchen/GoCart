@@ -2,6 +2,7 @@ package comp3350.GoCart.business;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import comp3350.GoCart.objects.Store;
 
@@ -9,10 +10,11 @@ import comp3350.GoCart.objects.Store;
 public class GetByName {
 
     public static List<Store> stores(String storeName, List<Store> storeList) {
+        storeName = storeName.toLowerCase();
         List<Store> storesWanted = new ArrayList<>();
 
         for (int i = 0; i < storeList.size(); i++) {
-            if (storeList.get(i).getStoreName().equals(storeName)) {
+            if (storeList.get(i).getStoreName().toLowerCase().equals(storeName)) {
                 storesWanted.add(storeList.get(i));
             }
         }
