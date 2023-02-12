@@ -8,13 +8,15 @@ import comp3350.GoCart.tests.business.DietaryRestrictionTest;
 import comp3350.GoCart.tests.business.SearchProductsByNameTest;
 import comp3350.GoCart.tests.business.CalculateCheapestStoreTest;
 import comp3350.GoCart.tests.business.DistanceCalculatorTest;
+import comp3350.GoCart.tests.business.SearchStoresByNameTest;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         CalculateCheapestStoreTest.class,
         DietaryRestrictionTest.class,
         SearchProductsByNameTest.class,
-        DistanceCalculatorTest.class
+        DistanceCalculatorTest.class,
+        SearchStoresByNameTest.class
 })
 
 public class AllTests {
