@@ -13,6 +13,12 @@ public class Product {
         this.peanutAllergy = peanutAllergy;
     }
 
+    public Product(final String newProductName){
+        productName = newProductName;
+        productPrice = BigDecimal.ZERO;
+        this.peanutAllergy = false;
+    }
+
 
     public String getProductName(){
         return productName;

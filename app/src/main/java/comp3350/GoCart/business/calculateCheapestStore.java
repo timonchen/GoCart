@@ -50,7 +50,7 @@ public class calculateCheapestStore {
         BigDecimal runningTotal = new BigDecimal("0");
         for (int i = 0; i < currentProducts.size();i++){
             // second loop will be removed with sql query
-            for (int j = 0;j < storesProducts.size();j++){
+            for (int j = 0; j < storesProducts.size(); j++){
                 if ( currentProducts.get(i) != null) {
                     if (currentProducts.get(i).getProductName().equals(storesProducts.get(j).getProductName()))
                         runningTotal = runningTotal.add(storesProducts.get(j).getProductPrice());
