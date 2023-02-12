@@ -23,28 +23,31 @@ public class SearchProductsByNameTest extends TestCase
     }
 
     @Test
+    // Method to test passing null as product name while searching
     public void testNullSearch()
     {
         System.out.println("\nTest: searching products with null");
 
         products = accessProducts.searchProductsByName(null);
-        assertTrue(products.isEmpty());
+        assertTrue("It should not return any product because searching with null", products.isEmpty());
 
         System.out.println("Finished test: searching products with null");
     }
 
     @Test
+    // Method to test passing empty String as product name while searching
     public void testEmptyStringSearch()
     {
         System.out.println("\nTest: searching products with empty string");
 
         List<Product> matchingProducts = accessProducts.searchProductsByName("");
-        assertFalse(matchingProducts.isEmpty());    //returns all the products (no filter)
+        assertFalse("It should return all the products because no filter was put.", matchingProducts.isEmpty());    //returns all the products (no filter)
 
         System.out.println("Finished test: searching products with empty string");
     }
 
     @Test
+    // Method to test searching with different cases for letters for product name while searching
     public void testCaseMismatchInSearch()
     {
         System.out.println("\nTest: searching products with case mismatch");
@@ -52,22 +55,23 @@ public class SearchProductsByNameTest extends TestCase
         products = new ArrayList<>();
         products.add(new Product("Banana", new BigDecimal("1.05"),false));
         List<Product> matchingProducts = accessProducts.searchProductsByName("banana");
-        assertEquals(products, matchingProducts);
+        assertEquals("Should return the correct product searched irrespective of the case.", products, matchingProducts);
 
         products = new ArrayList<>();
         products.add(new Product("Rye Bread", new BigDecimal("1.45"),true));
         matchingProducts = accessProducts.searchProductsByName("RYE BREAD");
-        assertEquals(products, matchingProducts);
+        assertEquals("Should return the correct product searched irrespective of the case.", products, matchingProducts);
 
         products = new ArrayList<>();
         products.add(new Product("Whole Wheat Bread", new BigDecimal("1.45"),true));
         matchingProducts = accessProducts.searchProductsByName("wHOLE wHEAT bREAD");
-        assertEquals(products, matchingProducts);
+        assertEquals("Should return the correct product searched irrespective of the case.", products, matchingProducts);
 
         System.out.println("Finished test: searching products with case mismatch");
     }
 
     @Test
+    // Method to test searching with very few characters for product name while searching
     public void testVeryFewCharactersSearch()
     {
         System.out.println("\nTest: searching products with very few characters in string");
@@ -79,14 +83,16 @@ public class SearchProductsByNameTest extends TestCase
         products.add(new Product("Whole Wheat Bread", new BigDecimal("1.45"),true));
         products.add(new Product("Lucky Charms", new BigDecimal("3.99"),true));
         products.add(new Product("toilet paper", new BigDecimal("15.99"),false));
+        products.add(new Product("Ice-cream", new BigDecimal("5.99"), false));
 
         List<Product> matchingProducts = accessProducts.searchProductsByName("a");
-        assertEquals(products, matchingProducts);
+        assertEquals("Should return all the products that contain the letter searched.", products, matchingProducts);
 
         System.out.println("Finished test: searching products with very few characters in string");
     }
 
     @Test
+    // Method to test searching products with similar words in their name
     public void testCloselyMatchingProductsSearch()
     {
         System.out.println("\nTest: searching products with very close names");
@@ -97,12 +103,13 @@ public class SearchProductsByNameTest extends TestCase
         products.add(new Product("Whole Wheat Bread", new BigDecimal("1.45"),true));
 
         List<Product> matchingProducts = accessProducts.searchProductsByName("bread");
-        assertEquals(products, matchingProducts);
+        assertEquals("Should return all the products containing the searched characters.", products, matchingProducts);
 
         System.out.println("Finished test: searching products with very close names");
     }
 
     @Test
+    // Method to test searching products with similar words in their name
     public void testWhiteSpaceSearch()
     {
         System.out.println("\nTest: searching products with whitespace");
@@ -117,17 +124,24 @@ public class SearchProductsByNameTest extends TestCase
         products.add(new Product("toilet paper", new BigDecimal("15.99"),false));
 
         List<Product> matchingProducts = accessProducts.searchProductsByName(" ");
-        assertEquals(products, matchingProducts);
+        assertEquals("Should return all the products which have whitespace in their name (name containing more than one word).", products, matchingProducts);
 
         System.out.println("Finished test: searching products with whitespace");
     }
 
     @Test
+    // Method to test searching products with special characters in their name
     public void testSpecialCharactersSearch() {
         System.out.println("\nTest: searching products with special characters in String");
 
         List<Product> matchingProducts = accessProducts.searchProductsByName(",@#/?><.;[]{}\"'");
-        assertTrue(matchingProducts.isEmpty());
+        assertTrue("Should return nothing because no product contains these characters.", matchingProducts.isEmpty());
+
+        products = new ArrayList<>();
+        products.add(new Product("Ice-cream", new BigDecimal("5.99"), false));
+
+        matchingProducts = accessProducts.searchProductsByName("Ice-cream");
+        assertEquals("Should return the correct product name searched with hyphen.", matchingProducts, products);
 
         System.out.println("Finished test: searching products with special characters in String");
     }
