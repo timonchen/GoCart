@@ -30,10 +30,12 @@ Due: February 12th, 2023
 Our class names and their functionalities will be changed to more generic in the next milestone.
 ```mermaid
 classDiagram
-   
-    Main <|--|> business
+   Data-->>
     Main <|--|> objects
     Main <|--|> persistence 
+	
+    Main <|--|> business
+
     Main <|--|> presentation
 
     business --|> presentation
