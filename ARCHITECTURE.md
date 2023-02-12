@@ -12,8 +12,8 @@ Authors:  Benedict Agupitan, Hridai Mehta, Rishavjot Singh, Ryan Petrillo, Tim C
     * stubs
 * Presentation(comp3350.GoCart.presentation)
 * Test(comp3350.GoCart(test))
-	*Business(comp3350.GoCart.tests.business)
-	*Objects(ss(comp3350.GoCart.tests.objects)
+	* Business(comp3350.GoCart.tests.business)
+	* Objects(ss(comp3350.GoCart.tests.objects)
 
 ### Layers
 | Presentation/UI     |      Logic/Business   	  	 |  Persistence/Data   |
