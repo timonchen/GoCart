@@ -11,7 +11,7 @@ Authors:  Benedict Agupitan, Hridai Mehta, Rishavjot Singh, Ryan Petrillo, Tim C
 * Persistence(comp3350.GoCart.persistence)
     * stubs
 * Presentation(comp3350.GoCart.presentation)
-* Test(comp3350.GoCart(test))
+* Test(comp3350.GoCart.test)
 	* Business(comp3350.GoCart.tests.business)
 	* Objects(ss(comp3350.GoCart.tests.objects)
 
