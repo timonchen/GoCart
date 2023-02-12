@@ -26,11 +26,6 @@ public class GetClosetStoresTest {
     }
 
 
-    @Test
-    public void testIncompleteAddress() {
-        System.out.println("\nStarting GetClosestStores: incomplete address");
-
-        List<Store> nearestStores = accessStores.getNearestStores("50 shorev");
 
         assertTrue("Invalid address should return empty list", nearestStores.size() == 0);
     }

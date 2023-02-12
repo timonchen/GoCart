@@ -11,14 +11,42 @@ public class GetByName {
 
     public static List<Store> stores(String storeName, List<Store> storeList) {
         storeName = storeName.toLowerCase();
-        List<Store> storesWanted = new ArrayList<>();
+        List<Store> results;
 
-        for (int i = 0; i < storeList.size(); i++) {
-            if (storeList.get(i).getStoreName().toLowerCase().equals(storeName)) {
-                storesWanted.add(storeList.get(i));
+        if (storeName.equals("")) {     // Set store list to empty
+            results = new ArrayList<>();
+        }
+        else {
+            results = matchStores(storeName, storeList);
+        }
+
+        return results;
+    }
+
+    private static List<Store> matchStores(String storeWanted, List<Store> stores) {
+        List<Store> results = new ArrayList<Store>();
+        storeWanted = storeWanted.toLowerCase();
+
+        for (int i = 0; i < stores.size(); i++) {
+            Store store = stores.get(i);
+            String storeName = store.getStoreName().toLowerCase();
+            boolean match = true;
+
+            // Check if all words in the storeName matches with user input
+            for (int j = 0; j < storeWanted.length() && match; j++) {
+                if (storeWanted.charAt(j) != storeName.charAt(j)) {
+                    match = false;
+                }
+            }
+
+            if (match) {
+                results.add(store);
             }
         }
 
-        return storesWanted;
+        return results;
     }
 }
+
+// API get near store returns a list of assorted list if valid
+// If returns empty list, display.

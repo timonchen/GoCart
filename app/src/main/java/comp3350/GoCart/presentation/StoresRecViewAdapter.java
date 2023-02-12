@@ -37,12 +37,24 @@ public class StoresRecViewAdapter extends RecyclerView.Adapter<StoresRecViewAdap
     // Modify views here
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.txtName.setText(stores.get(position).getStoreName() + " " + stores.get(position).getStoreAddress());
+        // Display a message if there is nothing to display
+        if (stores.isEmpty()) {
+            holder.txtName.setText("No search results found");
+        }
+        else {  // Display our search results
+            holder.txtName.setText(stores.get(position).getStoreName() + " " + stores.get(position).getStoreAddress());
+        }
+
     }
 
     @Override
     public int getItemCount() {
-        return stores.size();
+        int size = 0;
+
+        if (stores != null)
+            return stores.size();
+
+        return size;
     }
 
     // Set the stores that we want to display

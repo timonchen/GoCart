@@ -35,9 +35,7 @@ public class SearchStoresByNameTest extends TestCase {
         stores = new ArrayList<Store>();
         stores.add(new Store("Walmart", "123 Vista Avenue Winnipeg"));
         stores.add(new Store("Costco", "321 Vernon Road Winnipeg"));
-        stores.add(new Store("Walmart", "123 Vista Avenue Winnipeg"));
         stores.add(new Store("Safeway", "21 Peltier Avenue Winnipeg"));
-        stores.add(new Store("Walmart", "57 Lily Street Winnipeg"));
 
         List<Store> result = GetByName.stores("", stores);
         assertTrue("List should be empty", result.isEmpty());
@@ -55,7 +53,7 @@ public class SearchStoresByNameTest extends TestCase {
         stores.add(new Store("Walmart", "57 Lily Street Winnipeg"));
 
         List<Store> result = GetByName.stores("Safeway", stores);
-        assertTrue("List should be empty", result.get(0).getStoreName().equals("Safeway"));
+        assertTrue("List should have only Safeway", result.get(0).getStoreName().equals("Safeway"));
         assertTrue("There should only be one element in the results", result.size() == 1);
     }
 
@@ -90,6 +88,15 @@ public class SearchStoresByNameTest extends TestCase {
 
         List<Store> result = GetByName.stores("cOsTcO", stores);
         assertTrue("The store returned should still be costco reguardless if the letters are upper case or lowercase", result.get(0).getStoreName().equals("Costco"));
+    }
+
+    @Test
+    public void testPartialSearch() {
+        stores = new ArrayList<Store>();
+        stores.add(new Store("Walmart", "123 Vista Avenue Winnipeg"));
+
+        List<Store> result = GetByName.stores("wal", stores);
+        assertTrue("The proper store should still be returned even if input is incomplete", result.get(0).getStoreName().equals("Walmart"));
     }
 
 }
