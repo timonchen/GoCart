@@ -25,7 +25,7 @@ public class CalculateCheapestStoreTest extends TestCase
 
     public CalculateCheapestStoreTest()
     {
-
+        super();
     }
 
     @Test

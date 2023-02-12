@@ -13,6 +13,10 @@ import java.util.ArrayList;
 public class SearchStoresByNameTest extends TestCase {
     private List<Store> stores;
 
+    public SearchProductsByNameTest() {
+        super();
+    }
+
     // Search for a store that does not exist
     @Test
     public void testNoStoresFound() {
