@@ -33,7 +33,7 @@ classDiagram
    
     Main <|--|> business
     Main <|--|> objects
-    Main <|--|> peresistence
+    Main <|--|> persistence
     Main <|--|> presentation
     DSO <|-- Store
     DSO <|-- Product
