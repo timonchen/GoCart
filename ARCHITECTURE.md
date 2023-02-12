@@ -2,8 +2,6 @@
 ## GoCart Architecture
 Due: February 10th, 2023
 
-Authors:  Benedict Agupitan, Hridai Mehta, Rishavjot Singh, Ryan Petrillo, Tim Chen
-
 ### Packages
 * Application
 * Business(comp3350.GoCart.objects)
