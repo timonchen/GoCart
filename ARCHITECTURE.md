@@ -1,8 +1,6 @@
 # COMP3350 G06 Iteration 1
 ## GoCart Architecture
-Due: February 10th, 2023
-
-Authors:  Benedict Agupitan, Hridai Mehta, Rishavjot Singh, Ryan Petrillo, Tim Chen
+Due: February 12th, 2023
 
 ### Packages
 * Application
@@ -11,7 +9,7 @@ Authors:  Benedict Agupitan, Hridai Mehta, Rishavjot Singh, Ryan Petrillo, Tim C
 * Persistence(comp3350.GoCart.persistence)
     * stubs
 * Presentation(comp3350.GoCart.presentation)
-* Test(comp3350.GoCart(test))
+* Test(comp3350.GoCart.test)
 	* Business(comp3350.GoCart.tests.business)
 	* Objects(ss(comp3350.GoCart.tests.objects)
 
@@ -20,25 +18,27 @@ Authors:  Benedict Agupitan, Hridai Mehta, Rishavjot Singh, Ryan Petrillo, Tim C
 |---------------------|--------------------------------|----------------------|
 | Home page           | Access nearby stores	  	 | ProductStub Database |
 | Find store by name  | Access Srores by name  	  	 | StoreStub Database   |
-| Find nearby stores  | Store Distance calculator	 |                      |
-|                     | location Distance calculator   |                      |
-|                     | Access products by name		 |                      |
+| Find nearby stores  | Store Distance calculator	 | 				|
+| 			    | location Distance calculator   |                      |
+| 			    | Access products by name		 |                      |
 |                     | Access dietary restricted prod |                      |
 
 
 
 ### Diagram of Layers
+#### Note:
+Our class names and their functionalities will be changed to more generic in the next milestone.
 ```mermaid
 classDiagram
-   
-    Main <|--|> business
     Main <|--|> objects
     Main <|--|> persistence 
+	
+    Main <|--|> business
+
     Main <|--|> presentation
-    DSO <|-- Store
-    DSO <|-- Product
+
     business --|> presentation
-    persistence <|-- business
+    persistence --|> business
     objects --|> persistence
     class Main{
     }
@@ -48,8 +48,8 @@ classDiagram
 	AccessStrores
 	DistanceCalculator
 	DistaanceCalculatorAPIs
-	DistanceCalculatorStub
-CartManager
+	DistanceCalculatorRandom
+
 
 
 }
@@ -60,8 +60,9 @@ Store
 }
 
 class persistence{
-ProductPresistence
-StorePresistence
+ProductPersistence
+StorePersistence
+
 }
 
 class presentation{
@@ -71,10 +72,17 @@ FindStoreActivity
 FindStoreByNameActivity
 HomeActivity
 StoresRecViewAdapter
-}
- class DSO{
-    }
 
+
+}
+
+
+
+    DSO <|-- Store
+    DSO <|-- Product
+
+class DSO{  
+  }
 class Product{
 String productName
 BigDecimal productPrice
@@ -87,7 +95,6 @@ boolean equals(Object other)
 toString()
 
 }
-
 class Store{
 String storeName
 String storeAddress
