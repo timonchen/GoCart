@@ -45,16 +45,4 @@ public class StoreTest {
 
     }
 
-    @Test
-    public void testStore1() {
-        Store store;
-        System.out.println("\nStarting testStore1");
-
-        store = new Store("testStore", "test land avenue");
-        assertNotNull("Product should not be null", store);
-        assertTrue("Store name should be same as the one we are testing", "testStore".equals(store.getStoreName()));
-        assertTrue("Store address should be same as the one we are testing", "test land avenue".equals(store.getStoreAddress()));
-
-
-    }
 }

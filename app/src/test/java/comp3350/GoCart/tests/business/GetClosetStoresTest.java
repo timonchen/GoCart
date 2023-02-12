@@ -27,6 +27,8 @@ public class GetClosetStoresTest {
 
 
 
+        assertTrue("Invalid address should return empty list", nearestStores.size() == 0);
+    }
 
     @Test
     public void testValidAddress() throws Exception {
@@ -58,6 +60,14 @@ public class GetClosetStoresTest {
         }
     }
 
+    @Test
+    public void testEmptyAddress() {
+        System.out.println("\nStarting GetClosestStores: Empty address");
+
+        List<Store> nearestStores = accessStores.getNearestStores("");
+
+        assertTrue("Invalid address should return empty list", nearestStores.size() == 0);
+    }
 
 
 }
