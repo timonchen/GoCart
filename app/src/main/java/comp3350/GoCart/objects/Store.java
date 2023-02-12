@@ -7,6 +7,7 @@ public class Store {
     private final String storeName;
     private final String storeAddress; // zones
 
+
     public Store(final String newStoreName, final String newStoreAddress){
         storeAddress = newStoreAddress;
         storeName = newStoreName;
