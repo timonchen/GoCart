@@ -56,12 +56,10 @@ public class AccessStores{
             Future<List> future = executor.submit(callable);
             nearest = future.get();
         }catch (Exception e) { //currently if we have an error we just set the distance the 0
-            for(Store store : stores) {
-                store.setDistToUser(0.0);
-            }
+            nearest = new ArrayList<Store>();
         }
 
-        return nearest == null ? stores : nearest; //return original stores if there was an error.
+        return nearest; //return original stores if there was an error.
     }
 
 }

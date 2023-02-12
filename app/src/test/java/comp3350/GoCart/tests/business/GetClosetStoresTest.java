@@ -32,7 +32,7 @@ public class GetClosetStoresTest {
 
         List<Store> nearestStores = accessStores.getNearestStores("50 shorev");
 
-        assertTrue("Invalid address should return just the original store list", nearestStores.equals(accessStores.getStores()));
+        assertTrue("Invalid address should return empty list", nearestStores.size() == 0);
     }
 
     @Test
@@ -71,7 +71,7 @@ public class GetClosetStoresTest {
 
         List<Store> nearestStores = accessStores.getNearestStores("");
 
-        assertTrue("Invalid address should return just the original store list", nearestStores.equals(accessStores.getStores()));
+        assertTrue("Invalid address should return empty list", nearestStores.size() == 0);
     }
 
 
