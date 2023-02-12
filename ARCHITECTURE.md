@@ -79,7 +79,7 @@ CheckoutActivity
 
 ```mermaid
  
-classDiagram
+classDiagram1
 
     DSO <|-- Store
     DSO <|-- Product
