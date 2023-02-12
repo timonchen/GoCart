@@ -5,16 +5,19 @@ Due: February 10th, 2023
 Authors:  Benedict Agupitan, Hridai Mehta, Rishavjot Singh, Ryan Petrillo, Tim Chen
 
 ## Layers
-| Presentation/UI     |      Logic/Business   |  Persistence/Data   |
-|---------------------|-----------------------|----------------------|
-|  Home page          | LoginValidator        | ProductStub Database |
-| Find store by name  | TicketFetcher         |  StoreStub Database  |
-| Find nearby stores  | ProjectFetcher        |                      |
-|                     | User Creator for DB   |                      |
-|                     | MessageFetcher        |                      |
+| Presentation/UI     |      Logic/Business   	  	 |  Persistence/Data   |
+|---------------------|--------------------------------|----------------------|
+| Home page           | Access nearby stores	  	 | ProductStub Database |
+| Find store by name  | Access Srores by name  	  	 | StoreStub Database   |
+| Find nearby stores  | Store Distance calculator	 |                      |
+|                     | location Distance calculator   |                      |
+|                     | Access products by name		 |                      |
+|                     | Access dietary restricted prod |                      |
+
 
 
 ## Diagram of Layers
+```mermaid
 classDiagram
     Main <|-- LoginValidator
     Main <|--|> business
@@ -84,4 +87,4 @@ class Store{
 +compareTo(@NonNull Store other) 
 +toString()
 }
-
+```
