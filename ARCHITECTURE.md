@@ -4,7 +4,18 @@ Due: February 10th, 2023
 
 Authors:  Benedict Agupitan, Hridai Mehta, Rishavjot Singh, Ryan Petrillo, Tim Chen
 
-## Layers
+### Packages
+* Application
+* Business(comp3350.GoCart.objects)
+* Objects(comp3350.GoCart.objects)
+* Persistence(comp3350.GoCart.persistence)
+    * stubs
+* Presentation(comp3350.GoCart.presentation)
+* Test(comp3350.GoCart(test))
+	*Business(comp3350.GoCart.tests.business)
+	*Objects(ss(comp3350.GoCart.tests.objects)
+
+### Layers
 | Presentation/UI     |      Logic/Business   	  	 |  Persistence/Data   |
 |---------------------|--------------------------------|----------------------|
 | Home page           | Access nearby stores	  	 | ProductStub Database |
@@ -16,7 +27,7 @@ Authors:  Benedict Agupitan, Hridai Mehta, Rishavjot Singh, Ryan Petrillo, Tim C
 
 
 
-## Diagram of Layers
+### Diagram of Layers
 ```mermaid
 classDiagram
    
