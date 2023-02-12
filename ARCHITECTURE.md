@@ -18,9 +18,9 @@ Due: February 12th, 2023
 |---------------------|--------------------------------|----------------------|
 | Home page           | Access nearby stores	  	 | ProductStub Database |
 | Find store by name  | Access Srores by name  	  	 | StoreStub Database   |
-| Find nearby stores  | Store Distance calculator	 |                      |
-|                     | location Distance calculator   |                      |
-|                     | Access products by name		 |                      |
+| Find nearby stores  | Store Distance calculator	 | UserStub Database    |
+| Checkout page       | location Distance calculator   |                      |
+| payment processor   | Access products by name		 |                      |
 |                     | Access dietary restricted prod |                      |
 
 
@@ -62,7 +62,7 @@ Store
 class persistence{
 ProductPersistence
 StorePersistence
-UserPresistence
+UserPersistence
 }
 
 class presentation{
