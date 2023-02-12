@@ -128,6 +128,6 @@ feature. Our UI implements the "Find store" feature and the activities communica
 #### GetByName
 >This class is used to implement the user story "Find store by name" from the persistence  layer to work the logic.
 
-##Tier 3 Data/ Persistence
+## Tier 3 Data/ Persistence
 >This layer has the stub database for Products and Store
 
