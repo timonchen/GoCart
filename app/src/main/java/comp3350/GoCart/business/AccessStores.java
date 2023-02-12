@@ -61,7 +61,7 @@ public class AccessStores{
             }
         }
 
-        return nearest == null ? stores : nearest; //return original stores if there was an error.
+        return nearest == null ? new ArrayList<>() : nearest; //return original stores if there was an error.
     }
 
 }

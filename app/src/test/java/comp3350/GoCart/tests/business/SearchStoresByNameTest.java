@@ -38,9 +38,7 @@ public class SearchStoresByNameTest extends TestCase {
         stores.add(new Store("Safeway", "21 Peltier Avenue Winnipeg"));
 
         List<Store> result = GetByName.stores("", stores);
-        assertTrue("List should have all stores", result.get(0).getStoreName().equals("Walmart")
-                && result.get(1).getStoreName().equals("Costco")
-                && result.get(2).getStoreName().equals("Safeway"));
+        assertTrue("List should be empty", result.isEmpty());
     }
 
 

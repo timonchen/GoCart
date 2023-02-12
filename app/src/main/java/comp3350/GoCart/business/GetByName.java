@@ -13,8 +13,8 @@ public class GetByName {
         storeName = storeName.toLowerCase();
         List<Store> results;
 
-        if (storeName.equals("")) {
-            results = storeList;
+        if (storeName.equals("")) {     // Set store list to empty
+            results = new ArrayList<>();
         }
         else {
             results = matchStores(storeName, storeList);

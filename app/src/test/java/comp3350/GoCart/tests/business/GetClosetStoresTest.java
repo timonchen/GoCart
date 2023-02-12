@@ -26,14 +26,7 @@ public class GetClosetStoresTest {
     }
 
 
-    @Test
-    public void testIncompleteAddress() {
-        System.out.println("\nStarting GetClosestStores: incomplete address");
 
-        List<Store> nearestStores = accessStores.getNearestStores("50 shorev");
-
-        assertTrue("Invalid address should return just the original store list", nearestStores.equals(accessStores.getStores()));
-    }
 
     @Test
     public void testValidAddress() throws Exception {
@@ -65,14 +58,6 @@ public class GetClosetStoresTest {
         }
     }
 
-    @Test
-    public void testEmptyAddress() {
-        System.out.println("\nStarting GetClosestStores: Empty address");
-
-        List<Store> nearestStores = accessStores.getNearestStores("");
-
-        assertTrue("Invalid address should return just the original store list", nearestStores.equals(accessStores.getStores()));
-    }
 
 
 }

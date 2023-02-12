@@ -2,9 +2,11 @@ package comp3350.GoCart.presentation;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -58,6 +60,13 @@ public class FindStoreByNameActivity extends Activity {
                 // Display search results in the recycler viewer
                 adapter.setStores(searchResults);
                 storesRecView.setAdapter(adapter);
+
+                // Display message if a product was not found
+                if (adapter.getItemCount() == 0) {
+                    Toast toast = Toast.makeText(FindStoreByNameActivity.this, "Store not found", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 300);
+                    toast.show();
+                }
             }
         });
 
