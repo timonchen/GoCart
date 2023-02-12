@@ -44,60 +44,61 @@ classDiagram
     }
 
  class business{
-	+AccessProducts
-	+AccessStrores
-	+DistanceCalculator
-	+DistaanceCalculatorAPIs
-	+DistanceCalculatorStub
-	+CartManager
+	AccessProducts
+	AccessStrores
+	DistanceCalculator
+	DistaanceCalculatorAPIs
+	DistanceCalculatorStub
+CartManager
+
 
 }
 
 class objects{
-+Product
-+Store
+Product
+Store
 }
 
 class persistence{
- +ProductPresistence
- +StorePresistence
+ProductPresistence
+StorePresistence
 }
 
 class presentation{
-+ClosestStoreRecViewAdapter
-+FindClosetStoreActivity
-+FindStoreActivity
-+FindStoreByNameActivity
-+HomeActivity
-+StoresRecViewAdapter
+ClosestStoreRecViewAdapter
+FindClosetStoreActivity
+FindStoreActivity
+FindStoreByNameActivity
+HomeActivity
+StoresRecViewAdapter
 }
  class DSO{
     }
 
 class Product{
- +String productName
-+BigDecimal productPrice
-+boolean peanutAllergy
-+Product(newProductName, newProductPrice, boolean peanutAllergy)
-+String getProductName()
-+BigDecimal getProductPrice()
-+hasPeanutAllergy()
-+boolean equals(Object other)
-+toString()
+String productName
+BigDecimal productPrice
+boolean peanutAllergy
+Product(newProductName, newProductPrice, boolean peanutAllergy)
+String getProductName()
+BigDecimal getProductPrice()
+hasPeanutAllergy()
+boolean equals(Object other)
+toString()
 
 }
 
 class Store{
-+String storeName
-+String storeAddress
-+double distToUser
-+public Store(final String newStoreName, final String newStoreAddress)
-+String getStoreName()
-+String getStoreAddress()
-+boolean equals(Object other) 
-+setDistToUser(double dist)
-+getDistToUser()
-+compareTo(@NonNull Store other) 
-+toString()
+String storeName
+String storeAddress
+double distToUser
+public Store(final String newStoreName, final String newStoreAddress)
+String getStoreName()
+String getStoreAddress()
+boolean equals(Object other) 
+setDistToUser(double dist)
+getDistToUser()
+compareTo(@NonNull Store other) 
+toString()
 }
 ```
