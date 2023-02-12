@@ -1,6 +1,6 @@
 # COMP3350 G06 Iteration 1
 ## GoCart Architecture
-Due: February 10th, 2023
+Due: February 12th, 2023
 
 ### Packages
 * Application
