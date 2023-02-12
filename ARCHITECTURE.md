@@ -31,9 +31,9 @@ Authors:  Benedict Agupitan, Hridai Mehta, Rishavjot Singh, Ryan Petrillo, Tim C
 ```mermaid
 classDiagram
    
-    Main <|--|> business
+    Main <|--|> business --|> presentation
     Main <|--|> objects
-    Main <|--|> persistence
+    Main <|--|> persistence <|-- business
     Main <|--|> presentation
     DSO <|-- Store
     DSO <|-- Product
