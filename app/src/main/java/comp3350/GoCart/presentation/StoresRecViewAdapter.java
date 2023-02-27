@@ -86,5 +86,8 @@ public class StoresRecViewAdapter extends RecyclerView.Adapter<StoresRecViewAdap
         protected TextView getTxtName() {
             return txtName;
         }
+        protected TextView getTxtAddress() {
+            return txtAddress;
+        }
     }
 }
