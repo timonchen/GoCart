@@ -61,7 +61,7 @@ public class FindStoreByNameActivity extends Activity {
                 adapter.setStores(searchResults);
                 storesRecView.setAdapter(adapter);
 
-                // Display message if a product was not found
+                // Display message if a store was not found
                 if (adapter.getItemCount() == 0) {
                     Toast toast = Toast.makeText(FindStoreByNameActivity.this, "Store not found", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 300);

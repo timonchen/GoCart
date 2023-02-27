@@ -2,10 +2,12 @@ package comp3350.GoCart.presentation;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.w3c.dom.Text;
@@ -37,14 +39,16 @@ public class StoresRecViewAdapter extends RecyclerView.Adapter<StoresRecViewAdap
     // Modify views here
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        // Display a message if there is nothing to display
-        if (stores.isEmpty()) {
-            holder.txtName.setText("No search results found");
-        }
-        else {  // Display our search results
-            holder.txtName.setText(stores.get(position).getStoreName() + " " + stores.get(position).getStoreAddress());
-        }
+        holder.txtName.setText(stores.get(position).getStoreName());
+        holder.txtAddress.setText(stores.get(position).getStoreAddress());
 
+        // When user clicks on an element in the recycler view, run this
+        holder.parent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Do something on click
+            }
+        });
     }
 
     @Override
@@ -70,10 +74,14 @@ public class StoresRecViewAdapter extends RecyclerView.Adapter<StoresRecViewAdap
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView txtName;
+        private TextView txtAddress;
+        private CardView parent;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtName = itemView.findViewById(R.id.txtName); // Since we are not in the activity, we have to go through itemView
+            parent = itemView.findViewById(R.id.parent);
+            txtAddress =itemView.findViewById(R.id.txtAddress);
         }
         protected TextView getTxtName() {
             return txtName;
