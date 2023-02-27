@@ -10,6 +10,10 @@ import comp3350.GoCart.objects.Store;
 
 public class ClosestStoresRecViewAdapter extends StoresRecViewAdapter{
 
+    public ClosestStoresRecViewAdapter(OnStoreListener listener) {
+        super(listener);
+    }
+
     //overide the super class method because we need to also get the distances and present to the user
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
