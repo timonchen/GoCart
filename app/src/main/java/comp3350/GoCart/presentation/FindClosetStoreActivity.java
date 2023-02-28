@@ -73,7 +73,12 @@ public class FindClosetStoreActivity extends Activity implements ClosestStoresRe
     // Where int position is the index of the store in the recycler view
     @Override
     public void onStoreClick(int position) {
-        Intent intent = new Intent(this, ProductsActivity.class);
+        Store storeClicked = storeList.get(position);
+
+        Intent intent = new Intent(this, ProductsActivity.class);   // Switch from this activity ProductsActivity
+        intent.putExtra("selected_store", storeClicked);    // Send store data to ProductsActivity
+
         startActivity(intent);
     }
 }
+
