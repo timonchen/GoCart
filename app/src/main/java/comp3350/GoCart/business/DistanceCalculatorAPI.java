@@ -45,7 +45,8 @@ public class DistanceCalculatorAPI implements DistanceCalculator {
             json.getJSONArray("rows").getJSONObject(0).get("elements").toString();
             double dist = Double.parseDouble(json.getJSONArray("rows").getJSONObject(0).getJSONArray("elements").getJSONObject(0).getJSONObject("distance").getString("text").split(" ")[0]);
             store.setDistToUser(dist);
-            nearest.add(store);
+            if ( dist < 10)
+                nearest.add(store);
 
         }
 
