@@ -5,10 +5,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpRetryException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
