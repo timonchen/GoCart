@@ -13,7 +13,6 @@ public class Store {
 
     private final String storeName;
     private final String storeAddress; // zones
-
     private double distToUser;
 
 
@@ -24,7 +23,6 @@ public class Store {
         storeName = newStoreName;
         distToUser = 0;
         productStub = new ProductPersistenceStub();
-
     }
 
     public ProductPersistenceStub getProductsStubForTesting(){
@@ -42,10 +40,8 @@ public class Store {
     public boolean equals(Object other) {
         if(other instanceof Store) {
             Store toCheck = (Store)other;
-
             return storeName.equals(toCheck.storeName) && storeAddress.equals(toCheck.storeAddress);
         }
-
         return false;
     }
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 import comp3350.GoCart.objects.Store;
 
-public class ClosestStoresRecViewAdapter extends StoresRecViewAdapter{
+public class    ClosestStoresRecViewAdapter extends StoresRecViewAdapter{
 
     //overide the super class method because we need to also get the distances and present to the user
     @Override

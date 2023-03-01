@@ -41,11 +41,13 @@ public class ProductPersistenceStub implements ProductPersistence{
         products.add(new Product("Beef Jerkey", new BigDecimal("9.98"),false));
         products.add(new Product("12 cookies", new BigDecimal("12.98"),true));
         products.add(new Product("toilet paper", new BigDecimal("15.98"),false));
-
-
     }
 
+    public List<Product> getAllProducts() {
+        return products;
+    }
 
+    /*
     @Override
     public List<Product> getProduct(Product currentProduct) {
         int index = products.indexOf(currentProduct);
@@ -53,9 +55,10 @@ public class ProductPersistenceStub implements ProductPersistence{
         if(index > -1) {
             toReturn.add(products.get(index));
         }
-
         return toReturn;
     }
+    */
+
 
     @Override
     public List<Product> getDietaryRestrictedProducts() {

@@ -23,7 +23,6 @@ public class DistanceCalculatorAPI implements DistanceCalculator {
     private static String API_KEY = "&key=AIzaSyDGfUnYamfvdOBh4gFiEAjVwv5jv80tgf4";
 
     /*
-
     * This method uses Google's map api in order to get the distances of the stores given a location.
     * It calls into the api and gets the distance parameter from the JSON response
     * It returns the sorted list or throws an Exception
@@ -47,8 +46,9 @@ public class DistanceCalculatorAPI implements DistanceCalculator {
             json.getJSONArray("rows").getJSONObject(0).get("elements").toString();
             double dist = Double.parseDouble(json.getJSONArray("rows").getJSONObject(0).getJSONArray("elements").getJSONObject(0).getJSONObject("distance").getString("text").split(" ")[0]);
             store.setDistToUser(dist);
-            nearest.add(store);
-
+            if (dist < 10 ) { // only keeps results less then 10 km away
+                nearest.add(store);
+            }
         }
 
         Collections.sort(nearest, new Comparator<Store>() {

@@ -17,8 +17,9 @@ public class AccessProducts{
     public AccessProducts(){
         productPersistence = Services.getProductPersistence();
         products = null;
-
     }
+
+
     public List<Product> getDietaryProducts()
     {
         products = productPersistence.getDietaryRestrictedProducts();
@@ -33,6 +34,7 @@ public class AccessProducts{
     }
 
     public List<Product> getAllProducts(){
+        products = productPersistence.getAllProducts();
         return Collections.unmodifiableList(products);
     }
 }

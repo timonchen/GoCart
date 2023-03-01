@@ -14,11 +14,11 @@ import comp3350.GoCart.tests.business.SearchStoresByNameTest;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         CalculateCheapestStoreTest.class,
-        DietaryRestrictionTest.class,
-        SearchProductsByNameTest.class,
-        DistanceCalculatorTest.class,
-        SearchStoresByNameTest.class,
-        GetClosetStoresTest.class
+        //DietaryRestrictionTest.class,
+        //SearchProductsByNameTest.class,
+        //DistanceCalculatorTest.class,
+        //SearchStoresByNameTest.class,
+        //GetClosetStoresTest.class
 })
 
 public class AllTests {

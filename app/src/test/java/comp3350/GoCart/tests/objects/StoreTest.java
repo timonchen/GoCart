@@ -19,7 +19,6 @@ public class StoreTest {
     public void testNullStore() {
         System.out.println("\nStarting testNullStore");
         assertNotNull("Store should not be null", store);
-
     }
 
     @Test
@@ -32,7 +31,6 @@ public class StoreTest {
     public void testStoreAddress() {
         System.out.println("\nStarting testStoreAddress");
         assertTrue("Store address should be same as the one we are testing", "test land avenue".equals(store.getStoreAddress()));
-
     }
 
 
