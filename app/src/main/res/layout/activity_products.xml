@@ -5,4 +5,52 @@
     android:layout_height="match_parent"
     android:id="@+id/storeProducts">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:src="@drawable/walmart"
+        android:id="@+id/storeImage"
+        android:scaleType="centerCrop"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/storeInfo"
+        android:layout_below="@id/storeImage"
+        android:layout_marginTop="-15dp"
+        android:padding="15dp"
+        android:background="@drawable/store_layout_bg">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/storeName"
+            android:text="Store Name"
+            android:textSize="45sp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:layout_below="@id/storeImage"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/storeAddress"
+            android:text="Store Address"
+            android:textColor="#5e5e5e"
+            android:textSize="20sp"
+            android:layout_below="@id/storeName"
+            android:layout_marginTop="5dp"
+            />
+
+        <SearchView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/storeAddress"
+            android:layout_marginTop="30dp"
+            android:queryHint="Search for a Product"
+            android:background="@drawable/search_view_bg"
+            />
+    </RelativeLayout>
+
+
+
+
 </RelativeLayout>
