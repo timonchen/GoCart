@@ -7,6 +7,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,6 +43,10 @@ public class ProductsActivity extends Activity {
         Store store = getIntent().getParcelableExtra("selected_store"); // Store products are from
         storeProducts = store.getStoreProducts();
 
+        // Set data in views to store data
+        storeName.setText(store.getStoreName());
+        storeAddress.setText(store.getStoreAddress());
+
         // Initialize Recycler View adapter
         adapter = new ProductsRecViewAdapter();
         adapter.setProducts(storeProducts);
@@ -62,7 +67,9 @@ public class ProductsActivity extends Activity {
             }
         });
 
-        productsRecView.setLayoutManager(new LinearLayoutManager(this));
+        // Recycler view will use a grid layout with 2 columns per row
+        productsRecView.setLayoutManager(new GridLayoutManager(this, 2));
+        productsRecView.setFocusable(false);
     }
 
     private void updateProductList(String productName) {
@@ -85,6 +92,4 @@ public class ProductsActivity extends Activity {
         adapter.setProducts(productList);
         productsRecView.setAdapter(adapter);
     }
-
-
 }

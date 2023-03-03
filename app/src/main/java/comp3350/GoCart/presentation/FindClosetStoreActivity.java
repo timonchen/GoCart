@@ -25,6 +25,7 @@ public class FindClosetStoreActivity extends Activity implements ClosestStoresRe
     private EditText searchBar;
     private Button searchButton;
     private RecyclerView storesRecView;
+    private ClosestStoresRecViewAdapter adapter;
 
     private AccessStores accessStores;
     private List<Store> storeList;
@@ -43,7 +44,7 @@ public class FindClosetStoreActivity extends Activity implements ClosestStoresRe
         accessStores = new AccessStores();
 
         // Connect recView adapter to the recView in activity_find_store
-        ClosestStoresRecViewAdapter adapter = new ClosestStoresRecViewAdapter(this);    // We send this because we want to use this file's implementation of onStoreClick
+        adapter = new ClosestStoresRecViewAdapter(this);    // We send this because we want to use this file's implementation of onStoreClick
         storesRecView.setLayoutManager(new LinearLayoutManager(this));
 
         // Listen for "search button" press
@@ -73,10 +74,11 @@ public class FindClosetStoreActivity extends Activity implements ClosestStoresRe
     // Where int position is the index of the store in the recycler view
     @Override
     public void onStoreClick(int position) {
-        Store storeClicked = storeList.get(position);
+        Store storeClicked = adapter.getStores().get(position);
 
         Intent intent = new Intent(this, ProductsActivity.class);   // Switch from this activity ProductsActivity
         intent.putExtra("selected_store", storeClicked);    // Send store data to ProductsActivity
+        finish();
 
         startActivity(intent);
     }
