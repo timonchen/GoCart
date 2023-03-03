@@ -14,7 +14,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/storeInfo"
         android:layout_below="@id/storeImage"
         android:layout_marginTop="-15dp"
@@ -43,11 +43,20 @@
         <SearchView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/searchBar"
             android:layout_below="@id/storeAddress"
             android:layout_marginTop="30dp"
             android:queryHint="Search for a Product"
             android:background="@drawable/search_view_bg"
             />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/productsRecView"
+            android:layout_below="@id/searchBar"
+            android:layout_marginTop="50dp"/>
+
     </RelativeLayout>
 
 
