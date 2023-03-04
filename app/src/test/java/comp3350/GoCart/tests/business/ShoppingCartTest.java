@@ -20,7 +20,7 @@ public class ShoppingCartTest extends TestCase{
     @Test
     public void testValidData(){
         AccessProducts products = new AccessProducts();
-        List<Product> prods = products.getAllProducts();
+        List<Product> prods = products.getProducts();
 
 
         for (int i = 0; i<  prods.size(); i++){
