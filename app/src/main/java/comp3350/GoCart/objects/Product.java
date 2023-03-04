@@ -23,7 +23,6 @@ public class Product {
         this.peanutAllergy = false;
     }
 
-
     public String getProductName(){
         return productName;
     }

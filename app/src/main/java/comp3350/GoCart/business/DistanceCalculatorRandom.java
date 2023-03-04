@@ -29,8 +29,9 @@ public class DistanceCalculatorRandom implements DistanceCalculator{
             Random rand = new Random();
             double randomValue = MIN + (MAX - MIN) * rand.nextDouble();
             store.setDistToUser(randomValue);
-            if ( randomValue < 10)
+            if (randomValue < 10) {
                 nearest.add(store);
+            }
         }
 
         Collections.sort(nearest, new Comparator<Store>() {

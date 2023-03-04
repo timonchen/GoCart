@@ -24,4 +24,9 @@ public class HomeActivity extends Activity {
         Intent storesIntent = new Intent(HomeActivity.this, FindStoreActivity.class);
         HomeActivity.this.startActivity(storesIntent);
     }
+
+    public void buttonShoppingCartOnClick(View v){
+        Intent cartIntent = new Intent(HomeActivity.this, ShoppingCartActivity.class);
+        HomeActivity.this.startActivity(cartIntent);
+    }
 }

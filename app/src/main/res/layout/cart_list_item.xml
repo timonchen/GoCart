@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:id="@+id/parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Product Name"
+        android:textSize="20dp"
+        android:id="@+id/txtProductName"/>
+
+    <Button
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/btnDecQuantity"
+        android:text="-"
+        android:layout_below="@id/txtProductName"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:hint="0"
+        android:id="@+id/txtSetQuantity"
+        android:layout_toRightOf="@id/btnDecQuantity"
+        android:layout_below="@id/txtProductName"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"/>
+
+    <Button
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/btnIncQuantity"
+        android:text="+"
+        android:layout_toRightOf="@id/txtSetQuantity"
+        android:layout_below="@id/txtProductName"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"/>
+
+
+
+</RelativeLayout>

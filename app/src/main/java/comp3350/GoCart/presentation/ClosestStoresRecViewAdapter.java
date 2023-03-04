@@ -8,7 +8,7 @@ import java.util.List;
 
 import comp3350.GoCart.objects.Store;
 
-public class ClosestStoresRecViewAdapter extends StoresRecViewAdapter{
+public class    ClosestStoresRecViewAdapter extends StoresRecViewAdapter{
 
     public ClosestStoresRecViewAdapter(OnStoreListener listener) {
         super(listener);

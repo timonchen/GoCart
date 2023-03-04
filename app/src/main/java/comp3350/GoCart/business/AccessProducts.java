@@ -11,14 +11,13 @@ public class AccessProducts{
 
     private final ProductPersistence productPersistence;
 
-    private List<Product> products;
+    private List<Product> products; // list of stores of products.
     
 
     public AccessProducts(){
         productPersistence = Services.getProductPersistence();
         products = null;
     }
-
     public List<Product> getDietaryProducts()
     {
         products = productPersistence.getDietaryRestrictedProducts();
@@ -32,4 +31,8 @@ public class AccessProducts{
         return Collections.unmodifiableList(products);
     }
 
+    public List<Product> getAllProducts(){
+        products = productPersistence.getAllProducts();
+        return Collections.unmodifiableList(products);
+    }
 }
