@@ -38,8 +38,8 @@ public class ProductsRecViewAdapter extends RecyclerView.Adapter<ProductsRecView
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.productName.setText(products.get(position).getProductName());
-        String price = "$" + products.get(position).getProductPrice().toString();
-        holder.productPrice.setText(price);
+        // String price = "$" + products.get(position).getProductPrice().toString();
+        // holder.productPrice.setText(price);
     }
 
     @Override
