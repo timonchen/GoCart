@@ -41,7 +41,7 @@ public class ProductsActivity extends Activity {
 
         // Get store data from previous page
         Store store = getIntent().getParcelableExtra("selected_store"); // Store products are from
-        storeProducts = store.getStoreProducts();
+
 
         // Set data in views to store data
         storeName.setText(store.getStoreName());

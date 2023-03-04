@@ -34,7 +34,7 @@ public class Store implements Parcelable {
         storeName = in.readString();
         storeAddress = in.readString();
         distToUser = in.readDouble();
-        productStub = new ProductPersistenceStub();
+        storeID = in.readString();
     }
 
     @Override
@@ -61,10 +61,6 @@ public class Store implements Parcelable {
             return new Store[size];
         }
     };
-
-    public ProductPersistenceStub getProductsStubForTesting(){
-        return productStub;
-    }
 
     public String getStoreName(){
         return storeName;
