@@ -26,6 +26,7 @@ public class FindStoreByNameActivity extends Activity implements StoresRecViewAd
     private EditText searchBar;
     private Button searchButton;
     private RecyclerView storesRecView;
+    private StoresRecViewAdapter adapter;
 
     private AccessStores accessStores;
     private List<Store> storeList;
@@ -45,7 +46,7 @@ public class FindStoreByNameActivity extends Activity implements StoresRecViewAd
         storeList = accessStores.getStores();
 
         // Connect recView adapter to the recView in activity_find_store_by_name
-        StoresRecViewAdapter adapter = new StoresRecViewAdapter(this);
+        adapter = new StoresRecViewAdapter(this);
         storesRecView.setLayoutManager(new LinearLayoutManager(this));
 
         // Listen for "search button" press
@@ -79,10 +80,11 @@ public class FindStoreByNameActivity extends Activity implements StoresRecViewAd
     // Where int position is the index of the store in the recycler view
     @Override
     public void onStoreClick(int position) {
-        Store storeClicked = storeList.get(position);
+        Store storeClicked = adapter.getStores().get(position);
 
         Intent intent = new Intent(this, ProductsActivity.class);   // Switch from this activity ProductsActivity
         intent.putExtra("selected_store", storeClicked);    // Send store data to ProductsActivity
+        finish();
 
         startActivity(intent);
     }
