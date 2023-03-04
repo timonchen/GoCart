@@ -14,20 +14,19 @@ import comp3350.GoCart.persistence.stubs.ProductPersistenceStub;
 public class Store implements Parcelable {
     
 
+    private final String storeID;
     private final String storeName;
     private final String storeAddress; // zones
-
     private double distToUser;
 
 
-    private final ProductPersistenceStub productStub;
 
-    public Store(final String newStoreName, final String newStoreAddress){
+
+    public Store(final String newStoreID , final String newStoreName, final String newStoreAddress){
         storeAddress = newStoreAddress;
         storeName = newStoreName;
         distToUser = 0;
-        productStub = new ProductPersistenceStub();
-
+        storeID = newStoreID;
     }
 
     // The next following three methods are so that this class is parcelable. A parcelable class can be sent between activities.
@@ -85,10 +84,9 @@ public class Store implements Parcelable {
         return false;
     }
 
-    public List<Product> getStoreProducts(){
-        return productStub.getProductsStubForTesting();
-    }
+    public String getStoreID() {return storeID; }
 
+    @NonNull
     public String toString() {
         return "Name: " + storeName + "\nAddress: " + storeAddress;
     }

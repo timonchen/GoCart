@@ -15,16 +15,16 @@ public class StorePersistenceStub implements StorePersistence {
         stores = new ArrayList<>();
 
         //just a few stores for the stub db
-        stores.add(new Store("Walmart", "35 Lakewood Blvd Winnipeg"));
-        stores.add(new Store("Walmart", "1576 Regent Ave Winnipeg"));
+        stores.add(new Store("walm035","Walmart", "35 Lakewood Blvd Winnipeg"));
+        stores.add(new Store("walm157","Walmart", "1576 Regent Ave Winnipeg"));
 
-        stores.add(new Store("Costco", "1499 Regent Ave W Winnipeg"));
-        stores.add(new Store("Costco", "2365 McGillivray Blvd Winnipeg"));
+        stores.add(new Store("cost149","Costco", "1499 Regent Ave W Winnipeg"));
+        stores.add(new Store("cost236","Costco", "2365 McGillivray Blvd Winnipeg"));
 
-        stores.add(new Store("Safeway", "2025 Corydon Ave Winnipeg"));
-        stores.add(new Store("Safeway", "655 Osborne Winnipeg"));
+        stores.add(new Store("safe202","Safeway", "2025 Corydon Ave Winnipeg"));
+        stores.add(new Store("safe655","Safeway", "655 Osborne Winnipeg"));
     }
-
+    /*
     @Override
     public List<Store> getStore(Store toGet) {
         List<Store> toReturn = new ArrayList<>();
@@ -36,8 +36,10 @@ public class StorePersistenceStub implements StorePersistence {
 
         return toReturn;
     }
+    */
 
-    // int or store, store seems awkward
+
+
     @Override
     public List<Store> getAllStores() {
         return Collections.unmodifiableList(stores);

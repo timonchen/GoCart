@@ -1,21 +1,25 @@
 package comp3350.GoCart.objects;
 
-import java.math.BigDecimal;
+import androidx.annotation.NonNull;
+
+import java.util.Objects;
 
 public class Product {
+
+    private String productID;
     private final String productName;
-    private final BigDecimal productPrice;
+
+
 
     private  final boolean peanutAllergy;
-    public Product(final String newProductName, final BigDecimal newProductPrice, boolean peanutAllergy){
+    public Product(final String newProductID, final String newProductName,boolean peanutAllergy){
+        productID = newProductID;
         productName = newProductName;
-        productPrice = newProductPrice;
         this.peanutAllergy = peanutAllergy;
     }
 
     public Product(final String newProductName){
         productName = newProductName;
-        productPrice = BigDecimal.ZERO;
         this.peanutAllergy = false;
     }
 
@@ -24,22 +28,27 @@ public class Product {
         return productName;
     }
 
+    /*
     public BigDecimal getProductPrice(){
         return productPrice;
     }
 
+     */
+
+    public String getProductID() {return productID; }
+
     public boolean hasPeanutAllergy(){return peanutAllergy ;   }
-    public boolean equals(Object other) {
-        if(other instanceof Product) {
-            Product toCheck = (Product) other;
-            return productName.equals(toCheck.productName);
+    public boolean equals(Object otherObject){
+        boolean result = false;
+        if ( otherObject instanceof Product){
+            final Product otherProduct = (Product) otherObject;
+            result = Objects.equals(this.productID,otherProduct.productID);
         }
-
-        return false;
+        return result;
     }
 
+    @NonNull
     public String toString(){
-        return "Product: " + productName + "price: " + productPrice+" Peanut Allergy:" +hasPeanutAllergy();
+        return "Product: " + productName + " Peanut Allergy:" +hasPeanutAllergy();
     }
-
-}   
+}
