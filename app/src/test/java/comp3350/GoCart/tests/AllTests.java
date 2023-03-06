@@ -12,8 +12,8 @@ import comp3350.GoCart.tests.business.SearchStoresByNameTest;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        DietaryRestrictionTest.class,
-        SearchProductsByNameTest.class,
+       DietaryRestrictionTest.class,
+       SearchProductsByNameTest.class,
         DistanceCalculatorTest.class,
         SearchStoresByNameTest.class,
         GetClosetStoresTest.class
