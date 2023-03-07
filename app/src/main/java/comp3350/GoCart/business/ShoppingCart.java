@@ -8,13 +8,18 @@ import java.util.HashMap;
 import java.util.List;
 
 import comp3350.GoCart.objects.Product;
+import comp3350.GoCart.objects.Store;
 
 public class ShoppingCart {
     private static volatile ShoppingCart instance = null;
     private HashMap<Product,Integer> cartList = new HashMap<Product, Integer>();;
+    private Store store;
 
     private void ShoppingCart() {
+    }
 
+    public void setStore(Store newStore){
+        store = newStore;
     }
 
     public static ShoppingCart getInstance(){
@@ -29,9 +34,11 @@ public class ShoppingCart {
     }
 
     public void addProduct(Product newProd, Integer newQuantity){
-
         cartList.put(newProd, newQuantity);
+
     }
+
+
 
     public void removeProduct(Product newProd){
         cartList.remove(newProd);
@@ -41,9 +48,9 @@ public class ShoppingCart {
         //cartList.put(newProd, cartList.getOrDefault(newProd,0) + newQuant);
         if (cartList.containsKey(newProd)){
             cartList.put(newProd,newQuant);
-        } else {
+        } /*else {
             // throw exception product not in list
-        }
+        }*/
     }
 
     public void incrementProductQuantity(Product newProd){
@@ -62,6 +69,5 @@ public class ShoppingCart {
     public HashMap<Product,Integer> getCartList(){
         return cartList;
     }
-
 
 }

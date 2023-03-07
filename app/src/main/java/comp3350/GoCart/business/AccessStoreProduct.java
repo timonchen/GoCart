@@ -1,5 +1,6 @@
 package comp3350.GoCart.business;
 
+
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
@@ -12,7 +13,6 @@ import comp3350.GoCart.objects.StoreProduct;
 import comp3350.GoCart.persistence.StoreProductPersistence;
 
 public class AccessStoreProduct {
-
 
     private StoreProductPersistence storeProductPersistence;
     private List<StoreProduct> storeProducts;
@@ -29,11 +29,14 @@ public class AccessStoreProduct {
         return Collections.unmodifiableList(storeProducts);
     }
 
-    public Store returnCheapestStore(List<Product> productList, List<Store> storeList){
+    public StoreProduct findCheapestStore(List<Product> productList, List<Store> storeList){
         int currentCheapestIndex = 0;
         BigDecimal total;
         BigDecimal currentCheapestTotal = new BigDecimal("0");
-        Store cheapestStore = new Store("ERROR store", "","");
+        Store newStore = new Store("Emptystore", "","");
+        Product newProduct = new Product("Emptyproduct","",false);
+        StoreProduct result =  new StoreProduct(newStore,newProduct,currentCheapestTotal);
+
         if(productList != null && storeList != null
                 && productList.size() != 0 && storeList.size() != 0) {
             for (int i = 0; i < storeList.size(); i++) {
@@ -45,12 +48,14 @@ public class AccessStoreProduct {
                         currentCheapestIndex = i;
                         currentCheapestTotal = total;
                     }
+
                     if (!total.equals(BigDecimal.ZERO))
-                        cheapestStore = storeList.get(currentCheapestIndex);
+                        result = new StoreProduct(storeList.get(currentCheapestIndex),newProduct,currentCheapestTotal);
                 }
+
             }
         }
-        return cheapestStore;
+        return result;
     }
 
 
@@ -65,7 +70,6 @@ public class AccessStoreProduct {
                 if (storesProducts.get(i).getProductID().equals(currentProducts.get(i).getProductID()))
                     runningTotal = runningTotal.add(storesProducts.get(i).getPrice());
         }
-
 
         return runningTotal;
     }
