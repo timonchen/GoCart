@@ -53,7 +53,7 @@ public class DietaryRestrictionTest extends TestCase {
 
         System.out.println("Finished testShowDietaryProducts");
 
-    }
+   }
 
 
 }
