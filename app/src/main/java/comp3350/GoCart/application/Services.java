@@ -4,10 +4,12 @@ import comp3350.GoCart.R;
 import comp3350.GoCart.objects.User;
 import comp3350.GoCart.persistence.StorePersistence;
 import comp3350.GoCart.persistence.StoreProductPersistence;
+import comp3350.GoCart.persistence.UserPersistence;
 import comp3350.GoCart.persistence.stubs.ProductPersistenceStub;
 import comp3350.GoCart.persistence.stubs.StorePersistenceStub;
 import comp3350.GoCart.persistence.ProductPersistence;
 import comp3350.GoCart.persistence.stubs.StoreProductPersistenceStub;
+import comp3350.GoCart.persistence.stubs.UserPersistenceStub;
 
 
 public class Services{
