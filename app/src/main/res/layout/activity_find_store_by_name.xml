@@ -5,9 +5,8 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="80dp"
-    tools:contetxt="comp3350.GoCart.presentation.FindStoreByNameActivity">
+    tools:contetxt="comp3350.GoCart.presentation.FindStoreByNameActivity"
+    android:padding="30dp">
 
     <EditText
         android:id="@+id/searchBar"

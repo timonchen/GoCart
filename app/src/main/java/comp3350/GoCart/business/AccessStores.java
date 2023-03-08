@@ -1,7 +1,6 @@
 package comp3350.GoCart.business;
 
 
-import java.nio.file.attribute.AclEntry;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -17,7 +16,7 @@ import comp3350.GoCart.persistence.StorePersistence;
 public class AccessStores{
 
     
-    private StorePersistence storePersistence;
+    private final StorePersistence storePersistence;
     private List<Store> stores;
     private DistanceCalculator calculator;
 
@@ -44,7 +43,7 @@ public class AccessStores{
     public List<Store> getNearestStores(String location) {
 
         stores = storePersistence.getAllStores();
-        List<Store> nearest = null;
+        List<Store> nearest;
         try{
             ExecutorService executor = Executors.newSingleThreadExecutor();
             Callable<List> callable = new Callable<List>() {
@@ -56,7 +55,7 @@ public class AccessStores{
             Future<List> future = executor.submit(callable);
             nearest = future.get();
         }catch (Exception e) { //currently if we have an error we just set the distance the 0
-            nearest = new ArrayList<Store>();
+            nearest = new ArrayList<>();
         }
 
         return nearest; //return original stores if there was an error.
