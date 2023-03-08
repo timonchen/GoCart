@@ -1,21 +1,18 @@
 package comp3350.GoCart.business;
 
 
-import android.annotation.SuppressLint;
-
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 
 import comp3350.GoCart.objects.Product;
 import comp3350.GoCart.objects.Store;
 
 public class ShoppingCart {
     private static volatile ShoppingCart instance = null;
-    private HashMap<Product,Integer> cartList = new HashMap<Product, Integer>();;
+    private HashMap<Product,Integer> cartList = new HashMap<Product, Integer>();
     private Store store;
 
-    private void ShoppingCart() {
+    private ShoppingCart() {
     }
 
     public void setStore(Store newStore){
@@ -37,8 +34,6 @@ public class ShoppingCart {
         cartList.put(newProd, newQuantity);
 
     }
-
-
 
     public void removeProduct(Product newProd){
         cartList.remove(newProd);
@@ -65,9 +60,12 @@ public class ShoppingCart {
         }
     }
 
-
-    public HashMap<Product,Integer> getCartList(){
+    public HashMap<Product, Integer> getCartList(){
         return cartList;
+    }
+
+    public void clearCart(){
+        cartList = new HashMap<Product, Integer>();
     }
 
 }
