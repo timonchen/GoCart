@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:contetxt="comp3350.GoCart.presentation"
-    android:padding="80dp">
+    android:padding="30dp">
 
     <EditText
         android:layout_width="match_parent"
@@ -27,6 +27,7 @@
         android:layout_height="match_parent"
         android:layout_below="@id/searchButton"
         android:layout_marginTop="20dp"
-        android:id="@+id/storesRecView"/>
+        android:id="@+id/storesRecView"
+        android:overScrollMode="never"/>
 
 </RelativeLayout>
