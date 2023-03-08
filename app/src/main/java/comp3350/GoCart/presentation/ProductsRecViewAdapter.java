@@ -15,10 +15,11 @@ import java.util.ArrayList;
 
 import comp3350.GoCart.objects.Product;
 import comp3350.GoCart.R;
+import comp3350.GoCart.objects.StoreProduct;
 
 public class ProductsRecViewAdapter extends RecyclerView.Adapter<ProductsRecViewAdapter.ViewHolder> {
 
-    private List<Product> products;
+    private List<StoreProduct> products;
 
     public ProductsRecViewAdapter() {
         products = new ArrayList<>();
@@ -38,6 +39,8 @@ public class ProductsRecViewAdapter extends RecyclerView.Adapter<ProductsRecView
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.productName.setText(products.get(position).getProductName());
+        holder.productPrice.setText(products.get(position).getPrice().toString());
+
         // String price = "$" + products.get(position).getProductPrice().toString();
         // holder.productPrice.setText(price);
     }
@@ -53,12 +56,12 @@ public class ProductsRecViewAdapter extends RecyclerView.Adapter<ProductsRecView
     }
 
     // Set the stores that we want to display
-    public void setProducts(List<Product> products) {
+    public void setProducts(List<StoreProduct> products) {
         this.products = products;
         notifyDataSetChanged();
     }
 
-    protected List<Product> getProducts(){
+    protected List<StoreProduct> getProducts(){
         return products;
     }
 

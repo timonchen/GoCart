@@ -9,6 +9,7 @@ public interface StoreProductPersistence {
 
 
     List<StoreProduct> getStoreProducts(final String storeID);
+    List<StoreProduct> getStoreProductByName(final String storeID, final String productName);
 
 
 }
