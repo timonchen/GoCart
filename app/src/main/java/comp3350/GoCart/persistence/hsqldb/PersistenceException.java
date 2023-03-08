@@ -6,6 +6,7 @@ package comp3350.GoCart.persistence.hsqldb;
  * so we can throw them around, but not *have* to catch them if we don't want to.
  */
 public class PersistenceException extends RuntimeException {
+
     public PersistenceException(final Exception cause) {
         super(cause);
     }
