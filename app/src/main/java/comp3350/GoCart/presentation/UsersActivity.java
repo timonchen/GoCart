@@ -22,6 +22,8 @@ import comp3350.GoCart.objects.User;
 
 public class UsersActivity extends Activity
 {
+    // Codes to send back to home activity
+
     private AccessUsers accessUsers;
 
     @Override
@@ -39,7 +41,6 @@ public class UsersActivity extends Activity
         {
             setContentView(R.layout.activity_user_account);
         }
-        Toast.makeText(this, "ORAYO2", Toast.LENGTH_SHORT).show();
     }
 
     public void buttonSignUpPageOnClick(View v)
@@ -51,38 +52,19 @@ public class UsersActivity extends Activity
     {
         User newUser = createUserFromEditText();
 
-        if (newUser == null)    // Change to !=
+        if (newUser != null)
         {
             accessUsers.addUser(newUser);
-
             accessUsers.setLoggedInUser(newUser);
 
-            setContentView(R.layout.activity_home);
-            Button loginButton = (Button)findViewById(R.id.loginButton);
-            loginButton.setVisibility(View.GONE);
-
-            Button userAccountButton = (Button)findViewById(R.id.userAccountButton);
-            userAccountButton.setVisibility(View.VISIBLE);
-
-            String accountCreated = "Account Created";
-            String welcomeMessage = "Enjoy shopping with GoCart!";
-            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-
-            alertDialog.setTitle(accountCreated);
-            alertDialog.setMessage(welcomeMessage);
-
-            alertDialog.show();
+            // Inform home activity that the user has logged in
+            Intent result = new Intent();
+            result.putExtra("loggedInStatus", true);
+            setResult(RESULT_OK, result);
         }
 
-        /*
-        List<User> allUsers = accessUsers.getUsers();
-
-        System.out.println("All Users");
-
-        for (int i = 0; i < allUsers.size(); i++)
-        {
-            System.out.println(allUsers.get(i));
-        } */
+        // Go back to previous activity
+        this.finish();
     }
 
     public void buttonLoginOnClick(View view)
@@ -149,7 +131,6 @@ public class UsersActivity extends Activity
     {
         User newUser = null;
 
-        /*
         boolean valid = true;
         String firstName = null;
         String lastName = null;
@@ -285,7 +266,7 @@ public class UsersActivity extends Activity
         if (valid)
         {
             newUser = new User(firstName, lastName, address, city, province, zipCode, phone, email, password);
-        } */
+        }
 
         return newUser;
     }
