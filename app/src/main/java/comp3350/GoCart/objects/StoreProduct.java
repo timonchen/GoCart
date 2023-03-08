@@ -25,6 +25,7 @@ public class StoreProduct {
     */
 
     public String getProductID(){ return (product.getProductID()); }
+    public String getProductName() { return product.getProductName();}
 
 
 

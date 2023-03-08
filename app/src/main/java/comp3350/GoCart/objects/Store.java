@@ -42,6 +42,7 @@ public class Store implements Parcelable {
         dest.writeString(storeName);
         dest.writeString(storeAddress);
         dest.writeDouble(distToUser);
+        dest.writeString(storeID);
     }
 
     @Override
