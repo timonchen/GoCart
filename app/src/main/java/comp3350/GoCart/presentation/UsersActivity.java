@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,7 @@ public class UsersActivity extends Activity
         {
             setContentView(R.layout.activity_user_account);
         }
+        Toast.makeText(this, "ORAYO2", Toast.LENGTH_SHORT).show();
     }
 
     public void buttonSignUpPageOnClick(View v)
@@ -49,9 +51,18 @@ public class UsersActivity extends Activity
     {
         User newUser = createUserFromEditText();
 
-        if (newUser != null)
+        if (newUser == null)    // Change to !=
         {
             accessUsers.addUser(newUser);
+
+            accessUsers.setLoggedInUser(newUser);
+
+            setContentView(R.layout.activity_home);
+            Button loginButton = (Button)findViewById(R.id.loginButton);
+            loginButton.setVisibility(View.GONE);
+
+            Button userAccountButton = (Button)findViewById(R.id.userAccountButton);
+            userAccountButton.setVisibility(View.VISIBLE);
 
             String accountCreated = "Account Created";
             String welcomeMessage = "Enjoy shopping with GoCart!";
@@ -61,27 +72,17 @@ public class UsersActivity extends Activity
             alertDialog.setMessage(welcomeMessage);
 
             alertDialog.show();
-
-            accessUsers.setLoggedInUser(newUser);
-
-            setContentView(R.layout.activity_home);
-
-            Button loginButton = (Button)findViewById(R.id.loginButton);
-            loginButton.setVisibility(View.GONE);
-
-            Button userAccountButton = (Button)findViewById(R.id.userAccountButton);
-            userAccountButton.setVisibility(View.VISIBLE);
-
-            setContentView(R.layout.activity_home);
         }
 
+        /*
         List<User> allUsers = accessUsers.getUsers();
 
         System.out.println("All Users");
+
         for (int i = 0; i < allUsers.size(); i++)
         {
             System.out.println(allUsers.get(i));
-        }
+        } */
     }
 
     public void buttonLoginOnClick(View view)
@@ -148,6 +149,7 @@ public class UsersActivity extends Activity
     {
         User newUser = null;
 
+        /*
         boolean valid = true;
         String firstName = null;
         String lastName = null;
@@ -283,7 +285,7 @@ public class UsersActivity extends Activity
         if (valid)
         {
             newUser = new User(firstName, lastName, address, city, province, zipCode, phone, email, password);
-        }
+        } */
 
         return newUser;
     }
