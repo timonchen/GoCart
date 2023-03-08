@@ -11,11 +11,11 @@
 
     <Button
         android:id="@+id/strByNameButton"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Find Store By name"
-        android:onClick="findStoreNameOnClick"/>
+        android:onClick="findStoreNameOnClick"
+        android:text="Find Store By name" />
 
     <Button
         android:layout_width="200dp"

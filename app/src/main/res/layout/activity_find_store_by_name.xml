@@ -1,33 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:contetxt="comp3350.GoCart.presentation.FindStoreByNameActivity"
     android:padding="30dp">
 
     <EditText
+        android:id="@+id/searchBar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:hint="Search"
-        android:id="@+id/searchBar"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/searchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="Search"
-        android:id="@+id/searchButton"
-        android:layout_below="@id/searchBar"
-        android:layout_marginTop="20dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchBar" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/storesRecView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/searchButton"
         android:layout_marginTop="20dp"
-        android:id="@+id/storesRecView"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchButton" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
