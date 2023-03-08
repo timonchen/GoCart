@@ -29,6 +29,11 @@ public class AccessStoreProduct {
         return Collections.unmodifiableList(storeProducts);
     }
 
+    public List<StoreProduct> getStoreProductsByName(String storeID, String productName) {
+        storeProducts = storeProductPersistence.getStoreProductByName(storeID, productName);
+        return storeProducts;
+    }
+
     public Store returnCheapestStore(List<Product> productList, List<Store> storeList){
         int currentCheapestIndex = 0;
         BigDecimal total;
