@@ -49,4 +49,9 @@ public class StoreProductPersistenceHSQLDB implements StoreProductPersistence {
     public List<StoreProduct> getStoreProducts(String storeID) {
     return null;
     }
+
+    @Override
+    public List<StoreProduct> getStoreProductByName(String storeID, String productName) {
+        return null;
+    }
 }

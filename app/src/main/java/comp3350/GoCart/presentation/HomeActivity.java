@@ -3,10 +3,8 @@ package comp3350.GoCart.presentation;
 import comp3350.GoCart.R;
 import comp3350.GoCart.application.Main;
 import android.app.Activity;
-<<<<<<< app/src/main/java/comp3350/GoCart/presentation/HomeActivity.java
 import android.content.Context;
 import android.app.AlertDialog;
->>>>>>> app/src/main/java/comp3350/GoCart/presentation/HomeActivity.java
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
@@ -37,12 +35,10 @@ public class HomeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-<<<<<<< app/src/main/java/comp3350/GoCart/presentation/HomeActivity.java
         copyDatabaseToDevice();
         isLoggedIn = false;
         loginButton = findViewById(R.id.loginButton);
         userAccountButton = findViewById(R.id.userAccountButton);
->>>>>>> app/src/main/java/comp3350/GoCart/presentation/HomeActivity.java
     }
 
     @Override
@@ -54,7 +50,7 @@ public class HomeActivity extends Activity {
         Intent storesIntent = new Intent(HomeActivity.this, FindStoreActivity.class);
         HomeActivity.this.startActivity(storesIntent);
     }
-<<<<<<< app/src/main/java/comp3350/GoCart/presentation/HomeActivity.java
+
     private void copyDatabaseToDevice() {
         final String DB_PATH = "db";
 
@@ -146,5 +142,4 @@ public class HomeActivity extends Activity {
             alertDialog.show();
         }
     }
->>>>>>> app/src/main/java/comp3350/GoCart/presentation/HomeActivity.java
 }
