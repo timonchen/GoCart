@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,18 +16,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.GoCart.R;
+import comp3350.GoCart.business.AccessStoreProduct;
 import comp3350.GoCart.objects.Product;
 import comp3350.GoCart.objects.Store;
+import comp3350.GoCart.objects.StoreProduct;
+import comp3350.GoCart.persistence.ProductPersistence;
 
 public class ProductsActivity extends Activity {
 
+    // UI Elements
     private ImageView storeImage;
     private TextView storeName;
     private TextView storeAddress;
-    List<Product> storeProducts;
     private SearchView searchBar;
     private RecyclerView productsRecView;
     private ProductsRecViewAdapter adapter;
+
+    private AccessStoreProduct accessStoreProduct;
+    List<StoreProduct> storeProducts;
+    private String storeID;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,9 +47,12 @@ public class ProductsActivity extends Activity {
         searchBar = findViewById(R.id.searchBar);
         productsRecView = findViewById(R.id.productsRecView);
 
-        // Get store data from previous page
-        Store store = getIntent().getParcelableExtra("selected_store"); // Store products are from
+        // Get store data from previous activity
+        Store store = getIntent().getParcelableExtra("selected_store");
+        storeID = store.getStoreID();
 
+        accessStoreProduct = new AccessStoreProduct();
+        storeProducts = accessStoreProduct.getStoresProducts(store.getStoreID());
 
         // Set data in views to store data
         storeName.setText(store.getStoreName());
@@ -73,23 +84,7 @@ public class ProductsActivity extends Activity {
     }
 
     private void updateProductList(String productName) {
-        List<Product> productList = new ArrayList<>();
-
-        if (productName.equals("")) {   // If query empty, display everything
-            productList = storeProducts;
-        }
-        else {
-            for (int i = 0; i < storeProducts.size(); i++) {
-                Product product = storeProducts.get(i);
-                if (product.getProductName().toLowerCase().contains(productName.toLowerCase())) {
-                    productList.add(product);
-                }
-            }
-        }
-
-
-        // Update recycler view
-        adapter.setProducts(productList);
+        adapter.setProducts(accessStoreProduct.getStoreProductsByName(storeID, productName));
         productsRecView.setAdapter(adapter);
     }
 }

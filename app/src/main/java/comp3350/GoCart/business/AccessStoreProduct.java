@@ -1,6 +1,5 @@
 package comp3350.GoCart.business;
 
-
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
@@ -13,6 +12,7 @@ import comp3350.GoCart.objects.StoreProduct;
 import comp3350.GoCart.persistence.StoreProductPersistence;
 
 public class AccessStoreProduct {
+
 
     private StoreProductPersistence storeProductPersistence;
     private List<StoreProduct> storeProducts;
@@ -30,6 +30,12 @@ public class AccessStoreProduct {
     }
 
     public StoreProduct findCheapestStore(List<Product> productList, List<Store> storeList){
+    public List<StoreProduct> getStoreProductsByName(String storeID, String productName) {
+        storeProducts = storeProductPersistence.getStoreProductByName(storeID, productName);
+        return storeProducts;
+    }
+
+    public Store returnCheapestStore(List<Product> productList, List<Store> storeList){
         int currentCheapestIndex = 0;
         BigDecimal total;
         BigDecimal currentCheapestTotal = new BigDecimal("0");
@@ -48,11 +54,9 @@ public class AccessStoreProduct {
                         currentCheapestIndex = i;
                         currentCheapestTotal = total;
                     }
-
                     if (!total.equals(BigDecimal.ZERO))
                         result = new StoreProduct(storeList.get(currentCheapestIndex),newProduct,currentCheapestTotal);
                 }
-
             }
         }
         return result;
@@ -70,6 +74,7 @@ public class AccessStoreProduct {
                 if (storesProducts.get(i).getProductID().equals(currentProducts.get(i).getProductID()))
                     runningTotal = runningTotal.add(storesProducts.get(i).getPrice());
         }
+
 
         return runningTotal;
     }
