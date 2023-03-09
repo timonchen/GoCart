@@ -2,22 +2,32 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.ShoppingCartActivity"
     android:padding="40dp"
     >
 
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="80dp"
-        android:id="@+id/recViewProducts"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cartRecView"
+        android:layout_centerHorizontal="true"
+        android:overScrollMode="never"/>
 
 
+    </RelativeLayout>
+
+</ScrollView>
 
     <Button
         android:layout_width="wrap_content"
@@ -34,6 +44,4 @@
         android:layout_toRightOf="@id/btnReturnFromCart"
         android:layout_marginLeft="150sp"
         android:id="@+id/btnUpdateQuantity"/>
-
-
 </RelativeLayout>

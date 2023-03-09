@@ -27,14 +27,29 @@
         android:onClick="buttonFindStoreOnClick"/>
 
     <Button
-        android:id="@+id/btnTestingCart"
-        android:layout_width="200dp"
+        android:id="@+id/loginButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_below="@id/findStoreButton"
-        android:layout_marginTop="20dp"
-        android:text="Test Shopping Cart"
-        android:onClick="buttonShoppingCartOnClick"/>
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:text="Login"
+        android:onClick="buttonLoginPageOnClick" />
+
+    <Button
+        android:id="@+id/userAccountButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:text="User Account"
+        android:onClick="buttonUserAccountOnClick"
+        android:visibility="gone"
+        />
+
 
 </RelativeLayout>
 

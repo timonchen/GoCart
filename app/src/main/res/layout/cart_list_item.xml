@@ -5,6 +5,19 @@
     android:padding="10dp"
     android:id="@+id/parent">
 
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/productImage"
+        android:layout_marginTop="0dp"
+        android:src="@drawable/apple"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/productImage">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,6 +53,7 @@
         android:layout_below="@id/txtProductName"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"/>
+    </RelativeLayout>
 
 
 

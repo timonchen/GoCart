@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">GoCart</string>
-
+    <string name="home_activity_login">Login</string>
     <string name="action_settings">Settings</string>
     <string name="cheapest_order_start">Let us pick the store</string>
     <string name="find_stores">Find stores</string>
+    <string name="fatalError">Fatal error</string>
+    <string name="warning">Warning</string>
+
 </resources>

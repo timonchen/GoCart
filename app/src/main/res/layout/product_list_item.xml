@@ -7,7 +7,9 @@
     app:cardCornerRadius="10dp"
     app:cardElevation="5dp"
     android:layout_margin="15dp"
-    app:cardBackgroundColor="#FFFF">
+    app:cardBackgroundColor="#FFFF"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,7 +17,7 @@
 
         <ImageView
             android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_height="180dp"
             android:id="@+id/productImage"
             android:layout_marginTop="20dp"
             android:src="@drawable/apple"
@@ -26,8 +28,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="15dp"
+            android:id="@+id/layoutNamePrice"
             android:layout_marginTop="15dp"
             android:layout_below="@id/productImage">
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -52,6 +56,38 @@
 
 
         </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtQuant"
+            android:layout_below="@id/layoutNamePrice"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:text="Quantity:"
+            />
+
+        <EditText
+            android:id="@+id/etxtQuantityEntry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/txtQuant"
+            android:layout_below="@id/layoutNamePrice"
+            android:layout_marginTop="7dp"
+            android:layout_marginRight="10dp"
+            android:inputType="number"
+            android:text="1" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnAddToCart"
+            android:layout_below="@id/layoutNamePrice"
+            android:layout_toRightOf="@id/etxtQuantityEntry"
+            android:padding="20dp"
+            android:text="Add to cart"
+            />
+
     </RelativeLayout>
 
 

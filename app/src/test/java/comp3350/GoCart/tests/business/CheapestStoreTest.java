@@ -40,7 +40,7 @@ public class CheapestStoreTest extends TestCase
 
     @Before
     public void init(){
-        accP.getProducts();
+        //accP.getProducts();
         accS.getStores();
 
     }
@@ -62,7 +62,6 @@ public class CheapestStoreTest extends TestCase
     @Test
     public void testNullStoreList(){
         System.out.println("Start Test: null store list ");
-
 
         result = accSP.findCheapestStore(accP.getProducts(),null);
         assertNotNull(result);

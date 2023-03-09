@@ -1,26 +1,28 @@
 package comp3350.GoCart.presentation;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
+
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
+
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+
+import java.util.List;
 import comp3350.GoCart.R;
 import comp3350.GoCart.business.AccessStoreProduct;
-import comp3350.GoCart.objects.Product;
 import comp3350.GoCart.objects.Store;
 import comp3350.GoCart.objects.StoreProduct;
-import comp3350.GoCart.persistence.ProductPersistence;
+
 
 public class ProductsActivity extends Activity {
 
@@ -31,10 +33,10 @@ public class ProductsActivity extends Activity {
     private SearchView searchBar;
     private RecyclerView productsRecView;
     private ProductsRecViewAdapter adapter;
-
     private AccessStoreProduct accessStoreProduct;
     List<StoreProduct> storeProducts;
     private String storeID;
+    private FloatingActionButton viewCart;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,6 +48,7 @@ public class ProductsActivity extends Activity {
         storeAddress = findViewById(R.id.storeAddress);
         searchBar = findViewById(R.id.searchBar);
         productsRecView = findViewById(R.id.productsRecView);
+        viewCart = findViewById(R.id.cart_fab);
 
         // Get store data from previous activity
         Store store = getIntent().getParcelableExtra("selected_store");
@@ -63,6 +66,15 @@ public class ProductsActivity extends Activity {
         adapter.setProducts(storeProducts);
         productsRecView.setAdapter(adapter);
 
+        viewCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProductsActivity.this, ShoppingCartActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
         // Code related to search bar functionality
         searchBar.clearFocus();
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -78,10 +90,13 @@ public class ProductsActivity extends Activity {
             }
         });
 
+
         // Recycler view will use a grid layout with 2 columns per row
         productsRecView.setLayoutManager(new GridLayoutManager(this, 2));
         productsRecView.setFocusable(false);
     }
+
+
 
     private void updateProductList(String productName) {
         adapter.setProducts(accessStoreProduct.getStoreProductsByName(storeID, productName));

@@ -20,7 +20,7 @@ public class    ClosestStoresRecViewAdapter extends StoresRecViewAdapter{
         Store store = super.getStores().get(position);
         NumberFormat format = new DecimalFormat("#0.0");
 
-        holder.getTxtName().setText(store.getStoreName()+store.getStoreAddress());
+        holder.getTxtName().setText(store.getStoreName());
         holder.getTxtAddress().setText(store.getStoreAddress() + "\n" + String.valueOf(format.format(store.getDistToUser())) +"km" + "\n");
     }
 }
