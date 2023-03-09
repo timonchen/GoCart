@@ -49,8 +49,7 @@ public class ProductPersistenceHSQLDB implements ProductPersistence {
         try (final Connection c = connection()) {
             final Statement st = c.createStatement();
             final ResultSet rs = st.executeQuery("SELECT * FROM Stores WHERE name=?");
-            while (rs.next())
-            {
+            while (rs.next()) {
                 final Product product = fromResultSet(rs);
                 matchingProducts.add(product);
             }
@@ -59,11 +58,9 @@ public class ProductPersistenceHSQLDB implements ProductPersistence {
 
             return matchingProducts;
         }
-        catch (final SQLException e)
-        {
+        catch (final SQLException e) {
             throw new PersistenceException(e);
         }
-
 
     }
 

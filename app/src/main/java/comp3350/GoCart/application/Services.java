@@ -15,7 +15,7 @@ import comp3350.GoCart.persistence.stubs.StoreProductPersistenceStub;
 import comp3350.GoCart.persistence.stubs.UserPersistenceStub;
 
 public class Services{
-    private static final boolean useHSQLDB = false;
+    private static final boolean useHSQLDB = true;
 
 
     private static StorePersistence storePersistence = null;

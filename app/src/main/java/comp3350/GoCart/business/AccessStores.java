@@ -33,6 +33,11 @@ public class AccessStores{
         return Collections.unmodifiableList(stores);
     }
 
+    public List<Store> getStoresByName(String storeName) {
+        stores = storePersistence.searchStoresByName(storeName);
+        return Collections.unmodifiableList(stores);
+    }
+
     /*
     * This method calls the calculators calculate nearest stores method.
     * Currently we have two ways ways of doing this, one is just a random distance to each store
