@@ -5,11 +5,13 @@ import junit.framework.TestCase;
 import org.junit.*;
 
 import comp3350.GoCart.business.AccessProducts;
+import comp3350.GoCart.business.AccessStores;
 import comp3350.GoCart.business.GetByName;
 import comp3350.GoCart.business.ShoppingCart;
 import comp3350.GoCart.objects.Product;
 import comp3350.GoCart.objects.Store;
 
+import java.math.BigDecimal;
 import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.List;
@@ -140,6 +142,36 @@ public class ShoppingCartTest extends TestCase{
         assertEquals("product 0 not in list, expected 0", Integer.valueOf(0),cart.getQuantity(prods.get(0)));
         cart.clearCart();
     }
+
+    @Test
+    public void testSetandGetStore(){
+        cart = ShoppingCart.getInstance();
+        AccessStores accessStores = new AccessStores();
+        Store zero = accessStores.getStores().get(0);
+
+        cart.setStore(zero);
+        assertEquals("should be same object pass to it",zero,cart.getStore());
+        cart.clearCart();
+    }
+
+    @Test
+    public void testCalculateTotal(){
+        prods = products.getProducts();
+        cart = ShoppingCart.getInstance();
+        cart.addProduct(prods.get(0) , 2 );
+        AccessStores accessStores = new AccessStores();
+        Store zero = accessStores.getStores().get(0);
+
+        cart.setStore(zero);
+
+        assertEquals(" " , cart.calculateTotal(),new BigDecimal("2.10"));
+        cart.clearCart();
+    }
+
+
+
+
+
 
 
 }

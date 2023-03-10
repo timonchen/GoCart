@@ -29,7 +29,7 @@ public class UsersActivity extends Activity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        System.out.println("oncreate");
+
         super.onCreate(savedInstanceState);
         accessUsers = new AccessUsers();
 

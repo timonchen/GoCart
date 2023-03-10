@@ -18,21 +18,11 @@ public class Product {
         this.peanutAllergy = peanutAllergy;
     }
 
-    public Product(final String newProductName){
-        productName = newProductName;
-        this.peanutAllergy = false;
-    }
+
 
     public String getProductName(){
         return productName;
     }
-
-    /*
-    public BigDecimal getProductPrice(){
-        return productPrice;
-    }
-
-     */
 
     public String getProductID() {return productID; }
 

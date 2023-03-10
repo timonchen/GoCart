@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     xmlns:tools="http://schemas.android.com/tools"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.ShoppingCartActivity"
-    android:padding="40dp"
-    >
+    android:padding="10dp"
+    android:id="@+id/shopingCartActivity">
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -24,24 +18,61 @@
         android:layout_centerHorizontal="true"
         android:overScrollMode="never"/>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true">
+        <ImageView
+            android:contentDescription="TotalPriceMenu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imgStore"
+            android:src="@color/offWhite"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Price:"
+            android:padding="10dp"
+            android:textSize="21dp"
+            android:id="@+id/txtFixedTotal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtEditTotalPrice"
+            android:textSize="21dp"
+            android:padding="10dp"
+            android:text="9.99"
+            android:layout_toRightOf="@id/txtFixedTotal"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@id/txtFixedTotal"
+            android:textSize="21dp"
+            android:padding="10dp"
+            android:text=""
+            android:id="@+id/txtCheaperNotification"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/txtCheaperPrice"
+            android:textSize="21dp"
+            android:padding="10dp"
+            android:layout_below="@id/txtFixedTotal"
+            android:layout_toRightOf="@id/txtCheaperNotification"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_toRightOf="@id/txtCheaperPrice"
+            android:id="@+id/btnChangeToCheaper"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:visibility="invisible"/>
+
 
     </RelativeLayout>
 
-</ScrollView>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="Return"
-        android:id="@+id/btnReturnFromCart"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="Update"
-        android:layout_toRightOf="@id/btnReturnFromCart"
-        android:layout_marginLeft="150sp"
-        android:id="@+id/btnUpdateQuantity"/>
 </RelativeLayout>

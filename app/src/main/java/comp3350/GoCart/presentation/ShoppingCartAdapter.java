@@ -1,8 +1,9 @@
 package comp3350.GoCart.presentation;
 
-import android.content.Intent;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.view.View;
@@ -10,96 +11,142 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
-
-import java.util.HashMap;
+import java.math.BigDecimal;
 import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
 
+import comp3350.GoCart.business.AccessProducts;
+import comp3350.GoCart.business.AccessStoreProduct;
+import comp3350.GoCart.business.AccessStores;
 import comp3350.GoCart.business.ShoppingCart;
 import comp3350.GoCart.objects.Product;
-import comp3350.GoCart.objects.Store;
 import comp3350.GoCart.R;
-import comp3350.GoCart.objects.StoreProduct;
 
 public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapter.ViewHolder> {
 
 
     //private HashMap<Product,Integer> prodData;
+    Context context;
     private List<Product> products;
-    private List<Integer> quantitys;
+    private List<Integer> quantites;
     private Product prodListing;
+    private TextView editPrice;
+    private TextView notif,lp;
+    private Button changeStore;
 
 
-    public ShoppingCartAdapter() {
+    public ShoppingCartAdapter(Context context, List<Product> products, List<Integer> quantites, TextView price,TextView newNotif,TextView newLP,Button change) {
+        this.context = context;
+        this.products = products;
+        this.quantites = quantites;
+        this.editPrice = price;
+        this.notif = newNotif;
+        this.lp = newLP;
+        this.changeStore = change;
+
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // ViewGroup is the parent of all layouts (RelativeLayout, LinearLayout, etc.
+/*
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_list_item, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
+
+ */
+        View v = LayoutInflater.from(context).inflate(R.layout.cart_list_item,parent,false);
+        ViewHolder holder = new ViewHolder(v, new clickListener() {
+            @Override
+            public void clicked(Product p, int quant) {
+                ShoppingCart.getInstance().incrementProductQuantity(p);
+            }
+        });
+
+
+
+
+        return  holder;
     }
 
     // Modify views here
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.productname.setText(products.get(position).getProductName());
+        holder.productQuantity.setText(quantites.get(position).toString());
 
-        // Display a message if there is nothing to display
 
-        if (products.isEmpty()) {
-            holder.productname.setText("Cart is Empty");
-        }
-        else {  // Display our search results
-
-            holder.productname.setText(products.get(position).getProductName());
-            //prodListing = prodData.get(position).getKey();
-            //holder.txtName.setText(prodListing.getProductName() + "  Quantity " + prodData.get(position).getValue());
-        }
 
     }
 
     @Override
     public int getItemCount() {
-        int size = 0;
-
-        if (products != null)
-            return products.size();
-
-        return size;
+        return products.size();
     }
 
-    public void setCartProducts(List<Product> prods,List<Integer> quant ) {
+    public void setCartProducts(List<Product> prods,List<Integer> quant) {
         this.products = prods;
-        this.quantitys = quant;
+        this.quantites = quant;
         notifyDataSetChanged();
     }
 
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+
+        clickListener clickListener;
         private TextView productname;
+        private TextView selectedStorePrice;
+        private TextView cheaperStorePrice;
         private EditText productQuantity;
+        private Button incButton;
+        private Button decButton;
+        private AccessProducts ap = new AccessProducts();
 
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, clickListener Listener) {
             super(itemView);
             productname = itemView.findViewById(R.id.txtProductName);
             productQuantity = itemView.findViewById(R.id.txtSetQuantity);
+            incButton = itemView.findViewById(R.id.btnIncQuantity);
+            decButton = itemView.findViewById(R.id.btnDecQuantity);
+
+
+            this.clickListener = Listener;
+            incButton.setOnClickListener(this);
+            decButton.setOnClickListener(this);
+
 
         }
-        //protected TextView getTxtName() { return txtName;        }
+        @Override
+        public void onClick(View view){
+            Product prod = ap.searchProductsByName(productname.getText().toString()).get(0);
+            if (view.getId() == R.id.btnDecQuantity)
+                ShoppingCart.getInstance().decrementProductQuantity(prod);
+            else
+                ShoppingCart.getInstance().incrementProductQuantity(prod);
+            productQuantity.getText().clear();
+            productQuantity.append(ShoppingCart.getInstance().getQuantity(prod).toString());
+            editPrice.setText(ShoppingCart.getInstance().calculateTotal().toString());
+            notifyDataSetChanged();
+
+
+            AccessStoreProduct aSP = new AccessStoreProduct();
+            AccessStores aS = new AccessStores();
+            //BigDecimal cheapest = aSP.findCheapestStore(p,q,aS.getStores());
+            ShoppingCartActivity.check(notif,lp,changeStore);
+
+
+        }
+
+
+
     }
 
-    public void incrementOnClick(View v) {
-
-
-
+    public interface clickListener{
+        void clicked(Product p,int quant);
     }
+
 
 
 }

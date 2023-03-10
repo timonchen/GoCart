@@ -20,14 +20,10 @@ public class ProductPersistenceHSQLDB implements ProductPersistence {
 
     private final String dbPath;
     private Product fromResultSet(final ResultSet rs) throws SQLException {
-        final boolean has_allergy;
-        final String productID=rs.getString("PID");
-        final String name=rs.getString("NAME");
-        final String allergy =rs.getString("ALLERGY");
-        if(Integer.parseInt(allergy)==1){
-            has_allergy = true;
-        } else
-            has_allergy = false;
+
+        final String productID= String.valueOf(rs.getInt("PID"));
+        final String name= rs.getString("NAME");
+        final boolean has_allergy = rs.getBoolean("ALLERGY");
 
         return new Product(productID, name,has_allergy);
     }
@@ -73,7 +69,7 @@ public class ProductPersistenceHSQLDB implements ProductPersistence {
 
         try (final Connection c = connection()) {
             final Statement st = c.createStatement();
-            final ResultSet rs = st.executeQuery("SELECT * FROM Stores LIMIT 100");
+            final ResultSet rs = st.executeQuery("SELECT * FROM Stores");
             while (rs.next())
             {
                 final Product product = fromResultSet(rs);

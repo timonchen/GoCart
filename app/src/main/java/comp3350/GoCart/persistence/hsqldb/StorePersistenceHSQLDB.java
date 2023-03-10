@@ -30,11 +30,12 @@ public class StorePersistenceHSQLDB implements StorePersistence{
         return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
     }
     private Store fromResultSet(final ResultSet rs) throws SQLException {
-         final String storeID=rs.getString("SID");
+         final String storeID=String.valueOf( rs.getString("SID"));
          final String storeName=rs.getString("name");
          final String storeAddress=rs.getString("address");
         return new Store(storeID, storeName,storeAddress);
     }
+
     @Override
     public List<Store> getAllStores() {
         final List<Store> stores = new ArrayList<>();

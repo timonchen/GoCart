@@ -3,6 +3,7 @@ package comp3350.GoCart.business;
 
 import android.content.Intent;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -12,88 +13,76 @@ import comp3350.GoCart.objects.Product;
 import comp3350.GoCart.objects.Store;
 
 public class ShoppingCart {
-    private static volatile ShoppingCart instance = null;
+    private static final ShoppingCart instance = new ShoppingCart();
     //private HashMap<Product,Integer> cartList = new HashMap<Product, Integer>();
     private ArrayList<Product> products = new ArrayList<>();
     private ArrayList<Integer> quantity = new ArrayList<>();
     private Store store;
 
     private ShoppingCart() {
+
     }
 
     public void setStore(Store newStore){
         store = newStore;
     }
+    public Store getStore(){
+        return store;
+    }
+
+    public BigDecimal calculateTotal(){
+        AccessStoreProduct ap = new AccessStoreProduct();
+        return ap.calculateTotal(products,quantity,store.getStoreID());
+    }
 
     public static ShoppingCart getInstance(){
-        if (instance == null) {
-            synchronized (ShoppingCart.class) {
-                if (instance == null) {
-                    instance = new ShoppingCart();
-                }
-            }
-        }
-            return instance;
+        return instance;
     }
 
     public void addProduct(Product newProd, Integer newQuantity){
         //cartList.put(newProd, newQuantity);
-        products.add(newProd);
-        quantity.add(newQuantity);
-        System.out.println("NEW ITEM ADDED " + newProd+  newQuantity);
-
+        if ( products.contains(newProd)) {
+            changeProductQuantity(newProd,quantity.get(products.indexOf(newProd)) + newQuantity);
+        } else {
+            products.add(newProd);
+            quantity.add(newQuantity);
+        }
     }
 
     public void removeProduct(Product newProd){
         //cartList.remove(newProd);
         int position = products.indexOf(newProd);
         products.remove(position);
+        products.trimToSize();
         quantity.remove(position);
+        quantity.trimToSize();
     }
 
     public void changeProductQuantity(Product newProd, Integer newQuant){
-        /*
-        if (cartList.containsKey(newProd)){
-            cartList.put(newProd,newQuant);
-        } /*else {
-            // throw exception product not in list
-        }*/
 
         if ( products.contains(newProd)){
-            quantity.set(products.indexOf(newProd),newQuant);
+            if ( newQuant > -1) {
+                quantity.set(products.indexOf(newProd), newQuant);
+            } else
+                removeProduct(newProd);
         }
     }
 
     public void incrementProductQuantity(Product newProd){
-        /*
-        if (cartList.containsKey(newProd)) {
-            changeProductQuantity(newProd,cartList.get(newProd) + 1 );
-        }
-         */
+
         if(products.contains(newProd)){
             changeProductQuantity(newProd,quantity.get(products.indexOf(newProd)) +1 );
         }
     }
 
     public void decrementProductQuantity(Product newProd){
-        /*
-        if (cartList.containsKey(newProd)) {
-            changeProductQuantity(newProd,cartList.get(newProd) - 1 );
-        }
-        */
+
         if(products.contains(newProd)){
             changeProductQuantity(newProd,quantity.get(products.indexOf(newProd)) - 1 );
         }
     }
 
-    /*
-    public HashMap<Product, Integer> getCartList(){
-        return cartList;
-    }
-        public void clearCart(){
-        cartList = new HashMap<Product, Integer>();
-    }
-    */
+
     public List<Product> getCartProducts(){
         return Collections.unmodifiableList(products);
     }
@@ -116,8 +105,6 @@ public class ShoppingCart {
         return 0;
 
     }
-
-
 
 
 

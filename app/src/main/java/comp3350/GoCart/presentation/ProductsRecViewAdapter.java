@@ -39,10 +39,8 @@ public class ProductsRecViewAdapter extends RecyclerView.Adapter<ProductsRecView
         ViewHolder holder = new ViewHolder(view, new cartClickListener() {
             @Override
             public void onAdd(String p,int quant) {
-                System.out.println(" P AND QUANT " + p + "  "  + quant);
-                accessProducts = new AccessProducts();
-                accessProducts.searchProductsByName("Banana");
-                //ShoppingCart.getInstance().addProduct(accessProducts.searchProductsByName(p).get(0),quant);
+
+                ShoppingCart.getInstance().addProduct(accessProducts.searchProductsByName(p).get(0),quant);
             }
         });
         return holder;
@@ -98,10 +96,10 @@ public class ProductsRecViewAdapter extends RecyclerView.Adapter<ProductsRecView
             productName = itemView.findViewById(R.id.productName);
             productPrice = itemView.findViewById(R.id.productPrice);
             parent = itemView.findViewById(R.id.parent);
-
             cartQuantity = itemView.findViewById(R.id.etxtQuantityEntry);
             cartAddTo = itemView.findViewById(R.id.btnAddToCart);
-            this.listener = listener = listener;
+
+            this.listener = listener ;
             cartAddTo.setOnClickListener(this);
 
         }

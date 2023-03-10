@@ -28,17 +28,14 @@ public class StoreProductPersistenceHSQLDB implements StoreProductPersistence {
         return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
     }
 
-    private Product fromResultSet(final ResultSet rs) throws SQLException {
-        final boolean has_allergy;
-        final String productID = rs.getString("PID");
-        final String name = rs.getString("NAME");
-        final String allergy = rs.getString("ALLERGY");
-        if (Integer.parseInt(allergy) == 1) {
-            has_allergy = true;
-        } else
-            has_allergy = false;
+    private StoreProduct fromResultSet(final ResultSet rs) throws SQLException {
 
-        return new Product(productID, name, has_allergy);
+        final String productID = String.valueOf( rs.getInt("PID"));
+        final String name = rs.getString("NAME");
+
+
+
+        return new StoreProduct(new Store("","",""), new Product("","",false),new BigDecimal(0));
     }
 
     public StoreProductPersistenceHSQLDB(final String dbPath) {

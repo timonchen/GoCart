@@ -35,7 +35,7 @@ public class AccessStoreProduct {
         return storeProducts;
     }
 
-    public StoreProduct findCheapestStore(List<Product> productList, List<Store> storeList){
+    public StoreProduct findCheapestStore(List<Product> productList,List<Integer> quant, List<Store> storeList){
         int currentCheapestIndex = 0;
         BigDecimal total;
         BigDecimal currentCheapestTotal = new BigDecimal("0");
@@ -47,7 +47,7 @@ public class AccessStoreProduct {
                 && productList.size() != 0 && storeList.size() != 0) {
             for (int i = 0; i < storeList.size(); i++) {
                 if (storeList.get(i) != null) {
-                    total = calculateTotal(productList, storeList.get(i).getStoreID());
+                    total = calculateTotal(productList,quant, storeList.get(i).getStoreID());
                     if (currentCheapestTotal.equals(BigDecimal.ZERO)
                             && total.compareTo(BigDecimal.ZERO) > 0
                             ||total.compareTo(currentCheapestTotal) == -1 ){
@@ -64,20 +64,30 @@ public class AccessStoreProduct {
 
 
     //Calculates Total price at given store for list of products
-    private BigDecimal calculateTotal(List<Product> currentProducts, String storeID){
+    public BigDecimal calculateTotal(List<Product> currentProducts,List<Integer> quant, String storeID){
         //List<Product> storesProducts = currentStore.getStoreProducts();
+        StoreProduct currentSP = null;
+        List<StoreProduct> spList;
+        Product current = null;
+
         List<StoreProduct> storesProducts = getStoresProducts(storeID);
         BigDecimal runningTotal = new BigDecimal("0");
 
         for (int i = 0; i < currentProducts.size();i++){
-            if (storesProducts.get(i) != null)
-                if (storesProducts.get(i).getProductID().equals(currentProducts.get(i).getProductID()))
-                    runningTotal = runningTotal.add(storesProducts.get(i).getPrice());
+            if (quant != null && quant.size() > 0 ) {
+                spList= storeProductPersistence.getStoreProductByName(storeID, currentProducts.get(i).getProductName());
+                if(spList.size() > 0 ) {
+                    currentSP = spList.get(0);
+                    runningTotal = runningTotal.add(currentSP.getPrice().multiply(BigDecimal.valueOf(quant.get(i))));
+                }
+            }
         }
-
-
         return runningTotal;
     }
+
+
+
+
 
 
 }

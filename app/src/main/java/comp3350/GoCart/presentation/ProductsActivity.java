@@ -3,7 +3,6 @@ package comp3350.GoCart.presentation;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -20,6 +19,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 import comp3350.GoCart.R;
 import comp3350.GoCart.business.AccessStoreProduct;
+import comp3350.GoCart.business.ShoppingCart;
 import comp3350.GoCart.objects.Store;
 import comp3350.GoCart.objects.StoreProduct;
 
@@ -56,6 +56,7 @@ public class ProductsActivity extends Activity {
 
         accessStoreProduct = new AccessStoreProduct();
         storeProducts = accessStoreProduct.getStoresProducts(store.getStoreID());
+        ShoppingCart.getInstance().setStore(store);
 
         // Set data in views to store data
         storeName.setText(store.getStoreName());
@@ -66,12 +67,9 @@ public class ProductsActivity extends Activity {
         adapter.setProducts(storeProducts);
         productsRecView.setAdapter(adapter);
 
-        viewCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ProductsActivity.this, ShoppingCartActivity.class);
-                startActivity(intent);
-            }
+        viewCart.setOnClickListener(view -> {
+            Intent intent = new Intent(ProductsActivity.this, ShoppingCartActivity.class);
+            startActivity(intent);
         });
 
 
@@ -95,7 +93,6 @@ public class ProductsActivity extends Activity {
         productsRecView.setLayoutManager(new GridLayoutManager(this, 2));
         productsRecView.setFocusable(false);
     }
-
 
 
     private void updateProductList(String productName) {
