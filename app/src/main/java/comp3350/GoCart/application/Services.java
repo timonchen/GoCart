@@ -10,6 +10,7 @@ import comp3350.GoCart.persistence.hsqldb.ProductPersistenceHSQLDB;
 import comp3350.GoCart.persistence.hsqldb.StorePersistenceHSQLDB;
 import comp3350.GoCart.persistence.hsqldb.StoreProductPersistenceHSQLDB;
 import comp3350.GoCart.persistence.UserPersistence;
+import comp3350.GoCart.persistence.hsqldb.UserPersistenceHSQLDB;
 import comp3350.GoCart.persistence.stubs.ProductPersistenceStub;
 import comp3350.GoCart.persistence.stubs.StorePersistenceStub;
 import comp3350.GoCart.persistence.ProductPersistence;
@@ -50,7 +51,7 @@ public class Services{
 
     public static synchronized UserPersistence getUserPersistence() {
         if (userPersistence == null) {
-            userPersistence = new UserPersistenceStub();
+            userPersistence = new UserPersistenceHSQLDB(Main.getDBPathName());
         }
         return userPersistence;
     }

@@ -130,7 +130,9 @@ public class HomeActivity extends Activity {
             loggedInUser = data.getParcelableExtra(EXTRA_USER);
             if (loggedInUser != null)
             {
+                System.out.println("HomeActivity User: " + loggedInUser);
                 System.out.println("User = " + loggedInUser.getInitials());
+                System.out.println("User email = " + loggedInUser.getEmail());
                 Button loginButton = (Button) findViewById(R.id.loginButton);
                 Button userAccountButton = (Button) findViewById(R.id.userAccountButton);
 

@@ -21,11 +21,6 @@ public class UserPersistenceStub implements UserPersistence
         users.add(newUser);
     }
 
-    public int getNumUsers()
-    {
-        return users.size();
-    }
-
     public User getUser(String email, String password)
     {
         User user = null;
@@ -41,8 +36,52 @@ public class UserPersistenceStub implements UserPersistence
         return user;
     }
 
+    public int getNumUsers()
+    {
+        return users.size();
+    }
+
+    public void updateUser(User user)
+    {
+        int index;
+
+        index = users.indexOf(user);
+        if (index >= 0)
+        {
+            users.set(index, user);
+        }
+    }
+
+//    public void updateUserName(User user, String newName)
+//    {
+//        user.updateName(newName);
+//    }
+//
+//    public void updateUserPhone(User user, int phone)
+//    {
+//        user.updatePhone(phone);
+//    }
+//
+//    public void updateUserEmail(User user, String newEmail)
+//    {
+//        user.updateEmail(newEmail);
+//    }
+//
+//    public void updateUserPassword(User user, String newPassword)
+//    {
+//        user.updatePassword(newPassword);
+//    }
+
+
     public void deleteUser(User user)
     {
-        users.remove(user);
+        int index;
+
+        index = users.indexOf(user);
+
+        if (index >= 0)
+        {
+            users.remove(index);
+        }
     }
 }
