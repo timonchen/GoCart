@@ -53,17 +53,17 @@ public class SearchProductsByNameTest extends TestCase
         System.out.println("\nTest: searching products with case mismatch");
 
         products = new ArrayList<>();
-        products.add(new Product("Banana", new BigDecimal("1.05"),false));
+        products.add(new Product("Banana"));
         List<Product> matchingProducts = accessProducts.searchProductsByName("banana");
         assertEquals("Should return the correct product searched irrespective of the case.", products, matchingProducts);
 
         products = new ArrayList<>();
-        products.add(new Product("Rye Bread", new BigDecimal("1.45"),true));
+        products.add(new Product("Rye Bread"));
         matchingProducts = accessProducts.searchProductsByName("RYE BREAD");
         assertEquals("Should return the correct product searched irrespective of the case.", products, matchingProducts);
 
         products = new ArrayList<>();
-        products.add(new Product("Whole Wheat Bread", new BigDecimal("1.45"),true));
+        products.add(new Product("Whole Wheat Bread"));
         matchingProducts = accessProducts.searchProductsByName("wHOLE wHEAT bREAD");
         assertEquals("Should return the correct product searched irrespective of the case.", products, matchingProducts);
 
@@ -78,12 +78,12 @@ public class SearchProductsByNameTest extends TestCase
 
         products = new ArrayList<>();
 
-        products.add(new Product("Banana", new BigDecimal("1.05"),false));
-        products.add(new Product("Rye Bread", new BigDecimal("1.45"),true));
-        products.add(new Product("Whole Wheat Bread", new BigDecimal("1.45"),true));
-        products.add(new Product("Lucky Charms", new BigDecimal("3.99"),true));
-        products.add(new Product("toilet paper", new BigDecimal("15.99"),false));
-        products.add(new Product("Ice-cream", new BigDecimal("5.99"), false));
+        products.add(new Product("Banana"));
+        products.add(new Product("Rye Bread"));
+        products.add(new Product("Whole Wheat Bread"));
+        products.add(new Product("Lucky Charms"));
+        products.add(new Product("toilet paper"));
+        products.add(new Product("Ice-cream"));
 
         List<Product> matchingProducts = accessProducts.searchProductsByName("a");
         assertEquals("Should return all the products that contain the letter searched.", products, matchingProducts);
@@ -99,8 +99,8 @@ public class SearchProductsByNameTest extends TestCase
 
         products = new ArrayList<>();
 
-        products.add(new Product("Rye Bread", new BigDecimal("1.45"),true));
-        products.add(new Product("Whole Wheat Bread", new BigDecimal("1.45"),true));
+        products.add(new Product("Rye Bread"));
+        products.add(new Product("Whole Wheat Bread"));
 
         List<Product> matchingProducts = accessProducts.searchProductsByName("bread");
         assertEquals("Should return all the products containing the searched characters.", products, matchingProducts);
@@ -116,12 +116,12 @@ public class SearchProductsByNameTest extends TestCase
 
         products = new ArrayList<>();
 
-        products.add(new Product("Rye Bread", new BigDecimal("1.45"),true));
-        products.add(new Product("Whole Wheat Bread", new BigDecimal("1.45"),true));
-        products.add(new Product("Lucky Charms", new BigDecimal("3.99"),true));
-        products.add(new Product("Beef Jerkey", new BigDecimal("9.99"),false));
-        products.add(new Product("12 cookies", new BigDecimal("12.99"),true));
-        products.add(new Product("toilet paper", new BigDecimal("15.99"),false));
+        products.add(new Product("Rye Bread"));
+        products.add(new Product("Whole Wheat Bread"));
+        products.add(new Product("Lucky Charms"));
+        products.add(new Product("Beef Jerkey"));
+        products.add(new Product("12 cookies"));
+        products.add(new Product("toilet paper"));
 
         List<Product> matchingProducts = accessProducts.searchProductsByName(" ");
         assertEquals("Should return all the products which have whitespace in their name (name containing more than one word).", products, matchingProducts);
@@ -138,7 +138,7 @@ public class SearchProductsByNameTest extends TestCase
         assertTrue("Should return nothing because no product contains these characters.", matchingProducts.isEmpty());
 
         products = new ArrayList<>();
-        products.add(new Product("Ice-cream", new BigDecimal("5.99"), false));
+        products.add(new Product("Ice-cream"));
 
         matchingProducts = accessProducts.searchProductsByName("Ice-cream");
         assertEquals("Should return the correct product name searched with hyphen.", matchingProducts, products);

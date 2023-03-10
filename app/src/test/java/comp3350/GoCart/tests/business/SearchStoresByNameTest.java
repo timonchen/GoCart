@@ -20,11 +20,11 @@ public class SearchStoresByNameTest extends TestCase {
     @Test
     public void testNoStoresFound() {
         stores = new ArrayList<Store>();
-        stores.add(new Store("Walmart", "123 Vista Avenue Winnipeg"));
-        stores.add(new Store("Costco", "321 Vernon Road Winnipeg"));
-        stores.add(new Store("Walmart", "123 Vista Avenue Winnipeg"));
-        stores.add(new Store("Safeway", "21 Peltier Avenue Winnipeg"));
-        stores.add(new Store("Walmart", "57 Lily Street Winnipeg"));
+        stores.add(new Store("store1", "Walmart", "123 Vista Avenue Winnipeg"));
+        stores.add(new Store("store2","Costco", "321 Vernon Road Winnipeg"));
+        stores.add(new Store("store3","Walmart", "123 Vista Avenue Winnipeg"));
+        stores.add(new Store("store4", "Safeway", "21 Peltier Avenue Winnipeg"));
+        stores.add(new Store("store5", "Walmart", "57 Lily Street Winnipeg"));
 
         List<Store> result = GetByName.stores("SuperStore", stores);
         assertTrue("List should be empty", result.isEmpty());
@@ -33,9 +33,9 @@ public class SearchStoresByNameTest extends TestCase {
     @Test
     public void testBlankStore() {
         stores = new ArrayList<Store>();
-        stores.add(new Store("Walmart", "123 Vista Avenue Winnipeg"));
-        stores.add(new Store("Costco", "321 Vernon Road Winnipeg"));
-        stores.add(new Store("Safeway", "21 Peltier Avenue Winnipeg"));
+        stores.add(new Store("store1", "Walmart", "123 Vista Avenue Winnipeg"));
+        stores.add(new Store("store2","Costco", "321 Vernon Road Winnipeg"));
+        stores.add(new Store("store4", "Safeway", "21 Peltier Avenue Winnipeg"));
 
         List<Store> result = GetByName.stores("", stores);
         assertTrue("List should be empty", result.isEmpty());
@@ -46,11 +46,11 @@ public class SearchStoresByNameTest extends TestCase {
     @Test
     public void testOneStoreFound() {
         stores = new ArrayList<Store>();
-        stores.add(new Store("Walmart", "123 Vista Avenue Winnipeg"));
-        stores.add(new Store("Costco", "321 Vernon Road Winnipeg"));
-        stores.add(new Store("Walmart", "123 Vista Avenue Winnipeg"));
-        stores.add(new Store("Safeway", "21 Peltier Avenue Winnipeg"));
-        stores.add(new Store("Walmart", "57 Lily Street Winnipeg"));
+        stores.add(new Store("store1", "Walmart", "123 Vista Avenue Winnipeg"));
+        stores.add(new Store("store2","Costco", "321 Vernon Road Winnipeg"));
+        stores.add(new Store("store3","Walmart", "123 Vista Avenue Winnipeg"));
+        stores.add(new Store("store4", "Safeway", "21 Peltier Avenue Winnipeg"));
+        stores.add(new Store("store5", "Walmart", "57 Lily Street Winnipeg"));
 
         List<Store> result = GetByName.stores("Safeway", stores);
         assertTrue("List should have only Safeway", result.get(0).getStoreName().equals("Safeway"));
@@ -61,11 +61,11 @@ public class SearchStoresByNameTest extends TestCase {
     @Test
     public void testMultipleStoresFound() {
         stores = new ArrayList<Store>();
-        stores.add(new Store("Walmart", "123 Vista Avenue Winnipeg"));
-        stores.add(new Store("Costco", "321 Vernon Road Winnipeg"));
-        stores.add(new Store("Walmart", "11 Berkshire Bay Winnipeg"));
-        stores.add(new Store("Safeway", "21 Peltier Avenue Winnipeg"));
-        stores.add(new Store("Walmart", "57 Lily Street Winnipeg"));
+        stores.add(new Store("store1", "Walmart", "123 Vista Avenue Winnipeg"));
+        stores.add(new Store("store2","Costco", "321 Vernon Road Winnipeg"));
+        stores.add(new Store("store3","Walmart", "123 Vista Avenue Winnipeg"));
+        stores.add(new Store("store4", "Safeway", "21 Peltier Avenue Winnipeg"));
+        stores.add(new Store("store5", "Walmart", "57 Lily Street Winnipeg"));
 
         List<Store> result = GetByName.stores("Walmart", stores);
         assertTrue("There should be 3 stores with the name Walmart", result.size() == 3);
@@ -81,10 +81,10 @@ public class SearchStoresByNameTest extends TestCase {
     @Test
     public void testUpperAndLowerCase() {
         stores = new ArrayList<Store>();
-        stores.add(new Store("Walmart", "123 Vista Avenue Winnipeg"));
-        stores.add(new Store("Costco", "321 Vernon Road Winnipeg"));
-        stores.add(new Store("Walmart", "11 Berkshire Bay Winnipeg"));
-        stores.add(new Store("Safeway", "21 Peltier Avenue Winnipeg"));
+        stores.add(new Store("store1", "Walmart", "123 Vista Avenue Winnipeg"));
+        stores.add(new Store("store2","Costco", "321 Vernon Road Winnipeg"));
+        stores.add(new Store("store3","Walmart", "123 Vista Avenue Winnipeg"));
+        stores.add(new Store("store4", "Safeway", "21 Peltier Avenue Winnipeg"));
 
         List<Store> result = GetByName.stores("cOsTcO", stores);
         assertTrue("The store returned should still be costco reguardless if the letters are upper case or lowercase", result.get(0).getStoreName().equals("Costco"));
@@ -93,7 +93,7 @@ public class SearchStoresByNameTest extends TestCase {
     @Test
     public void testPartialSearch() {
         stores = new ArrayList<Store>();
-        stores.add(new Store("Walmart", "123 Vista Avenue Winnipeg"));
+        stores.add(new Store("store1", "Walmart", "123 Vista Avenue Winnipeg"));
 
         List<Store> result = GetByName.stores("wal", stores);
         assertTrue("The proper store should still be returned even if input is incomplete", result.get(0).getStoreName().equals("Walmart"));

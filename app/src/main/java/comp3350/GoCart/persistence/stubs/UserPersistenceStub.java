@@ -41,4 +41,9 @@ public class UserPersistenceStub implements UserPersistence
 
         return user;
     }
+
+    public void deleteUser(User user)
+    {
+        users.remove(user);
+    }
 }

@@ -31,8 +31,8 @@ public class DietaryRestrictionTest extends TestCase {
     @Test
     public void testDietaryRestriction() {
         System.out.println("\nchecking dietary restriction in a product");
-        Product p1 = new Product("Banana", new BigDecimal("1.05"), false);
-        Product p2 = (new Product("Rye Bread", new BigDecimal("1.45"), true));
+        Product p1 = new Product("product1", "Banana", false);
+        Product p2 = (new Product("product2", "Rye Bread", true));
         assertFalse("The product should have peanut allergy", p1.hasPeanutAllergy());
         assertTrue("The product should not have peanut allergy", p2.hasPeanutAllergy());
         System.out.println("Finished testDietaryRestriction");
@@ -43,10 +43,10 @@ public class DietaryRestrictionTest extends TestCase {
     public void testShowDietaryProducts() {
         System.out.println("\nGet dietaryRestricted products");
         list = new ArrayList<>();
-        list.add(new Product("Banana", new BigDecimal("1.05"), false));
-        list.add(new Product("Beef Jerkey", new BigDecimal("9.99"), false));
-        list.add(new Product("toilet paper", new BigDecimal("15.99"), false));
-        list.add(new Product("Ice-cream", new BigDecimal("5.99"), false));
+        list.add(new Product("product1", "Banana", false));
+        list.add(new Product("product2", "Beef Jerkey", false));
+        list.add(new Product("product3", "toilet paper", false));
+        list.add(new Product("product4", "Ice-cream", false));
 
         List<Product> testList = accessProducts.getDietaryProducts();
         assertTrue(testList.containsAll(list) && (list).containsAll(testList));

@@ -11,4 +11,6 @@ public interface UserPersistence
     List<User> getUserSequential();
 
     User getUser(String email, String password);
+
+    void deleteUser(final User user);
 }

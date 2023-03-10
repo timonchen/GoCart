@@ -15,7 +15,7 @@ public class AccessUsers
 
     private User user;
 
-    private User loggedInUser;
+    private static User loggedInUser;
 
     public AccessUsers()
     {
@@ -47,5 +47,10 @@ public class AccessUsers
     public User getUser(String email, String password)
     {
         return userPersistence.getUser(email, password);
+    }
+
+    public void deleteUser(User user)
+    {
+        userPersistence.deleteUser(user);
     }
 }
