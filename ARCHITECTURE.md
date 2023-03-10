@@ -22,6 +22,8 @@ Due: March 10, 2023
 | Find nearby stores  | Store Distance calculator	 | StorePersistenceHSQLDB	   |
 | Error Messages 	    | location Distance calculator   | StoreProductPersistenceHSQLDB |
 | find products	    | Access products by name		 | UserPersistenceHSQLDB         |
+| find products	    | Access Orders			 | OrderLinePersistenceHSQLDB    |
+| find products	    | Access OrderLineItem		 | OrderLinePersistenceStub	   |
 | Shopping cart       | Access users			 | OrderPresistenceStub      	   |
 | 			    | Shopping cart			 | ProductPersistenceStub        |
 | 			    | 					 | StorePersistenceStub          |
@@ -176,6 +178,8 @@ String getInitials()
 >This class is used to access the products of a Store from the persistence layer to work the logic.
 #### AccessStores
 >This class is used to access the Store from the persistence layer to work the logic.
+#### AccessOrderlineItem
+>This class is used to access the OrderLineItem from the persistence layer to work the logic.
 #### CalculateCheapestStore
 >This class is used to implement the user story "find the cheapest order" by finding the cheapest order accross all stores.
 #### DistanceCalculator
