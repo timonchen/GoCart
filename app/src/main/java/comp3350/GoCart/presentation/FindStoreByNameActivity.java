@@ -3,7 +3,6 @@ package comp3350.GoCart.presentation;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import comp3350.GoCart.business.AccessStores;
-import comp3350.GoCart.business.GetByName;
 import comp3350.GoCart.objects.Store;
 import comp3350.GoCart.R;
 
@@ -27,7 +25,6 @@ public class FindStoreByNameActivity extends Activity implements StoresRecViewAd
     private Button searchButton;
     private RecyclerView storesRecView;
     private StoresRecViewAdapter adapter;
-
     private AccessStores accessStores;
     private List<Store> storeList;
 
@@ -57,7 +54,7 @@ public class FindStoreByNameActivity extends Activity implements StoresRecViewAd
                 String input = searchBar.getText().toString();  // Get the text from the text box
                 storeList = accessStores.getStores();  // Get/Update our list of stores from db
 
-                List<Store> searchResults = GetByName.stores(input, storeList);    // Find stores in our list with name given
+                List<Store> searchResults = accessStores.getStoresByName(input);    // Find stores in our list with name given
 
                 // Display search results in the recycler viewer
                 adapter.setStores(searchResults);

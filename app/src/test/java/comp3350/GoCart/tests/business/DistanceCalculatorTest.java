@@ -12,6 +12,7 @@ import comp3350.GoCart.business.DistanceCalculator;
 import comp3350.GoCart.business.DistanceCalculatorAPI;
 import comp3350.GoCart.business.DistanceCalculatorRandom;
 import comp3350.GoCart.objects.Store;
+import comp3350.GoCart.persistence.stubs.StorePersistenceStub;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class DistanceCalculatorTest extends TestCase {
         super();
         api = new DistanceCalculatorAPI();
         stub = new DistanceCalculatorRandom();
-        accessStores = new AccessStores();
+        accessStores = new AccessStores(new StorePersistenceStub());
         stores = accessStores.getStores();
     }
 

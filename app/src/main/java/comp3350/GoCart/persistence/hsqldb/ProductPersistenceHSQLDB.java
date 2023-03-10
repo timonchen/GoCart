@@ -20,12 +20,12 @@ public class ProductPersistenceHSQLDB implements ProductPersistence {
 
     private final String dbPath;
     private Product fromResultSet(final ResultSet rs) throws SQLException {
+        final String productID=  String.valueOf(rs.getInt("PID"));
+        final String name=rs.getString("NAME");
+        final boolean hasAllergy =rs.getBoolean("HAS_ALLERGY");
 
-        final String productID= String.valueOf(rs.getInt("PID"));
-        final String name= rs.getString("NAME");
-        final boolean has_allergy = rs.getBoolean("ALLERGY");
 
-        return new Product(productID, name,has_allergy);
+        return new Product(productID, name,hasAllergy);
     }
     public ProductPersistenceHSQLDB(final String dbPath){
         this.dbPath = dbPath;
@@ -35,7 +35,25 @@ public class ProductPersistenceHSQLDB implements ProductPersistence {
     }
     @Override
     public List<Product> getDietaryRestrictedProducts() {
-        return null;
+        List<Product> matchingProducts = new ArrayList<>();
+
+        try (final Connection c = connection()) {
+            final Statement st = c.createStatement();
+            final ResultSet rs = st.executeQuery("SELECT * FROM PRODUCTS WHERE HAS_ALLERGY = TRUE");
+            while (rs.next())
+            {
+                final Product product = fromResultSet(rs);
+                matchingProducts.add(product);
+            }
+            rs.close();
+            st.close();
+
+            return matchingProducts;
+        }
+        catch (final SQLException e)
+        {
+            throw new PersistenceException(e);
+        }
     }
 
     @Override
@@ -43,8 +61,9 @@ public class ProductPersistenceHSQLDB implements ProductPersistence {
             List<Product> matchingProducts = new ArrayList<>();
 
         try (final Connection c = connection()) {
-            final Statement st = c.createStatement();
-            final ResultSet rs = st.executeQuery("SELECT * FROM Stores WHERE name=?");
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM PRODUCTS WHERE NAME = ?");
+            st.setString(1, productName);
+            final ResultSet rs = st.executeQuery();
             while (rs.next())
             {
                 final Product product = fromResultSet(rs);
@@ -55,38 +74,10 @@ public class ProductPersistenceHSQLDB implements ProductPersistence {
 
             return matchingProducts;
         }
-        catch (final SQLException e)
-        {
-            throw new PersistenceException(e);
-        }
-
-
-    }
-
-    @Override
-    public List<Product> getAllProducts(){
-        List<Product> matchingProducts = new ArrayList<>();
-
-        try (final Connection c = connection()) {
-            final Statement st = c.createStatement();
-            final ResultSet rs = st.executeQuery("SELECT * FROM Stores");
-            while (rs.next())
-            {
-                final Product product = fromResultSet(rs);
-                matchingProducts.add(product);
-            }
-            rs.close();
-            st.close();
-
-            return matchingProducts;
-        }
-        catch (final SQLException e)
-        {
+        catch (final SQLException e) {
             throw new PersistenceException(e);
         }
 
     }
-
-
 
 }

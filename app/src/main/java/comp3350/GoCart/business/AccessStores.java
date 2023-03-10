@@ -29,8 +29,18 @@ public class AccessStores{
         stores = null;
     }
 
+    public AccessStores(final StorePersistence storePersistence) {
+        this();
+        this.storePersistence = storePersistence;
+    }
+
     public List<Store> getStores() {
         stores = storePersistence.getAllStores();
+        return Collections.unmodifiableList(stores);
+    }
+
+    public List<Store> getStoresByName(String storeName) {
+        stores = storePersistence.searchStoresByName(storeName);
         return Collections.unmodifiableList(stores);
     }
 
@@ -58,7 +68,6 @@ public class AccessStores{
         }catch (Exception e) { //currently if we have an error we just set the distance the 0
             nearest = new ArrayList<Store>();
         }
-
         return nearest; //return original stores if there was an error.
     }
 

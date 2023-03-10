@@ -29,13 +29,12 @@ public class StoreProductPersistenceHSQLDB implements StoreProductPersistence {
     }
 
     private StoreProduct fromResultSet(final ResultSet rs) throws SQLException {
+        final int productID = rs.getInt("PID");
+        final int storeID = rs.getInt("SID");
+        final BigDecimal price = rs.getBigDecimal("PRICE");
+        final String prodName = rs.getString("PRODUCT_NAME");
 
-        final String productID = String.valueOf( rs.getInt("PID"));
-        final String name = rs.getString("NAME");
-
-
-
-        return new StoreProduct(new Store("","",""), new Product("","",false),new BigDecimal(0));
+        return new StoreProduct( new Store(String.valueOf(storeID)), new Product(String.valueOf(productID), prodName),price);
     }
 
     public StoreProductPersistenceHSQLDB(final String dbPath) {
@@ -44,11 +43,50 @@ public class StoreProductPersistenceHSQLDB implements StoreProductPersistence {
 
     @Override
     public List<StoreProduct> getStoreProducts(String storeID) {
-    return null;
+        final List<StoreProduct> stores = new ArrayList<>();
+
+        try (final Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM STORES_PRODUCTS WHERE SID = ?");
+            st.setInt(1, Integer.parseInt(storeID));
+            final ResultSet rs = st.executeQuery();
+            while (rs.next())
+            {
+                final StoreProduct sp = fromResultSet(rs);
+                stores.add(sp);
+            }
+            rs.close();
+            st.close();
+
+            return stores;
+        }
+        catch (final SQLException e)
+        {
+            throw new PersistenceException(e);
+        }
     }
 
     @Override
     public List<StoreProduct> getStoreProductByName(String storeID, String productName) {
-        return null;
+        final List<StoreProduct> stores = new ArrayList<>();
+
+        try (final Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM STORES_PRODUCTS WHERE SID = ? AND PRODUCT_NAME = ?");
+            st.setInt(1, Integer.parseInt(storeID));
+            st.setString(2, productName);
+            final ResultSet rs = st.executeQuery();
+            while (rs.next())
+            {
+                final StoreProduct sp = fromResultSet(rs);
+                stores.add(sp);
+            }
+            rs.close();
+            st.close();
+
+            return stores;
+        }
+        catch (final SQLException e)
+        {
+            throw new PersistenceException(e);
+        }
     }
 }

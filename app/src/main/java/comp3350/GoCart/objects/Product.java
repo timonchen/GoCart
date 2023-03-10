@@ -9,8 +9,6 @@ public class Product {
     private String productID;
     private final String productName;
 
-
-
     private  final boolean peanutAllergy;
     public Product(final String newProductID, final String newProductName,boolean peanutAllergy){
         productID = newProductID;
@@ -18,6 +16,11 @@ public class Product {
         this.peanutAllergy = peanutAllergy;
     }
 
+    public Product(final String newProductID, final String newProductName){
+        productName = newProductName;
+        productID = newProductID;
+        this.peanutAllergy = false;
+    }
 
 
     public String getProductName(){

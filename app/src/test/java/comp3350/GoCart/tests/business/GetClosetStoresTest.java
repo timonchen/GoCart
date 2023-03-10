@@ -12,6 +12,7 @@ import java.util.List;
 
 import comp3350.GoCart.business.AccessStores;
 import comp3350.GoCart.objects.Store;
+import comp3350.GoCart.persistence.stubs.StorePersistenceStub;
 
 /*
 * Note that the current implentation of AccessStores uses the API distance calculator so these tests reflect that
@@ -22,7 +23,7 @@ public class GetClosetStoresTest {
 
     public GetClosetStoresTest() {
         super();
-        accessStores = new AccessStores();
+        accessStores = new AccessStores(new StorePersistenceStub());
     }
 
 

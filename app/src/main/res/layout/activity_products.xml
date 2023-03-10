@@ -64,7 +64,8 @@
                     android:background="@drawable/search_view_bg"
                     />
 
-                <View
+                <!-- Divider -->
+            <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:id="@+id/divider"
@@ -73,11 +74,19 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"/>
 
-                <androidx.recyclerview.widget.RecyclerView
+                <Switch
+                android:id="@+id/allergenSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/divider"
+                android:text="Peanut-free"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/productsRecView"
-                    android:layout_below="@id/divider"
+                    android:layout_below="@id/allergenSwitch"
                     android:layout_centerHorizontal="true"
                     android:overScrollMode="never"/>
             </RelativeLayout>

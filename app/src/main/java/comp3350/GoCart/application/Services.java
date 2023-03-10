@@ -2,8 +2,10 @@ package comp3350.GoCart.application;
 
 import comp3350.GoCart.R;
 import comp3350.GoCart.objects.User;
+import comp3350.GoCart.persistence.OrderPersistence;
 import comp3350.GoCart.persistence.StorePersistence;
 import comp3350.GoCart.persistence.StoreProductPersistence;
+import comp3350.GoCart.persistence.hsqldb.OrderPersistenceHSQLDB;
 import comp3350.GoCart.persistence.hsqldb.ProductPersistenceHSQLDB;
 import comp3350.GoCart.persistence.hsqldb.StorePersistenceHSQLDB;
 import comp3350.GoCart.persistence.hsqldb.StoreProductPersistenceHSQLDB;
@@ -15,34 +17,24 @@ import comp3350.GoCart.persistence.stubs.StoreProductPersistenceStub;
 import comp3350.GoCart.persistence.stubs.UserPersistenceStub;
 
 public class Services{
-    private static final boolean useHSQLDB = false;
-
 
     private static StorePersistence storePersistence = null;
     private static ProductPersistence productPersistence = null;
     private static StoreProductPersistence storeProductPersistence = null;
+
     private static UserPersistence userPersistence = null;
+
+    private static OrderPersistence orderPersistence = null;
 
     public static synchronized StorePersistence getStorePersistence(){
         if (storePersistence == null){
-            if(useHSQLDB) {
-                storePersistence = new StorePersistenceHSQLDB(Main.getDBPathName());
-            } else{
-                storePersistence = new StorePersistenceStub();
-
-            }
+            storePersistence = new StorePersistenceHSQLDB(Main.getDBPathName());
         }
         return storePersistence;
     }
     public static synchronized ProductPersistence getProductPersistence() {
         if (productPersistence == null) {
-            if (useHSQLDB) {
-                productPersistence = new ProductPersistenceHSQLDB(Main.getDBPathName());
-
-
-            } else {
-                productPersistence = new ProductPersistenceStub();
-            }
+            productPersistence = new ProductPersistenceHSQLDB(Main.getDBPathName());
         }
             return productPersistence;
 
@@ -50,14 +42,8 @@ public class Services{
 
     public static synchronized StoreProductPersistence getStoreProductPersistence() {
         if (storeProductPersistence == null) {
-            if (storePersistence == null) {
-                if (useHSQLDB) {
-                    storeProductPersistence = new StoreProductPersistenceHSQLDB(Main.getDBPathName());
+            storeProductPersistence = new StoreProductPersistenceHSQLDB(Main.getDBPathName());
 
-                }
-            } else {
-                storeProductPersistence = new StoreProductPersistenceStub();
-            }
         }
         return storeProductPersistence;
     }
@@ -67,5 +53,13 @@ public class Services{
             userPersistence = new UserPersistenceStub();
         }
         return userPersistence;
+    }
+
+    public static synchronized OrderPersistence getOrderPersistence() {
+        if(orderPersistence == null) {
+            orderPersistence = new OrderPersistenceHSQLDB(Main.getDBPathName());
+        }
+
+        return orderPersistence;
     }
 }

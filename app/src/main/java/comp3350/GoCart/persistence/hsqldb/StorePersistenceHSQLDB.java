@@ -27,24 +27,24 @@ public class StorePersistenceHSQLDB implements StorePersistence{
 
     }
     private Connection connection() throws SQLException {
+        System.out.println("dbpath: " + dbPath);
         return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
     }
     private Store fromResultSet(final ResultSet rs) throws SQLException {
-         final String storeID=String.valueOf( rs.getString("SID"));
-         final String storeName=rs.getString("name");
-         final String storeAddress=rs.getString("address");
+         final String storeID= String.valueOf(rs.getInt("SID"));
+         final String storeName=rs.getString("NAME");
+         final String storeAddress=rs.getString("ADDRESS");
         return new Store(storeID, storeName,storeAddress);
     }
-
     @Override
     public List<Store> getAllStores() {
         final List<Store> stores = new ArrayList<>();
 
         try (final Connection c = connection()) {
+            System.out.println("Connection worked");
             final Statement st = c.createStatement();
             final ResultSet rs = st.executeQuery("SELECT * FROM STORES");
-            while (rs.next())
-            {
+            while (rs.next()) {
                 final Store store = fromResultSet(rs);
                 stores.add(store);
             }
@@ -53,10 +53,33 @@ public class StorePersistenceHSQLDB implements StorePersistence{
 
             return stores;
         }
-        catch (final SQLException e)
-        {
+        catch (final SQLException e) {
             throw new PersistenceException(e);
         }
+    }
+
+    @Override
+    public List<Store> searchStoresByName(String storeName) {
+        List<Store> result = new ArrayList<>();
+
+        try (final Connection c = connection()) {
+            final Statement st = c.createStatement();
+            String query = "SELECT * FROM STORES WHERE name LIKE " + "\'" + storeName + "%\'";
+            final ResultSet rs = st.executeQuery(query);
+
+            while (rs.next()) {
+                final Store store = fromResultSet(rs);
+                result.add(store);
+            }
+
+            rs.close();
+            st.close();
+        }
+        catch (final SQLException e) {
+            throw new PersistenceException(e);
+        }
+
+        return result;
     }
 
 }
