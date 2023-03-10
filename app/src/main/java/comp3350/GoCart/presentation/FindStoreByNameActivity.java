@@ -26,7 +26,6 @@ public class FindStoreByNameActivity extends Activity implements StoresRecViewAd
     private RecyclerView storesRecView;
     private StoresRecViewAdapter adapter;
     private AccessStores accessStores;
-    private List<Store> storeList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,6 @@ public class FindStoreByNameActivity extends Activity implements StoresRecViewAd
 
         // Grab store data
         accessStores = new AccessStores();
-        storeList = accessStores.getStores();
 
         // Connect recView adapter to the recView in activity_find_store_by_name
         adapter = new StoresRecViewAdapter(this);
@@ -52,7 +50,6 @@ public class FindStoreByNameActivity extends Activity implements StoresRecViewAd
             @Override
             public void onClick(View v) {
                 String input = searchBar.getText().toString();  // Get the text from the text box
-                storeList = accessStores.getStores();  // Get/Update our list of stores from db
 
                 List<Store> searchResults = accessStores.getStoresByName(input);    // Find stores in our list with name given
 

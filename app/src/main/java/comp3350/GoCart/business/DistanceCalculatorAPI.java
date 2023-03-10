@@ -5,8 +5,10 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpRetryException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -21,7 +23,6 @@ public class DistanceCalculatorAPI implements DistanceCalculator {
     private static String API_KEY = "&key=AIzaSyDGfUnYamfvdOBh4gFiEAjVwv5jv80tgf4";
 
     /*
-
     * This method uses Google's map api in order to get the distances of the stores given a location.
     * It calls into the api and gets the distance parameter from the JSON response
     * It returns the sorted list or throws an Exception

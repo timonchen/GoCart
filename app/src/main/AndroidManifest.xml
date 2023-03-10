@@ -5,9 +5,13 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-
-        <!-- DEBUG Change android:name to presentation.HomeActivity -->
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".presentation.enterHomeAddress"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ShoppingCartActivity"
+            android:exported="false" /> <!-- DEBUG Change android:name to presentation.HomeActivity -->
         <activity
             android:name=".presentation.HomeActivity"
             android:label="@string/app_name"
@@ -53,13 +57,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<!--        <activity-->
-<!--            android:name=".presentation.StudentsActivity"-->
-<!--            android:label="@string/title_activity_students" >-->
-<!--            <meta-data-->
-<!--                android:name="android.support.PARENT_ACTIVITY"-->
-<!--                android:value="comp3350.srsys.presentation.HomeActivity" />-->
-<!--        </activity>-->
 
         <activity android:name=".presentation.UsersActivity"
             android:label="@string/app_name"

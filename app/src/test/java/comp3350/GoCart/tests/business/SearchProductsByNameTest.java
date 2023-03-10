@@ -2,6 +2,7 @@ package comp3350.GoCart.tests.business;
 
 import junit.framework.TestCase;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -10,6 +11,7 @@ import java.util.List;
 
 import comp3350.GoCart.business.AccessProducts;
 import comp3350.GoCart.objects.Product;
+import comp3350.GoCart.persistence.stubs.ProductPersistenceStub;
 
 public class SearchProductsByNameTest extends TestCase
 {

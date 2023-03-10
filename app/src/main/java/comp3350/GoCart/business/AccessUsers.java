@@ -6,6 +6,7 @@ import java.util.List;
 import comp3350.GoCart.application.Services;
 import comp3350.GoCart.objects.User;
 import comp3350.GoCart.persistence.UserPersistence;
+import comp3350.GoCart.persistence.stubs.UserPersistenceStub;
 
 public class AccessUsers
 {
@@ -15,12 +16,18 @@ public class AccessUsers
 
     private User user;
 
-    private User loggedInUser;
+    private static User loggedInUser;
 
     public AccessUsers()
     {
         userPersistence = Services.getUserPersistence();
         users = null;
+    }
+
+    public AccessUsers(final UserPersistenceStub userPersistence)
+    {
+        this();
+        this.userPersistence = userPersistence;
     }
 
     public void setLoggedInUser(User loggedInUser)
@@ -33,19 +40,25 @@ public class AccessUsers
         return this.loggedInUser;
     }
 
-    public List<User> getUsers()
-    {
-        users = userPersistence.getUserSequential();
-        return Collections.unmodifiableList(users);
-    }
 
-    public User addUser(User newUser)
+
+    public void addUser(User newUser)
     {
-        return userPersistence.addUser(newUser);
+        userPersistence.addUser(newUser);
     }
 
     public User getUser(String email, String password)
     {
         return userPersistence.getUser(email, password);
+    }
+
+    public int getNumUsers()
+    {
+        return userPersistence.getNumUsers();
+    }
+
+    public void deleteUser(User user)
+    {
+        userPersistence.deleteUser(user);
     }
 }

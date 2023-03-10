@@ -3,6 +3,7 @@ package comp3350.GoCart.persistence.stubs;
 import java.math.BigDecimal;
 import java.security.ProtectionDomain;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -26,8 +27,6 @@ public class ProductPersistenceStub implements ProductPersistence{
         products.add(new Product( "3984","toilet paper", false));
         products.add(new Product( "3846","Ice-cream", false));
     }
-
-
 
 
 
@@ -61,6 +60,10 @@ public class ProductPersistenceStub implements ProductPersistence{
         }
 
         return matchingProducts;
+    }
+
+    public List<Product> getAllProducts(){
+        return Collections.unmodifiableList(products);
     }
     /*
     @Override

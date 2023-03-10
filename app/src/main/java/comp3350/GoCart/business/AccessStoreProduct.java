@@ -10,6 +10,7 @@ import comp3350.GoCart.application.Services;
 import comp3350.GoCart.objects.Product;
 import comp3350.GoCart.objects.Store;
 import comp3350.GoCart.objects.StoreProduct;
+import comp3350.GoCart.persistence.StorePersistence;
 import comp3350.GoCart.persistence.StoreProductPersistence;
 
 public class AccessStoreProduct {
@@ -25,6 +26,11 @@ public class AccessStoreProduct {
         storeProductPersistence = Services.getStoreProductPersistence();
         accessProducts = new AccessProducts();
         storeProducts = null;
+    }
+
+    public AccessStoreProduct(StoreProductPersistence storeProductPersistence){
+        this();
+        this.storeProductPersistence = storeProductPersistence;
     }
 
     public List<StoreProduct> getStoresProducts(String StoreID) {
@@ -74,16 +80,19 @@ public class AccessStoreProduct {
         return filteredProducts;
     }
 
-    public Store returnCheapestStore(List<Product> productList, List<Store> storeList){
+    public StoreProduct findCheapestStore(List<Product> productList,List<Integer> quant, List<Store> storeList){
         int currentCheapestIndex = 0;
         BigDecimal total;
         BigDecimal currentCheapestTotal = new BigDecimal("0");
-        Store cheapestStore = new Store("ERROR store", "","");
+        Store cheapestStore = new Store("Emptystore", "","");
+        Product newProduct = new Product("","");
+        StoreProduct result = new StoreProduct(cheapestStore,newProduct,currentCheapestTotal);
+
         if(productList != null && storeList != null
                 && productList.size() != 0 && storeList.size() != 0) {
             for (int i = 0; i < storeList.size(); i++) {
                 if (storeList.get(i) != null) {
-                    total = calculateTotal(productList, storeList.get(i).getStoreID());
+                    total = calculateTotal(productList,quant, storeList.get(i).getStoreID());
                     if (currentCheapestTotal.equals(BigDecimal.ZERO)
                             && total.compareTo(BigDecimal.ZERO) > 0
                             ||total.compareTo(currentCheapestTotal) == -1 ){
@@ -91,24 +100,34 @@ public class AccessStoreProduct {
                         currentCheapestTotal = total;
                     }
                     if (!total.equals(BigDecimal.ZERO))
-                        cheapestStore = storeList.get(currentCheapestIndex);
+                        result = new StoreProduct(storeList.get(currentCheapestIndex),newProduct,currentCheapestTotal);
                 }
             }
         }
-        return cheapestStore;
+        return result;
     }
 
 
     //Calculates Total price at given store for list of products
-    private BigDecimal calculateTotal(List<Product> currentProducts, String storeID){
+    public BigDecimal calculateTotal(List<Product> currentProducts,List<Integer> quant, String storeID){
         //List<Product> storesProducts = currentStore.getStoreProducts();
-        List<StoreProduct> storesProducts = getStoresProducts(storeID);
+        StoreProduct currentSP = null;
+        List<StoreProduct> spList = storeProductPersistence.getStoreProducts(storeID);
+        Product current = null;
+
         BigDecimal runningTotal = new BigDecimal("0");
 
         for (int i = 0; i < currentProducts.size();i++){
-            if (storesProducts.get(i) != null)
-                if (storesProducts.get(i).getProductID().equals(currentProducts.get(i).getProductID()))
-                    runningTotal = runningTotal.add(storesProducts.get(i).getPrice());
+            if (quant != null && quant.size() > 0 ) {
+
+                //spList= storeProductPersistence.getStoreProductByName(storeID, currentProducts.get(i).getProductName());
+                for(int j = 0; j < spList.size();j++){
+                    if ( spList.get(j).getProductName().equals(currentProducts.get(i).getProductName())) {
+                        currentSP = spList.get(j);
+                        runningTotal = runningTotal.add(currentSP.getPrice().multiply(BigDecimal.valueOf(quant.get(i))));
+                    }
+                }
+            }
         }
 
 

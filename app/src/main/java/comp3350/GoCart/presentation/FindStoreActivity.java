@@ -25,4 +25,5 @@ public class FindStoreActivity extends Activity {
         FindStoreActivity.this.startActivity(storeClosestIntent);
     }
 
+
 }
