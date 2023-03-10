@@ -112,6 +112,7 @@ public class AccessStoreProduct {
     public BigDecimal calculateTotal(List<Product> currentProducts,List<Integer> quant, String storeID){
         //List<Product> storesProducts = currentStore.getStoreProducts();
         StoreProduct currentSP = null;
+
         List<StoreProduct> spList = storeProductPersistence.getStoreProducts(storeID);
         Product current = null;
 
@@ -122,6 +123,7 @@ public class AccessStoreProduct {
 
                 //spList= storeProductPersistence.getStoreProductByName(storeID, currentProducts.get(i).getProductName());
                 for(int j = 0; j < spList.size();j++){
+
                     if ( spList.get(j).getProductName().equals(currentProducts.get(i).getProductName())) {
                         currentSP = spList.get(j);
                         runningTotal = runningTotal.add(currentSP.getPrice().multiply(BigDecimal.valueOf(quant.get(i))));
@@ -129,7 +131,6 @@ public class AccessStoreProduct {
                 }
             }
         }
-
 
         return runningTotal;
     }
