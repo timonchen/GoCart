@@ -59,7 +59,8 @@ public class ProductsActivity extends Activity {
         storeID = store.getStoreID();
 
         accessStoreProduct = new AccessStoreProduct();
-        storeProducts = accessStoreProduct.getStoresProducts(store.getStoreID());
+        storeProducts = accessStoreProduct.getStoresProducts(storeID);
+        storeProducts = accessStoreProduct.getStoresProducts(storeID);
 
         // Set data in views to store data
         storeName.setText(store.getStoreName());
