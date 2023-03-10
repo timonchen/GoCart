@@ -39,7 +39,6 @@ public class UsersActivity extends Activity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        System.out.println("oncreate");
         super.onCreate(savedInstanceState);
         accessUsers = new AccessUsers();
 
@@ -325,7 +324,7 @@ public class UsersActivity extends Activity
 
         if (valid)
         {
-            newUser = new User(firstName, lastName, address, city, province, zipCode, phone, email, password);
+            newUser = new User(accessUsers.getNumUsers() + 1, firstName, lastName, address, city, province, zipCode, phone, email, password);
         }
 
         return newUser;

@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 public class User implements Parcelable
 {
+
+    private int userID;
     private String firstName;
     private String lastName;
     private final String address;
@@ -15,8 +17,9 @@ public class User implements Parcelable
     private String email;
     private String password;
 
-    public User(final String firstName, final String lastName, final String address, final String city, final String province, final String zipCode, final int phone, final String email, final String password)
+    public User(int userID, final String firstName, final String lastName, final String address, final String city, final String province, final String zipCode, final int phone, final String email, final String password)
     {
+        this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -93,6 +96,22 @@ public class User implements Parcelable
         return Character.toUpperCase(firstName.charAt(0)) + "" + Character.toUpperCase(lastName.charAt(0));
     }
 
+    public int getUserID()
+    {
+        return userID;
+    }
+
+    public String getFirstName()
+    {
+        return firstName;
+    }
+
+    public String getLastName()
+    {
+        return lastName;
+    }
+
+
     public String getName()
     {
         return firstName + " " + lastName;
@@ -103,6 +122,21 @@ public class User implements Parcelable
         return address + ", " + city + ", " + province + ", " + zipCode;
     }
 
+    public String getCity()
+    {
+        return city;
+    }
+
+    public String getProvince()
+    {
+        return province;
+    }
+
+    public String getZipCode()
+    {
+        return zipCode;
+    }
+
     public int getPhone()
     {
         return phone;
@@ -111,6 +145,11 @@ public class User implements Parcelable
     public String getEmail()
     {
         return email;
+    }
+
+    public String getPassword()
+    {
+        return password;
     }
 
     public void updateName(String name)

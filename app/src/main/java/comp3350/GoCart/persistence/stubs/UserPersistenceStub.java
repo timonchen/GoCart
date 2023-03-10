@@ -16,15 +16,14 @@ public class UserPersistenceStub implements UserPersistence
         users = new ArrayList<>();
     }
 
-    public User addUser(User newUser)
+    public void addUser(User newUser)
     {
         users.add(newUser);
-        return newUser;
     }
 
-    public List<User> getUserSequential()
+    public int getNumUsers()
     {
-        return Collections.unmodifiableList(users);
+        return users.size();
     }
 
     public User getUser(String email, String password)

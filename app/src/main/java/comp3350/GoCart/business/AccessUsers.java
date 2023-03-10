@@ -33,20 +33,21 @@ public class AccessUsers
         return this.loggedInUser;
     }
 
-    public List<User> getUsers()
-    {
-        users = userPersistence.getUserSequential();
-        return Collections.unmodifiableList(users);
-    }
 
-    public User addUser(User newUser)
+
+    public void addUser(User newUser)
     {
-        return userPersistence.addUser(newUser);
+        userPersistence.addUser(newUser);
     }
 
     public User getUser(String email, String password)
     {
         return userPersistence.getUser(email, password);
+    }
+
+    public int getNumUsers()
+    {
+        return userPersistence.getNumUsers();
     }
 
     public void deleteUser(User user)
