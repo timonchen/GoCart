@@ -161,5 +161,19 @@ public class HomeActivity extends Activity {
 
             alertDialog.show();
         }
+        else {
+            loginButton.setVisibility(View.VISIBLE);
+            userAccountButton.setVisibility(View.GONE);
+
+            // Inform user of the update
+            String status = "Logged out";
+            String exitMessage = "Thank you for shopping with GoCart!";
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+
+            alertDialog.setTitle(status);
+            alertDialog.setMessage(exitMessage);
+
+            alertDialog.show();
+        }
     }
 }
