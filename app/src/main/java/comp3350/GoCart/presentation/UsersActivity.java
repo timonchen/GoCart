@@ -612,6 +612,8 @@ public class UsersActivity extends Activity
     public void buttonLogoutOnClick(View v)
     {
         Intent intent = new Intent(UsersActivity.this, HomeActivity.class);
-        UsersActivity.this.startActivity(intent);
+        intent.putExtra("loggedOut", true);
+        startActivity(intent);
+        finish();
     }
 }
