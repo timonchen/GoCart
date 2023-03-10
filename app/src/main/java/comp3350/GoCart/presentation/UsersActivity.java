@@ -82,29 +82,10 @@ public class UsersActivity extends Activity
 
             loggedInUser = newUser;
 
-
             // Inform home activity that the user has logged in
             Intent result = new Intent();
             result.putExtra(EXTRA_USER, loggedInUser);
             setResult(RESULT_OK, result);
-
-            String title = "Account Created";
-            String message = "Enjoy shopping with GoCart!";
-
-//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//            builder.setTitle(title);
-//            builder.setMessage(message);
-//            AlertDialog dialog = builder.create();
-//            dialog.show();
-//
-//            System.out.println("New user that is created: " + newUser);
-//
-//            new Handler().postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    finish();
-//                }
-//            }, 1000);
 
             finish();
         }
@@ -165,21 +146,6 @@ public class UsersActivity extends Activity
                 result.putExtra(EXTRA_USER, loggedInUser);
                 setResult(RESULT_OK, result);
 
-//                String title = "Welcome";
-//                String message = "Enjoy shopping with GoCart!";
-//
-//                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//                builder.setTitle(title);
-//                builder.setMessage(message);
-//                AlertDialog dialog = builder.create();
-//                dialog.show();
-//
-//                new Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        finish();
-//                    }
-//                }, 2000);
 
                 finish();
             }
@@ -611,9 +577,10 @@ public class UsersActivity extends Activity
 
     public void buttonLogoutOnClick(View v)
     {
-        Intent intent = new Intent(UsersActivity.this, HomeActivity.class);
-        intent.putExtra("loggedOut", true);
-        startActivity(intent);
+        System.out.println("Pressed logout button");
+        Intent result = new Intent();
+        result.putExtra(EXTRA_USER, (String) null);
+        setResult(RESULT_OK, result);
         finish();
     }
 }
