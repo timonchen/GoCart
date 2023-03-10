@@ -29,6 +29,12 @@ public class Store implements Parcelable {
         storeID = newStoreID;
     }
 
+    public Store(final String newStoreID) {
+        storeID = newStoreID;
+        storeName = null;
+        storeAddress = null;
+    }
+
     // The next following three methods are so that this class is parcelable. A parcelable class can be sent between activities.
     protected Store(Parcel in) {
         storeName = in.readString();

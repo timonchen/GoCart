@@ -16,7 +16,7 @@ import comp3350.GoCart.persistence.StorePersistence;
 public class AccessStores{
 
     
-    private final StorePersistence storePersistence;
+    private StorePersistence storePersistence;
     private List<Store> stores;
     private DistanceCalculator calculator;
 
@@ -26,6 +26,11 @@ public class AccessStores{
         storePersistence = Services.getStorePersistence();
         calculator = new DistanceCalculatorAPI(); //using the API
         stores = null;
+    }
+
+    public AccessStores(final StorePersistence storePersistence) {
+        this();
+        this.storePersistence = storePersistence;
     }
 
     public List<Store> getStores() {
@@ -62,7 +67,6 @@ public class AccessStores{
         }catch (Exception e) { //currently if we have an error we just set the distance the 0
             nearest = new ArrayList<>();
         }
-
         return nearest; //return original stores if there was an error.
     }
 
