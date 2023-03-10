@@ -577,7 +577,6 @@ public class UsersActivity extends Activity
 
     public void buttonLogoutOnClick(View v)
     {
-        System.out.println("Pressed logout button");
         Intent result = new Intent();
         result.putExtra(EXTRA_USER, (String) null);
         setResult(RESULT_OK, result);
