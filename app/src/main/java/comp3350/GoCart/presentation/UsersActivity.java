@@ -384,8 +384,7 @@ public class UsersActivity extends Activity
         }
     }
 
-    public void buttonInitializeUpdateUserPhoneOnClick(View v)
-    {
+    public void buttonInitializeUpdateUserPhoneOnClick(View v) {
         System.out.println("Inside buttonInitializeUpdateUserPhoneOnClick");
         TextView textView = (TextView) findViewById(R.id.textViewUserPhone);
         EditText editText = (EditText) findViewById(R.id.editViewUserPhone);
