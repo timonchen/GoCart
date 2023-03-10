@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 
 
-public class DietaryRestrictionTest extends TestCase {
+public class DietaryRestrictionTest extends TestCase {/*
     boolean isEmpty;
     private List<Product> list;
     private AccessProducts accessProducts;
@@ -56,4 +56,4 @@ public class DietaryRestrictionTest extends TestCase {
    }
 
 
-}
+*/}

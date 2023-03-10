@@ -15,7 +15,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:src="@drawable/walmart"
+            android:src="@drawable/store_bg"
             android:id="@+id/storeImage"
             android:scaleType="centerCrop"/>
 

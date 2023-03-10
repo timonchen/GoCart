@@ -10,6 +10,7 @@ import comp3350.GoCart.application.Services;
 import comp3350.GoCart.objects.Product;
 import comp3350.GoCart.objects.Store;
 import comp3350.GoCart.objects.StoreProduct;
+import comp3350.GoCart.persistence.StorePersistence;
 import comp3350.GoCart.persistence.StoreProductPersistence;
 
 public class AccessStoreProduct {
@@ -25,6 +26,11 @@ public class AccessStoreProduct {
         storeProductPersistence = Services.getStoreProductPersistence();
         accessProducts = new AccessProducts();
         storeProducts = null;
+    }
+
+    public AccessStoreProduct(final StoreProductPersistence storePersistence) {
+        this();
+        this.storeProductPersistence = storePersistence;
     }
 
     public List<StoreProduct> getStoresProducts(String StoreID) {
