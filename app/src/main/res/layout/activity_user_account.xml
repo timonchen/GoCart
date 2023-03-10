@@ -169,12 +169,13 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewEmail" />
 
     <Button
-        android:id="@+id/buttonPreviousOrders"
+        android:id="@+id/buttonLogout"
         android:layout_width="145dp"
         android:layout_height="79dp"
-        android:text="Previous Orders"
+        android:text="Logout"
         android:layout_marginStart="30dp"
         android:layout_marginTop="35dp"
+        android:onClick="buttonLogoutOnClick"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonChangePassword" />
 

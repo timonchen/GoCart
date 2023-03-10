@@ -610,4 +610,10 @@ public class UsersActivity extends Activity
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+    public void buttonLogoutOnClick(View v)
+    {
+        Intent intent = new Intent(UsersActivity.this, HomeActivity.class);
+        UsersActivity.this.startActivity(intent);
+    }
 }
