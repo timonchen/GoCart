@@ -6,7 +6,6 @@ import org.junit.*;
 
 import comp3350.GoCart.business.AccessProducts;
 import comp3350.GoCart.business.AccessStores;
-import comp3350.GoCart.business.GetByName;
 import comp3350.GoCart.business.ShoppingCart;
 import comp3350.GoCart.objects.Product;
 import comp3350.GoCart.objects.Store;
