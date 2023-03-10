@@ -117,7 +117,7 @@ public class HomeActivity extends Activity {
         Intent usersIntent = new Intent(HomeActivity.this, UsersActivity.class);
         usersIntent.putExtra(UsersActivity.EXTRA_USER, loggedInUser);
         usersIntent.putExtra(UsersActivity.EXTRA_PAGE_TYPE, UsersActivity.PAGE_TYPE_USER_ACCOUNT);
-        HomeActivity.this.startActivity(usersIntent);
+        HomeActivity.this.startActivityForResult(usersIntent, REQUEST_LOGIN);
     }
 
     // This method deals with returns made by another activity
@@ -126,10 +126,9 @@ public class HomeActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUEST_LOGIN && resultCode == RESULT_OK) {
-            isLoggedIn = data.getBooleanExtra("loggedInStatus", false);  // defaultValue (false) is used if no result with key "loggedInStatus" was returned
             loggedInUser = data.getParcelableExtra(EXTRA_USER);
-            if (loggedInUser != null)
-            {
+
+            if (loggedInUser != null) {
                 System.out.println("User = " + loggedInUser.getInitials());
                 Button loginButton = (Button) findViewById(R.id.loginButton);
                 Button userAccountButton = (Button) findViewById(R.id.userAccountButton);
@@ -137,23 +136,41 @@ public class HomeActivity extends Activity {
                 loginButton.setVisibility(View.GONE);
                 userAccountButton.setVisibility(View.VISIBLE);
                 userAccountButton.setText(loggedInUser.getInitials());
+                isLoggedIn = true;
+            }
+            else {
+                isLoggedIn = false;
             }
             updateActivity();
         }
     }
 
     private void updateActivity() {
-        if (isLoggedIn) {
+        if (isLoggedIn) {   // User is logged in
             loginButton.setVisibility(View.GONE);   // Hide login button
             userAccountButton.setVisibility(View.VISIBLE);  // Display user button
 
             // Inform user of the update
-            String accountCreated = "Account Created";
+            String status = "Logged in";
             String welcomeMessage = "Enjoy shopping with GoCart!";
             AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 
-            alertDialog.setTitle(accountCreated);
+            alertDialog.setTitle(status);
             alertDialog.setMessage(welcomeMessage);
+
+            alertDialog.show();
+        }
+        else {  // User is logged out
+            loginButton.setVisibility(View.VISIBLE);
+            userAccountButton.setVisibility(View.GONE);
+
+            // Inform user of the update
+            String status = "Logged out";
+            String exitMessage = "Thank you for shopping with GoCart!";
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+
+            alertDialog.setTitle(status);
+            alertDialog.setMessage(exitMessage);
 
             alertDialog.show();
         }
