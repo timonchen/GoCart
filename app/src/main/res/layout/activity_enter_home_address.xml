@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.ShoppingCartActivity"
+    android:padding="60dp">
+
+
+  <EditText
+      android:layout_width="260dp"
+      android:layout_height="40dp"
+      android:hint="66 Chancellors Cir, Winnipeg"
+      android:layout_marginTop="20dp"
+      android:id="@+id/txtAddressBar"/>
+
+
+  <Button
+      android:layout_width="100dp"
+      android:layout_height="60dp"
+      android:text="Set Address"
+      android:id="@+id/btnSetAddr"
+      android:layout_below="@id/txtAddressBar"/>
+
+
+
+</RelativeLayout>
