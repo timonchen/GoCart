@@ -60,6 +60,8 @@ public class UsersActivity extends Activity
             userPhone.setText((loggedInUser.getPhone()) + "");
 
             TextView userEmail = (TextView) findViewById(R.id.textViewUserEmail);
+            System.out.println("            TextView userEmail = (TextView) findViewById(R.id.textViewUserEmail);\n");
+            System.out.println("user email: " + loggedInUser.getEmail());
             userEmail.setText(loggedInUser.getEmail());
         }
     }
@@ -85,21 +87,7 @@ public class UsersActivity extends Activity
             result.putExtra(EXTRA_USER, loggedInUser);
             setResult(RESULT_OK, result);
 
-            String title = "Account Created";
-            String message = "Enjoy shopping with GoCart!";
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(title);
-            builder.setMessage(message);
-            AlertDialog dialog = builder.create();
-            dialog.show();
-
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    finish();
-                }
-            }, 1000);
+            finish();
         }
     }
 
@@ -158,21 +146,8 @@ public class UsersActivity extends Activity
                 result.putExtra(EXTRA_USER, loggedInUser);
                 setResult(RESULT_OK, result);
 
-                String title = "Welcome";
-                String message = "Enjoy shopping with GoCart!";
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle(title);
-                builder.setMessage(message);
-                AlertDialog dialog = builder.create();
-                dialog.show();
-
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        finish();
-                    }
-                }, 2000);
+                finish();
             }
         }
     }
@@ -349,14 +324,12 @@ public class UsersActivity extends Activity
 
     public void buttonCompleteUpdateUserNameOnClick(View v)
     {
-        System.out.println("Inside buttonCompleteUpdateUserNameOnClick");
         EditText editName = (EditText) findViewById(R.id.editViewUserName);
         String name;
         if (!TextUtils.isEmpty(editName.getText().toString())) {
-            System.out.println("inside !TextUtils.isEmpty(editName.getText().toString()))");
             name = editName.getText().toString();
             loggedInUser.updateName(name);
-            System.out.println("name = " + name);
+            accessUsers.updateUser(loggedInUser);
             TextView textView = (TextView) findViewById(R.id.textViewUserName);
             textView.setText(loggedInUser.getName());
             textView.setVisibility(View.VISIBLE);
@@ -366,7 +339,6 @@ public class UsersActivity extends Activity
             ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) textViewPhone.getLayoutParams();
             layoutParams.topToBottom = R.id.textViewUserName;
             textViewPhone.setLayoutParams(layoutParams);
-            System.out.println("end");
 
             Button initializeUpdateNameButton = (Button) findViewById(R.id.buttonInitializeUpdateName);
             Button completeUpdateNameButton = (Button) findViewById(R.id.buttonCompleteUpdateName);
@@ -423,6 +395,7 @@ public class UsersActivity extends Activity
                 }
                 else {
                     loggedInUser.updatePhone(phone);
+                    accessUsers.updateUser(loggedInUser);
                     TextView textView = (TextView) findViewById(R.id.textViewUserPhone);
                     textView.setText(loggedInUser.getPhone() + "");
                     textView.setVisibility(View.VISIBLE);
@@ -488,6 +461,7 @@ public class UsersActivity extends Activity
             }
             else {
                 loggedInUser.updateEmail(email);
+                accessUsers.updateUser(loggedInUser);
                 System.out.println("email = " + email);
                 TextView textView = (TextView) findViewById(R.id.textViewUserEmail);
                 textView.setText(loggedInUser.getEmail());
@@ -548,7 +522,7 @@ public class UsersActivity extends Activity
         if (valid)
         {
             loggedInUser.updatePassword(password);
-
+            accessUsers.updateUser(loggedInUser);
             String title = "Password Updated";
             String message = "Enjoy shopping with GoCart!";
 
@@ -603,15 +577,9 @@ public class UsersActivity extends Activity
 
     public void buttonLogoutOnClick(View v)
     {
-        logout();
-    }
-
-    // Call this method to log out
-    private void logout() {
-        loggedInUser = null;
-        Intent intent = new Intent();
-        intent.putExtra(EXTRA_USER, loggedInUser);
-        setResult(RESULT_OK, intent);
+        Intent result = new Intent();
+        result.putExtra(EXTRA_USER, (String) null);
+        setResult(RESULT_OK, result);
         finish();
     }
 }

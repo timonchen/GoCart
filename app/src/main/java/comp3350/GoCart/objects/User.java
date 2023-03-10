@@ -13,11 +13,11 @@ public class User implements Parcelable
     private final String city;
     private final String province;
     private final String zipCode;
-    private long phone;
+    private int phone;
     private String email;
     private String password;
 
-    public User(int userID, final String firstName, final String lastName, final String address, final String city, final String province, final String zipCode, final long phone, final String email, final String password)
+    public User(int userID, final String firstName, final String lastName, final String address, final String city, final String province, final String zipCode, final int phone, final String email, final String password)
     {
         this.userID = userID;
         this.firstName = firstName;
@@ -29,10 +29,13 @@ public class User implements Parcelable
         this.phone = phone;
         this.email = email;
         this.password = password;
+
+        System.out.println("    new user created: " + email);
     }
 
     protected User(Parcel in)
     {
+        userID = in.readInt();
         firstName = in.readString();
         lastName = in.readString();
         address = in.readString();
@@ -63,13 +66,14 @@ public class User implements Parcelable
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(userID);
         dest.writeString(firstName);
         dest.writeString(lastName);
         dest.writeString(address);
         dest.writeString(city);
         dest.writeString(province);
         dest.writeString(zipCode);
-        dest.writeLong(phone);
+        dest.writeInt(phone);
         dest.writeString(email);
         dest.writeString(password);
     }
@@ -93,7 +97,7 @@ public class User implements Parcelable
 
     public String getInitials()
     {
-        return Character.toUpperCase(firstName.charAt(0)) + "" + Character.toUpperCase(lastName.charAt(0));
+        return Character.toUpperCase(this.firstName.charAt(0)) + "" + Character.toUpperCase(this.lastName.charAt(0));
     }
 
     public int getUserID()
@@ -184,7 +188,7 @@ public class User implements Parcelable
 
     public String toString()
     {
-        return "First Name: " + firstName + " Last Name: " + lastName + " Address: " + address + " City: " + city + " Province: " + province + " ZIP Code: " + zipCode +
+        return "Id: " + userID + "First Name: " + firstName + " Last Name: " + lastName + " Address: " + address + " City: " + city + " Province: " + province + " ZIP Code: " + zipCode +
                 " Phone: " + phone + " Email: " + email + " Password: " + password;
     }
 }
