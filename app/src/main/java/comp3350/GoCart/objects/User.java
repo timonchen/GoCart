@@ -13,11 +13,11 @@ public class User implements Parcelable
     private final String city;
     private final String province;
     private final String zipCode;
-    private int phone;
+    private long phone;
     private String email;
     private String password;
 
-    public User(int userID, final String firstName, final String lastName, final String address, final String city, final String province, final String zipCode, final int phone, final String email, final String password)
+    public User(int userID, final String firstName, final String lastName, final String address, final String city, final String province, final String zipCode, final long phone, final String email, final String password)
     {
         this.userID = userID;
         this.firstName = firstName;
@@ -69,7 +69,7 @@ public class User implements Parcelable
         dest.writeString(city);
         dest.writeString(province);
         dest.writeString(zipCode);
-        dest.writeInt(phone);
+        dest.writeLong(phone);
         dest.writeString(email);
         dest.writeString(password);
     }
@@ -119,7 +119,7 @@ public class User implements Parcelable
 
     public String getAddress()
     {
-        return address + ", " + city + ", " + province + ", " + zipCode;
+        return address;
     }
 
     public String getCity()
@@ -137,7 +137,7 @@ public class User implements Parcelable
         return zipCode;
     }
 
-    public int getPhone()
+    public long getPhone()
     {
         return phone;
     }

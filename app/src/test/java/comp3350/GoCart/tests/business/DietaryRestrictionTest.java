@@ -1,8 +1,14 @@
 package comp3350.GoCart.tests.business;
 import junit.framework.TestCase;
+
+import org.junit.Before;
 import org.junit.Test;
 import comp3350.GoCart.business.AccessProducts;
+import comp3350.GoCart.business.AccessUsers;
 import comp3350.GoCart.objects.Product;
+import comp3350.GoCart.persistence.stubs.ProductPersistenceStub;
+import comp3350.GoCart.persistence.stubs.UserPersistenceStub;
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.ArrayList;
@@ -13,6 +19,12 @@ public class DietaryRestrictionTest extends TestCase {
     boolean isEmpty;
     private List<Product> list;
     private AccessProducts accessProducts;
+
+    @Before
+    public void setUp(){
+        accessProducts = new AccessProducts(new ProductPersistenceStub());
+    }
+
 
     public DietaryRestrictionTest() {
         super();
