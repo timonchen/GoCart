@@ -23,10 +23,10 @@ Due: March 10, 2023
 | Error Messages 	    | location Distance calculator   | StoreProductPersistenceHSQLDB |
 | find products	    | Access products by name		 | UserPersistenceHSQLDB         |
 | Shopping cart       | Access users			 | OrderPresistenceStub      	   |
-| User profile        | Shopping cart			 | ProductPersistenceStub        |
-| User profile        | 					 | StorePersistenceStub          |
-| User profile        | 					 | StoreProductPersistenceStub   |
-| User profile        | 					 | UserPersistenceStub           |
+| 			    | Shopping cart			 | ProductPersistenceStub        |
+| 			    | 					 | StorePersistenceStub          |
+| 			    | 					 | StoreProductPersistenceStub   |
+|     	          | 					 | UserPersistenceStub           |
 
 
 
