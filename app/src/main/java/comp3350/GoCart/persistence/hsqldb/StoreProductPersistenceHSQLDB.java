@@ -64,29 +64,4 @@ public class StoreProductPersistenceHSQLDB implements StoreProductPersistence {
             throw new PersistenceException(e);
         }
     }
-
-    @Override
-    public List<StoreProduct> getStoreProductByName(String storeID, String productName) {
-        final List<StoreProduct> stores = new ArrayList<>();
-
-        try (final Connection c = connection()) {
-            final PreparedStatement st = c.prepareStatement("SELECT * FROM STORES_PRODUCTS WHERE SID = ? AND PRODUCT_NAME = ?");
-            st.setInt(1, Integer.parseInt(storeID));
-            st.setString(2, productName);
-            final ResultSet rs = st.executeQuery();
-            while (rs.next())
-            {
-                final StoreProduct sp = fromResultSet(rs);
-                stores.add(sp);
-            }
-            rs.close();
-            st.close();
-
-            return stores;
-        }
-        catch (final SQLException e)
-        {
-            throw new PersistenceException(e);
-        }
-    }
 }
