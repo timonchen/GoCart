@@ -28,17 +28,13 @@ public class StoreProductPersistenceHSQLDB implements StoreProductPersistence {
         return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
     }
 
-    private Product fromResultSet(final ResultSet rs) throws SQLException {
-        final boolean has_allergy;
-        final String productID = rs.getString("PID");
-        final String name = rs.getString("NAME");
-        final String allergy = rs.getString("ALLERGY");
-        if (Integer.parseInt(allergy) == 1) {
-            has_allergy = true;
-        } else
-            has_allergy = false;
+    private StoreProduct fromResultSet(final ResultSet rs) throws SQLException {
+        final int productID = rs.getInt("PID");
+        final int storeID = rs.getInt("SID");
+        final BigDecimal price = rs.getBigDecimal("PRICE");
+        final String prodName = rs.getString("PRODUCT_NAME");
 
-        return new Product(productID, name, has_allergy);
+        return new StoreProduct( new Store(String.valueOf(storeID)), new Product(String.valueOf(productID), prodName),price);
     }
 
     public StoreProductPersistenceHSQLDB(final String dbPath) {
@@ -47,11 +43,25 @@ public class StoreProductPersistenceHSQLDB implements StoreProductPersistence {
 
     @Override
     public List<StoreProduct> getStoreProducts(String storeID) {
-    return null;
-    }
+        final List<StoreProduct> stores = new ArrayList<>();
 
-    @Override
-    public List<StoreProduct> getStoreProductByName(String storeID, String productName) {
-        return null;
+        try (final Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM STORES_PRODUCTS WHERE SID = ?");
+            st.setInt(1, Integer.parseInt(storeID));
+            final ResultSet rs = st.executeQuery();
+            while (rs.next())
+            {
+                final StoreProduct sp = fromResultSet(rs);
+                stores.add(sp);
+            }
+            rs.close();
+            st.close();
+
+            return stores;
+        }
+        catch (final SQLException e)
+        {
+            throw new PersistenceException(e);
+        }
     }
 }

@@ -139,25 +139,6 @@ public class StoreProductPersistenceStub implements StoreProductPersistence {
         }
         return newStoreProducts;
     }
-
-    @Override
-    public List<StoreProduct> getStoreProductByName(String storeID, String productName) {
-        List<StoreProduct> matchingProducts = new ArrayList<>();
-
-        if (productName != null && storeID != null)
-        {
-            for (int i = 0; i < sps.size(); i++)
-            {
-                StoreProduct currStoreProduct = sps.get(i);
-
-                if (currStoreProduct.getStoreId().equals(storeID) && currStoreProduct.getProductName().toLowerCase().contains(productName.toLowerCase())) {
-                    matchingProducts.add(currStoreProduct);
-                }
-            }
-        }
-
-        return matchingProducts;
-    }
 }
 
 

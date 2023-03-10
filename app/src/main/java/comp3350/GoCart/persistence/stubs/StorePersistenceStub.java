@@ -24,21 +24,6 @@ public class StorePersistenceStub implements StorePersistence {
         stores.add(new Store("safe202","Safeway", "2025 Corydon Ave Winnipeg"));
         stores.add(new Store("safe655","Safeway", "655 Osborne Winnipeg"));
     }
-    /*
-    @Override
-    public List<Store> getStore(Store toGet) {
-        List<Store> toReturn = new ArrayList<>();
-
-        int index = stores.indexOf(toGet);
-        if(index >= 0) {
-            toReturn.add(stores.get(index));
-        }
-
-        return toReturn;
-    }
-    */
-
-
 
     @Override
     public List<Store> getAllStores() {
