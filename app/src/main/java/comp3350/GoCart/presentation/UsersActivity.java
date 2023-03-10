@@ -79,16 +79,6 @@ public class UsersActivity extends Activity
 
             loggedInUser = newUser;
 
-
-
-
-//            builder.setPositiveButton(buttonText, new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialogInterface, int i) {
-//
-//                }
-//            });
-
             // Inform home activity that the user has logged in
             Intent result = new Intent();
             result.putExtra(EXTRA_USER, loggedInUser);
