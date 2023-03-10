@@ -2,9 +2,11 @@ package comp3350.GoCart.application;
 
 import comp3350.GoCart.R;
 import comp3350.GoCart.objects.User;
+import comp3350.GoCart.persistence.OrderLinePersistence;
 import comp3350.GoCart.persistence.OrderPersistence;
 import comp3350.GoCart.persistence.StorePersistence;
 import comp3350.GoCart.persistence.StoreProductPersistence;
+import comp3350.GoCart.persistence.hsqldb.OrderLinePersistenceHSQLDB;
 import comp3350.GoCart.persistence.hsqldb.OrderPersistenceHSQLDB;
 import comp3350.GoCart.persistence.hsqldb.ProductPersistenceHSQLDB;
 import comp3350.GoCart.persistence.hsqldb.StorePersistenceHSQLDB;
@@ -21,10 +23,9 @@ public class Services{
     private static StorePersistence storePersistence = null;
     private static ProductPersistence productPersistence = null;
     private static StoreProductPersistence storeProductPersistence = null;
-
     private static UserPersistence userPersistence = null;
-
     private static OrderPersistence orderPersistence = null;
+    private static OrderLinePersistence orderLinePersistence = null;
 
     public static synchronized StorePersistence getStorePersistence(){
         if (storePersistence == null){
@@ -61,5 +62,13 @@ public class Services{
         }
 
         return orderPersistence;
+    }
+
+    public static synchronized OrderLinePersistence getOrderLinePersistence() {
+        if(orderLinePersistence == null) {
+            orderLinePersistence = new OrderLinePersistenceHSQLDB(Main.getDBPathName());
+        }
+
+        return orderLinePersistence;
     }
 }

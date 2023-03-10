@@ -27,13 +27,6 @@ public class Product {
         return productName;
     }
 
-    /*
-    public BigDecimal getProductPrice(){
-        return productPrice;
-    }
-
-     */
-
     public String getProductID() {return productID; }
 
     public boolean hasPeanutAllergy(){return peanutAllergy ;   }

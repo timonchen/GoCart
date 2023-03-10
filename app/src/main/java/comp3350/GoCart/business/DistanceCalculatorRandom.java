@@ -24,15 +24,18 @@ public class DistanceCalculatorRandom implements DistanceCalculator{
         }
 
         List<Store> nearest = new ArrayList<>();
-
+        int count = 0;
         for(Store store : allStores) {
             Random rand = new Random();
             double randomValue = MIN + (MAX - MIN) * rand.nextDouble();
             store.setDistToUser(randomValue);
-            if ( randomValue < 10)
+            if ( randomValue < 15) {
+
                 nearest.add(store);
+            }
         }
 
+        System.out.println(count);
         Collections.sort(nearest, new Comparator<Store>() {
             @Override
             public int compare(Store s1, Store s2) {
