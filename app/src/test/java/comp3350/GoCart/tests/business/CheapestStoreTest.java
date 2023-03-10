@@ -16,6 +16,8 @@ import java.util.List;
 import comp3350.GoCart.business.*;
 import comp3350.GoCart.objects.*;
 
+import comp3350.GoCart.persistence.stubs.ProductPersistenceStub;
+import comp3350.GoCart.persistence.stubs.StorePersistenceStub;
 import comp3350.GoCart.persistence.stubs.StoreProductPersistenceStub;
 
 
@@ -28,10 +30,10 @@ public class CheapestStoreTest extends TestCase
     private List<StoreProduct> storeProduct;
     private StoreProduct result;
     private StoreProductPersistenceStub spStub;
-    private AccessProducts accP = new AccessProducts();
+    private AccessProducts accP = new AccessProducts( new ProductPersistenceStub());
 
-    private AccessStores accS = new AccessStores();
-    private AccessStoreProduct accSP = new AccessStoreProduct();
+    private AccessStores accS = new AccessStores( new StorePersistenceStub());
+    private AccessStoreProduct accSP = new AccessStoreProduct( new StoreProductPersistenceStub());
 
     public CheapestStoreTest()
     {
@@ -61,10 +63,10 @@ public class CheapestStoreTest extends TestCase
     @Test
     public void testValidData(){
         initalize();
-        result = accSP.findCheapestStore(accP.getProducts(),quant,accS.getStores());
+        result = accSP.findCheapestStore(accP.searchProductsByName("Banana"),quant,accS.getStores());
         assertNotNull(result);
         assertEquals("costco 149 is cheapest" , "cost149",result.getStoreId());
-        assertEquals("should equal " , result.getPrice(), new BigDecimal("309.00")  );
+        assertEquals("should equal ",new BigDecimal("1.00")  , result.getPrice()  );
         System.out.println("End Test: valid data \n");
 
     }
@@ -75,7 +77,7 @@ public class CheapestStoreTest extends TestCase
         initalize();
         System.out.println("Start Test: null store list ");
 
-        result = accSP.findCheapestStore(accP.getProducts(),quant,null);
+        result = accSP.findCheapestStore(accP.searchProductsByName("Banana"),quant,null);
         assertNotNull(result);
         assertEquals("no store returned/no stores given","Emptystore",result.getStoreId());
         System.out.println("End Test: null store list \n");
@@ -98,7 +100,7 @@ public class CheapestStoreTest extends TestCase
         initalize();
         System.out.println("Start Test: empty store list ");
         stores = new ArrayList<>();
-        result = accSP.findCheapestStore(accP.getProducts(),quant,stores);
+        result = accSP.findCheapestStore(accP.searchProductsByName("Banana"),quant,stores);
         assertNotNull(result);
         assertEquals("no store returned/no stores given" ,"Emptystore",result.getStoreId());
         System.out.println("End Test: empty store list \n");

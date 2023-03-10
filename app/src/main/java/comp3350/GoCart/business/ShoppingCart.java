@@ -76,7 +76,6 @@ public class ShoppingCart {
     }
 
     public void decrementProductQuantity(Product newProd){
-
         if(products.contains(newProd)){
             changeProductQuantity(newProd,quantity.get(products.indexOf(newProd)) - 1 );
         }
@@ -100,8 +99,9 @@ public class ShoppingCart {
     }
 
     public Integer getQuantity(Product newProd) {
-        if (products.contains(newProd))
+        if (products.contains(newProd)) {
             return quantity.get(products.indexOf(newProd));
+        }
         return 0;
 
     }

@@ -9,7 +9,7 @@ import comp3350.GoCart.persistence.ProductPersistence;
 
 public class AccessProducts{
 
-    private final ProductPersistence productPersistence;
+    private ProductPersistence productPersistence;
 
     private List<Product> products;
 
@@ -18,6 +18,13 @@ public class AccessProducts{
         productPersistence = Services.getProductPersistence();
         products = null;
     }
+
+    public AccessProducts(ProductPersistence productPersistence){
+        this();
+        this.productPersistence = productPersistence;
+    }
+
+
 
     public List<Product> getDietaryProducts()
     {
@@ -32,10 +39,12 @@ public class AccessProducts{
         return Collections.unmodifiableList(products);
     }
 
-
+/*
     public List<Product> getProducts(){
         products = productPersistence.getAllProducts();
         return Collections.unmodifiableList(products);
     }
+    */
+
 
 }

@@ -54,6 +54,8 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         return holder;
 
  */
+
+
         View v = LayoutInflater.from(context).inflate(R.layout.cart_list_item,parent,false);
         ViewHolder holder = new ViewHolder(v, new clickListener() {
             @Override

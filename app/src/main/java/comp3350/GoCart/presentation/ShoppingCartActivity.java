@@ -67,6 +67,7 @@ public class ShoppingCartActivity extends Activity {
         price.setText(selectedStorePrice.toString());
         productRecView.setAdapter(new ShoppingCartAdapter(getApplicationContext(),p,q,price,notif,lp,change));
         check(notif,lp,change);
+
         change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,10 +101,15 @@ public class ShoppingCartActivity extends Activity {
         ShoppingCart cart = ShoppingCart.getInstance();
         aSP = new AccessStoreProduct();
         aS = new AccessStores();
+
         List<Product> p = ShoppingCart.getInstance().getCartProducts();
         List<Integer> q = ShoppingCart.getInstance().getCartQuantity();
+
         cheapest = aSP.findCheapestStore(p,q,aS.getStores());
+
         BigDecimal cheapestValue = aSP.calculateTotal(p,q,cheapest.getStoreId());
+
+
 
         if(cheapestValue.equals(BigDecimal.ZERO) || cheapestValue.equals(cart.calculateTotal())) {
             notif.setText("");
@@ -111,6 +117,7 @@ public class ShoppingCartActivity extends Activity {
             changeStores.setVisibility(View.INVISIBLE);
             changeStores.setText("Set to cheaper store");
         } else {
+
             if(!cheapest.equals( cart.getStore() )){
                 notif.setText("Cheaper price total found");
                 lowerPrice.setText(cheapestValue.toString());
@@ -118,6 +125,8 @@ public class ShoppingCartActivity extends Activity {
                 changeStores.setText("Set to cheaper store");
             }
         }
+
+
 
     }
 

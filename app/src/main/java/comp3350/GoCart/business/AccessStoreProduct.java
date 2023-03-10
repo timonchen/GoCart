@@ -27,6 +27,11 @@ public class AccessStoreProduct {
         storeProducts = null;
     }
 
+    public AccessStoreProduct(StoreProductPersistence storeProductPersistence){
+        this();
+        this.storeProductPersistence = storeProductPersistence;
+    }
+
     public List<StoreProduct> getStoresProducts(String StoreID) {
         storeProducts= storeProductPersistence.getStoreProducts(StoreID);
         return Collections.unmodifiableList(storeProducts);
@@ -65,10 +70,14 @@ public class AccessStoreProduct {
         int currentCheapestIndex = 0;
         BigDecimal total;
         BigDecimal currentCheapestTotal = new BigDecimal("0");
-        Store cheapestStore = new Store("ERROR store", "","");
+        Store cheapestStore = new Store("Emptystore", "","");
+        Product newProduct = new Product("","");
+        StoreProduct result = new StoreProduct(cheapestStore,newProduct,currentCheapestTotal);
+
         if(productList != null && storeList != null
                 && productList.size() != 0 && storeList.size() != 0) {
             for (int i = 0; i < storeList.size(); i++) {
+
                 if (storeList.get(i) != null) {
                     total = calculateTotal(productList,quant, storeList.get(i).getStoreID());
                     if (currentCheapestTotal.equals(BigDecimal.ZERO)
@@ -76,6 +85,7 @@ public class AccessStoreProduct {
                             ||total.compareTo(currentCheapestTotal) == -1 ){
                         currentCheapestIndex = i;
                         currentCheapestTotal = total;
+
                     }
                     if (!total.equals(BigDecimal.ZERO))
                         result = new StoreProduct(storeList.get(currentCheapestIndex),newProduct,currentCheapestTotal);
@@ -90,18 +100,19 @@ public class AccessStoreProduct {
     public BigDecimal calculateTotal(List<Product> currentProducts,List<Integer> quant, String storeID){
         //List<Product> storesProducts = currentStore.getStoreProducts();
         StoreProduct currentSP = null;
-        List<StoreProduct> spList;
+        List<StoreProduct> spList = storeProductPersistence.getStoreProducts(storeID);
         Product current = null;
 
-        List<StoreProduct> storesProducts = getStoresProducts(storeID);
         BigDecimal runningTotal = new BigDecimal("0");
-
         for (int i = 0; i < currentProducts.size();i++){
             if (quant != null && quant.size() > 0 ) {
-                spList= storeProductPersistence.getStoreProductByName(storeID, currentProducts.get(i).getProductName());
-                if(spList.size() > 0 ) {
-                    currentSP = spList.get(0);
-                    runningTotal = runningTotal.add(currentSP.getPrice().multiply(BigDecimal.valueOf(quant.get(i))));
+
+                //spList= storeProductPersistence.getStoreProductByName(storeID, currentProducts.get(i).getProductName());
+                for(int j = 0; j < spList.size();j++){
+                    if ( spList.get(j).getProductName().equals(currentProducts.get(i).getProductName())) {
+                        currentSP = spList.get(j);
+                        runningTotal = runningTotal.add(currentSP.getPrice().multiply(BigDecimal.valueOf(quant.get(i))));
+                    }
                 }
             }
         }

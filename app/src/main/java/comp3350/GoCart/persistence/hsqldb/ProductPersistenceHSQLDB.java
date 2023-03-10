@@ -79,5 +79,28 @@ public class ProductPersistenceHSQLDB implements ProductPersistence {
         }
 
     }
+    @Override
+    public List<Product> getAllProducts() {
+        List<Product> matchingProducts = new ArrayList<>();
+
+        try (final Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM PRODUCTS ");
+            final ResultSet rs = st.executeQuery();
+            while (rs.next())
+            {
+                final Product product = fromResultSet(rs);
+                matchingProducts.add(product);
+            }
+            rs.close();
+            st.close();
+
+            return matchingProducts;
+        }
+        catch (final SQLException e) {
+            throw new PersistenceException(e);
+        }
+
+    }
+
 
 }
