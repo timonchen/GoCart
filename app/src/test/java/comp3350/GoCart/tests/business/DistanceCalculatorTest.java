@@ -59,11 +59,11 @@ public class DistanceCalculatorTest extends TestCase {
     public void testValidData() throws Exception {
         System.out.println("\nStarting testDistanceCalculator: valid data");
 
-        List<Store> firstCheck = stub.calculateNearestStores("50 shoreview bay", stores);
-        List<Store> secondCheck = api.calculateNearestStores("50 shoreview bay", stores);
+        List<Store> firstCheck = stub.calculateNearestStores("50 shoreview bay winnipeg", stores);
+        List<Store> secondCheck = api.calculateNearestStores("50 shoreview bay winnipeg", stores);
 
-        assertTrue("sizes should equal",firstCheck.size() == stores.size());
-        assertTrue("sizes should equal",secondCheck.size() == stores.size());
+        assertTrue("sizes should equal: " + firstCheck.size() + " and " + stores.size(),firstCheck.size() == stores.size());
+        assertTrue("sizes should equal: " + secondCheck.size() + " and " + stores.size(),secondCheck.size() == stores.size());
 
         //stub version will return a randomized distance list so we'll verify that they aren't 0
         for(int i = 0 ; i < stores.size() - 1; i++) {
@@ -115,7 +115,7 @@ public class DistanceCalculatorTest extends TestCase {
 
 
 
-        assertTrue(firstCheck.size() == stores.size());
+        assertTrue("sizes should be equal. They are: " + firstCheck.size() + " and " + stores.size(),firstCheck.size() == stores.size());
 
         //stub version will still return a randomized distance list so we'll verify that they aren't 0
         for(int i = 0 ; i < stores.size() - 1; i++) {

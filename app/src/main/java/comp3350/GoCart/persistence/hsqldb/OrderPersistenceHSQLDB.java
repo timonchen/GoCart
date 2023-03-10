@@ -58,7 +58,7 @@ public class OrderPersistenceHSQLDB implements OrderPersistence {
                 return fromResultSet(set);
             }
 
-            return null;
+            return new Order(-1, -1, -1);
         } catch (SQLException e) {
             throw new PersistenceException(e);
         }

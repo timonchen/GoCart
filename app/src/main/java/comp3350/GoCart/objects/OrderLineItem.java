@@ -24,4 +24,14 @@ public class OrderLineItem {
     public BigDecimal getPrice() {
         return price;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if(other instanceof OrderLineItem) {
+            return orderID == ((OrderLineItem) other).getOrderID() && productID == ((OrderLineItem) other).getProductID();
+        }
+
+        return false;
+
+    }
 }
