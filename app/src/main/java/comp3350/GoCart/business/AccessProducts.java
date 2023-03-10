@@ -42,12 +42,5 @@ public class AccessProducts{
         return Collections.unmodifiableList(products);
     }
 
-/*
-    public List<Product> getProducts(){
-        products = productPersistence.getAllProducts();
-        return Collections.unmodifiableList(products);
-    }
-    */
-
 
 }
