@@ -7,6 +7,7 @@ Due: March 10, 2023
 * Business(comp3350.GoCart.objects)
 * Objects(comp3350.GoCart.objects)
 * Persistence(comp3350.GoCart.persistence)
+    * HSQLDB
     * stubs
 * Presentation(comp3350.GoCart.presentation)
 * Test(comp3350.GoCart.test)
@@ -186,6 +187,6 @@ String getInitials()
 
 
 ## Tier 3 Data/ Persistence
->This layer has the HSQLDB database for all the objects respectively.
+>This layer has the HSQLDB database for all the objects respectively. The app runs database.script in assets directory to implement a HSQLDB that is ussed to handle our 
 
 
