@@ -138,7 +138,7 @@ public class HomeActivity extends Activity {
                 userAccountButton.setText(loggedInUser.getInitials());
                 isLoggedIn = true;
             }
-            else {
+            else {  // null means user was logged out
                 isLoggedIn = false;
             }
             updateActivity();
