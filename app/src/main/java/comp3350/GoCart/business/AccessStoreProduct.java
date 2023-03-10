@@ -33,8 +33,22 @@ public class AccessStoreProduct {
     }
 
     public List<StoreProduct> getStoreProductsByName(String storeID, String productName) {
-        storeProducts = storeProductPersistence.getStoreProductByName(storeID, productName);
-        return storeProducts;
+        storeProducts = getStoresProducts(storeID);
+        List<StoreProduct> matchingProducts = new ArrayList<>();
+
+        if (productName != null && storeID != null)
+        {
+            for (int i = 0; i < storeProducts.size(); i++)
+            {
+                StoreProduct currStoreProduct = storeProducts.get(i);
+
+                if (currStoreProduct.getStoreId().equals(storeID) && currStoreProduct.getProductName().toLowerCase().contains(productName.toLowerCase())) {
+                    matchingProducts.add(currStoreProduct);
+                }
+            }
+        }
+
+        return matchingProducts;
     }
 
     public List<StoreProduct> getStoreProductsByNameWithAllergen(String storeID, String productName) {

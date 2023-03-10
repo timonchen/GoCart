@@ -58,28 +58,4 @@ public class StorePersistenceHSQLDB implements StorePersistence{
         }
     }
 
-    @Override
-    public List<Store> searchStoresByName(String storeName) {
-        List<Store> result = new ArrayList<>();
-
-        try (final Connection c = connection()) {
-            final Statement st = c.createStatement();
-            String query = "SELECT * FROM STORES WHERE name LIKE " + "\'" + storeName + "%\'";
-            final ResultSet rs = st.executeQuery(query);
-
-            while (rs.next()) {
-                final Store store = fromResultSet(rs);
-                result.add(store);
-            }
-
-            rs.close();
-            st.close();
-        }
-        catch (final SQLException e) {
-            throw new PersistenceException(e);
-        }
-
-        return result;
-    }
-
 }
