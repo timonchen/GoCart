@@ -117,7 +117,7 @@ public class HomeActivity extends Activity {
         Intent usersIntent = new Intent(HomeActivity.this, UsersActivity.class);
         usersIntent.putExtra(UsersActivity.EXTRA_USER, loggedInUser);
         usersIntent.putExtra(UsersActivity.EXTRA_PAGE_TYPE, UsersActivity.PAGE_TYPE_USER_ACCOUNT);
-        HomeActivity.this.startActivityForResult(usersIntent, REQUEST_LOGIN);
+        HomeActivity.this.startActivity(usersIntent);
     }
 
     // This method deals with returns made by another activity
@@ -126,9 +126,10 @@ public class HomeActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUEST_LOGIN && resultCode == RESULT_OK) {
+            isLoggedIn = data.getBooleanExtra("loggedInStatus", false);  // defaultValue (false) is used if no result with key "loggedInStatus" was returned
             loggedInUser = data.getParcelableExtra(EXTRA_USER);
-
-            if (loggedInUser != null) {
+            if (loggedInUser != null)
+            {
                 System.out.println("User = " + loggedInUser.getInitials());
                 Button loginButton = (Button) findViewById(R.id.loginButton);
                 Button userAccountButton = (Button) findViewById(R.id.userAccountButton);
@@ -146,16 +147,16 @@ public class HomeActivity extends Activity {
     }
 
     private void updateActivity() {
-        if (isLoggedIn) {   // User is logged in
+        if (isLoggedIn) {
             loginButton.setVisibility(View.GONE);   // Hide login button
             userAccountButton.setVisibility(View.VISIBLE);  // Display user button
 
             // Inform user of the update
-            String status = "Logged in";
+            String accountCreated = "Account Created";
             String welcomeMessage = "Enjoy shopping with GoCart!";
             AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 
-            alertDialog.setTitle(status);
+            alertDialog.setTitle(accountCreated);
             alertDialog.setMessage(welcomeMessage);
 
             alertDialog.show();

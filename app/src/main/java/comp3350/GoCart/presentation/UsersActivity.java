@@ -85,6 +85,15 @@ public class UsersActivity extends Activity
             result.putExtra(EXTRA_USER, loggedInUser);
             setResult(RESULT_OK, result);
 
+            String title = "Account Created";
+            String message = "Enjoy shopping with GoCart!";
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(title);
+            builder.setMessage(message);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -148,6 +157,15 @@ public class UsersActivity extends Activity
                 Intent result = new Intent();
                 result.putExtra(EXTRA_USER, loggedInUser);
                 setResult(RESULT_OK, result);
+
+                String title = "Welcome";
+                String message = "Enjoy shopping with GoCart!";
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle(title);
+                builder.setMessage(message);
+                AlertDialog dialog = builder.create();
+                dialog.show();
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -565,7 +583,8 @@ public class UsersActivity extends Activity
             public void onClick(DialogInterface dialog, int which) {
                 // User confirmed, delete the item
                 accessUsers.deleteUser(loggedInUser);
-                logout();
+                Intent intent = new Intent(UsersActivity.this, HomeActivity.class);
+                UsersActivity.this.startActivity(intent);
             }
         });
 
