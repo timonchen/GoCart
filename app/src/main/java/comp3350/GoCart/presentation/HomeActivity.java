@@ -160,7 +160,7 @@ public class HomeActivity extends Activity {
 
             alertDialog.show();
         }
-        else {  // User is logged out
+        else {
             loginButton.setVisibility(View.VISIBLE);
             userAccountButton.setVisibility(View.GONE);
 

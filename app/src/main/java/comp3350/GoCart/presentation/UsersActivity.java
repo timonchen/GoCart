@@ -587,6 +587,7 @@ public class UsersActivity extends Activity
         logout();
     }
 
+    // Call this method to log out
     private void logout() {
         loggedInUser = null;
         Intent intent = new Intent();
