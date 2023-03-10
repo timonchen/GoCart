@@ -9,22 +9,23 @@ import android.widget.SearchView;
 import android.widget.Switch;
 import android.widget.TextView;
 
-
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
-
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
 import java.util.List;
+
 import comp3350.GoCart.R;
 import comp3350.GoCart.business.AccessStoreProduct;
 import comp3350.GoCart.business.ShoppingCart;
 import comp3350.GoCart.objects.Store;
 import comp3350.GoCart.objects.StoreProduct;
-
+import comp3350.GoCart.persistence.ProductPersistence;
 
 public class ProductsActivity extends Activity {
 
@@ -35,6 +36,7 @@ public class ProductsActivity extends Activity {
     private SearchView searchBar;
     private RecyclerView productsRecView;
     private ProductsRecViewAdapter adapter;
+
     private AccessStoreProduct accessStoreProduct;
     List<StoreProduct> storeProducts;
     private String storeID;
@@ -62,8 +64,10 @@ public class ProductsActivity extends Activity {
         storeID = store.getStoreID();
 
         accessStoreProduct = new AccessStoreProduct();
-        storeProducts = accessStoreProduct.getStoresProducts(store.getStoreID());
+        storeProducts = accessStoreProduct.getStoresProducts(storeID);
+        storeProducts = accessStoreProduct.getStoresProducts(storeID);
         ShoppingCart.getInstance().setStore(store);
+
 
         // Set data in views to store data
         storeName.setText(store.getStoreName());
@@ -104,12 +108,10 @@ public class ProductsActivity extends Activity {
             }
         });
 
-
         // Recycler view will use a grid layout with 2 columns per row
         productsRecView.setLayoutManager(new GridLayoutManager(this, 2));
         productsRecView.setFocusable(false);
     }
-
 
     private void updateProductList(String productName) {
         lastSearch = productName;

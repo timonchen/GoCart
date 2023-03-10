@@ -8,6 +8,4 @@ public interface StorePersistence {
     //List<Store> getStore(Store currentStore);
     List<Store> getAllStores();
 
-    List<Store> searchStoresByName(String storeName);
-
 }

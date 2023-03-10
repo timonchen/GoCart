@@ -10,6 +10,7 @@ import comp3350.GoCart.application.Services;
 import comp3350.GoCart.objects.Product;
 import comp3350.GoCart.objects.Store;
 import comp3350.GoCart.objects.StoreProduct;
+import comp3350.GoCart.persistence.StorePersistence;
 import comp3350.GoCart.persistence.StoreProductPersistence;
 
 public class AccessStoreProduct {
@@ -37,10 +38,23 @@ public class AccessStoreProduct {
         return Collections.unmodifiableList(storeProducts);
     }
 
-
     public List<StoreProduct> getStoreProductsByName(String storeID, String productName) {
-        storeProducts = storeProductPersistence.getStoreProductByName(storeID, productName);
-        return storeProducts;
+        storeProducts = getStoresProducts(storeID);
+        List<StoreProduct> matchingProducts = new ArrayList<>();
+
+        if (productName != null && storeID != null)
+        {
+            for (int i = 0; i < storeProducts.size(); i++)
+            {
+                StoreProduct currStoreProduct = storeProducts.get(i);
+
+                if (currStoreProduct.getStoreId().equals(storeID) && currStoreProduct.getProductName().toLowerCase().contains(productName.toLowerCase())) {
+                    matchingProducts.add(currStoreProduct);
+                }
+            }
+        }
+
+        return matchingProducts;
     }
 
     public List<StoreProduct> getStoreProductsByNameWithAllergen(String storeID, String productName) {
@@ -77,7 +91,6 @@ public class AccessStoreProduct {
         if(productList != null && storeList != null
                 && productList.size() != 0 && storeList.size() != 0) {
             for (int i = 0; i < storeList.size(); i++) {
-
                 if (storeList.get(i) != null) {
                     total = calculateTotal(productList,quant, storeList.get(i).getStoreID());
                     if (currentCheapestTotal.equals(BigDecimal.ZERO)
@@ -85,7 +98,6 @@ public class AccessStoreProduct {
                             ||total.compareTo(currentCheapestTotal) == -1 ){
                         currentCheapestIndex = i;
                         currentCheapestTotal = total;
-
                     }
                     if (!total.equals(BigDecimal.ZERO))
                         result = new StoreProduct(storeList.get(currentCheapestIndex),newProduct,currentCheapestTotal);
@@ -104,6 +116,7 @@ public class AccessStoreProduct {
         Product current = null;
 
         BigDecimal runningTotal = new BigDecimal("0");
+
         for (int i = 0; i < currentProducts.size();i++){
             if (quant != null && quant.size() > 0 ) {
 

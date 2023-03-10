@@ -40,8 +40,42 @@ public class AccessStores{
     }
 
     public List<Store> getStoresByName(String storeName) {
-        stores = storePersistence.searchStoresByName(storeName);
-        return Collections.unmodifiableList(stores);
+        stores = getStores();
+        List<Store> results = storePersistence.getAllStores();
+        storeName = storeName.toLowerCase();
+
+        if (storeName.equals("")) {     // Set store list to empty
+            results = new ArrayList<>();
+        }
+        else {
+            results = matchStores(storeName, stores);
+        }
+
+        return Collections.unmodifiableList(results);
+    }
+
+    private List<Store> matchStores(String storeWanted, List<Store> stores) {
+        List<Store> results = new ArrayList<Store>();
+        storeWanted = storeWanted.toLowerCase();
+
+        for (int i = 0; i < stores.size(); i++) {
+            Store store = stores.get(i);
+            String storeName = store.getStoreName().toLowerCase();
+            boolean match = true;
+
+            // Check if all words in the storeName matches with user input
+            for (int j = 0; j < storeWanted.length() && match; j++) {
+                if (storeWanted.charAt(j) != storeName.charAt(j)) {
+                    match = false;
+                }
+            }
+
+            if (match) {
+                results.add(store);
+            }
+        }
+
+        return results;
     }
 
     /*
