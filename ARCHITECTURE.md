@@ -14,14 +14,18 @@ Due: February 12th, 2023
 	* Objects(ss(comp3350.GoCart.tests.objects)
 
 ### Layers
-| Presentation/UI     |      Logic/Business   	  	 |  Persistence/Data   |
-|---------------------|--------------------------------|----------------------|
-| Home page           | Access nearby stores	  	 | ProductStub Database |
-| Find store by name  | Access Srores by name  	  	 | StoreStub Database   |
-| Find nearby stores  | Store Distance calculator	 | 				|
-| 			    | location Distance calculator   |                      |
-| 			    | Access products by name		 |                      |
-|                     | Access dietary restricted prod |                      |
+| Presentation/UI     |      Logic/Business   	  	 |  Persistence/Data   		   |
+|---------------------|--------------------------------|-------------------------------|
+| Home page           | Access nearby stores	  	 | OrderPersistenceHSQLDB 	   |
+| Find store by name  | Access Srores by name  	  	 | ProductPersistenceHSQLDB      |
+| Find nearby stores  | Store Distance calculator	 | StorePersistenceHSQLDB	   |
+| Error Messages 	    | location Distance calculator   | StoreProductPersistenceHSQLDB |
+| find products	    | Access products by name		 | UserPersistenceHSQLDB         |
+| Shopping cart       | Access users			 | OrderPresistenceStub      	   |
+| User profile        | Shopping cart			 | ProductPersistenceStub        |
+| User profile        | 					 | StorePersistenceStub          |
+| User profile        | 					 | StoreProductPersistenceStub   |
+| User profile        | 					 | UserPersistenceStub           |
 
 
 
@@ -130,4 +134,5 @@ feature. Our UI implements the "Find store" feature and the activities communica
 
 ## Tier 3 Data/ Persistence
 >This layer has the stub database for Products and Store
+
 
