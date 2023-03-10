@@ -1,6 +1,7 @@
 package comp3350.GoCart.presentation;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -14,12 +15,14 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+
 import java.util.List;
 
 import comp3350.GoCart.R;
 import comp3350.GoCart.business.AccessStoreProduct;
-import comp3350.GoCart.objects.Product;
+import comp3350.GoCart.business.ShoppingCart;
 import comp3350.GoCart.objects.Store;
 import comp3350.GoCart.objects.StoreProduct;
 import comp3350.GoCart.persistence.ProductPersistence;
@@ -39,6 +42,7 @@ public class ProductsActivity extends Activity {
     private String storeID;
     private String lastSearch;
     private boolean hasAllergen;
+    private FloatingActionButton viewCart;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +57,7 @@ public class ProductsActivity extends Activity {
         lastSearch = "";
 
         Switch allergenSwitch = findViewById(R.id.allergenSwitch);
+        viewCart = findViewById(R.id.cart_fab);
 
         // Get store data from previous activity
         Store store = getIntent().getParcelableExtra("selected_store");
@@ -61,6 +66,8 @@ public class ProductsActivity extends Activity {
         accessStoreProduct = new AccessStoreProduct();
         storeProducts = accessStoreProduct.getStoresProducts(storeID);
         storeProducts = accessStoreProduct.getStoresProducts(storeID);
+        ShoppingCart.getInstance().setStore(store);
+
 
         // Set data in views to store data
         storeName.setText(store.getStoreName());
@@ -70,6 +77,12 @@ public class ProductsActivity extends Activity {
         adapter = new ProductsRecViewAdapter();
         adapter.setProducts(storeProducts);
         productsRecView.setAdapter(adapter);
+
+        viewCart.setOnClickListener(view -> {
+            Intent intent = new Intent(ProductsActivity.this, ShoppingCartActivity.class);
+            startActivity(intent);
+        });
+
 
         // Code related to search bar functionality
         searchBar.clearFocus();

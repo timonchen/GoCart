@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cartProductCard"
+    android:layout_marginTop="15dp"
+    android:layout_marginBottom="15dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Product Name"
+            android:textSize="30sp"
+            android:layout_marginTop="35dp"
+            android:id="@+id/txtProductName"
+            android:textStyle="bold"
+            android:layout_toRightOf="@id/imgHolder"/>
+
+        <Button
+            android:id="@+id/btnDecQuantity"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_toRightOf="@id/imgHolder"
+            android:layout_below="@id/txtProductName"
+            android:layout_marginTop="10dp"
+            android:text="-" />
+
+        <EditText
+            android:id="@+id/txtSetQuantity"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/txtProductName"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/btnDecQuantity"
+            android:hint="0"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/btnIncQuantity"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/txtProductName"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/txtSetQuantity"
+            android:text="+" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp"
+            android:layout_margin="30dp"
+            android:id="@+id/imgHolder">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/imgStore"
+                android:src="@color/colorPrimary"/>
+
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+
+
+
+</androidx.cardview.widget.CardView>
