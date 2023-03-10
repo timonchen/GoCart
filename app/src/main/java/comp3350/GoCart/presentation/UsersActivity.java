@@ -581,7 +581,7 @@ public class UsersActivity extends Activity
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // User confirmed, delete the item
+                // User confirmed, delete
                 accessUsers.deleteUser(loggedInUser);
                 Intent intent = new Intent(UsersActivity.this, HomeActivity.class);
                 UsersActivity.this.startActivity(intent);
