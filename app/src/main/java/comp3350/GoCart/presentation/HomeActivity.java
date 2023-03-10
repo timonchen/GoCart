@@ -21,12 +21,15 @@ import java.io.InputStreamReader;
 
 
 import comp3350.GoCart.R;
+import comp3350.GoCart.objects.User;
 
 public class HomeActivity extends Activity {
 
     // Codes for activity returns
-    private final int REQUEST_IS_LOGGED_IN = 1;
+    public static final int REQUEST_LOGIN = 1;
+    public static final String EXTRA_USER = "loggedInUser";
 
+    private User loggedInUser;
     private boolean isLoggedIn;
     private Button loginButton;
     private Button userAccountButton;
@@ -36,6 +39,7 @@ public class HomeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         copyDatabaseToDevice();
+        this.loggedInUser = null;
         isLoggedIn = false;
         loginButton = findViewById(R.id.loginButton);
         userAccountButton = findViewById(R.id.userAccountButton);
@@ -105,11 +109,14 @@ public class HomeActivity extends Activity {
 
     public void buttonLoginPageOnClick(View v) {
         Intent usersIntent = new Intent(HomeActivity.this, UsersActivity.class);
-        HomeActivity.this.startActivityForResult(usersIntent, REQUEST_IS_LOGGED_IN);    // startActivityForResult expects that something will be returned by the activity
+        usersIntent.putExtra(UsersActivity.EXTRA_PAGE_TYPE, UsersActivity.PAGE_TYPE_LOGIN);
+        HomeActivity.this.startActivityForResult(usersIntent, REQUEST_LOGIN);    // startActivityForResult expects that something will be returned by the activity
     }
 
     public void buttonUserAccountOnClick(View v) {
         Intent usersIntent = new Intent(HomeActivity.this, UsersActivity.class);
+        usersIntent.putExtra(UsersActivity.EXTRA_USER, loggedInUser);
+        usersIntent.putExtra(UsersActivity.EXTRA_PAGE_TYPE, UsersActivity.PAGE_TYPE_USER_ACCOUNT);
         HomeActivity.this.startActivity(usersIntent);
     }
 
@@ -118,11 +125,20 @@ public class HomeActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQUEST_IS_LOGGED_IN) {
-            if (resultCode == RESULT_OK) {
-                isLoggedIn = data.getBooleanExtra("loggedInStatus", false);  // defaultValue (false) is used if no result with key "loggedInStatus" was returned
-                updateActivity();
+        if (requestCode == REQUEST_LOGIN && resultCode == RESULT_OK) {
+            isLoggedIn = data.getBooleanExtra("loggedInStatus", false);  // defaultValue (false) is used if no result with key "loggedInStatus" was returned
+            loggedInUser = data.getParcelableExtra(EXTRA_USER);
+            if (loggedInUser != null)
+            {
+                System.out.println("User = " + loggedInUser.getInitials());
+                Button loginButton = (Button) findViewById(R.id.loginButton);
+                Button userAccountButton = (Button) findViewById(R.id.userAccountButton);
+
+                loginButton.setVisibility(View.GONE);
+                userAccountButton.setVisibility(View.VISIBLE);
+                userAccountButton.setText(loggedInUser.getInitials());
             }
+            updateActivity();
         }
     }
 

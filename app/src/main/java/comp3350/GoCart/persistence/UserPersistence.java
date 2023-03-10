@@ -6,9 +6,12 @@ import comp3350.GoCart.objects.User;
 
 public interface UserPersistence
 {
-    User addUser(final User newUser);
 
-    List<User> getUserSequential();
+    void addUser(final User newUser);
 
     User getUser(String email, String password);
+
+    int getNumUsers();
+
+    void deleteUser(final User user);
 }
