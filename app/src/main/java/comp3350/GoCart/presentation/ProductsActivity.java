@@ -2,8 +2,10 @@ package comp3350.GoCart.presentation;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,6 +37,8 @@ public class ProductsActivity extends Activity {
     private AccessStoreProduct accessStoreProduct;
     List<StoreProduct> storeProducts;
     private String storeID;
+    private String lastSearch;
+    private boolean hasAllergen;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,6 +50,9 @@ public class ProductsActivity extends Activity {
         storeAddress = findViewById(R.id.storeAddress);
         searchBar = findViewById(R.id.searchBar);
         productsRecView = findViewById(R.id.productsRecView);
+        lastSearch = "";
+
+        Switch allergenSwitch = findViewById(R.id.allergenSwitch);
 
         // Get store data from previous activity
         Store store = getIntent().getParcelableExtra("selected_store");
@@ -78,13 +85,27 @@ public class ProductsActivity extends Activity {
             }
         });
 
+        // The following code is run when the allergen switch is clicked
+        allergenSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                hasAllergen = isChecked;
+                updateProductList(lastSearch);
+            }
+        });
+
         // Recycler view will use a grid layout with 2 columns per row
         productsRecView.setLayoutManager(new GridLayoutManager(this, 2));
         productsRecView.setFocusable(false);
     }
 
     private void updateProductList(String productName) {
-        adapter.setProducts(accessStoreProduct.getStoreProductsByName(storeID, productName));
+        lastSearch = productName;
+
+        if (hasAllergen)
+            adapter.setProducts(accessStoreProduct.getStoreProductsByNameWithAllergen(storeID, productName));
+        else
+            adapter.setProducts(accessStoreProduct.getStoreProductsByName(storeID, productName));
         productsRecView.setAdapter(adapter);
     }
 }
