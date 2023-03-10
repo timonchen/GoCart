@@ -74,11 +74,9 @@ public class ProductPersistenceHSQLDB implements ProductPersistence {
 
             return matchingProducts;
         }
-        catch (final SQLException e)
-        {
+        catch (final SQLException e) {
             throw new PersistenceException(e);
         }
-
 
     }
 

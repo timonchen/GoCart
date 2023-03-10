@@ -1,6 +1,7 @@
 package comp3350.GoCart.business;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,11 +17,13 @@ public class AccessStoreProduct {
 
     private StoreProductPersistence storeProductPersistence;
     private List<StoreProduct> storeProducts;
+    private AccessProducts accessProducts;
 
 
 
     public AccessStoreProduct(){
         storeProductPersistence = Services.getStoreProductPersistence();
+        accessProducts = new AccessProducts();
         storeProducts = null;
     }
 
@@ -32,6 +35,29 @@ public class AccessStoreProduct {
     public List<StoreProduct> getStoreProductsByName(String storeID, String productName) {
         storeProducts = storeProductPersistence.getStoreProductByName(storeID, productName);
         return storeProducts;
+    }
+
+    public List<StoreProduct> getStoreProductsByNameWithAllergen(String storeID, String productName) {
+        List<StoreProduct> unfilteredProducts = getStoreProductsByName(storeID, productName);
+        List<StoreProduct> filteredProducts = new ArrayList<>();
+        List<Product> productsWithAllergen = accessProducts.getDietaryProducts();
+
+        // For each product with an allergen, compare it with every product in the unfiltered products
+        for (int i = 0; i < productsWithAllergen.size(); i++) {
+            boolean foundProduct = false;
+
+            for (int j = 0; j < unfilteredProducts.size() && !foundProduct; j++) {
+                StoreProduct curr = unfilteredProducts.get(j);
+
+                if (productsWithAllergen.get(i).getProductID().equals(curr.getProductID()))
+                {
+                    filteredProducts.add(curr);
+                    unfilteredProducts.remove(j);
+                }
+            }
+        }
+
+        return filteredProducts;
     }
 
     public Store returnCheapestStore(List<Product> productList, List<Store> storeList){
