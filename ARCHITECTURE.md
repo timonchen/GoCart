@@ -1,6 +1,6 @@
-# COMP3350 G06 Iteration 1
+# COMP3350 G06 Iteration 2
 ## GoCart Architecture
-Due: February 12th, 2023
+Due: March 10, 2023
 
 ### Packages
 * Application
@@ -86,7 +86,7 @@ StoresRecViewAdapter
 
     DSO <|-- Store
     DSO <|-- Product
-    DSO <|-- ProductStore
+    DSO <|-- StoreProduct
     DSO <|-- Order
     DSO <|-- OrderLineItem
     DSO <|-- User
