@@ -8,6 +8,7 @@ import comp3350.GoCart.tests.business.DietaryRestrictionTest;
 import comp3350.GoCart.tests.business.GetClosetStoresTest;
 import comp3350.GoCart.tests.business.SearchProductsByNameTest;
 import comp3350.GoCart.tests.business.DistanceCalculatorTest;
+import comp3350.GoCart.tests.business.SearchStoreProductTest;
 import comp3350.GoCart.tests.business.SearchStoresByNameTest;
 
 @RunWith(Suite.class)
@@ -16,7 +17,8 @@ import comp3350.GoCart.tests.business.SearchStoresByNameTest;
        SearchProductsByNameTest.class,
         DistanceCalculatorTest.class,
         SearchStoresByNameTest.class,
-        GetClosetStoresTest.class
+        GetClosetStoresTest.class,
+        SearchStoreProductTest.class
 })
 
 public class AllTests {

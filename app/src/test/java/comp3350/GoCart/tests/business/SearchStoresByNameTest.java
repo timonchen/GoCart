@@ -6,15 +6,16 @@ import org.junit.*;
 
 import comp3350.GoCart.business.AccessStores;
 import comp3350.GoCart.objects.Store;
+import comp3350.GoCart.persistence.stubs.StorePersistenceStub;
+
 import java.util.List;
 
 public class SearchStoresByNameTest extends TestCase {
     private AccessStores accessStores;
-    private List<Store> stores;
 
     public SearchStoresByNameTest() {
         super();
-        accessStores = new AccessStores();
+        accessStores = new AccessStores(new StorePersistenceStub());
     }
 
     // Search for a store that does not exist
