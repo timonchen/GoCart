@@ -114,7 +114,7 @@ public class HomeActivity extends Activity {
 
             File outFile = new File(copyPath);
 
-
+            if (!outFile.exists()) {
                 InputStreamReader in = new InputStreamReader(assetManager.open(asset));
                 FileWriter out = new FileWriter(outFile);
 
@@ -126,7 +126,7 @@ public class HomeActivity extends Activity {
 
                 out.close();
                 in.close();
-
+            }
         }
     }
 
@@ -202,6 +202,20 @@ public class HomeActivity extends Activity {
 
             alertDialog.setTitle(accountCreated);
             alertDialog.setMessage(welcomeMessage);
+
+            alertDialog.show();
+        }
+        else {
+            loginButton.setVisibility(View.VISIBLE);
+            userAccountButton.setVisibility(View.GONE);
+
+            // Inform user of the update
+            String status = "Logged out";
+            String exitMessage = "Thank you for shopping with GoCart!";
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+
+            alertDialog.setTitle(status);
+            alertDialog.setMessage(exitMessage);
 
             alertDialog.show();
         }

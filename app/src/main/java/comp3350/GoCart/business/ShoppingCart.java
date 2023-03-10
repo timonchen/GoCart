@@ -11,6 +11,7 @@ import java.util.List;
 
 import comp3350.GoCart.objects.Product;
 import comp3350.GoCart.objects.Store;
+import comp3350.GoCart.persistence.stubs.StoreProductPersistenceStub;
 
 public class ShoppingCart {
     private static final ShoppingCart instance = new ShoppingCart();
@@ -30,8 +31,12 @@ public class ShoppingCart {
         return store;
     }
 
-    public BigDecimal calculateTotal(){
-        AccessStoreProduct ap = new AccessStoreProduct();
+    public BigDecimal calculateTotal(boolean db){
+        AccessStoreProduct ap;
+        if ( db == true)
+            ap = new AccessStoreProduct();
+        else
+            ap = new AccessStoreProduct(new StoreProductPersistenceStub());
         return ap.calculateTotal(products,quantity,store.getStoreID());
     }
 

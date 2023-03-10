@@ -6,7 +6,6 @@ import org.junit.*;
 
 import comp3350.GoCart.business.AccessProducts;
 import comp3350.GoCart.business.AccessStores;
-import comp3350.GoCart.business.GetByName;
 import comp3350.GoCart.business.ShoppingCart;
 import comp3350.GoCart.objects.Product;
 import comp3350.GoCart.objects.Store;
@@ -174,8 +173,26 @@ public class ShoppingCartTest extends TestCase{
         assertEquals("should be same object pass to it",zero,cart.getStore());
         cart.clearCart();
     }
+    @Test
+    public void testCalculateTotal(){
+        List<Product> products1 = products.searchProductsByName("Banana");
+        Product banana = products1.get(0);
+        List<Product> products2 = products.searchProductsByName("Rye");
+        Product rye = products2.get(0);
+        List<Product> products3 = products.searchProductsByName("Cookie");
+        Product cookie = products3.get(0);
+
+        Store testingStore = accessStores.getStores().get(0);
+        cart = ShoppingCart.getInstance();
+        cart.setStore(testingStore);
+        cart.addProduct(banana,5);
+        cart.addProduct(rye,5);
+        cart.addProduct(cookie,5);
+
+        System.out.println(" CART TOTAL " + cart.calculateTotal(false));
 
 
+    }
 
 
 
@@ -184,3 +201,4 @@ public class ShoppingCartTest extends TestCase{
 
 
 }
+
