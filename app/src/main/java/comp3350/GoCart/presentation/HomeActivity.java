@@ -139,6 +139,10 @@ public class HomeActivity extends Activity {
                 loginButton.setVisibility(View.GONE);
                 userAccountButton.setVisibility(View.VISIBLE);
                 userAccountButton.setText(loggedInUser.getInitials());
+                isLoggedIn = true;
+            }
+            else {  // null means user was logged out
+                isLoggedIn = false;
             }
             updateActivity();
         }

@@ -12,22 +12,34 @@ public class OrderPresistenceStub implements OrderPersistence {
 
     public OrderPresistenceStub() {
         orders = new ArrayList<>();
+        //some random orders
+        orders.add(new Order(1, 1, 1));
+        orders.add(new Order(4, 5, 2));
+        orders.add(new Order(2, 3, 4));
+        orders.add(new Order(9, 1, 5));
+        orders.add(new Order(3, 1, 5));
+        orders.add(new Order(5, 4, 5));
+        orders.add(new Order(6, 6, 3));
+        orders.add(new Order(7, 1, 6));
+        orders.add(new Order(8, 5, 1));
+
     }
 
+    @Override
     public Order insertOrder(Order toInsert) {
         orders.add(toInsert);
         return toInsert;
     }
-
+    @Override
     public Order getOrder(int orderID) {
         for(Order order : orders) {
             if(order.getOrderID() == orderID) {
                 return order;
             }
         }
-        return null;
+        return new Order(-1, -1, -1);
     }
-
+    @Override
     public List<Order> getAllOrders(int customerID) {
         List<Order> matchingOrders = new ArrayList<>();
 
