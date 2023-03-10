@@ -22,7 +22,7 @@ public class ProductPersistenceHSQLDB implements ProductPersistence {
     private Product fromResultSet(final ResultSet rs) throws SQLException {
         final String productID=  String.valueOf(rs.getInt("PID"));
         final String name=rs.getString("NAME");
-        final boolean hasAllergy =rs.getBoolean("ALLERGY");
+        final boolean hasAllergy =rs.getBoolean("HAS_ALLERGY");
 
 
         return new Product(productID, name,hasAllergy);
