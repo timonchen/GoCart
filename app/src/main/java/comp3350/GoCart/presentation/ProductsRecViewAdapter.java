@@ -39,7 +39,6 @@ public class ProductsRecViewAdapter extends RecyclerView.Adapter<ProductsRecView
         ViewHolder holder = new ViewHolder(view, new cartClickListener() {
             @Override
             public void onAdd(String p,int quant) {
-
                 ShoppingCart.getInstance().addProduct(accessProducts.searchProductsByName(p).get(0),quant);
             }
         });
@@ -107,6 +106,7 @@ public class ProductsRecViewAdapter extends RecyclerView.Adapter<ProductsRecView
         @Override
         public void onClick(View view){
             listener.onAdd(productName.getText().toString(),Integer.parseInt(cartQuantity.getText().toString()));
+
         }
     }
 

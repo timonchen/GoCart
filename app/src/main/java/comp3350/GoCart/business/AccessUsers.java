@@ -6,7 +6,7 @@ import java.util.List;
 import comp3350.GoCart.application.Services;
 import comp3350.GoCart.objects.User;
 import comp3350.GoCart.persistence.UserPersistence;
-import comp3350.GoCart.persistence.stubs.UserPersistenceStub;
+
 
 public class AccessUsers
 {
@@ -24,11 +24,6 @@ public class AccessUsers
         users = null;
     }
 
-    public AccessUsers(final UserPersistenceStub userPersistence)
-    {
-        this();
-        this.userPersistence = userPersistence;
-    }
 
     public void setLoggedInUser(User loggedInUser)
     {

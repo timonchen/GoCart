@@ -105,6 +105,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         private Button decButton;
 
         private AccessProducts ap = new AccessProducts();
+        private AccessStoreProduct asp= new AccessStoreProduct();
 
 
         public ViewHolder(@NonNull View itemView, clickListener Listener) {
@@ -131,15 +132,8 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                 ShoppingCart.getInstance().incrementProductQuantity(prod);
             productQuantity.getText().clear();
             productQuantity.append(ShoppingCart.getInstance().getQuantity(prod).toString());
-            editPrice.setText(ShoppingCart.getInstance().calculateTotal(true).toString());
+            editPrice.setText(ShoppingCart.getInstance().calculateTotal(asp).toString());
             notifyDataSetChanged();
-
-
-            AccessStoreProduct aSP = new AccessStoreProduct();
-            AccessStores aS = new AccessStores();
-            //BigDecimal cheapest = aSP.findCheapestStore(p,q,aS.getStores());
-
-
 
         }
 

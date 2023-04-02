@@ -2,6 +2,16 @@ package comp3350.GoCart.tests.business;
 
 
 
+import static org.mockito.Mockito.*;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+
+import static org.mockito.Mockito.when;
+
+
 import junit.framework.TestCase;
 
 
@@ -15,25 +25,26 @@ import java.util.List;
 
 import comp3350.GoCart.business.*;
 import comp3350.GoCart.objects.*;
-
-import comp3350.GoCart.persistence.stubs.ProductPersistenceStub;
-import comp3350.GoCart.persistence.stubs.StorePersistenceStub;
-import comp3350.GoCart.persistence.stubs.StoreProductPersistenceStub;
+import comp3350.GoCart.persistence.StoreProductPersistence;
 
 
-public class CheapestStoreTest extends TestCase
-{
+public class CheapestStoreTest{
 
     private List<Product> products;
 
     private List<Store> stores;
     private List<StoreProduct> storeProduct;
     private StoreProduct result;
-    private StoreProductPersistenceStub spStub;
-    private AccessProducts accP = new AccessProducts( new ProductPersistenceStub());
 
-    private AccessStores accS = new AccessStores( new StorePersistenceStub());
-    private AccessStoreProduct accSP = new AccessStoreProduct( new StoreProductPersistenceStub());
+    private AccessProducts accessProducts ;
+    private AccessStores accessStores;
+    private AccessStoreProduct accessStoreProduct;
+    private Product prod1,prod2;
+    private List<Store> storeList;
+    private Store store1,store2;
+    private StoreProduct sps1p1,sps1p2,sps2p1,sps2p2;
+    private List<StoreProduct> s1PL,s2PL;
+    private StoreProductPersistence spp;
 
     public CheapestStoreTest()
     {
@@ -43,18 +54,45 @@ public class CheapestStoreTest extends TestCase
 
     @Before
     public void initalize(){
-        //accP.getProducts();
-        accS.getStores();
-         quant = new ArrayList<>();
-        quant.add(1);
-        quant.add(2);
-        quant.add(3);
-        quant.add(4);
-        quant.add(5);
-        quant.add(6);
-        quant.add(7);
-        quant.add(8);
+        accessStores = mock(AccessStores.class);
+        accessProducts = mock(AccessProducts.class);
 
+        store1 = new Store("1","Walmart", "1576 Regent Ave Winnipeg");
+        store2 = new Store("2","Costco", "1499 Regent Ave W Winnipeg");
+        prod1 = new Product("4521","Banana",false);
+        prod2 = new Product("6849","Rye Bread",true);
+
+        sps1p1 = new StoreProduct(store1,prod1,new BigDecimal(1.00));
+        sps1p2 = new StoreProduct(store1,prod2,new BigDecimal(2.00));
+
+        sps2p1 = new StoreProduct(store2,prod1,new BigDecimal(1.10));
+        sps2p2 = new StoreProduct(store2,prod2,new BigDecimal(2.10));
+
+        s1PL = new ArrayList<>();
+        s1PL.add(sps1p1);
+        s1PL.add(sps1p2);
+
+        s2PL = new ArrayList<>();
+        s2PL.add(sps2p1);
+        s2PL.add(sps2p2);
+
+        storeList = new ArrayList<>();
+        storeList.add(store1);
+        storeList.add(store2);
+
+        spp = mock(StoreProductPersistence.class);
+        accessStoreProduct = new AccessStoreProduct(spp);
+
+        spp = mock(StoreProductPersistence.class);
+        accessStoreProduct = new AccessStoreProduct(spp);
+        when(spp.getStoreProducts("1")).thenReturn(s1PL);
+        when(spp.getStoreProducts("2")).thenReturn(s2PL);
+
+        quant = new ArrayList<>();
+        quant.add(1);
+        products = new ArrayList<>();
+
+        System.out.println("Init executed");
 
     }
 
@@ -62,11 +100,15 @@ public class CheapestStoreTest extends TestCase
 
     @Test
     public void testValidData(){
-        initalize();
-        result = accSP.findCheapestStore(accP.searchProductsByName("Banana"),quant,accS.getStores());
+        System.out.println("Start Test:  valid data ");
+
+        products.add(prod1);
+        quant.add(1);
+
+        result = accessStoreProduct.findCheapestStore(products,quant,storeList);
         assertNotNull(result);
-        assertEquals("costco 149 is cheapest" , "cost149",result.getStoreId());
-        assertEquals("should equal ",new BigDecimal("1.00")  , result.getPrice()  );
+        assertEquals("Store 1 is cheapest" , "1",result.getStoreId());
+        assertEquals("should equal ",new BigDecimal("1.00")  , result.getPrice() );
         System.out.println("End Test: valid data \n");
 
     }
@@ -74,10 +116,15 @@ public class CheapestStoreTest extends TestCase
 
     @Test
     public void testNullStoreList(){
-        initalize();
+
+
         System.out.println("Start Test: null store list ");
 
-        result = accSP.findCheapestStore(accP.searchProductsByName("Banana"),quant,null);
+        products.add(prod1);
+        quant.add(1);
+
+        result = accessStoreProduct.findCheapestStore(products,quant,null);
+        System.out.println("return ");
         assertNotNull(result);
         assertEquals("no store returned/no stores given","Emptystore",result.getStoreId());
         System.out.println("End Test: null store list \n");
@@ -86,9 +133,12 @@ public class CheapestStoreTest extends TestCase
 
     @Test
     public void testNullProductList(){
-        initalize();
+
+
         System.out.println("Start Test: null product list ");
-        result = accSP.findCheapestStore(null,quant,accS.getStores());
+        quant.add(1);
+
+        result = accessStoreProduct.findCheapestStore(null,quant,storeList);
         assertNotNull(result);
         assertEquals("no store returned/no products given","Emptystore",result.getStoreId());
         System.out.println("End Test: null product list \n");
@@ -97,10 +147,10 @@ public class CheapestStoreTest extends TestCase
 
     @Test
     public void testEmptyStoreList(){
-        initalize();
         System.out.println("Start Test: empty store list ");
-        stores = new ArrayList<>();
-        result = accSP.findCheapestStore(accP.searchProductsByName("Banana"),quant,stores);
+        storeList = new ArrayList<>();
+
+        result = accessStoreProduct.findCheapestStore(products,quant,storeList);
         assertNotNull(result);
         assertEquals("no store returned/no stores given" ,"Emptystore",result.getStoreId());
         System.out.println("End Test: empty store list \n");
@@ -108,10 +158,11 @@ public class CheapestStoreTest extends TestCase
 
     @Test
     public void testEmptyProductList(){
-        initalize();
+
         System.out.println("Start Test: empty product list ");
         products = new ArrayList<>();
-        result = accSP.findCheapestStore(products,quant,accS.getStores());
+
+        result = accessStoreProduct.findCheapestStore(products,quant,storeList);
         assertNotNull(result);
         assertEquals("no store returned/no products given","Emptystore",result.getStoreId());
         System.out.println("End Test: empty product list \n");
@@ -119,8 +170,10 @@ public class CheapestStoreTest extends TestCase
 
     @Test
     public void testSomeInvalidProductName(){
-        initalize();
         System.out.println("Start Test: some wrong product name ");
+        quant.add(1);
+        quant.add(1);
+        quant.add(1);
 
         products = new ArrayList<>();
 
@@ -128,11 +181,14 @@ public class CheapestStoreTest extends TestCase
         products.add(new Product( "6849","Rye Bread", true));
         products.add(new Product( "1234","Pokeman TCG", false));
         products.add(new Product( "7890","one dozen dabloons", false));
-        result = accSP.findCheapestStore(products,quant,accS.getStores());
+        result = accessStoreProduct.findCheapestStore(products,quant,storeList);
         assertNotNull(result);
-        assertEquals("First Store is cheapest","cost149",result.getStoreId());
+        assertEquals("First Store is cheapest","1",result.getStoreId());
         System.out.println("End Test: some wrong product name \n");
     }
 
 
 }
+
+
+

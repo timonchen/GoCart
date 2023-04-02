@@ -13,11 +13,9 @@ import comp3350.GoCart.persistence.hsqldb.StorePersistenceHSQLDB;
 import comp3350.GoCart.persistence.hsqldb.StoreProductPersistenceHSQLDB;
 import comp3350.GoCart.persistence.UserPersistence;
 import comp3350.GoCart.persistence.hsqldb.UserPersistenceHSQLDB;
-import comp3350.GoCart.persistence.stubs.ProductPersistenceStub;
-import comp3350.GoCart.persistence.stubs.StorePersistenceStub;
+
 import comp3350.GoCart.persistence.ProductPersistence;
-import comp3350.GoCart.persistence.stubs.StoreProductPersistenceStub;
-import comp3350.GoCart.persistence.stubs.UserPersistenceStub;
+
 
 public class Services{
 

@@ -43,6 +43,7 @@ public class ProductsActivity extends Activity {
     private String lastSearch;
     private boolean hasAllergen;
     private FloatingActionButton viewCart;
+    private ShoppingCart shoppingCart;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,7 +66,6 @@ public class ProductsActivity extends Activity {
 
         accessStoreProduct = new AccessStoreProduct();
         storeProducts = accessStoreProduct.getStoresProducts(storeID);
-        storeProducts = accessStoreProduct.getStoresProducts(storeID);
         ShoppingCart.getInstance().setStore(store);
 
 
@@ -80,8 +80,10 @@ public class ProductsActivity extends Activity {
 
         viewCart.setOnClickListener(view -> {
             Intent intent = new Intent(ProductsActivity.this, ShoppingCartActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent,1);
         });
+
+
 
 
         // Code related to search bar functionality
@@ -112,6 +114,24 @@ public class ProductsActivity extends Activity {
         productsRecView.setLayoutManager(new GridLayoutManager(this, 2));
         productsRecView.setFocusable(false);
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                //String store = data.getStringExtra("newStore");
+                //String addr = data.getStringExtra("newStore");
+
+                Store store = data.getParcelableExtra("newStore");
+                storeID = store.getStoreID();
+                storeName.setText(store.getStoreName());
+                storeAddress.setText(store.getStoreAddress());
+                storeProducts = accessStoreProduct.getStoresProducts(storeID);
+                adapter.setProducts(storeProducts);
+            }
+        }
+    }
+
 
     private void updateProductList(String productName) {
         lastSearch = productName;
