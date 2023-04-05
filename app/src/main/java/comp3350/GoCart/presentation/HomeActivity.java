@@ -45,24 +45,6 @@ public class HomeActivity extends Activity {
         userAccountButton = findViewById(R.id.userAccountButton);
         System.out.println("here1");
     }
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//
-//        // Retrieve the boolean value indicating if the user has logged out
-//        boolean loggedOut = getIntent().getBooleanExtra("loggedOut", false);
-//
-//        if (loggedOut) {
-//            this.loggedInUser = null;
-//            Button loginButton = (Button) findViewById(R.id.loginButton);
-//            Button userAccountButton = (Button) findViewById(R.id.userAccountButton);
-//
-//            loginButton.setVisibility(View.VISIBLE);
-//            userAccountButton.setVisibility(View.GONE);
-//
-//            isLoggedIn = false;
-//        }
-//    }
 
     @Override
     protected void onDestroy() {
