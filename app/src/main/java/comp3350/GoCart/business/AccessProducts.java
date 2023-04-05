@@ -20,7 +20,10 @@ public class AccessProducts{
     }
 
 
-
+    public AccessProducts(final ProductPersistence productPersistence){
+        this();
+        this.productPersistence = productPersistence;
+    }
 
     public List<Product> getDietaryProducts()
     {
@@ -34,6 +37,9 @@ public class AccessProducts{
         products = productPersistence.searchProductsByName(productName);
         return Collections.unmodifiableList(products);
     }
-
+    public List<Product> searchProductsByCategory(String category) {
+        products = productPersistence.searchProductsByCategory(category);
+        return Collections.unmodifiableList(products);
+    }
 
 }
