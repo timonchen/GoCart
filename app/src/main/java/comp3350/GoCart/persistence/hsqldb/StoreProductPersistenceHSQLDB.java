@@ -64,4 +64,25 @@ public class StoreProductPersistenceHSQLDB implements StoreProductPersistence {
             throw new PersistenceException(e);
         }
     }
+
+    @Override
+    public List<StoreProduct> getAllStoreProducts() {
+        final List<StoreProduct> storeProducts = new ArrayList<>();
+
+        try (final Connection c = connection()) {
+            final Statement st = c.createStatement();
+            final ResultSet rs = st.executeQuery("SELECT * FROM STORES_PRODUCTS");
+            while (rs.next()) {
+                final StoreProduct sp = fromResultSet(rs);
+                storeProducts.add(sp);
+            }
+            rs.close();
+            st.close();
+        }
+        catch (final SQLException e) {
+            throw new PersistenceException(e);
+        }
+
+        return storeProducts;
+    }
 }

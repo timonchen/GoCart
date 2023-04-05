@@ -27,8 +27,6 @@ public class AccessProducts{
         this.productPersistence = productPersistence;
     }
 
-
-
     public List<Product> getDietaryProducts()
     {
         products = productPersistence.getDietaryRestrictedProducts();
@@ -42,5 +40,8 @@ public class AccessProducts{
         return Collections.unmodifiableList(products);
     }
 
-
+    public List<Product> getProducts() {
+        products = productPersistence.getAllProducts();
+        return Collections.unmodifiableList(products);
+    }
 }

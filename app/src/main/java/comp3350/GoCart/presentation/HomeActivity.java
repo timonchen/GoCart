@@ -50,9 +50,16 @@ public class HomeActivity extends Activity {
         super.onDestroy();
     }
 
-    public void buttonFindStoreOnClick(View v){
+    // Executed when "Find Store" button is clicked
+    public void buttonFindStoreOnClick(View v) {
         Intent storesIntent = new Intent(HomeActivity.this, FindStoreActivity.class);
         HomeActivity.this.startActivity(storesIntent);
+    }
+
+    // Executed when "Discover Deals" button is clicked
+    public void buttonDiscoverDealsOnClick(View v) {
+        Intent dealsIntent = new Intent(HomeActivity.this, DealsActivity.class);
+        HomeActivity.this.startActivity(dealsIntent);
     }
 
     private void copyDatabaseToDevice() {
@@ -117,7 +124,7 @@ public class HomeActivity extends Activity {
         Intent usersIntent = new Intent(HomeActivity.this, UsersActivity.class);
         usersIntent.putExtra(UsersActivity.EXTRA_USER, loggedInUser);
         usersIntent.putExtra(UsersActivity.EXTRA_PAGE_TYPE, UsersActivity.PAGE_TYPE_USER_ACCOUNT);
-        HomeActivity.this.startActivity(usersIntent);
+        HomeActivity.this.startActivityForResult(usersIntent, REQUEST_LOGIN);
     }
 
     // This method deals with returns made by another activity

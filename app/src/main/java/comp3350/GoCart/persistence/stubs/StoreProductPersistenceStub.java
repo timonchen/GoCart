@@ -139,6 +139,11 @@ public class StoreProductPersistenceStub implements StoreProductPersistence {
         }
         return newStoreProducts;
     }
+
+    @Override
+    public List<StoreProduct> getAllStoreProducts(){
+        return null;
+    }
 }
 
 

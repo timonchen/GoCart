@@ -1,6 +1,8 @@
 package comp3350.GoCart.business;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.security.ProtectionDomain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,7 +21,6 @@ public class AccessStoreProduct {
     private StoreProductPersistence storeProductPersistence;
     private List<StoreProduct> storeProducts;
     private AccessProducts accessProducts;
-
 
 
     public AccessStoreProduct(){
@@ -107,6 +108,25 @@ public class AccessStoreProduct {
         return result;
     }
 
+    // Variation of findCheapestStore
+    // Given a product, this method will find the cheapest store that sells that product
+    public StoreProduct findCheapestStore(Product product) {
+        List<StoreProduct> storeProducts = findAllProducts(product);    // List containing all variations of a product
+        StoreProduct cheapestStore = null;
+
+        // Loop through all the storeProducts to find the cheapest storeProduct
+        int length = storeProducts.size();
+        for (int i = 0; i < length; i++) {
+            StoreProduct curr = storeProducts.get(i);
+
+            if (cheapestStore == null || (cheapestStore.getPrice().compareTo(curr.getPrice()) == 1)) {  // if .compareTo() returns 1, then cheapestStore's price is more expensive than curr
+                cheapestStore = curr;
+            }
+        }
+
+        return cheapestStore;
+    }
+
 
     //Calculates Total price at given store for list of products
     public BigDecimal calculateTotal(List<Product> currentProducts,List<Integer> quant, String storeID){
@@ -134,5 +154,41 @@ public class AccessStoreProduct {
         return runningTotal;
     }
 
+    /* All stores sell a product at a different price. Although the stores are selling the same product, their pices vary amongst stores.
+     * The purpose of this method is to get all the possible variants of a product
+     */
+    private List<StoreProduct> findAllProducts(Product product) {
+        List<StoreProduct> storeProducts = storeProductPersistence.getAllStoreProducts();   // List of all StoreProducts
+        List<StoreProduct> matchingStoreProducts = new ArrayList<StoreProduct>();    // List of all StoreProducts with a matching product as the parameter
+
+        // Get a list of all storeProducts that match with product
+        int length = storeProducts.size();
+        for (int i = 0; i < length; i++) {
+            StoreProduct curr = storeProducts.get(i);   // Current storeProduct
+
+            // StoreProducts of the same Product have the same name, so use that in the comparison
+            if (product.getProductName().equals(curr.getProductName())) {
+                matchingStoreProducts.add(curr);
+            }
+        }
+
+        return matchingStoreProducts;
+    }
+
+    public BigDecimal findAveragePrice(Product product) {
+        BigDecimal avgPrice = new BigDecimal(0);
+        List<StoreProduct> matchingStoreProducts = findAllProducts(product);
+
+        // Add up all the prices
+        int length = matchingStoreProducts.size();
+        for (int i = 0; i < length; i++) {
+            avgPrice = avgPrice.add(matchingStoreProducts.get(i).getPrice());
+        }
+
+        // Divide by length to find average
+        avgPrice = avgPrice.divide(BigDecimal.valueOf(length), 2, RoundingMode.DOWN);
+
+        return avgPrice;
+    }
 
 }

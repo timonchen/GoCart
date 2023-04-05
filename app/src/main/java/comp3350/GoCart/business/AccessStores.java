@@ -39,6 +39,21 @@ public class AccessStores{
         return Collections.unmodifiableList(stores);
     }
 
+    // This needs to be refactored to use int ids instead of strings
+    public Store getStoreByID(String id) {
+        stores = getStores();
+        Store matchingStore = null;
+
+        for (int i = 0; i < stores.size() && matchingStore == null; i++) {
+            Store currStore = stores.get(i);
+
+            if (currStore.getStoreID().equals(id))
+                matchingStore = currStore;
+        }
+
+        return matchingStore;
+    }
+
     public List<Store> getStoresByName(String storeName) {
         stores = getStores();
         List<Store> results = storePersistence.getAllStores();
