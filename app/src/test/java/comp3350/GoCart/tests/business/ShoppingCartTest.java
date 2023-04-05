@@ -43,8 +43,8 @@ public class ShoppingCartTest{
     public void init(){
         accessStores = mock(AccessStores.class);
         accessProducts = mock(AccessProducts.class);
-        prod1 = new Product("4521","Banana",false);
-        prod2 = new Product("6849","Rye Bread",true);
+        prod1 = new Product("4521","Banana",false,"produce");
+        prod2 = new Product("6849","Rye Bread",true,"bakery");
         System.out.println("Init executed");
     }
 
