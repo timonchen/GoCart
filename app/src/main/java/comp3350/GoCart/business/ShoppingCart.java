@@ -24,15 +24,15 @@ public class ShoppingCart {
     }
 
     public void setStore(Store newStore){
+
         store = newStore;
     }
     public Store getStore(){
         return store;
     }
 
-    public BigDecimal calculateTotal(){
-        AccessStoreProduct ap = new AccessStoreProduct();
-        return ap.calculateTotal(products,quantity,store.getStoreID());
+    public BigDecimal calculateTotal(AccessStoreProduct ap){
+        return ap.calculateTotal(products,quantity,store);
     }
 
     public static ShoppingCart getInstance(){

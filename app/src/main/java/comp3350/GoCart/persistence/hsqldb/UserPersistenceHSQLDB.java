@@ -31,7 +31,7 @@ public class UserPersistenceHSQLDB implements UserPersistence
     public void addUser(User newUser)
     {
         try (final Connection connection = connection()) {
-            String query = "insert into customers values(?,?,?,?,?,?,?,?,?,?)";
+            String query = "INSERT INTO CUSTOMERS VALUES(?,?,?,?,?,?,?,?,?,?)";
             final PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setString(1, String.valueOf(getNumUsers() + 1));
@@ -46,6 +46,11 @@ public class UserPersistenceHSQLDB implements UserPersistence
             statement.setString(10, newUser.getPassword());
 
             statement.executeUpdate();
+
+            if (getUser(newUser.getEmail(), newUser.getPassword()) != null)
+            {
+                System.out.println("Added user successfully");
+            }
         } catch (SQLException e) {
             throw new PersistenceException(e);
         }
@@ -53,9 +58,10 @@ public class UserPersistenceHSQLDB implements UserPersistence
 
     public User getUser(String email, String password)
     {
+        System.out.println("inside persistence getuser");
         User user = null;
         try (final Connection connection = connection()) {
-            String query = "select * from customers where email = ? AND password = ?";
+            String query = "SELECT * FROM CUSTOMERS WHERE EMAIL = ? AND PASSWORD = ?";
             final PreparedStatement statement = connection.prepareStatement(query);
 
             statement.setString(1, email);
@@ -65,7 +71,9 @@ public class UserPersistenceHSQLDB implements UserPersistence
 
             while (resultSet.next())
             {
+                System.out.println("while");
                 user = fromResultSet(resultSet);
+                System.out.println("user:" + user.getName());
             }
             resultSet.close();
             statement.close();
@@ -111,6 +119,40 @@ public class UserPersistenceHSQLDB implements UserPersistence
         final String password = resultSet.getString("PASSWORD");
 
         return new User(cID, firstName, lastName, address, city, province, zipCode, phone, email, password);
+    }
+
+    public void updateUserName(User user, String newName)
+    {
+        try (final Connection connection = connection()){
+            int cID = user.getUserID();
+            String query = "update customers FIRSTNAME = ?, LASTNAME = ?, ADDRESS = ?, CITY = ?, PROVINCE = ?, ZIPCODE = ?, PHONE = ?, EMAIL = ?, PASSWORD = ? where CID = ?";
+            final PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, user.getFirstName());
+            statement.setString(2, user.getLastName());
+            statement.setString(3, user.getAddress());
+            statement.setString(4, user.getCity());
+            statement.setString(5, user.getProvince());
+            statement.setString(6, user.getZipCode());
+            statement.setString(7, String.valueOf(user.getPhone()));
+            statement.setString(8, user.getEmail());
+            statement.setString(9, user.getPassword());
+            statement.setInt(10, cID);
+            statement.executeUpdate();
+        }
+        catch (final SQLException e)
+        {
+            throw new PersistenceException(e);
+        }
+    }
+
+
+    public void updateUser(User user)
+    {
+        try (final Connection c = connection()) {
+            String query = "delete from customers where CID = ?";
+        } catch (final SQLException e) {
+            throw new PersistenceException(e);
+        }
     }
 
     public void deleteUser(User user)

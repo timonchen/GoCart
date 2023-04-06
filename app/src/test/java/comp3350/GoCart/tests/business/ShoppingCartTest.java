@@ -1,16 +1,26 @@
 package comp3350.GoCart.tests.business;
 
-import junit.framework.TestCase;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.anyObject;
+import static org.mockito.Mockito.mock;
+
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
+
 
 import org.junit.*;
 
 import comp3350.GoCart.business.AccessProducts;
+import comp3350.GoCart.business.AccessStoreProduct;
 import comp3350.GoCart.business.AccessStores;
 import comp3350.GoCart.business.ShoppingCart;
 import comp3350.GoCart.objects.Product;
 import comp3350.GoCart.objects.Store;
-import comp3350.GoCart.persistence.stubs.ProductPersistenceStub;
-import comp3350.GoCart.persistence.stubs.StorePersistenceStub;
+
 
 import java.math.BigDecimal;
 import java.util.AbstractMap;
@@ -19,167 +29,181 @@ import java.util.List;
 import java.util.ArrayList;
 
 
-public class ShoppingCartTest extends TestCase{
+public class ShoppingCartTest{
     private List<Product> prods;
     private ShoppingCart cart;
-    AccessProducts products = new AccessProducts(new ProductPersistenceStub());
-    AccessStores accessStores = new AccessStores(new StorePersistenceStub());
+    private AccessProducts accessProducts ;
+    private AccessStores accessStores ;
 
+    private Product prod1,prod2;
+
+
+
+    @Before
+    public void init(){
+        accessStores = mock(AccessStores.class);
+        accessProducts = mock(AccessProducts.class);
+        prod1 = new Product("4521","Banana",false,"produce");
+        prod2 = new Product("6849","Rye Bread",true,"bakery");
+        System.out.println("Init executed");
+    }
 
 
     @After
     public void clearCart(){
         cart.clearCart();
+        System.out.println("Test Cleanup\n");
     }
 
 
     @Test
     public void testValidData(){
-        List<Product> products1 = products.searchProductsByName("Banana");
-        List<Product> products2 = products.searchProductsByName("Rye");
+        System.out.println("Start Test: cart valid data");
 
         cart = ShoppingCart.getInstance();
-        cart.addProduct(products1.get(0) , 5 );
-        cart.addProduct(products2.get(0) , 6 );
-        assertTrue("List contains first item ", cart.isInCart(products1.get(0)) );
-        assertEquals("first item has quantity 5",Integer.valueOf(5), cart.getQuantity(products1.get(0)));
-        assertTrue("List contains second item ", cart.isInCart(products1.get(0)) );
-        assertEquals("first item has quantity 6",Integer.valueOf(6), cart.getQuantity(products2.get(0)));
+        cart.addProduct(prod1 , 5 );
+        cart.addProduct(prod2 , 6 );
 
-        cart.clearCart();
 
+        assertTrue("List contains first item ", cart.isInCart(prod1 ));
+        assertEquals("first item has quantity 5",Integer.valueOf(5), cart.getQuantity(prod1));
+        assertTrue("List contains second item ", cart.isInCart(prod2));
+        assertEquals("first item has quantity 6",Integer.valueOf(6), cart.getQuantity(prod2));
+
+        System.out.println("End Test: cart valid data");
     }
 
     @Test
     public void testValidIncrement(){
-        List<Product> products1 = products.searchProductsByName("Banana");
-        Product banana = products1.get(0);
+        System.out.println("Start Test: cart valid increment");
 
         cart = ShoppingCart.getInstance();
-        cart.addProduct(products1.get(0) , 1 );
+        cart.addProduct(prod1 , 1 );
 
-        assertTrue("List contains fifth item ", cart.isInCart(banana));
-        assertEquals("banana has quantity of 1", Integer.valueOf(1),cart.getQuantity(banana));
-        cart.incrementProductQuantity(banana);
-        assertEquals("banana has quantity of 2", Integer.valueOf(2),cart.getQuantity(banana));
-        cart.incrementProductQuantity(banana);
-        assertEquals("banana has quantity of 3", Integer.valueOf(3),cart.getQuantity(banana));
-        cart.clearCart();
+        assertTrue("List contains fifth item ", cart.isInCart(prod1));
+        assertEquals("banana has quantity of 1", Integer.valueOf(1),cart.getQuantity(prod1));
+        cart.incrementProductQuantity(prod1);
+        assertEquals("banana has quantity of 2", Integer.valueOf(2),cart.getQuantity(prod1));
+        cart.incrementProductQuantity(prod1);
+        assertEquals("banana has quantity of 3", Integer.valueOf(3),cart.getQuantity(prod1));
+        System.out.println("End Test: cart valid increment");
     }
 
     @Test
     public void testinvalidIncrement(){
-        List<Product> products1 = products.searchProductsByName("Banana");
-        Product banana = products1.get(0);
+        System.out.println("Start Test: cart invalid increment ");
 
         cart = ShoppingCart.getInstance();
-        assertEquals("fbanana has quantity 0",Integer.valueOf(0),cart.getQuantity(banana));
-        cart.incrementProductQuantity(banana);
-        assertEquals("banana still has quantity 0",Integer.valueOf(0),cart.getQuantity(banana));
-        cart.clearCart();
+        assertEquals("fbanana has quantity 0",Integer.valueOf(0),cart.getQuantity(prod1));
+        cart.incrementProductQuantity(prod1);
+        assertEquals("banana still has quantity 0",Integer.valueOf(0),cart.getQuantity(prod1));
+        System.out.println("End Test: cart invalid increment ");
     }
 
     @Test
     public void testValidDecrement(){
-        List<Product> products1 = products.searchProductsByName("Banana");
-        Product banana = products1.get(0);
+        System.out.println("Start Test: cart valid decrement ");
 
         cart = ShoppingCart.getInstance();
-        cart.addProduct(banana , 7);
-        assertTrue("List contains product 4 item ",  cart.isInCart(banana) );
-        assertEquals("banana has quantity of 7", Integer.valueOf(7),cart.getQuantity(banana));
-        cart.decrementProductQuantity(banana);
-        assertEquals("banana has quantity of 6", Integer.valueOf(6),cart.getQuantity(banana));
-        cart.decrementProductQuantity(banana);
-        assertEquals("banana has quantity of 5", Integer.valueOf(5),cart.getQuantity(banana));
-        cart.clearCart();
+        cart.addProduct(prod1 , 7);
+        assertTrue("List contains product 4 item ",  cart.isInCart(prod1) );
+        assertEquals("banana has quantity of 7", Integer.valueOf(7),cart.getQuantity(prod1));
+        cart.decrementProductQuantity(prod1);
+        assertEquals("banana has quantity of 6", Integer.valueOf(6),cart.getQuantity(prod1));
+        cart.decrementProductQuantity(prod1);
+        assertEquals("banana has quantity of 5", Integer.valueOf(5),cart.getQuantity(prod1));
+        System.out.println("End Test: cart valid decrement ");
     }
     @Test
     public void testinvaliddecrement(){
-        List<Product> products1 = products.searchProductsByName("Banana");
-        Product banana = products1.get(0);
+        System.out.println("Start Test: cart invalid decrement");
 
         cart = ShoppingCart.getInstance();
 
-        assertEquals("banana not in list, expected 0 value", Integer.valueOf(0) ,cart.getQuantity(banana));
-        cart.decrementProductQuantity(banana);
-        assertEquals("banana not in list, expected 0 value", Integer.valueOf(0) ,cart.getQuantity(banana));
-        cart.clearCart();
+        assertEquals("banana not in list, expected 0 value", Integer.valueOf(0) ,cart.getQuantity(prod1));
+        cart.decrementProductQuantity(prod1);
+        assertEquals("banana not in list, expected 0 value", Integer.valueOf(0) ,cart.getQuantity(prod1));
+        System.out.println("End Test: cart invalid decrement");
     }
 
     @Test
     public void testValidChangeQuantity(){
-        List<Product> products1 = products.searchProductsByName("Banana");
-        Product banana = products1.get(0);
+        System.out.println("Start Test: cart valid change quantity");
 
         cart = ShoppingCart.getInstance();
 
-        cart.addProduct(banana , 2 );
-        assertEquals("product 0 has a quantity of 2", Integer.valueOf(2),cart.getQuantity(banana));
-        cart.changeProductQuantity(banana,12);
-        assertEquals("product 0 has a quantity of 12", Integer.valueOf(12),cart.getQuantity(banana));
-        cart.clearCart();
+        cart.addProduct(prod1 , 2 );
+        assertEquals("product 0 has a quantity of 2", Integer.valueOf(2),cart.getQuantity(prod1));
+        cart.changeProductQuantity(prod1,12);
+        assertEquals("product 0 has a quantity of 12", Integer.valueOf(12),cart.getQuantity(prod1));
+
+        System.out.println("End Test: cart valid change quantity");
     }
 
     @Test
     public void testInvalidChangeQuantity(){
-
-        List<Product> products1 = products.searchProductsByName("Banana");
-        Product banana = products1.get(0);
-        List<Product> products2 = products.searchProductsByName("Rye");
-        Product rye = products2.get(0);
-        List<Product> products3 = products.searchProductsByName("Cookie");
-        Product cookie = products3.get(0);
-
+        System.out.println("Start Test: cart invalid change quantity");
         cart = ShoppingCart.getInstance();
 
-        cart.addProduct(banana , 2 );
-        assertEquals("product 0 has a quantity of 2", Integer.valueOf(2),cart.getQuantity(banana));
+        cart.addProduct(prod1 , 2 );
+        assertEquals("product 1 has a quantity of 2", Integer.valueOf(2),cart.getQuantity(prod1));
 
-        cart.changeProductQuantity(rye,12);
-        assertEquals("product 1 has 0 quantity",Integer.valueOf(0),cart.getQuantity(rye));
+        cart.changeProductQuantity(prod2,5);
+        assertEquals("product 2 not in cart and has 0 quantity",Integer.valueOf(0),cart.getQuantity(prod2));
 
-        cart.changeProductQuantity(cookie,12);
-        assertEquals("product 2  has 0 quantity",Integer.valueOf(0),cart.getQuantity(cookie));
+        cart.changeProductQuantity(prod2,12);
+        assertEquals("product 2 not in cart and has 0 quantity",Integer.valueOf(0),cart.getQuantity(prod2));
 
-        cart.addProduct(cookie,2);
-        assertEquals("product 2 has a quantity of 2", Integer.valueOf(2),cart.getQuantity(cookie));
+        cart.addProduct(prod2,2);
+        assertEquals("product 2 has a quantity of 2", Integer.valueOf(2),cart.getQuantity(prod2));
 
-        cart.removeProduct(cookie);
-        assertEquals("product 2  has 0 quantity",Integer.valueOf(0),cart.getQuantity(cookie));
-        cart.clearCart();
+        cart.removeProduct(prod2);
+        assertEquals("product 2  has 0 quantity",Integer.valueOf(0),cart.getQuantity(prod2));
+        System.out.println("End Test: cart invalid change quantity");
     }
 
 
     @Test
     public void testremoveProduct(){
-        List<Product> products1 = products.searchProductsByName("Banana");
-        Product banana = products1.get(0);
+        System.out.println("Start Test: cart remove product");
 
         cart = ShoppingCart.getInstance();
-        cart.addProduct(banana , 2 );
+        cart.addProduct(prod1 , 2 );
 
-        assertEquals("product 0 has a quantity of 2", Integer.valueOf(2),cart.getQuantity(banana));
-        cart.removeProduct(banana);
-        assertEquals("product 0 not in list, expected 0", Integer.valueOf(0),cart.getQuantity(banana));
-        cart.clearCart();
+        assertEquals("product 0 has a quantity of 2", Integer.valueOf(2),cart.getQuantity(prod1));
+        cart.removeProduct(prod1);
+        assertEquals("product 0 not in list, expected 0", Integer.valueOf(0),cart.getQuantity(prod1));
+        System.out.println("End Test: cart remove product");
     }
 
     @Test
     public void testSetandGetStore(){
+        System.out.println("Start Test: cart set and get store");
+        Store store1 = new Store("1","Walmart", "1576 Regent Ave Winnipeg");
+
         cart = ShoppingCart.getInstance();
-        Store zero = accessStores.getStores().get(0);
-        cart.setStore(zero);
-        assertEquals("should be same object pass to it",zero,cart.getStore());
-        cart.clearCart();
+        cart.setStore(store1);
+        assertEquals("should be same object pass to it",store1,cart.getStore());
+        System.out.println("End Test: cart set and get store");
+    }
+    @Test
+    public void testCalculateTotal(){
+        System.out.println("Start Test: cart calculate total");
+        AccessStoreProduct asp = mock(AccessStoreProduct.class);
+        Store store = new Store("1","Walmart", "1576 Regent Ave Winnipeg");
+        when(asp.calculateTotal(anyList() ,anyList() ,any())).thenReturn(BigDecimal.valueOf(12.34));
+
+        Store store1 = new Store("1","Walmart", "1576 Regent Ave Winnipeg");
+
+        cart = ShoppingCart.getInstance();
+        cart.setStore(store1);
+        cart.addProduct(prod1,5);
+        cart.addProduct(prod2,5);
+
+        assertEquals("final price is ",BigDecimal.valueOf(12.34),cart.calculateTotal(asp));
+
+        System.out.println("End Test: cart calculate total");
     }
 
-
-
-
-
-
-
-
-
 }
+

@@ -6,8 +6,6 @@ import java.util.List;
 import comp3350.GoCart.application.Services;
 import comp3350.GoCart.objects.Product;
 import comp3350.GoCart.persistence.ProductPersistence;
-import comp3350.GoCart.persistence.stubs.ProductPersistenceStub;
-import comp3350.GoCart.persistence.stubs.UserPersistenceStub;
 
 public class AccessProducts{
 
@@ -21,8 +19,8 @@ public class AccessProducts{
         products = null;
     }
 
-    public AccessProducts(final ProductPersistenceStub productPersistence)
-    {
+
+    public AccessProducts(final ProductPersistence productPersistence){
         this();
         this.productPersistence = productPersistence;
     }
@@ -44,4 +42,9 @@ public class AccessProducts{
         products = productPersistence.getAllProducts();
         return Collections.unmodifiableList(products);
     }
+    public List<Product> searchProductsByCategory(String category) {
+        products = productPersistence.searchProductsByCategory(category);
+        return Collections.unmodifiableList(products);
+    }
+
 }

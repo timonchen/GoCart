@@ -43,6 +43,7 @@ public class HomeActivity extends Activity {
         isLoggedIn = false;
         loginButton = findViewById(R.id.loginButton);
         userAccountButton = findViewById(R.id.userAccountButton);
+        System.out.println("here1");
     }
 
     @Override
@@ -63,6 +64,8 @@ public class HomeActivity extends Activity {
     }
 
     private void copyDatabaseToDevice() {
+        System.out.println("here2");
+
         final String DB_PATH = "db";
 
         String[] assetNames;
@@ -87,6 +90,8 @@ public class HomeActivity extends Activity {
     }
 
     public void copyAssetsToDirectory(String[] assets, File directory) throws IOException {
+        System.out.println("here2");
+
         AssetManager assetManager = getAssets();
 
         for (String asset : assets) {
@@ -98,7 +103,7 @@ public class HomeActivity extends Activity {
 
             File outFile = new File(copyPath);
 
-
+            if (!outFile.exists()) {
                 InputStreamReader in = new InputStreamReader(assetManager.open(asset));
                 FileWriter out = new FileWriter(outFile);
 
@@ -110,14 +115,17 @@ public class HomeActivity extends Activity {
 
                 out.close();
                 in.close();
-
+            }
         }
     }
 
     public void buttonLoginPageOnClick(View v) {
+        System.out.println("here4");
         Intent usersIntent = new Intent(HomeActivity.this, UsersActivity.class);
         usersIntent.putExtra(UsersActivity.EXTRA_PAGE_TYPE, UsersActivity.PAGE_TYPE_LOGIN);
         HomeActivity.this.startActivityForResult(usersIntent, REQUEST_LOGIN);    // startActivityForResult expects that something will be returned by the activity
+        System.out.println("Logout button clicked came back to home");
+
     }
 
     public void buttonUserAccountOnClick(View v) {
@@ -125,19 +133,36 @@ public class HomeActivity extends Activity {
         usersIntent.putExtra(UsersActivity.EXTRA_USER, loggedInUser);
         usersIntent.putExtra(UsersActivity.EXTRA_PAGE_TYPE, UsersActivity.PAGE_TYPE_USER_ACCOUNT);
         HomeActivity.this.startActivityForResult(usersIntent, REQUEST_LOGIN);
+        System.out.println("here5");
     }
 
     // This method deals with returns made by another activity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         super.onActivityResult(requestCode, resultCode, data);
+        System.out.println("here6");
 
         if (requestCode == REQUEST_LOGIN && resultCode == RESULT_OK) {
             isLoggedIn = data.getBooleanExtra("loggedInStatus", false);  // defaultValue (false) is used if no result with key "loggedInStatus" was returned
             loggedInUser = data.getParcelableExtra(EXTRA_USER);
-            if (loggedInUser != null)
+            if (loggedInUser == null)
             {
+                isLoggedIn = false;
+                System.out.println("Logout button clicked came back to home onactivityresult");
+                loggedInUser = null;
+
+                Button loginButton = (Button) findViewById(R.id.loginButton);
+                Button userAccountButton = (Button) findViewById(R.id.userAccountButton);
+
+                loginButton.setVisibility(View.VISIBLE);
+                userAccountButton.setVisibility(View.GONE);
+
+            }
+            else {
+                System.out.println("HomeActivity User: " + loggedInUser);
                 System.out.println("User = " + loggedInUser.getInitials());
+                System.out.println("User email = " + loggedInUser.getEmail());
                 Button loginButton = (Button) findViewById(R.id.loginButton);
                 Button userAccountButton = (Button) findViewById(R.id.userAccountButton);
 
@@ -145,15 +170,16 @@ public class HomeActivity extends Activity {
                 userAccountButton.setVisibility(View.VISIBLE);
                 userAccountButton.setText(loggedInUser.getInitials());
                 isLoggedIn = true;
-            }
-            else {  // null means user was logged out
-                isLoggedIn = false;
+
+                System.out.println("Logout button clicked came back to home onactivityresult !null");
+
             }
             updateActivity();
         }
     }
 
     private void updateActivity() {
+        System.out.println("here7");
         if (isLoggedIn) {
             loginButton.setVisibility(View.GONE);   // Hide login button
             userAccountButton.setVisibility(View.VISIBLE);  // Display user button

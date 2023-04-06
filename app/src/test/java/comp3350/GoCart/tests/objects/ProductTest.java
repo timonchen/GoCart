@@ -16,7 +16,7 @@ public class ProductTest {
 
     @Test
     public void testNullProduct() {
-        product = new Product("testNullProduct", "name", false);
+        product = new Product("testNullProduct", "name", false, null);
         System.out.println("\nStarting testNullProduct");
 
         assertNotNull("Product should not be null", product);
@@ -25,7 +25,7 @@ public class ProductTest {
 
     @Test
     public void testProductName() {
-        product = new Product("testProduct", "name", false);
+        product = new Product("testProduct", "name", false, null);
 
         System.out.println("\nStarting testProductName");
 
@@ -34,7 +34,7 @@ public class ProductTest {
 
     @Test
     public void testProductID() {
-        product = new Product("testProduct", "name", false);
+        product = new Product("testProduct", "name", false,null);
 
         System.out.println("\nStarting testProductID");
 
@@ -44,7 +44,7 @@ public class ProductTest {
 
     @Test
     public void testProductAllergy() {
-        product = new Product("testProduct", "name", false);
+        product = new Product("testProduct", "name", false,null);
 
         System.out.println("\nStarting testProductAllergy");
         assertFalse("Product price should not have dietary restrictions", (product.hasPeanutAllergy()));
@@ -52,9 +52,9 @@ public class ProductTest {
 
     @Test
     public void testProductEquals() {
-        product = new Product("testProduct", "name", false);
+        product = new Product("testProduct", "name", false, null);
         System.out.println("\nStarting testProductEquals");
-        Product product2 = new Product("testProduct", "name", false);
+        Product product2 = new Product("testProduct", "name", false, null);
         assertTrue("Both products should be equal", product.equals(product2));
 
     }
