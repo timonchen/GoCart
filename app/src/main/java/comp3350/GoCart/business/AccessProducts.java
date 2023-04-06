@@ -20,6 +20,11 @@ public class AccessProducts{
     }
 
 
+    public AccessProducts(final ProductPersistence productPersistence){
+        this();
+        this.productPersistence = productPersistence;
+    }
+
 
 
     public List<Product> getDietaryProducts()

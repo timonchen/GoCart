@@ -14,7 +14,7 @@ import comp3350.GoCart.objects.Store;
 
 public class ShoppingCart {
     private static final ShoppingCart instance = new ShoppingCart();
-    //private HashMap<Product,Integer> cartList = new HashMap<Product, Integer>();
+
     private ArrayList<Product> products = new ArrayList<>();
     private ArrayList<Integer> quantity = new ArrayList<>();
     private Store store;
@@ -24,12 +24,12 @@ public class ShoppingCart {
     }
 
     public void setStore(Store newStore){
-
         store = newStore;
     }
     public Store getStore(){
         return store;
     }
+
 
     public BigDecimal calculateTotal(AccessStoreProduct ap){
         return ap.calculateTotal(products,quantity,store);
