@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="comp3350.GoCart.presentation.DealsActivity">
+
+    <!-- Layout for product image and arrows -->
+    <RelativeLayout
+        android:id="@+id/productLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp">
+        <!-- Product Image -->
+        <ImageView
+            android:id="@+id/productImage"
+            android:layout_width="250dp"
+            android:layout_height="300dp"
+
+            android:src="@drawable/shopping_bag"
+            android:layout_centerHorizontal="true"
+            />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="120dp">
+
+            <!-- Left button -->
+            <ImageView
+                android:id="@+id/prevButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/arrow_left"
+                android:layout_marginLeft="20dp"/>
+
+            <!-- Right button -->
+            <ImageView
+                android:id="@+id/nextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/arrow_right"
+                android:layout_marginRight="10dp"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <!-- Layout for the Product/ Store information -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/productLayout"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="60dp">
+
+        <!-- Product Name -->
+        <TextView
+            android:id="@+id/productName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Product Name"
+            android:textSize="40dp"
+            />
+
+        <!-- Store Name -->
+        <TextView
+            android:id="@+id/storeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Store Name"
+            android:textSize="25dp"
+            android:layout_below="@id/productName"
+            android:layout_marginTop="5dp"
+            />
+
+        <!-- Store Address -->
+        <TextView
+            android:id="@+id/storeAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Store Address"
+            android:textSize="15dp"
+            android:layout_below="@id/storeName"
+            android:layout_marginTop="5dp"
+            />
+    </RelativeLayout>
+
+    <!-- Layout for prices -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/productLayout"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="70dp"
+        android:layout_alignParentRight="true">
+
+        <TextView
+            android:id="@+id/avgPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#919191"
+            android:background="@drawable/price_dash"
+            android:text="$ #.##"
+            android:textSize="30dp"
+            />
+
+        <TextView
+            android:id="@+id/salePrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#0db817"
+            android:text="$ #.##"
+            android:textSize="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/avgPrice"/>
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
