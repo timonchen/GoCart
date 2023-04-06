@@ -45,33 +45,22 @@ public class HomeActivity extends Activity {
         userAccountButton = findViewById(R.id.userAccountButton);
         System.out.println("here1");
     }
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//
-//        // Retrieve the boolean value indicating if the user has logged out
-//        boolean loggedOut = getIntent().getBooleanExtra("loggedOut", false);
-//
-//        if (loggedOut) {
-//            this.loggedInUser = null;
-//            Button loginButton = (Button) findViewById(R.id.loginButton);
-//            Button userAccountButton = (Button) findViewById(R.id.userAccountButton);
-//
-//            loginButton.setVisibility(View.VISIBLE);
-//            userAccountButton.setVisibility(View.GONE);
-//
-//            isLoggedIn = false;
-//        }
-//    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
     }
 
-    public void buttonFindStoreOnClick(View v){
+    // Executed when "Find Store" button is clicked
+    public void buttonFindStoreOnClick(View v) {
         Intent storesIntent = new Intent(HomeActivity.this, FindStoreActivity.class);
         HomeActivity.this.startActivity(storesIntent);
+    }
+
+    // Executed when "Discover Deals" button is clicked
+    public void buttonDiscoverDealsOnClick(View v) {
+        Intent dealsIntent = new Intent(HomeActivity.this, DealsActivity.class);
+        HomeActivity.this.startActivity(dealsIntent);
     }
 
     private void copyDatabaseToDevice() {

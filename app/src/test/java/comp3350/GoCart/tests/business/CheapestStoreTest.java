@@ -59,8 +59,8 @@ public class CheapestStoreTest{
 
         store1 = new Store("1","Walmart", "1576 Regent Ave Winnipeg");
         store2 = new Store("2","Costco", "1499 Regent Ave W Winnipeg");
-        prod1 = new Product("4521","Banana",false);
-        prod2 = new Product("6849","Rye Bread",true);
+        prod1 = new Product("4521","Banana",false,"produce");
+        prod2 = new Product("6849","Rye Bread",true, "bakery");
 
         sps1p1 = new StoreProduct(store1,prod1,new BigDecimal(1.00));
         sps1p2 = new StoreProduct(store1,prod2,new BigDecimal(2.00));
@@ -177,10 +177,11 @@ public class CheapestStoreTest{
 
         products = new ArrayList<>();
 
-        products.add(new Product( "4521","Banana",false));
-        products.add(new Product( "6849","Rye Bread", true));
-        products.add(new Product( "1234","Pokeman TCG", false));
-        products.add(new Product( "7890","one dozen dabloons", false));
+        products.add(new Product( "4521","Banana",false, "produce"));
+        products.add(new Product( "6849","Rye Bread", true,"bakery"));
+        products.add(new Product( "6849","Rye Bread", true,"bakery"));
+        products.add(new Product( "1234","Pokeman TCG", false,null));
+        products.add(new Product( "7890","one dozen dabloons", false, null));
         result = accessStoreProduct.findCheapestStore(products,quant,storeList);
         assertNotNull(result);
         assertEquals("First Store is cheapest","1",result.getStoreId());
