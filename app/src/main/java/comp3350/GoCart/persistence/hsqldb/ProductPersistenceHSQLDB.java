@@ -23,6 +23,7 @@ public class ProductPersistenceHSQLDB implements ProductPersistence {
         final String productID=  String.valueOf(rs.getInt("PID"));
         final String name=rs.getString("NAME");
         final boolean hasAllergy =rs.getBoolean("HAS_ALLERGY");
+        final String category =rs.getString("CATEGORY");
 
         return new Product(productID, name,hasAllergy);
     }
@@ -54,6 +55,28 @@ public class ProductPersistenceHSQLDB implements ProductPersistence {
             throw new PersistenceException(e);
         }
     }
+
+    @Override
+    public List<Product> searchProductsByCategory(String category) {
+        List<Product> matchingProducts = new ArrayList<>();
+
+        try (final Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM PRODUCTS WHERE category = ?");
+            st.setString(1, category);
+            final ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                final Product product = fromResultSet(rs);
+                matchingProducts.add(product);
+            }
+            rs.close();
+            st.close();
+
+            return matchingProducts;
+        } catch (final SQLException e) {
+            throw new PersistenceException(e);
+        }
+    }
+
 
     @Override
     public List<Product> searchProductsByName(String productName) {

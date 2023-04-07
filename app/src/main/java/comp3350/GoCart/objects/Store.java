@@ -6,11 +6,6 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
-
 public class Store implements Parcelable {
     
 
@@ -18,8 +13,6 @@ public class Store implements Parcelable {
     private final String storeName;
     private final String storeAddress; // zones
     private double distToUser;
-
-
 
 
     public Store(final String newStoreID , final String newStoreName, final String newStoreAddress){

@@ -12,10 +12,6 @@ public interface ProductPersistence {
     List<Product> searchProductsByName(String productName);
 
     List<Product> getAllProducts();
-    /*
-    Product insertProduct(Product toInsert);
-    Product updateProduct(Product toUpdate);
-    boolean deleteProduct(Product toDelete);
-    List<Product> getProduct(Product currentProduct);
-    */
+
+    List<Product> searchProductsByCategory(String category) ;
 }

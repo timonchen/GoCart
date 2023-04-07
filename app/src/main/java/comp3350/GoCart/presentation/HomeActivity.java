@@ -48,9 +48,16 @@ public class HomeActivity extends Activity {
         super.onDestroy();
     }
 
-    public void buttonFindStoreOnClick(View v){
+    // Executed when "Find Store" button is clicked
+    public void buttonFindStoreOnClick(View v) {
         Intent storesIntent = new Intent(HomeActivity.this, FindStoreActivity.class);
         HomeActivity.this.startActivity(storesIntent);
+    }
+
+    // Executed when "Discover Deals" button is clicked
+    public void buttonDiscoverDealsOnClick(View v) {
+        Intent dealsIntent = new Intent(HomeActivity.this, DealsActivity.class);
+        HomeActivity.this.startActivity(dealsIntent);
     }
 
     private void copyDatabaseToDevice() {

@@ -43,7 +43,6 @@ public class ProductsRecViewAdapter extends RecyclerView.Adapter<ProductsRecView
             }
         });
         return holder;
-
     }
 
     // Modify views (UI Element) here
@@ -51,11 +50,6 @@ public class ProductsRecViewAdapter extends RecyclerView.Adapter<ProductsRecView
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.productName.setText(products.get(position).getProductName());
         holder.productPrice.setText(products.get(position).getPrice().toString());
-
-
-
-        // String price = "$" + products.get(position).getProductPrice().toString();
-        // holder.productPrice.setText(price);
     }
 
     @Override
