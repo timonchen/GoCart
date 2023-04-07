@@ -59,6 +59,12 @@ public class AccessStoreProduct {
         return matchingProducts;
     }
 
+    // Get StoreProductByName given a category
+    public List<StoreProduct> getStoreProductsByName(String storeID, String productName, String categoryName) {
+        List<StoreProduct> matchingName = getStoreProductsByName(storeID, productName);    // Get StoreProducts with the matching name
+        return categorizeStoreProducts(matchingName, categoryName);
+    }
+
     public List<StoreProduct> getStoreProductsByNameWithAllergen(String storeID, String productName) {
         List<StoreProduct> unfilteredProducts = getStoreProductsByName(storeID, productName);
         List<StoreProduct> filteredProducts = new ArrayList<>();
@@ -80,6 +86,32 @@ public class AccessStoreProduct {
         }
 
         return filteredProducts;
+    }
+
+    // Get StoreProductByNameWithAllergen given a category
+    public List<StoreProduct> getStoreProductsByNameWithAllergen(String storeID, String productName, String categoryName) {
+        List<StoreProduct> matchingName = getStoreProductsByNameWithAllergen(storeID, productName);    // Get StoreProducts with the matching name
+        return categorizeStoreProducts(matchingName, categoryName);
+    }
+
+    // Given a list of StoreProduct, this method will search for a StoreProduct in the list that contains a Product with a category we want
+    private List<StoreProduct> categorizeStoreProducts(List<StoreProduct> storeProducts, String categoryName) {
+        List<Product> matchingCategory = accessProducts.searchProductsByCategory(categoryName); // Products with a matching category
+        List<StoreProduct> result = new ArrayList<>();
+
+        // For every StoreProduct in storeProducts, see if the StoreProduct's Product matches a Product in matchingCategory
+        for (int i = 0; i < storeProducts.size(); i++) {
+            boolean foundProduct = false;
+            StoreProduct curr = storeProducts.get(i);
+
+            for (int j = 0; j < matchingCategory.size() && !foundProduct; j++) {
+                if (curr.getProductName().equals(matchingCategory.get(j).getProductName())) {   // Compare product names
+                    result.add(curr);
+                }
+            }
+        }
+
+        return result;
     }
 
     public StoreProduct findCheapestStore(List<Product> productList,List<Integer> quant, List<Store> storeList){

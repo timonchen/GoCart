@@ -40,7 +40,7 @@ public class ProductPersistenceHSQLDB implements ProductPersistence {
 
         try (final Connection c = connection()) {
             final Statement st = c.createStatement();
-            final ResultSet rs = st.executeQuery("SELECT * FROM PRODUCTS WHERE HAS_ALLERGY = TRUE");
+            final ResultSet rs = st.executeQuery("SELECT * FROM PRODUCTS WHERE HAS_ALLERGY = FALSE");
             while (rs.next())
             {
                 final Product product = fromResultSet(rs);
