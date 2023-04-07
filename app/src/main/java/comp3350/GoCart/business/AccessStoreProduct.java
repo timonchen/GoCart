@@ -41,6 +41,9 @@ public class AccessStoreProduct {
         return Collections.unmodifiableList(storeProducts);
     }
 
+    /*
+    returns all products with matching name inside given store
+     */
     public List<StoreProduct> getStoreProductsByName(String storeID, String productName) {
         storeProducts = getStoresProducts(storeID);
         List<StoreProduct> matchingProducts = new ArrayList<>();
@@ -60,6 +63,10 @@ public class AccessStoreProduct {
         return matchingProducts;
     }
 
+
+    /*
+    returns all products that do not contain allergens inside given store
+     */
     public List<StoreProduct> getStoreProductsByNameWithAllergen(String storeID, String productName) {
         List<StoreProduct> unfilteredProducts = getStoreProductsByName(storeID, productName);
         List<StoreProduct> filteredProducts = new ArrayList<>();
@@ -83,6 +90,9 @@ public class AccessStoreProduct {
         return filteredProducts;
     }
 
+    /*
+    Calculates total price for each store and returns lowest value for given list of products
+     */
     public StoreProduct findCheapestStore(List<Product> productList,List<Integer> quant, List<Store> storeList){
         int currentCheapestIndex = 0;
         BigDecimal total;
@@ -96,18 +106,14 @@ public class AccessStoreProduct {
                 && productList.size() != 0 && storeList.size() != 0) {
             for (int i = 0; i < storeList.size(); i++) {
                 if (storeList.get(i) != null) {
-
                     total = calculateTotal(productList,quant, storeList.get(i));
                     if (currentCheapestTotal.equals(BigDecimal.ZERO)
                             && total.compareTo(BigDecimal.ZERO) > 0
                             ||total.compareTo(currentCheapestTotal) == -1 ){
-
                         currentCheapestIndex = i;
                         currentCheapestTotal = total;
-
                     }
                     if (!total.equals(BigDecimal.ZERO)) {
-
                         result = new StoreProduct(storeList.get(currentCheapestIndex), newProduct, currentCheapestTotal);
 
                     }

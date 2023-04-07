@@ -103,6 +103,8 @@ public class ProductsRecViewAdapter extends RecyclerView.Adapter<ProductsRecView
 
         }
 
+
+        //Adds product selected with quantity entered into shopping cart
         @Override
         public void onClick(View view){
             listener.onAdd(productName.getText().toString(),Integer.parseInt(cartQuantity.getText().toString()));
