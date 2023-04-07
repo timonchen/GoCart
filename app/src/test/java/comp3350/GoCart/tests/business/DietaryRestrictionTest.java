@@ -6,8 +6,8 @@ import org.junit.Test;
 import comp3350.GoCart.business.AccessProducts;
 import comp3350.GoCart.business.AccessUsers;
 import comp3350.GoCart.objects.Product;
-import comp3350.GoCart.persistence.stubs.ProductPersistenceStub;
-import comp3350.GoCart.persistence.stubs.UserPersistenceStub;
+import comp3350.GoCart.persistence.ProductPersistence;
+import comp3350.GoCart.persistence.UserPersistence;
 
 import java.math.BigDecimal;
 import java.util.List;

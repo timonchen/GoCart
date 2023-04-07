@@ -1,5 +1,6 @@
 package comp3350.GoCart.business;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -12,6 +13,7 @@ public class AccessProducts{
     private ProductPersistence productPersistence;
 
     private List<Product> products;
+    private List<String> categories;
 
 
     public AccessProducts(){
@@ -45,6 +47,17 @@ public class AccessProducts{
     public List<Product> searchProductsByCategory(String category) {
         products = productPersistence.searchProductsByCategory(category);
         return Collections.unmodifiableList(products);
+    }
+
+    public List<String> getAllCategories(){
+        products = productPersistence.getAllProducts();
+        categories = new ArrayList<>();
+        for(int i=0; i< products.size();i++){
+    if(!categories.contains(products.get(i).getProductCategory())){
+        categories.add(products.get(i).getProductCategory());
+    }
+        }
+        return categories;
     }
 
 }

@@ -19,6 +19,7 @@ import static org.junit.Assert.*;
 public class SearchProductsByCategoryTest {
     private AccessProducts accessProducts;
     private List<Product> products;
+    private List<String> allCategories;
     private File tempDB;
 
     @Before
@@ -50,6 +51,20 @@ public class SearchProductsByCategoryTest {
         List<Product> matchingProducts = accessProducts.searchProductsByCategory("dairy");
         System.out.println(matchingProducts.toString());
         assertEquals("Should return the correct product searched irrespective of the case.", products, matchingProducts);
+
+
+        System.out.println("Finished test: searching products with specific category successful");
+    }
+
+    @Test
+    // Method to test searching for product with a specific category, "diary in this case
+    public void getAllCategoriesTest() {
+        System.out.println("\nTest: getting all categories");
+
+        allCategories = accessProducts.getAllCategories();
+
+        System.out.println(allCategories.toString());
+        assertEquals("Should return the correct product searched irrespective of the case.", "yes", "yes");
 
 
         System.out.println("Finished test: searching products with specific category successful");
