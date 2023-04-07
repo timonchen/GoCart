@@ -42,9 +42,9 @@ public class CheapestStoreTest{
     private Product prod1,prod2;
     private List<Store> storeList;
     private Store store1,store2;
-    private StoreProduct sps1p1,sps1p2,sps2p1,sps2p2;
-    private List<StoreProduct> s1PL,s2PL;
-    private StoreProductPersistence spp;
+    private StoreProduct store1Product1,store1Product2,store2Product1,store2Product2;
+    private List<StoreProduct> store1ProductList,store2ProductList;
+    private StoreProductPersistence mockStoreProductPersistence;
 
     public CheapestStoreTest()
     {
@@ -62,31 +62,29 @@ public class CheapestStoreTest{
         prod1 = new Product("4521","Banana",false);
         prod2 = new Product("6849","Rye Bread",true);
 
-        sps1p1 = new StoreProduct(store1,prod1,new BigDecimal(1.00));
-        sps1p2 = new StoreProduct(store1,prod2,new BigDecimal(2.00));
+        store1Product1 = new StoreProduct(store1,prod1,new BigDecimal(1.00));
+        store1Product2 = new StoreProduct(store1,prod2,new BigDecimal(2.00));
 
-        sps2p1 = new StoreProduct(store2,prod1,new BigDecimal(1.10));
-        sps2p2 = new StoreProduct(store2,prod2,new BigDecimal(2.10));
+        store2Product1 = new StoreProduct(store2,prod1,new BigDecimal(1.10));
+        store2Product2 = new StoreProduct(store2,prod2,new BigDecimal(2.10));
 
-        s1PL = new ArrayList<>();
-        s1PL.add(sps1p1);
-        s1PL.add(sps1p2);
+        store1ProductList = new ArrayList<>();
+        store1ProductList.add(store1Product1);
+        store1ProductList.add(store1Product2);
 
-        s2PL = new ArrayList<>();
-        s2PL.add(sps2p1);
-        s2PL.add(sps2p2);
+        store2ProductList = new ArrayList<>();
+        store2ProductList.add(store2Product1);
+        store2ProductList.add(store2Product2);
 
         storeList = new ArrayList<>();
         storeList.add(store1);
         storeList.add(store2);
 
-        spp = mock(StoreProductPersistence.class);
-        accessStoreProduct = new AccessStoreProduct(spp);
+        mockStoreProductPersistence = mock(StoreProductPersistence.class);
+        accessStoreProduct = new AccessStoreProduct(mockStoreProductPersistence);
 
-        spp = mock(StoreProductPersistence.class);
-        accessStoreProduct = new AccessStoreProduct(spp);
-        when(spp.getStoreProducts("1")).thenReturn(s1PL);
-        when(spp.getStoreProducts("2")).thenReturn(s2PL);
+        when(mockStoreProductPersistence.getStoreProducts("1")).thenReturn(store1ProductList);
+        when(mockStoreProductPersistence.getStoreProducts("2")).thenReturn(store2ProductList);
 
         quant = new ArrayList<>();
         quant.add(1);
