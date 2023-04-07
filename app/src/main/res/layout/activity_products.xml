@@ -17,8 +17,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
-
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
@@ -34,6 +32,8 @@
                 android:layout_marginTop="-15dp"
                 android:padding="15dp"
                 android:background="@drawable/store_layout_bg">
+
+                <!-- Store information -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -54,6 +54,7 @@
                     android:layout_marginTop="5dp"
                     />
 
+                <!-- Search bar -->
                 <SearchView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -65,7 +66,7 @@
                     />
 
                 <!-- Divider -->
-            <View
+                <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:id="@+id/divider"
@@ -74,6 +75,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"/>
 
+                <!-- Allergen switch -->
                 <Switch
                 android:id="@+id/allergenSwitch"
                 android:layout_width="wrap_content"
@@ -82,13 +84,23 @@
                 android:text="Peanut-free"
                 />
 
-            <androidx.recyclerview.widget.RecyclerView
+                <Spinner
+                    android:id="@+id/categorySpinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/productsRecView"
-                    android:layout_below="@id/allergenSwitch"
-                    android:layout_centerHorizontal="true"
-                    android:overScrollMode="never"/>
+                    android:layout_below="@id/divider"
+                    android:layout_alignParentRight="true"
+
+                    />
+
+                <!-- Products -->
+                <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/productsRecView"
+                        android:layout_below="@id/allergenSwitch"
+                        android:layout_centerHorizontal="true"
+                        android:overScrollMode="never"/>
             </RelativeLayout>
 
 

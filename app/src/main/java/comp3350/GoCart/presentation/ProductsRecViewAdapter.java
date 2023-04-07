@@ -43,7 +43,6 @@ public class ProductsRecViewAdapter extends RecyclerView.Adapter<ProductsRecView
             }
         });
         return holder;
-
     }
 
     // Modify views (UI Element) here
