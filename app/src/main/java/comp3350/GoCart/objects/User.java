@@ -29,8 +29,6 @@ public class User implements Parcelable
         this.phone = phone;
         this.email = email;
         this.password = password;
-
-        System.out.println("    new user created: " + email);
     }
 
     protected User(Parcel in)
@@ -154,6 +152,11 @@ public class User implements Parcelable
     public String getPassword()
     {
         return password;
+    }
+
+    public void setUserID(int userID)
+    {
+        this.userID = userID;
     }
 
     public void updateName(String name)

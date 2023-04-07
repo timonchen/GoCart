@@ -24,6 +24,12 @@ public class AccessUsers
         users = null;
     }
 
+    public AccessUsers(final UserPersistence userPersistence)
+    {
+        this();
+        this.userPersistence = userPersistence;
+    }
+
 
     public void setLoggedInUser(User loggedInUser)
     {
@@ -35,9 +41,101 @@ public class AccessUsers
         return this.loggedInUser;
     }
 
-    public void addUser(User newUser)
+    public User addUser(String firstName, String lastName, String address, String city, String province, String zipCode, String phoneString, String email, String password, String confirmPassword)
     {
-        userPersistence.addUser(newUser);
+        User newUser = null;
+        boolean valid = true;
+        int phone = 0;
+
+        if (firstName.isEmpty())
+        {
+            valid = false;
+        }
+
+        if (lastName.isEmpty())
+        {
+            valid = false;
+        }
+
+        if (address.isEmpty())
+        {
+            valid = false;
+        }
+
+        if (city.isEmpty())
+        {
+            valid = false;
+        }
+
+        if (province.isEmpty())
+        {
+            valid = false;
+        }
+
+        if (zipCode.isEmpty())
+        {
+            valid = false;
+        }
+        else {
+            if (zipCode.length() != 6)
+            {
+                valid = false;
+            }
+        }
+
+        try {
+            phone = Integer.parseInt(phoneString);
+
+            if (phoneString.length() != 10)
+            {
+                valid = false;
+            }
+        }
+        catch (NumberFormatException e)
+        {
+            valid = false;
+        }
+
+        if (email.isEmpty())
+        {
+            valid = false;
+        }
+        else {
+            if (!email.contains("@") || !email.contains("."))
+            {
+                valid = false;
+            }
+        }
+
+        if (password.isEmpty())
+        {
+            valid = false;
+        }
+        else {
+            if (password.length() < 6)
+            {
+                valid = false;
+            }
+        }
+
+        if (confirmPassword.isEmpty())
+        {
+            valid = false;
+        }
+        else {
+            if (!confirmPassword.equals(password))
+            {
+                valid = false;
+            }
+        }
+
+        if (valid)
+        {
+            newUser = new User(0, firstName, lastName, address, city, province, zipCode, phone, email, password);
+            userPersistence.addUser(newUser);
+        }
+
+        return newUser;
     }
 
     public User getUser(String email, String password)
@@ -50,20 +148,6 @@ public class AccessUsers
     {
         userPersistence.updateUser(theUser);
     }
-//
-//    public void updateUserPhone(User user, int phone)
-//    {
-//        userPersistence.updateUserPhone(user, phone);
-//    }
-//
-//    public void updateUserEmail(User user, String newEmail)
-//    {
-//        userPersistence.updateUserEmail(user, newEmail);
-//    }
-//    public void updateUserPassword(final User user, final String newPassword)
-//    {
-//        userPersistence.updateUserPassword(user, newPassword);
-//    }
 
     public int getNumUsers()
     {

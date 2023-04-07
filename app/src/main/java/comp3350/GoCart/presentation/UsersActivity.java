@@ -77,7 +77,6 @@ public class UsersActivity extends Activity
 
         if (newUser != null)
         {
-            accessUsers.addUser(newUser);
             accessUsers.setLoggedInUser(newUser);
 
             loggedInUser = newUser;
@@ -164,133 +163,101 @@ public class UsersActivity extends Activity
         String province = null;
         String zipCode = null;
         int phone = 0;
+        String phoneString = null;
         String email = null;
         String password = null;
         String confirmPassword = null;
 
         EditText editFirstName = (EditText)findViewById(R.id.editFirstName);
-        if (!TextUtils.isEmpty(editFirstName.getText().toString())) {
-            firstName = editFirstName.getText().toString();
-        } else {
-            editFirstName.setError("First name cannot be empty");
-            valid = false;
-        }
-
         EditText editLastName = (EditText) findViewById(R.id.editLastName);
-        if (!TextUtils.isEmpty(editLastName.getText().toString()))
-        {
-            lastName = editLastName.getText().toString();
-        }
-        else {
-            editLastName.setError("Last name cannot be empty");
-            valid = false;
-        }
-
         EditText editAddress = (EditText) findViewById(R.id.editAddress);
-        if (!TextUtils.isEmpty(editAddress.getText().toString())) {
-            address = editAddress.getText().toString();
-        } else {
-            editAddress.setError("Address cannot be empty");
-            valid = false;
-        }
-
         EditText editCity = (EditText) findViewById(R.id.editCity);
-        if (!TextUtils.isEmpty(editCity.getText().toString())) {
-            city = editCity.getText().toString();
-        } else {
-            editCity.setError("City cannot be empty");
-            valid = false;
-        }
-
         EditText editProvince = (EditText)findViewById(R.id.editProvince);
-        if (!TextUtils.isEmpty(editProvince.getText().toString())) {
-            province = editProvince.getText().toString();
-        } else {
-            editProvince.setError("Province cannot be empty");
-            valid = false;
-        }
-
         EditText editZipCode = (EditText)findViewById(R.id.editZipCode);
-        if (!TextUtils.isEmpty(editZipCode.getText().toString())) {
-            if (editZipCode.getText().toString().length() == 6)
-            {
-                zipCode = editZipCode.getText().toString();
-            }
-            else {
-                editZipCode.setError("Zip Code must be of length 6");
-                valid = false;
-            }
-        } else {
-            editZipCode.setError("Zip Code cannot be empty");
-            valid = false;
-        }
-
         EditText editPhone = (EditText) findViewById(R.id.editPhone);
-        if (!TextUtils.isEmpty(editPhone.getText().toString())) {
-            try {
-                phone = Integer.parseInt(editPhone.getText().toString());
-                if (editPhone.getText().toString().length() != 10)
-                {
-                    phone = 0;
-                    valid = false;
-                    editPhone.setError("Phone must contain 10 digits.");
-                }
-            }
-            catch (NumberFormatException e)
-            {
-                editPhone.setError("Phone can only contain numbers.");
-            }
-        } else {
-            editPhone.setError("Phone cannot be empty");
-            valid = false;
-        }
-
         EditText editEmail = (EditText) findViewById(R.id.editEmail);
-        if (!TextUtils.isEmpty(editEmail.getText().toString())) {
-            email = editEmail.getText().toString();
-            if (!email.contains("@") || !email.contains("."))
-            {
-                email = null;
-                valid = false;
-                editEmail.setError("Not a valid email");
-            }
-        } else {
-            editEmail.setError("Email cannot be empty");
-            valid = false;
-        }
-
         EditText editPassword = (EditText) findViewById(R.id.editPassword);
-        if (!TextUtils.isEmpty(editPassword.getText().toString())) {
-            password = editPassword.getText().toString();
-            if (password.length() < 6)
-            {
-                password = null;
-                valid = false;
-                editPassword.setError("Password must contain at least 6 characters");
-            }
-        } else {
-            editPassword.setError("Password cannot be empty");
-            valid = false;
-        }
-
         EditText editConfirmPassword = (EditText) findViewById(R.id.editConfirmPassword);
-        if (!TextUtils.isEmpty(editConfirmPassword.getText().toString())) {
-            confirmPassword = editConfirmPassword.getText().toString();
 
-            if (password != null && !password.equals(confirmPassword))
-            {
-                confirmPassword = null;
-                valid = false;
-                editConfirmPassword.setError("Password does not match");
-            }
-        } else {
-            editConfirmPassword.setError("Cannot be empty");
-            valid = false;
-        }
+        firstName = editFirstName.getText().toString();
+        lastName = editLastName.getText().toString();
+        address = editAddress.getText().toString();
+        city = editCity.getText().toString();
+        province = editProvince.getText().toString();
+        zipCode = editZipCode.getText().toString();
+        phoneString = editPhone.getText().toString();
+        email = editEmail.getText().toString();
+        password = editPassword.getText().toString();
+        confirmPassword = editConfirmPassword.getText().toString();
 
-        if (valid)
+        newUser = accessUsers.addUser(firstName, lastName, address, city, province, zipCode, phoneString, email, password, confirmPassword);
+
+        if (newUser == null)
         {
-            newUser = new User(accessUsers.getNumUsers() + 1, firstName, lastName, address, city, province, zipCode, phone, email, password);
+            if (firstName.isEmpty()) {
+                editFirstName.setError("First name cannot be empty");
+            }
+
+            if (lastName.isEmpty()) {
+                editLastName.setError("Last name cannot be empty");
+            }
+
+            if (address.isEmpty()) {
+                editAddress.setError("Address cannot be empty");
+            }
+
+            if (city.isEmpty()) {
+                editCity.setError("City cannot be empty");
+            }
+
+            if (province.isEmpty()) {
+                editProvince.setError("Province cannot be empty");
+            }
+
+            if (!zipCode.isEmpty()) {
+                if (zipCode.length() != 6) {
+                    editZipCode.setError("Zip Code must be of length 6");
+                }
+            } else {
+                editZipCode.setError("Zip Code cannot be empty");
+            }
+
+            if (!phoneString.isEmpty()) {
+                try {
+                    phone = Integer.parseInt(editPhone.getText().toString());
+                    if (phoneString.length() != 10) {
+                        editPhone.setError("Phone must contain 10 digits.");
+                    }
+                } catch (NumberFormatException e) {
+                    editPhone.setError("Phone can only contain numbers.");
+                }
+            } else {
+                editPhone.setError("Phone cannot be empty");
+            }
+
+            if (!email.isEmpty()) {
+                if (!email.contains("@") || !email.contains(".")) {
+                    editEmail.setError("Not a valid email");
+                }
+            } else {
+                editEmail.setError("Email cannot be empty");
+            }
+
+            if (!password.isEmpty()) {
+                if (password.length() < 6) {
+                    editPassword.setError("Password must contain at least 6 characters");
+                }
+            } else {
+                editPassword.setError("Password cannot be empty");
+            }
+
+            if (!confirmPassword.isEmpty()) {
+                if (!password.equals(confirmPassword)) {
+                    editConfirmPassword.setError("Password does not match");
+                }
+            } else {
+                editConfirmPassword.setError("Cannot be empty");
+            }
         }
 
         return newUser;
