@@ -22,9 +22,7 @@ public class AccessUsersIT
         final UserPersistence persistence = new UserPersistenceHSQLDB(this.tempDB.getAbsolutePath().replace(".script", ""));
         this.accessUsers = new AccessUsers(persistence);
     }
-
-
-
+    
     @After
     public void tearDown() {
         // reset DB

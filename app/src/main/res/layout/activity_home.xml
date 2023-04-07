@@ -30,11 +30,11 @@
         android:id="@+id/discoverDealsButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:layout_below="@id/findStoreButton"
+        android:layout_centerInParent="true"
         android:layout_marginTop="10dp"
-        android:text="Discover Deals"
-        android:onClick="buttonDiscoverDealsOnClick"/>
+        android:onClick="buttonDiscoverDealsOnClick"
+        android:text="Discover Deals" />
 
     <Button
         android:id="@+id/loginButton"
@@ -59,6 +59,19 @@
         android:onClick="buttonUserAccountOnClick"
         android:visibility="gone"
         />
+
+    <Button
+        android:id="@+id/loginButtonOnStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="10dp"
+        android:onClick="buttonLoginPageOnClick"
+        android:text="Login/Sign Up" />
 
 
 </RelativeLayout>
