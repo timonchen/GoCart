@@ -40,6 +40,9 @@ public class AccessStoreProduct {
         return Collections.unmodifiableList(storeProducts);
     }
 
+    /*
+    returns all products with matching name inside given store
+     */
     public List<StoreProduct> getStoreProductsByName(String storeID, String productName) {
         storeProducts = getStoresProducts(storeID);
         List<StoreProduct> matchingProducts = new ArrayList<>();
@@ -127,18 +130,14 @@ public class AccessStoreProduct {
                 && productList.size() != 0 && storeList.size() != 0) {
             for (int i = 0; i < storeList.size(); i++) {
                 if (storeList.get(i) != null) {
-
                     total = calculateTotal(productList,quant, storeList.get(i));
                     if (currentCheapestTotal.equals(BigDecimal.ZERO)
                             && total.compareTo(BigDecimal.ZERO) > 0
                             ||total.compareTo(currentCheapestTotal) == -1 ){
-
                         currentCheapestIndex = i;
                         currentCheapestTotal = total;
-
                     }
                     if (!total.equals(BigDecimal.ZERO)) {
-
                         result = new StoreProduct(storeList.get(currentCheapestIndex), newProduct, currentCheapestTotal);
 
                     }
