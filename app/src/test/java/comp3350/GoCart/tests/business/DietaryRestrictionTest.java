@@ -9,6 +9,8 @@ import comp3350.GoCart.objects.Product;
 import comp3350.GoCart.persistence.ProductPersistence;
 import comp3350.GoCart.persistence.UserPersistence;
 
+import static org.mockito.Mockito.*;
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.ArrayList;
@@ -17,16 +19,27 @@ import static org.junit.Assert.*;
 
 public class DietaryRestrictionTest extends TestCase {
     boolean isEmpty;
-    private List<Product> list;
     private AccessProducts accessProducts;
+    private ProductPersistence productPersistence;
 
     public DietaryRestrictionTest() {
         super();
-        accessProducts = new AccessProducts();
+        productPersistence = mock(ProductPersistence.class);
+        accessProducts = new AccessProducts(productPersistence);
     }
 
     @Test
     public void testEmptyList() {
+
+        //add some products to the list
+        List<Product> prods = new ArrayList<>();
+        Product p1 = new Product("1", "Banana", true, "produce");
+        Product p2 = new Product("2", "Rye Bread", true, "bakery");
+        prods.add(p1);
+        prods.add(p2);
+
+        //mock our productPersistent calls
+        when(productPersistence.getDietaryRestrictedProducts()).thenReturn(prods);
         List<Product> testList = accessProducts.getDietaryProducts();
 
         assertFalse("Should not be empty", testList.isEmpty());
@@ -37,8 +50,8 @@ public class DietaryRestrictionTest extends TestCase {
     @Test
     public void testDietaryRestriction() {
         System.out.println("\nchecking dietary restriction in a product");
-        Product p1 = new Product("1", "Banana", false);
-        Product p2 = (new Product("2", "Rye Bread", true));
+        Product p1 = new Product("1", "Banana", false, "produce");
+        Product p2 = (new Product("2", "Rye Bread", true, "bakery"));
         assertFalse("The product should have peanut allergy", p1.hasPeanutAllergy());
         assertTrue("The product should not have peanut allergy", p2.hasPeanutAllergy());
         System.out.println("Finished testDietaryRestriction");
@@ -48,12 +61,13 @@ public class DietaryRestrictionTest extends TestCase {
     @Test
     public void testShowDietaryProducts() {
         System.out.println("\nGet dietaryRestricted products");
-        list = new ArrayList<>();
-        list.add(new Product( "6849","Rye Bread", true));
-        list.add(new Product( "6917","Whole Wheat Bread", true));
-        list.add(new Product( "3818","Lucky Charms",true));
-        list.add(new Product( "1958","12 cookies", true));
+        List<Product> list = new ArrayList<>();
+        list.add(new Product( "6849","Rye Bread", true, "bakery"));
+        list.add(new Product( "6917","Whole Wheat Bread", true, "bakery"));
+        list.add(new Product( "3818","Lucky Charms",true, "bakery"));
+        list.add(new Product( "1958","12 cookies", true, "bakery"));
 
+        when(productPersistence.getDietaryRestrictedProducts()).thenReturn(list);
         List<Product> testList = accessProducts.getDietaryProducts();
         assertTrue("Should return a list of the same size", list.size() == testList.size());
 
