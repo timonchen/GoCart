@@ -50,6 +50,27 @@ public class MyViewAction {
         };
     }
 
+    public static ViewAction checkChildTextViewWithId(final int id, final String expectedText) {
+        return new ViewAction() {
+            @Override
+            public Matcher<View> getConstraints() {
+                return null;
+            }
+
+            @Override
+            public String getDescription() {
+                return "Check a child TextView with the specified id and compare its text.";
+            }
+
+            @Override
+            public void perform(UiController uiController, View view) {
+                TextView v = view.findViewById(id);
+                if (!expectedText.equals(v.getText().toString())) {
+                    throw new AssertionError("Expected text: " + expectedText + ", but was: " + v.getText());
+                }
+            }
+        };
+    }
 
 
 
