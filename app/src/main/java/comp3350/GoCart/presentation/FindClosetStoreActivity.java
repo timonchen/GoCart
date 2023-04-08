@@ -2,9 +2,7 @@ package comp3350.GoCart.presentation;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;

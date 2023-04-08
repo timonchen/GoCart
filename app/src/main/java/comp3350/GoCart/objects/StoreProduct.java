@@ -1,6 +1,5 @@
 package comp3350.GoCart.objects;
 
-import androidx.annotation.NonNull;
 
 import java.math.BigDecimal;
 
@@ -17,12 +16,6 @@ public class StoreProduct {
 
     public String getStoreId(){ return (store.getStoreID() ); }
     public Store getStore(){ return store;}
-
-    /*
-    public String getStoreName(){ return (store.getStoreName() ); }
-    public String getStoreAddress(){ return (store.getStoreAddress()); }
-    public double getStoreDistance(){ return (store.getDistToUser()); }
-    */
 
     public String getProductID(){ return (product.getProductID()); }
     public String getProductName() { return product.getProductName();}

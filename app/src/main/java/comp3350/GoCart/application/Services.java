@@ -1,7 +1,5 @@
 package comp3350.GoCart.application;
 
-import comp3350.GoCart.R;
-import comp3350.GoCart.objects.User;
 import comp3350.GoCart.persistence.OrderLinePersistence;
 import comp3350.GoCart.persistence.OrderPersistence;
 import comp3350.GoCart.persistence.StorePersistence;

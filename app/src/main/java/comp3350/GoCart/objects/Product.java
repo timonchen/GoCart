@@ -1,6 +1,5 @@
 package comp3350.GoCart.objects;
 
-import androidx.annotation.NonNull;
 
 import java.util.Objects;
 
@@ -47,7 +46,7 @@ public class Product {
         return result;
     }
 
-    @NonNull
+
     public String toString(){
         return "Product: " + productName + " Peanut Allergy:" +hasPeanutAllergy() + " Category:" + category;
     }

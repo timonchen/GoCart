@@ -7,16 +7,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
+
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -30,7 +28,6 @@ import comp3350.GoCart.business.AccessStoreProduct;
 import comp3350.GoCart.business.ShoppingCart;
 import comp3350.GoCart.objects.Store;
 import comp3350.GoCart.objects.StoreProduct;
-import comp3350.GoCart.persistence.ProductPersistence;
 
 public class ProductsActivity extends Activity {
     final String DEFAULT_CATEGORY = "All";  // Category when no category is selected

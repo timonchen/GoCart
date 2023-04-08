@@ -62,7 +62,7 @@ public class AccessStoreProductsIT {
     @Test
     public void testCalculateTotal(){
         final Store store = new Store("1");
-        final Product p1 = new Product("4521","Banana",false);
+        final Product p1 = new Product("4521","Banana",false,"produce");
         List<Integer> quant = new ArrayList<>();
         List<Product> products = new ArrayList<>();
         quant.add(1);
