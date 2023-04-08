@@ -22,7 +22,7 @@ public class DietaryRestrictionTest extends TestCase {
 
     public DietaryRestrictionTest() {
         super();
-        accessProducts = new AccessProducts(new ProductPersistenceStub());
+        accessProducts = new AccessProducts();
     }
 
     @Test

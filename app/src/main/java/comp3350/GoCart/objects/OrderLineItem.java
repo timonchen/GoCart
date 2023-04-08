@@ -3,22 +3,22 @@ package comp3350.GoCart.objects;
 import java.math.BigDecimal;
 
 public class OrderLineItem {
-    private int orderID;
-    private int productID;
+    private Order order;
+    private Product product;
     private BigDecimal price;
 
-    public OrderLineItem(int orderID, int productID, BigDecimal price) {
-        this.orderID = orderID;
-        this.productID = productID;
+    public OrderLineItem(final Order order, final Product product, BigDecimal price) {
+        this.order = order;
+        this.product = product;
         this.price = price;
     }
 
-    public int getOrderID() {
-        return orderID;
+    public String getOrderID() {
+        return order.getOrderID();
     }
 
-    public int getProductID() {
-        return productID;
+    public String getProductID() {
+        return product.getProductID();
     }
 
     public BigDecimal getPrice() {
@@ -28,7 +28,7 @@ public class OrderLineItem {
     @Override
     public boolean equals(Object other) {
         if(other instanceof OrderLineItem) {
-            return orderID == ((OrderLineItem) other).getOrderID() && productID == ((OrderLineItem) other).getProductID();
+            return order.getOrderID().equals(((OrderLineItem) other).getOrderID()) && getProductID().equals(((OrderLineItem) other).getProductID());
         }
 
         return false;

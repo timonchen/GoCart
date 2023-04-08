@@ -1,17 +1,18 @@
 package comp3350.GoCart.objects;
 
-import androidx.annotation.NonNull;
 
 import java.util.Objects;
 
 public class Product {
 
     private String productID;
-    private final String productName;
-    private final String category;
+    private String productName;
+    private String category;
 
 
-    private  final boolean peanutAllergy;
+    private  boolean peanutAllergy;
+
+    private Product() {}
     public Product(final String newProductID, final String newProductName,boolean peanutAllergy, final String category){
         productID = newProductID;
         productName = newProductName;
@@ -47,8 +48,37 @@ public class Product {
         return result;
     }
 
-    @NonNull
     public String toString(){
         return "Product: " + productName + " Peanut Allergy:" +hasPeanutAllergy() + " Category:" + category;
+    }
+
+    public static class ProductBuilder {
+        private Product product;
+
+        public ProductBuilder() {
+            this.product = new Product();
+        }
+
+        public ProductBuilder productID(String productID) {
+            this.product.productID = productID;
+            return this;
+        }
+        public ProductBuilder productName(String productName) {
+            this.product.productName = productName;
+            return this;
+        }
+        public ProductBuilder category(String category) {
+            this.product.category = category;
+            return this;
+        }
+
+        public ProductBuilder peanutAllergy(boolean peanutAllergy) {
+            this.product.peanutAllergy = peanutAllergy;
+            return this;
+        }
+
+        public Product build() {
+            return product;
+        }
     }
 }

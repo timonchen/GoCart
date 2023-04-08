@@ -9,12 +9,14 @@ import androidx.annotation.NonNull;
 public class Store implements Parcelable {
     
 
-    private final String storeID;
-    private final String storeName;
-    private final String storeAddress; // zones
+    private String storeID;
+    private String storeName;
+    private String storeAddress; // zones
     private double distToUser;
 
 
+
+    private Store() {}
     public Store(final String newStoreID , final String newStoreName, final String newStoreAddress){
         storeAddress = newStoreAddress;
         storeName = newStoreName;
@@ -96,5 +98,38 @@ public class Store implements Parcelable {
 
     public double compareTo(@NonNull Store other) {
         return distToUser - other.distToUser;
+    }
+
+    //This is the storeBuilder class that is used to build the store
+    public static class StoreBuilder {
+        private Store store;
+
+        public StoreBuilder() {
+            this.store = new Store();
+        }
+
+        public StoreBuilder storeID(String storeID) {
+            this.store.storeID = storeID;
+            return this;
+        }
+
+        public StoreBuilder storeName(String storeName) {
+            this.store.storeName = storeName;
+            return this;
+        }
+
+        public StoreBuilder storeAddress(String storeAddress) {
+            this.store.storeAddress = storeAddress;
+            return this;
+        }
+
+        public StoreBuilder distToUser(double distToUser) {
+            this.store.distToUser = distToUser;
+            return this;
+        }
+
+        public Store build() {
+            return this.store;
+        }
     }
 }
