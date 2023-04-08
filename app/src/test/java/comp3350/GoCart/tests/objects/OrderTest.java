@@ -1,8 +1,11 @@
-package comp3350.GoCart.tests.objects;
+package comp3350.GoCart.tests;
 
 import org.junit.Test;
 
 import comp3350.GoCart.objects.Order;
+import comp3350.GoCart.objects.Store;
+import comp3350.GoCart.objects.User;
+
 import static org.junit.Assert.*;
 
 public class OrderTest {
@@ -14,7 +17,7 @@ public class OrderTest {
         System.out.println("Starting testNullOrder");
         Order order;
 
-        order = new Order(1, 1, 3);
+        order = new Order("1", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("3").build());
         assertNotNull("Order should not be null", order);
 
         System.out.println("Finished testNullOrder");
@@ -26,10 +29,10 @@ public class OrderTest {
         System.out.println("Starting testGetters");
         Order order;
 
-        order = new Order(1, 1, 3);
-        assertTrue("OID should be equal", order.getOrderID() == 1);
-        assertTrue("CID should be equal", order.getCustomerID() == 1);
-        assertTrue("SID should be equal", order.getStoreID() == 3);
+        order = new Order("1", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("3").build());
+        assertEquals("OID should be equal", order.getOrderID(), "1");
+        assertEquals("CID should be equal", order.getCustomerID(), 1);
+        assertEquals("SID should be equal", order.getStoreID(), "3");
 
         System.out.println("Finished testGetters");
     }
@@ -40,8 +43,8 @@ public class OrderTest {
         Order order1;
         Order order2;
 
-        order1 = new Order(1, 1, 3);
-        order2 = new Order(1, 1, 3);
+        order1 = new Order("1", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("3").build());
+        order2 = new Order("1", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("3").build());
         assertTrue("Orders should be equal", order1.equals(order2));
 
         System.out.println("Finished testEquals");
