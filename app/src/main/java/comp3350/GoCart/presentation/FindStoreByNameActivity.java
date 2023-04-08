@@ -77,7 +77,7 @@ public class FindStoreByNameActivity extends Activity implements StoresRecViewAd
         Store storeClicked = adapter.getStores().get(position);
 
         Intent intent = new Intent(this, ProductsActivity.class);   // Switch from this activity ProductsActivity
-        intent.putExtra("selected_store", storeClicked);    // Send store data to ProductsActivity
+        intent.putExtra("selectedStoreID", storeClicked.getStoreID());    // Send storeID to ProductsActivity so that it can find it
         finish();
 
         startActivity(intent);
