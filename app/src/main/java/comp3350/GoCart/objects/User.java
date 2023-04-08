@@ -9,16 +9,17 @@ public class User implements Parcelable
     private int userID;
     private String firstName;
     private String lastName;
-    private final String address;
-    private final String city;
-    private final String province;
-    private final String zipCode;
+    private String address;
+    private String city;
+    private String province;
+    private String zipCode;
     private int phone;
     private String email;
     private String password;
 
-    public User(int userID, final String firstName, final String lastName, final String address, final String city, final String province, final String zipCode, final int phone, final String email, final String password)
-    {
+
+    private User() {}
+    public User(int userID, final String firstName, final String lastName, final String address, final String city, final String province, final String zipCode, final int phone, final String email, final String password) {
         this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -193,5 +194,66 @@ public class User implements Parcelable
     {
         return "Id: " + userID + "First Name: " + firstName + " Last Name: " + lastName + " Address: " + address + " City: " + city + " Province: " + province + " ZIP Code: " + zipCode +
                 " Phone: " + phone + " Email: " + email + " Password: " + password;
+    }
+
+    public static class UserBuilder {
+        private User user;
+
+        public UserBuilder() {
+            this.user = new User();
+        }
+
+        public UserBuilder userID(int userID) {
+            this.user.userID = userID;
+            return this;
+        }
+
+        public UserBuilder firstName(String firstName) {
+            this.user.firstName = firstName;
+            return this;
+        }
+
+        public UserBuilder lastName(String lastName) {
+            this.user.lastName = lastName;
+            return this;
+        }
+
+        public UserBuilder address(String address) {
+            this.user.address = address;
+            return this;
+        }
+
+        public UserBuilder city(String city) {
+            this.user.city = city;
+            return this;
+        }
+
+        public UserBuilder province(String province) {
+            this.user.province = province;
+            return this;
+        }
+
+        public UserBuilder zipCode(String zipCode) {
+            this.user.zipCode = zipCode;
+            return this;
+        }
+        public UserBuilder phone(int phone) {
+            this.user.phone = phone;
+            return this;
+        }
+
+        public UserBuilder email(String email) {
+            this.user.email = email;
+            return this;
+        }
+
+        public UserBuilder password(String password) {
+            this.user.password = password;
+            return this;
+        }
+
+        public User build(){
+            return this.user;
+        }
     }
 }

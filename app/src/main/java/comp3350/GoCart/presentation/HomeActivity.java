@@ -28,7 +28,7 @@ public class HomeActivity extends Activity {
 
     private User loggedInUser;
     private boolean isLoggedIn;
-    private Button loginButton;
+
     private Button userAccountButton;
 
     @Override
@@ -42,8 +42,6 @@ public class HomeActivity extends Activity {
         copyDatabaseToDevice();
         this.loggedInUser = null;
         isLoggedIn = false;
-        loginButton = (Button) findViewById(R.id.loginButton);
-        loginButton.setVisibility(View.GONE);
         userAccountButton = (Button) findViewById(R.id.userAccountButton);
     }
 
@@ -143,38 +141,24 @@ public class HomeActivity extends Activity {
         if (requestCode == REQUEST_LOGIN && resultCode == RESULT_OK) {
             isLoggedIn = data.getBooleanExtra("loggedInStatus", false);  // defaultValue (false) is used if no result with key "loggedInStatus" was returned
             loggedInUser = data.getParcelableExtra(EXTRA_USER);
+            Button loginButtonOnStart = (Button) findViewById(R.id.loginButtonOnStart);
+            Button userAccountButton = (Button) findViewById(R.id.userAccountButton);
+            Button discoverDealsButton = (Button) findViewById(R.id.discoverDealsButton);
+            Button findStoreButton = (Button) findViewById(R.id.findStoreButton);
             if (loggedInUser == null)
             {
-                isLoggedIn = false;
+
                 loggedInUser = null;
-
-                Button loginButtonOnStart = (Button) findViewById(R.id.loginButtonOnStart);
-                Button userAccountButton = (Button) findViewById(R.id.userAccountButton);
-
                 loginButtonOnStart.setVisibility(View.VISIBLE);
                 userAccountButton.setVisibility(View.GONE);
-
-                loginButton.setVisibility(View.GONE);
-
-                Button findStoreButton = (Button) findViewById(R.id.findStoreButton);
                 findStoreButton.setVisibility(View.GONE);
-                Button discoverDealsButton = (Button) findViewById(R.id.discoverDealsButton);
                 discoverDealsButton.setVisibility(View.GONE);
-
+                isLoggedIn = false;
             }
             else {
-                Button loginButtonOnStart = (Button) findViewById(R.id.loginButtonOnStart);
                 loginButtonOnStart.setVisibility(View.GONE);
-                loginButton.setVisibility(View.GONE);
-                Button findStoreButton = (Button) findViewById(R.id.findStoreButton);
                 findStoreButton.setVisibility(View.VISIBLE);
-                Button discoverDealsButton = (Button) findViewById(R.id.discoverDealsButton);
                 discoverDealsButton.setVisibility(View.VISIBLE);
-
-                Button loginButton = (Button) findViewById(R.id.loginButton);
-                Button userAccountButton = (Button) findViewById(R.id.userAccountButton);
-
-                loginButton.setVisibility(View.GONE);
                 userAccountButton.setVisibility(View.VISIBLE);
                 userAccountButton.setText(loggedInUser.getInitials());
                 isLoggedIn = true;
@@ -185,7 +169,7 @@ public class HomeActivity extends Activity {
 
     private void updateActivity() {
         if (isLoggedIn) {
-            loginButton.setVisibility(View.GONE);   // Hide login button
+
             userAccountButton.setVisibility(View.VISIBLE);  // Display user button
 
             // Inform user of the update
@@ -197,7 +181,7 @@ public class HomeActivity extends Activity {
             alertDialog.show();
         }
         else {
-            loginButton.setVisibility(View.GONE);
+
             userAccountButton.setVisibility(View.GONE);
 
             // Inform user of the update

@@ -2,9 +2,7 @@ package comp3350.GoCart.presentation;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -77,7 +75,7 @@ public class FindClosetStoreActivity extends Activity implements ClosestStoresRe
         Store storeClicked = adapter.getStores().get(position);
 
         Intent intent = new Intent(this, ProductsActivity.class);   // Switch from this activity ProductsActivity
-        intent.putExtra("selected_store", storeClicked);    // Send store data to ProductsActivity
+        intent.putExtra("selectedStoreID", storeClicked.getStoreID());    // Send storeID to ProductsActivity so that it can find it
         finish();
 
         startActivity(intent);

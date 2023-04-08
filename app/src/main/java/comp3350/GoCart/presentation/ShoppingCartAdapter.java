@@ -1,25 +1,21 @@
 package comp3350.GoCart.presentation;
 
 import android.content.Context;
-import android.text.Editable;
-import android.text.TextWatcher;
+
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.view.View;
-
 import androidx.annotation.NonNull;
-import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.math.BigDecimal;
+
 import java.util.List;
 
 import comp3350.GoCart.business.AccessProducts;
 import comp3350.GoCart.business.AccessStoreProduct;
-import comp3350.GoCart.business.AccessStores;
 import comp3350.GoCart.business.ShoppingCart;
 import comp3350.GoCart.objects.Product;
 import comp3350.GoCart.R;
@@ -45,6 +41,8 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ShoppingCart cart = ShoppingCart.getInstance();
         View v = LayoutInflater.from(context).inflate(R.layout.cart_list_item,parent,false);
+
+        //Click listener that for each individual product, adds product to cart when clicked
         ViewHolder holder = new ViewHolder(v, new clickListener() {
             @Override
             public void clicked(Product p, int quant) {
@@ -54,12 +52,11 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         return  holder;
     }
 
-    // Modify views here
+    // sets name and price for each product card
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.productname.setText(products.get(position).getProductName());
         holder.productQuantity.setText(quantites.get(position).toString());
-
     }
 
     @Override
@@ -117,11 +114,6 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             editPrice.setText(ShoppingCart.getInstance().calculateTotal(accessStoreProduct).toString());
             notifyDataSetChanged();
         }
-
-
-
-
-
 
     }
 

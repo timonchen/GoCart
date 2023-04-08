@@ -37,17 +37,6 @@
         android:text="Discover Deals" />
 
     <Button
-        android:id="@+id/loginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:text="Login"
-        android:onClick="buttonLoginPageOnClick" />
-
-    <Button
         android:id="@+id/userAccountButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

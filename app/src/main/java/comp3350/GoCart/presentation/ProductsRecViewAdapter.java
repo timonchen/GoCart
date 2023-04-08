@@ -17,7 +17,6 @@ import java.util.ArrayList;
 
 import comp3350.GoCart.business.AccessProducts;
 import comp3350.GoCart.business.ShoppingCart;
-import comp3350.GoCart.objects.Product;
 import comp3350.GoCart.R;
 import comp3350.GoCart.objects.StoreProduct;
 

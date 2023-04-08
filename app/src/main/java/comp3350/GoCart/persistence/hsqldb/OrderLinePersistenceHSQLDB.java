@@ -9,7 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import comp3350.GoCart.objects.Order;
 import comp3350.GoCart.objects.OrderLineItem;
+import comp3350.GoCart.objects.Product;
 import comp3350.GoCart.persistence.OrderLinePersistence;
 
 public class OrderLinePersistenceHSQLDB implements OrderLinePersistence {
@@ -24,18 +26,18 @@ public class OrderLinePersistenceHSQLDB implements OrderLinePersistence {
     }
 
     private OrderLineItem fromResultSet(final ResultSet rs) throws SQLException {
-        final int orderID = rs.getInt("OID");
-        final int productID = rs.getInt("PID");
+        final String orderID = String.valueOf(rs.getInt("OID"));
+        final String productID = String.valueOf(rs.getInt("PID"));
         final BigDecimal price = rs.getBigDecimal("PRICE");
 
-        return new OrderLineItem(orderID, productID, price);
+        return new OrderLineItem(new Order.OrderBuilder().orderID(orderID).build(), new Product.ProductBuilder().productID(productID).build(), price);
     }
     @Override
     public OrderLineItem insertOrderLine(OrderLineItem toInsert) {
         try(Connection conn = connection()) {
             PreparedStatement statement = conn.prepareStatement("INSERT INTO ORDERLINEITEMS VALUES(?, ?, ?)");
-            statement.setInt(1, toInsert.getOrderID());
-            statement.setInt(2, toInsert.getProductID());
+            statement.setInt(1, Integer.parseInt(toInsert.getOrderID()));
+            statement.setInt(2, Integer.parseInt(toInsert.getProductID()));
             statement.setBigDecimal(3, toInsert.getPrice());
             return toInsert;
         } catch (SQLException e) {
@@ -55,7 +57,7 @@ public class OrderLinePersistenceHSQLDB implements OrderLinePersistence {
                 return fromResultSet(set);
             }
 
-            return new OrderLineItem(-1, -1, new BigDecimal(-1));
+            return new OrderLineItem(new Order.OrderBuilder().orderID("-1").build(), new Product.ProductBuilder().productID("-1").build(), new BigDecimal(-1));
         } catch (SQLException e) {
             throw new PersistenceException(e);
         }

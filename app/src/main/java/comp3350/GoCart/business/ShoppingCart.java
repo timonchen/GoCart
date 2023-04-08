@@ -1,12 +1,10 @@
 package comp3350.GoCart.business;
 
 
-import android.content.Intent;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 import comp3350.GoCart.objects.Product;
@@ -37,11 +35,11 @@ public class ShoppingCart {
     public BigDecimal calculateTotal(AccessStoreProduct ap){
         return ap.calculateTotal(products,quantity,store);
     }
+
     /*
     Adds a new product to shopping cart list with given value, if product already exists in list, increment
     the quantity with given value
      */
-
     public void addProduct(Product newProd, Integer newQuantity){
         //cartList.put(newProd, newQuantity);
         if ( products.contains(newProd)) {

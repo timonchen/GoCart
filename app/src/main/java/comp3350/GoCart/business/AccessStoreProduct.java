@@ -2,7 +2,6 @@ package comp3350.GoCart.business;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.security.ProtectionDomain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,7 +12,6 @@ import comp3350.GoCart.objects.EmptyStore;
 import comp3350.GoCart.objects.Product;
 import comp3350.GoCart.objects.Store;
 import comp3350.GoCart.objects.StoreProduct;
-import comp3350.GoCart.persistence.StorePersistence;
 import comp3350.GoCart.persistence.StoreProductPersistence;
 
 public class AccessStoreProduct {
@@ -117,6 +115,7 @@ public class AccessStoreProduct {
         return result;
     }
 
+    //calls findCheapestStore() to calculate price for each store given, and returns cheapest store
     public StoreProduct findCheapestStore(List<Product> productList,List<Integer> quant, List<Store> storeList){
         int currentCheapestIndex = 0;
         BigDecimal total;
