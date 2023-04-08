@@ -1,15 +1,13 @@
 package comp3350.GoCart.presentation;
 
 import comp3350.GoCart.R;
-import comp3350.GoCart.application.Main;
+
 import android.app.Activity;
 import android.content.Context;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -19,8 +17,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 
-
-import comp3350.GoCart.R;
+import comp3350.GoCart.application.Services;
 import comp3350.GoCart.objects.User;
 
 public class HomeActivity extends Activity {
@@ -38,12 +35,16 @@ public class HomeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        Button findStoreButton = (Button) findViewById(R.id.findStoreButton);
+        findStoreButton.setVisibility(View.GONE);
+        Button discoverDealsButton = (Button) findViewById(R.id.discoverDealsButton);
+        discoverDealsButton.setVisibility(View.GONE);
         copyDatabaseToDevice();
         this.loggedInUser = null;
         isLoggedIn = false;
-        loginButton = findViewById(R.id.loginButton);
-        userAccountButton = findViewById(R.id.userAccountButton);
-        System.out.println("here1");
+        loginButton = (Button) findViewById(R.id.loginButton);
+        loginButton.setVisibility(View.GONE);
+        userAccountButton = (Button) findViewById(R.id.userAccountButton);
     }
 
     @Override
@@ -51,9 +52,16 @@ public class HomeActivity extends Activity {
         super.onDestroy();
     }
 
-    public void buttonFindStoreOnClick(View v){
+    // Executed when "Find Store" button is clicked
+    public void buttonFindStoreOnClick(View v) {
         Intent storesIntent = new Intent(HomeActivity.this, FindStoreActivity.class);
         HomeActivity.this.startActivity(storesIntent);
+    }
+
+    // Executed when "Discover Deals" button is clicked
+    public void buttonDiscoverDealsOnClick(View v) {
+        Intent dealsIntent = new Intent(HomeActivity.this, DealsActivity.class);
+        HomeActivity.this.startActivity(dealsIntent);
     }
 
     private void copyDatabaseToDevice() {
@@ -75,7 +83,7 @@ public class HomeActivity extends Activity {
 
             copyAssetsToDirectory(assetNames, dataDirectory);
 
-            Main.setDBPathName(dataDirectory.toString() + "/" + Main.getDBPathName());
+            Services.setDBPathName(dataDirectory.toString() + "/" + Services.getDBPathName());
 
         } catch (final IOException ioe) {
             Messages.warning(this, "Unable to access application data: " + ioe.getMessage());
@@ -113,12 +121,9 @@ public class HomeActivity extends Activity {
     }
 
     public void buttonLoginPageOnClick(View v) {
-        System.out.println("here4");
         Intent usersIntent = new Intent(HomeActivity.this, UsersActivity.class);
         usersIntent.putExtra(UsersActivity.EXTRA_PAGE_TYPE, UsersActivity.PAGE_TYPE_LOGIN);
         HomeActivity.this.startActivityForResult(usersIntent, REQUEST_LOGIN);    // startActivityForResult expects that something will be returned by the activity
-        System.out.println("Logout button clicked came back to home");
-
     }
 
     public void buttonUserAccountOnClick(View v) {
@@ -126,7 +131,6 @@ public class HomeActivity extends Activity {
         usersIntent.putExtra(UsersActivity.EXTRA_USER, loggedInUser);
         usersIntent.putExtra(UsersActivity.EXTRA_PAGE_TYPE, UsersActivity.PAGE_TYPE_USER_ACCOUNT);
         HomeActivity.this.startActivityForResult(usersIntent, REQUEST_LOGIN);
-        System.out.println("here5");
     }
 
     // This method deals with returns made by another activity
@@ -142,20 +146,31 @@ public class HomeActivity extends Activity {
             if (loggedInUser == null)
             {
                 isLoggedIn = false;
-                System.out.println("Logout button clicked came back to home onactivityresult");
                 loggedInUser = null;
 
-                Button loginButton = (Button) findViewById(R.id.loginButton);
+                Button loginButtonOnStart = (Button) findViewById(R.id.loginButtonOnStart);
                 Button userAccountButton = (Button) findViewById(R.id.userAccountButton);
 
-                loginButton.setVisibility(View.VISIBLE);
+                loginButtonOnStart.setVisibility(View.VISIBLE);
                 userAccountButton.setVisibility(View.GONE);
+
+                loginButton.setVisibility(View.GONE);
+
+                Button findStoreButton = (Button) findViewById(R.id.findStoreButton);
+                findStoreButton.setVisibility(View.GONE);
+                Button discoverDealsButton = (Button) findViewById(R.id.discoverDealsButton);
+                discoverDealsButton.setVisibility(View.GONE);
 
             }
             else {
-                System.out.println("HomeActivity User: " + loggedInUser);
-                System.out.println("User = " + loggedInUser.getInitials());
-                System.out.println("User email = " + loggedInUser.getEmail());
+                Button loginButtonOnStart = (Button) findViewById(R.id.loginButtonOnStart);
+                loginButtonOnStart.setVisibility(View.GONE);
+                loginButton.setVisibility(View.GONE);
+                Button findStoreButton = (Button) findViewById(R.id.findStoreButton);
+                findStoreButton.setVisibility(View.VISIBLE);
+                Button discoverDealsButton = (Button) findViewById(R.id.discoverDealsButton);
+                discoverDealsButton.setVisibility(View.VISIBLE);
+
                 Button loginButton = (Button) findViewById(R.id.loginButton);
                 Button userAccountButton = (Button) findViewById(R.id.userAccountButton);
 
@@ -163,32 +178,26 @@ public class HomeActivity extends Activity {
                 userAccountButton.setVisibility(View.VISIBLE);
                 userAccountButton.setText(loggedInUser.getInitials());
                 isLoggedIn = true;
-
-                System.out.println("Logout button clicked came back to home onactivityresult !null");
-
             }
             updateActivity();
         }
     }
 
     private void updateActivity() {
-        System.out.println("here7");
         if (isLoggedIn) {
             loginButton.setVisibility(View.GONE);   // Hide login button
             userAccountButton.setVisibility(View.VISIBLE);  // Display user button
 
             // Inform user of the update
-            String accountCreated = "Account Created";
             String welcomeMessage = "Enjoy shopping with GoCart!";
             AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 
-            alertDialog.setTitle(accountCreated);
             alertDialog.setMessage(welcomeMessage);
 
             alertDialog.show();
         }
         else {
-            loginButton.setVisibility(View.VISIBLE);
+            loginButton.setVisibility(View.GONE);
             userAccountButton.setVisibility(View.GONE);
 
             // Inform user of the update

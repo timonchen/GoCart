@@ -25,8 +25,7 @@ public class ProductPersistenceHSQLDB implements ProductPersistence {
         final boolean hasAllergy =rs.getBoolean("HAS_ALLERGY");
         final String category =rs.getString("CATEGORY");
 
-
-        return new Product(productID, name,hasAllergy,category);
+        return new Product(productID, name,hasAllergy);
     }
     public ProductPersistenceHSQLDB(final String dbPath){
         this.dbPath = dbPath;
@@ -40,7 +39,7 @@ public class ProductPersistenceHSQLDB implements ProductPersistence {
 
         try (final Connection c = connection()) {
             final Statement st = c.createStatement();
-            final ResultSet rs = st.executeQuery("SELECT * FROM PRODUCTS WHERE HAS_ALLERGY = TRUE");
+            final ResultSet rs = st.executeQuery("SELECT * FROM PRODUCTS WHERE HAS_ALLERGY = FALSE");
             while (rs.next())
             {
                 final Product product = fromResultSet(rs);

@@ -14,7 +14,7 @@ import comp3350.GoCart.objects.Store;
 
 public class ShoppingCart {
     private static final ShoppingCart instance = new ShoppingCart();
-    //private HashMap<Product,Integer> cartList = new HashMap<Product, Integer>();
+
     private ArrayList<Product> products = new ArrayList<>();
     private ArrayList<Integer> quantity = new ArrayList<>();
     private Store store;
@@ -24,20 +24,23 @@ public class ShoppingCart {
     }
 
     public void setStore(Store newStore){
-
         store = newStore;
     }
     public Store getStore(){
         return store;
     }
-
-    public BigDecimal calculateTotal(AccessStoreProduct ap){
-        return ap.calculateTotal(products,quantity,store);
-    }
-
     public static ShoppingCart getInstance(){
         return instance;
     }
+
+    //Calculates total price of items inside cart and currently set store
+    public BigDecimal calculateTotal(AccessStoreProduct ap){
+        return ap.calculateTotal(products,quantity,store);
+    }
+    /*
+    Adds a new product to shopping cart list with given value, if product already exists in list, increment
+    the quantity with given value
+     */
 
     public void addProduct(Product newProd, Integer newQuantity){
         //cartList.put(newProd, newQuantity);
@@ -49,6 +52,9 @@ public class ShoppingCart {
         }
     }
 
+    /*
+    removes product from shopping cart
+     */
     public void removeProduct(Product newProd){
         //cartList.remove(newProd);
         int position = products.indexOf(newProd);
@@ -58,8 +64,10 @@ public class ShoppingCart {
         quantity.trimToSize();
     }
 
+    /*
+    sets quantity for given product;
+     */
     public void changeProductQuantity(Product newProd, Integer newQuant){
-
         if ( products.contains(newProd)){
             if ( newQuant > -1) {
                 quantity.set(products.indexOf(newProd), newQuant);
@@ -69,9 +77,8 @@ public class ShoppingCart {
     }
 
     public void incrementProductQuantity(Product newProd){
-
         if(products.contains(newProd)){
-            changeProductQuantity(newProd,quantity.get(products.indexOf(newProd)) +1 );
+            changeProductQuantity(newProd,quantity.get(products.indexOf(newProd)) + 1 );
         }
     }
 

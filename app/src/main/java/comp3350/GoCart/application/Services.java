@@ -18,6 +18,7 @@ import comp3350.GoCart.persistence.ProductPersistence;
 
 
 public class Services{
+    private static String dbName="database";
 
     private static StorePersistence storePersistence = null;
     private static ProductPersistence productPersistence = null;
@@ -28,13 +29,13 @@ public class Services{
 
     public static synchronized StorePersistence getStorePersistence(){
         if (storePersistence == null){
-            storePersistence = new StorePersistenceHSQLDB(Main.getDBPathName());
+            storePersistence = new StorePersistenceHSQLDB(getDBPathName());
         }
         return storePersistence;
     }
     public static synchronized ProductPersistence getProductPersistence() {
         if (productPersistence == null) {
-            productPersistence = new ProductPersistenceHSQLDB(Main.getDBPathName());
+            productPersistence = new ProductPersistenceHSQLDB(getDBPathName());
         }
             return productPersistence;
 
@@ -42,7 +43,7 @@ public class Services{
 
     public static synchronized StoreProductPersistence getStoreProductPersistence() {
         if (storeProductPersistence == null) {
-            storeProductPersistence = new StoreProductPersistenceHSQLDB(Main.getDBPathName());
+            storeProductPersistence = new StoreProductPersistenceHSQLDB(getDBPathName());
 
         }
         return storeProductPersistence;
@@ -50,14 +51,14 @@ public class Services{
 
     public static synchronized UserPersistence getUserPersistence() {
         if (userPersistence == null) {
-            userPersistence = new UserPersistenceHSQLDB(Main.getDBPathName());
+            userPersistence = new UserPersistenceHSQLDB(getDBPathName());
         }
         return userPersistence;
     }
 
     public static synchronized OrderPersistence getOrderPersistence() {
         if(orderPersistence == null) {
-            orderPersistence = new OrderPersistenceHSQLDB(Main.getDBPathName());
+            orderPersistence = new OrderPersistenceHSQLDB(getDBPathName());
         }
 
         return orderPersistence;
@@ -65,9 +66,26 @@ public class Services{
 
     public static synchronized OrderLinePersistence getOrderLinePersistence() {
         if(orderLinePersistence == null) {
-            orderLinePersistence = new OrderLinePersistenceHSQLDB(Main.getDBPathName());
+            orderLinePersistence = new OrderLinePersistenceHSQLDB(getDBPathName());
         }
 
         return orderLinePersistence;
+    }
+
+    public static void setDBPathName(final String name) {
+        try {
+            Class.forName("org.hsqldb.jdbcDriver").newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        dbName = name;
+    }
+
+    public static String getDBPathName() {
+        return dbName;
     }
 }

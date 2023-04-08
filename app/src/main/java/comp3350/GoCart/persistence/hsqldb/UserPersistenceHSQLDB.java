@@ -31,8 +31,11 @@ public class UserPersistenceHSQLDB implements UserPersistence
     public void addUser(User newUser)
     {
         try (final Connection connection = connection()) {
+
             String query = "INSERT INTO CUSTOMERS VALUES(?,?,?,?,?,?,?,?,?,?)";
             final PreparedStatement statement = connection.prepareStatement(query);
+
+            newUser.setUserID(getNumUsers() + 1);
 
             statement.setString(1, String.valueOf(getNumUsers() + 1));
             statement.setString(2, newUser.getFirstName());
@@ -46,11 +49,6 @@ public class UserPersistenceHSQLDB implements UserPersistence
             statement.setString(10, newUser.getPassword());
 
             statement.executeUpdate();
-
-            if (getUser(newUser.getEmail(), newUser.getPassword()) != null)
-            {
-                System.out.println("Added user successfully");
-            }
         } catch (SQLException e) {
             throw new PersistenceException(e);
         }
@@ -58,7 +56,6 @@ public class UserPersistenceHSQLDB implements UserPersistence
 
     public User getUser(String email, String password)
     {
-        System.out.println("inside persistence getuser");
         User user = null;
         try (final Connection connection = connection()) {
             String query = "SELECT * FROM CUSTOMERS WHERE EMAIL = ? AND PASSWORD = ?";

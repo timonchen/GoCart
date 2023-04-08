@@ -1,6 +1,8 @@
 package comp3350.GoCart.presentation;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -9,6 +11,7 @@ import android.widget.TextView;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.math.BigDecimal;
@@ -24,38 +27,23 @@ import comp3350.GoCart.R;
 public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapter.ViewHolder> {
 
 
-    //private HashMap<Product,Integer> prodData;
-    Context context;
+    private Context context;
     private List<Product> products;
     private List<Integer> quantites;
-    private Product prodListing;
     private TextView editPrice;
-    private TextView notif,lp;
-    private Button changeStore;
 
 
-    public ShoppingCartAdapter(Context context, List<Product> products, List<Integer> quantites, TextView price,TextView newNotif,TextView newLP,Button change) {
+    public ShoppingCartAdapter(Context context, List<Product> products, List<Integer> quantites, TextView price) {
         this.context = context;
         this.products = products;
         this.quantites = quantites;
         this.editPrice = price;
-        this.notif = newNotif;
-        this.lp = newLP;
-        this.changeStore = change;
-
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-/*
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_list_item, parent, false);
-        ViewHolder holder = new ViewHolder(view);
-        return holder;
-
- */
-
-
+        ShoppingCart cart = ShoppingCart.getInstance();
         View v = LayoutInflater.from(context).inflate(R.layout.cart_list_item,parent,false);
         ViewHolder holder = new ViewHolder(v, new clickListener() {
             @Override
@@ -63,10 +51,6 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                 ShoppingCart.getInstance().incrementProductQuantity(p);
             }
         });
-
-
-
-
         return  holder;
     }
 
@@ -76,8 +60,6 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         holder.productname.setText(products.get(position).getProductName());
         holder.productQuantity.setText(quantites.get(position).toString());
 
-
-
     }
 
     @Override
@@ -85,27 +67,18 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         return products.size();
     }
 
-    public void setCartProducts(List<Product> prods,List<Integer> quant) {
-        this.products = prods;
-        this.quantites = quant;
-        notifyDataSetChanged();
-    }
-
-
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-
         clickListener clickListener;
         private TextView productname;
-        private TextView selectedStorePrice;
-        private TextView cheaperStorePrice;
         private EditText productQuantity;
         private Button incButton;
         private Button decButton;
+        private Button changeQuantbtn;
 
-        private AccessProducts ap = new AccessProducts();
-        private AccessStoreProduct asp= new AccessStoreProduct();
+        private AccessProducts accessProducts = new AccessProducts();
+        private AccessStoreProduct accessStoreProduct= new AccessStoreProduct();
 
 
         public ViewHolder(@NonNull View itemView, clickListener Listener) {
@@ -114,28 +87,39 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             productQuantity = itemView.findViewById(R.id.txtSetQuantity);
             incButton = itemView.findViewById(R.id.btnIncQuantity);
             decButton = itemView.findViewById(R.id.btnDecQuantity);
-
-
+            changeQuantbtn = itemView.findViewById(R.id.btnChangeQuantity);
 
             this.clickListener = Listener;
             incButton.setOnClickListener(this);
             decButton.setOnClickListener(this);
-
+            changeQuantbtn.setOnClickListener(this);
 
         }
+
+        /*
+        Listener for three buttons, increments or decrements cart items or sets quantity based
+        off button pressed
+         */
         @Override
         public void onClick(View view){
-            Product prod = ap.searchProductsByName(productname.getText().toString()).get(0);
-            if (view.getId() == R.id.btnDecQuantity)
-                ShoppingCart.getInstance().decrementProductQuantity(prod);
-            else
-                ShoppingCart.getInstance().incrementProductQuantity(prod);
-            productQuantity.getText().clear();
-            productQuantity.append(ShoppingCart.getInstance().getQuantity(prod).toString());
-            editPrice.setText(ShoppingCart.getInstance().calculateTotal(asp).toString());
-            notifyDataSetChanged();
+            ShoppingCart cart = ShoppingCart.getInstance();
+            Product prod = accessProducts.searchProductsByName(productname.getText().toString()).get(0);
 
+            if (view.getId() == R.id.btnDecQuantity)
+                cart.decrementProductQuantity(prod);
+            else if (view.getId() == R.id.btnIncQuantity)
+                cart.incrementProductQuantity(prod);
+            else if (view.getId() == R.id.btnChangeQuantity){
+                cart.changeProductQuantity(prod,Integer.parseInt(productQuantity.getText().toString()));
+            }
+            productQuantity.getText().clear();
+            productQuantity.append(cart.getQuantity(prod).toString());
+            editPrice.setText(ShoppingCart.getInstance().calculateTotal(accessStoreProduct).toString());
+            notifyDataSetChanged();
         }
+
+
+
 
 
 
@@ -144,6 +128,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     public interface clickListener{
         void clicked(Product p,int quant);
     }
+
 
 
 
