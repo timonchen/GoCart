@@ -296,6 +296,7 @@ public class UsersActivity extends Activity
         if (!TextUtils.isEmpty(editName.getText().toString())) {
             name = editName.getText().toString();
             loggedInUser.updateName(name);
+            System.out.println("Updated name = " + loggedInUser.getName());
             accessUsers.updateUser(loggedInUser);
             TextView textView = (TextView) findViewById(R.id.textViewUserName);
             textView.setText(loggedInUser.getName());
@@ -362,6 +363,7 @@ public class UsersActivity extends Activity
                 }
                 else {
                     loggedInUser.updatePhone(phone);
+                    System.out.println("Updated phone = " + loggedInUser.getPhone());
                     accessUsers.updateUser(loggedInUser);
                     TextView textView = (TextView) findViewById(R.id.textViewUserPhone);
                     textView.setText(loggedInUser.getPhone() + "");
@@ -429,7 +431,7 @@ public class UsersActivity extends Activity
             else {
                 loggedInUser.updateEmail(email);
                 accessUsers.updateUser(loggedInUser);
-                System.out.println("email = " + email);
+                System.out.println("Updated email: " + loggedInUser.getEmail());
                 TextView textView = (TextView) findViewById(R.id.textViewUserEmail);
                 textView.setText(loggedInUser.getEmail());
                 textView.setVisibility(View.VISIBLE);

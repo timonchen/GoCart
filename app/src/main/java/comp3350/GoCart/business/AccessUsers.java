@@ -140,7 +140,6 @@ public class AccessUsers
 
     public User getUser(String email, String password)
     {
-        System.out.println("userPersistence.getUser(email, password)" + "email and password: " + email + " " + password);
         return userPersistence.getUser(email, password);
     }
 
