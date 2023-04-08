@@ -90,6 +90,7 @@ public class AccessStores{
         stores = storePersistence.getAllStores();
         List<Store> nearest = null;
         try{
+            //executor service is used as network activity can not be done on the main thread
             ExecutorService executor = Executors.newSingleThreadExecutor();
             Callable<List> callable = new Callable<List>() {
                 @Override

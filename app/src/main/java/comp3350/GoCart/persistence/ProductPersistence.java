@@ -14,6 +14,6 @@ public interface ProductPersistence {
     List<Product> searchProductsByCategory(String category) ;
 
 
-        List<Product> getAllProducts();
+    List<Product> getAllProducts();
 
 }

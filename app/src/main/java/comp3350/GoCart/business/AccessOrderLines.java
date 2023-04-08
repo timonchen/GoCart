@@ -1,7 +1,5 @@
 package comp3350.GoCart.business;
 
-import androidx.annotation.NonNull;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -30,7 +28,7 @@ public class AccessOrderLines {
         return sortedByPrice;
     }
 
-    public boolean insertAllItems(@NonNull List<OrderLineItem> ordersToInsert) {
+    public boolean insertAllItems(List<OrderLineItem> ordersToInsert) {
         for(OrderLineItem oli : ordersToInsert) {
             orderLinePersistence.insertOrderLine(oli);
         }

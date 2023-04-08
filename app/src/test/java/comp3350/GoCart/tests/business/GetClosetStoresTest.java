@@ -7,12 +7,17 @@ import junit.framework.TestCase;
 
 import org.json.JSONException;
 import org.junit.Test;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.List;
 
 import comp3350.GoCart.business.AccessStores;
 import comp3350.GoCart.objects.Store;
-import comp3350.GoCart.persistence.stubs.StorePersistenceStub;
+
 
 /*
 * Note that the current implentation of AccessStores uses the API distance calculator so these tests reflect that
@@ -23,7 +28,7 @@ public class GetClosetStoresTest {
 
     public GetClosetStoresTest() {
         super();
-        accessStores = new AccessStores(new StorePersistenceStub());
+        accessStores = mock(AccessStores.class);
     }
 
 
