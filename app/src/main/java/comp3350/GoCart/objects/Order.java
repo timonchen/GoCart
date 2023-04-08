@@ -2,26 +2,27 @@ package comp3350.GoCart.objects;
 
 public class Order {
 
-    private int orderID;
-    private int customerID;
-    private int storeID;
+    private String orderID;
+    private User user;
+    private Store store;
 
-    public Order(int oID, int cID, int sID) {
+    private Order() {}
+    public Order(final String oID, final User user, final Store store) {
         orderID = oID;
-        customerID = cID;
-        storeID = sID;
+        this.user = user;
+        this.store = store;
     }
 
-    public int getOrderID(){
+    public String getOrderID(){
         return orderID;
     }
 
     public int getCustomerID() {
-        return customerID;
+        return user.getUserID();
     }
 
-    public int getStoreID() {
-        return storeID;
+    public String getStoreID() {
+        return store.getStoreID();
     }
 
     public boolean equals(Object otherOrder) {
@@ -30,5 +31,33 @@ public class Order {
         }
 
         return false;
+    }
+
+    public static class OrderBuilder {
+        private Order order;
+
+        public OrderBuilder() {
+            this.order = new Order();
+        }
+
+        public OrderBuilder orderID(String orderID) {
+            this.order.orderID = orderID;
+            return this;
+        }
+
+        public OrderBuilder user(User user) {
+            this.order.user = user;
+            return this;
+        }
+
+        public OrderBuilder store(Store store) {
+            this.order.store = store;
+            return this;
+        }
+
+        public Order build() {
+            return this.order;
+        }
+
     }
 }

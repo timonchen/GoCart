@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.GoCart.objects.Order;
+import comp3350.GoCart.objects.Store;
+import comp3350.GoCart.objects.User;
 import comp3350.GoCart.persistence.OrderPersistence;
 
 public class OrderPersistenceHSQLDB implements OrderPersistence {
@@ -25,20 +27,25 @@ public class OrderPersistenceHSQLDB implements OrderPersistence {
     }
 
     private Order fromResultSet(final ResultSet rs) throws SQLException {
-        final int orderID = Integer.parseInt(rs.getString("OID"));
+        final String orderID = rs.getString("OID");
         final int customerID = Integer.parseInt(rs.getString("CID"));
-        final int storeID = Integer.parseInt(rs.getString("SID"));
+        final String storeID = rs.getString("SID");
 
-        return new Order(orderID, customerID, storeID);
+        //use the builders here as we don't need all the other info
+        User.UserBuilder userBuilder = new User.UserBuilder();
+        Store.StoreBuilder storeBuilder = new Store.StoreBuilder();
+
+        return new Order(orderID, userBuilder.userID(customerID).build(), storeBuilder.storeID(storeID).build());
+
     }
 
     @Override
     public Order insertOrder(Order toInsert) {
         try(Connection conn = connection()) {
             PreparedStatement statement = conn.prepareStatement("INSERT INTO ORDERS VALUES(?, ?, ?)");
-            statement.setInt(1, toInsert.getOrderID());
+            statement.setInt(1, Integer.parseInt(toInsert.getOrderID()));
             statement.setInt(2, toInsert.getCustomerID());
-            statement.setInt(3, toInsert.getStoreID());
+            statement.setInt(3, Integer.parseInt(toInsert.getStoreID()));
             return toInsert;
         } catch (SQLException e) {
             throw new PersistenceException(e);
@@ -58,7 +65,7 @@ public class OrderPersistenceHSQLDB implements OrderPersistence {
                 return fromResultSet(set);
             }
 
-            return new Order(-1, -1, -1);
+            return new Order("-1", new User.UserBuilder().userID(-1).build(), new Store.StoreBuilder().storeID("-1").build());
         } catch (SQLException e) {
             throw new PersistenceException(e);
         }

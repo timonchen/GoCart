@@ -23,7 +23,7 @@ public class AccessOrders {
     public List<Order> getSortedOrders(int customerID) {
         List<Order> sortedOrders = orderPersistence.getAllOrders(customerID);
 
-        Collections.sort(sortedOrders, (a, b) -> Integer.compare(a.getOrderID(), b.getOrderID()));
+        Collections.sort(sortedOrders, (a, b) -> Integer.compare(Integer.parseInt(a.getOrderID()), Integer.parseInt(b.getOrderID())));
 
         return sortedOrders;
     }
