@@ -25,6 +25,7 @@ import java.util.List;
 import comp3350.GoCart.R;
 import comp3350.GoCart.business.AccessProducts;
 import comp3350.GoCart.business.AccessStoreProduct;
+import comp3350.GoCart.business.AccessStores;
 import comp3350.GoCart.business.ShoppingCart;
 import comp3350.GoCart.objects.Store;
 import comp3350.GoCart.objects.StoreProduct;
@@ -49,26 +50,32 @@ public class ProductsActivity extends Activity {
     private FloatingActionButton viewCart;
     private ShoppingCart shoppingCart;
     private String currCategory;
+    private AccessStores accessStores;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
 
+        // Initialize views
         storeName = findViewById(R.id.storeName);
         storeAddress = findViewById(R.id.storeAddress);
         searchBar = findViewById(R.id.searchBar);
         productsRecView = findViewById(R.id.productsRecView);
         viewCart = findViewById(R.id.cart_fab);
         categorySpinner = findViewById(R.id.categorySpinner);
-        lastSearch = "";
-        currCategory = DEFAULT_CATEGORY;
-
         Switch allergenSwitch = findViewById(R.id.allergenSwitch);
 
+        // Initialize instance variables
+        lastSearch = "";
+        currCategory = DEFAULT_CATEGORY;
+        accessStores = new AccessStores();
+
+
+
         // Get store data from previous activity
-        Store store = getIntent().getParcelableExtra("selected_store");
-        storeID = store.getStoreID();
+        storeID = getIntent().getStringExtra("selectedStoreID");
+        Store store = accessStores.getStoreByID(storeID);
 
         // Get Store's products
         accessStoreProduct = new AccessStoreProduct();
@@ -149,8 +156,8 @@ public class ProductsActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
-                Store store = data.getParcelableExtra("newStore");
-                storeID = store.getStoreID();
+                storeID = data.getStringExtra("newStoreID");
+                Store store = accessStores.getStoreByID(storeID);
                 storeName.setText(store.getStoreName());
                 storeAddress.setText(store.getStoreAddress());
                 storeProducts = accessStoreProduct.getStoresProducts(storeID);

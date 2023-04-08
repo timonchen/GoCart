@@ -79,7 +79,7 @@ public class ShoppingCartActivity extends Activity {
             check();
             price.setText(cart.calculateTotal(accessStoreProduct).toString());
             Intent returnIntent = new Intent();
-            returnIntent.putExtra("newStore",cheapestStore);
+            returnIntent.putExtra("newStoreID",cheapestStore.getStoreID());
             setResult(Activity.RESULT_OK,returnIntent);
         });
 

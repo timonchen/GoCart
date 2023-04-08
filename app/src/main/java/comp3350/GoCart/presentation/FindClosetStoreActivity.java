@@ -75,7 +75,7 @@ public class FindClosetStoreActivity extends Activity implements ClosestStoresRe
         Store storeClicked = adapter.getStores().get(position);
 
         Intent intent = new Intent(this, ProductsActivity.class);   // Switch from this activity ProductsActivity
-        intent.putExtra("selected_store", storeClicked);    // Send store data to ProductsActivity
+        intent.putExtra("selectedStoreID", storeClicked.getStoreID());    // Send storeID to ProductsActivity so that it can find it
         finish();
 
         startActivity(intent);
