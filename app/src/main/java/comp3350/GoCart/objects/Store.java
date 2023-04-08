@@ -4,7 +4,7 @@ package comp3350.GoCart.objects;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
+
 
 public class Store implements Parcelable {
     
@@ -84,7 +84,7 @@ public class Store implements Parcelable {
 
     public String getStoreID() {return storeID; }
 
-    @NonNull
+
     public String toString() {
         return "Name: " + storeName + "\nAddress: " + storeAddress;
     }
@@ -96,7 +96,7 @@ public class Store implements Parcelable {
         return distToUser;
     }
 
-    public double compareTo(@NonNull Store other) {
+    public double compareTo(Store other) {
         return distToUser - other.distToUser;
     }
 

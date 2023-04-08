@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.List;
 
 import comp3350.GoCart.objects.Store;
 

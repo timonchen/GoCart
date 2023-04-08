@@ -70,7 +70,7 @@ public class ShoppingCartActivity extends Activity {
         check.setOnClickListener(view -> check());
 
         /*
-        click listener, changes currently selected store to cheaper store found when check was clicked
+        click listener, changes currently selected store to cheaper store found when check button was clicked
          */
         change.setOnClickListener(view -> {
             cheapestStore = accessStoreProduct.findCheapestStore(p,q,accessStores.getStores()).getStore();
@@ -88,7 +88,7 @@ public class ShoppingCartActivity extends Activity {
 
 
     /*
-    Checks for cheaper store with products inside cart, updates ui based off result
+    Displays result from search for cheaper store, toggles button visibility base on result
      */
     public void check(){
         StoreProduct cheapest;
