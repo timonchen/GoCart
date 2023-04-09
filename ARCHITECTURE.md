@@ -8,7 +8,6 @@ Due: April 10, 2023
 * Objects(comp3350.GoCart.objects)
 * Persistence(comp3350.GoCart.persistence)
     * HSQLDB
-    * stubs
 * Presentation(comp3350.GoCart.presentation)
 * Android Test(package comp3350.GoCart)
     * systemTests
