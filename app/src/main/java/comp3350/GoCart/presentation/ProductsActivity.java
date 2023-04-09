@@ -66,14 +66,10 @@ public class ProductsActivity extends Activity {
         categorySpinner = findViewById(R.id.categorySpinner);
         Switch allergenSwitch = findViewById(R.id.allergenSwitch);
 
-
         // Initialize instance variables
         lastSearch = "";
         currCategory = DEFAULT_CATEGORY;
         accessStores = new AccessStores();
-
-
-
 
         // Get store data from previous activity
         storeID = getIntent().getStringExtra("selectedStoreID");
