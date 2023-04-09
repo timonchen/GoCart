@@ -532,6 +532,14 @@ public class UsersActivity extends Activity
                 cart.clearCart();
             }
         });
+        // Add the "No" button
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // User cancelled, do nothing
+            }
+        });
+
 
         // Show the dialog
         AlertDialog dialog = builder.create();

@@ -102,7 +102,7 @@ public class HomeActivity extends Activity {
 
             File outFile = new File(copyPath);
 
-
+            if (!outFile.exists()) {
                 InputStreamReader in = new InputStreamReader(assetManager.open(asset));
                 FileWriter out = new FileWriter(outFile);
 
@@ -114,6 +114,7 @@ public class HomeActivity extends Activity {
 
                 out.close();
                 in.close();
+            }
 
         }
     }
