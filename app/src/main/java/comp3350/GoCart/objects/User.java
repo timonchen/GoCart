@@ -1,11 +1,7 @@
 package comp3350.GoCart.objects;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-public class User implements Parcelable
+public class User
 {
-
     private int userID;
     private String firstName;
     private String lastName;
@@ -30,68 +26,6 @@ public class User implements Parcelable
         this.phone = phone;
         this.email = email;
         this.password = password;
-    }
-
-    protected User(Parcel in)
-    {
-        userID = in.readInt();
-        firstName = in.readString();
-        lastName = in.readString();
-        address = in.readString();
-        city = in.readString();
-        province = in.readString();
-        zipCode = in.readString();
-        phone = in.readInt();
-        email = in.readString();
-        password = in.readString();
-    }
-
-    public static final Creator<User> CREATOR = new Creator<User>() {
-        @Override
-        public User createFromParcel(Parcel in) {
-            return new User(in);
-        }
-
-        @Override
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(userID);
-        dest.writeString(firstName);
-        dest.writeString(lastName);
-        dest.writeString(address);
-        dest.writeString(city);
-        dest.writeString(province);
-        dest.writeString(zipCode);
-        dest.writeInt(phone);
-        dest.writeString(email);
-        dest.writeString(password);
-    }
-
-    public boolean verifyUser(String email, String password)
-    {
-        boolean userVerified = true;
-
-        if (!this.email.equals(email))
-        {
-            userVerified = false;
-        }
-
-        if (!this.password.equals(password))
-        {
-            userVerified = false;
-        }
-
-        return userVerified;
     }
 
     public String getInitials()

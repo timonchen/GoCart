@@ -101,7 +101,7 @@
             android:textColor="#919191"
             android:background="@drawable/price_dash"
             android:text="$ #.##"
-            android:textSize="30dp"
+            android:textSize="25dp"
             />
 
         <TextView
@@ -110,9 +110,9 @@
             android:layout_height="wrap_content"
             android:textColor="#0db817"
             android:text="$ #.##"
-            android:textSize="30dp"
+            android:textSize="25dp"
             android:layout_marginTop="5dp"
-            android:layout_below="@id/avgPrice"/>
+            android:layout_below="@id/avgPrice" />
     </RelativeLayout>
 
 

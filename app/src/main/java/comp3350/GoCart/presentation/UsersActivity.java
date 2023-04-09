@@ -5,20 +5,13 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import comp3350.GoCart.R;
 import comp3350.GoCart.business.AccessUsers;
@@ -31,7 +24,9 @@ public class UsersActivity extends Activity
 
     public static final int PAGE_TYPE_LOGIN = 1;
     public static final int PAGE_TYPE_USER_ACCOUNT = 2;
-    public static final String EXTRA_USER = "loggedInUser";
+    // constants for parcel
+    public static final String EXTRA_USER_EMAIL = "loggedInUserEmail";
+    public static final String EXTRA_USER_PASSWORD = "loggedInUserPassword";
     public static final String EXTRA_PAGE_TYPE = "pageType";
 
     private AccessUsers accessUsers;
@@ -53,7 +48,12 @@ public class UsersActivity extends Activity
         else if (pageType == PAGE_TYPE_USER_ACCOUNT)
         {
             setContentView(R.layout.activity_user_account);
-            loggedInUser = getIntent().getParcelableExtra(EXTRA_USER);
+
+            // Retrieve logged in user data from other activity
+            String loggedInUserEmail = getIntent().getStringExtra(EXTRA_USER_EMAIL);
+            String loggedInUserPassword = getIntent().getStringExtra(EXTRA_USER_PASSWORD);
+            loggedInUser = accessUsers.getUser(loggedInUserEmail, loggedInUserPassword);
+
             TextView userName = (TextView) findViewById(R.id.textViewUserName);
             userName.setText(loggedInUser.getName());
             
@@ -78,13 +78,12 @@ public class UsersActivity extends Activity
 
         if (newUser != null)
         {
-            accessUsers.setLoggedInUser(newUser);
-
             loggedInUser = newUser;
 
             // Inform home activity that the user has logged in
             Intent result = new Intent();
-            result.putExtra(EXTRA_USER, loggedInUser);
+            result.putExtra(EXTRA_USER_EMAIL, loggedInUser.getEmail());
+            result.putExtra(EXTRA_USER_PASSWORD, loggedInUser.getPassword());
             setResult(RESULT_OK, result);
 
             finish();
@@ -137,16 +136,15 @@ public class UsersActivity extends Activity
             }
             else
             {
-                accessUsers.setLoggedInUser(user);
                 setContentView(R.layout.activity_home);
 
                 loggedInUser = user;
 
                 // Inform home activity that the user has logged in
                 Intent result = new Intent();
-                result.putExtra(EXTRA_USER, loggedInUser);
+                result.putExtra(EXTRA_USER_EMAIL, loggedInUser.getEmail());
+                result.putExtra(EXTRA_USER_PASSWORD, loggedInUser.getPassword());
                 setResult(RESULT_OK, result);
-
 
                 finish();
             }
@@ -550,7 +548,8 @@ public class UsersActivity extends Activity
     {
         ShoppingCart cart = ShoppingCart.getInstance();
         Intent result = new Intent();
-        result.putExtra(EXTRA_USER, (String) null);
+        result.putExtra(EXTRA_USER_EMAIL, (String) null);
+        result.putExtra(EXTRA_USER_PASSWORD, (String) null);
         setResult(RESULT_OK, result);
         cart.clearCart();
         finish();

@@ -12,33 +12,15 @@ public class AccessUsers
 {
     private UserPersistence userPersistence;
 
-    private List<User> users;
-
-    private User user;
-
-    private static User loggedInUser;
-
     public AccessUsers()
     {
         userPersistence = Services.getUserPersistence();
-        users = null;
     }
 
     public AccessUsers(final UserPersistence userPersistence)
     {
         this();
         this.userPersistence = userPersistence;
-    }
-
-
-    public void setLoggedInUser(User loggedInUser)
-    {
-        this.loggedInUser = loggedInUser;
-    }
-
-    public User getLoggedInUser()
-    {
-        return this.loggedInUser;
     }
 
     public User addUser(String firstName, String lastName, String address, String city, String province, String zipCode, String phoneString, String email, String password, String confirmPassword)
@@ -147,11 +129,6 @@ public class AccessUsers
     public void updateUser(User theUser)
     {
         userPersistence.updateUser(theUser);
-    }
-
-    public int getNumUsers()
-    {
-        return userPersistence.getNumUsers();
     }
 
     public void deleteUser(User user)

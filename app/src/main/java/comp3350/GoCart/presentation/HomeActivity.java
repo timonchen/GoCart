@@ -18,6 +18,7 @@ import java.io.InputStreamReader;
 
 
 import comp3350.GoCart.application.Services;
+import comp3350.GoCart.business.AccessUsers;
 import comp3350.GoCart.objects.User;
 
 public class HomeActivity extends Activity {
@@ -127,7 +128,8 @@ public class HomeActivity extends Activity {
 
     public void buttonUserAccountOnClick(View v) {
         Intent usersIntent = new Intent(HomeActivity.this, UsersActivity.class);
-        usersIntent.putExtra(UsersActivity.EXTRA_USER, loggedInUser);
+        usersIntent.putExtra(UsersActivity.EXTRA_USER_EMAIL, loggedInUser.getEmail());
+        usersIntent.putExtra(UsersActivity.EXTRA_USER_PASSWORD, loggedInUser.getPassword());
         usersIntent.putExtra(UsersActivity.EXTRA_PAGE_TYPE, UsersActivity.PAGE_TYPE_USER_ACCOUNT);
         HomeActivity.this.startActivityForResult(usersIntent, REQUEST_LOGIN);
     }
@@ -141,7 +143,15 @@ public class HomeActivity extends Activity {
 
         if (requestCode == REQUEST_LOGIN && resultCode == RESULT_OK) {
             isLoggedIn = data.getBooleanExtra("loggedInStatus", false);  // defaultValue (false) is used if no result with key "loggedInStatus" was returned
-            loggedInUser = data.getParcelableExtra(EXTRA_USER);
+
+            // Get user info from activity
+            String loggedInUserEmail = data.getStringExtra(UsersActivity.EXTRA_USER_EMAIL);
+            String loggedInUserPassword = data.getStringExtra(UsersActivity.EXTRA_USER_PASSWORD);
+
+            // Retrieve user from the information
+            AccessUsers accessUsers = new AccessUsers();
+            loggedInUser = accessUsers.getUser(loggedInUserEmail, loggedInUserPassword);
+
             Button loginButtonOnStart = (Button) findViewById(R.id.loginButtonOnStart);
             Button userAccountButton = (Button) findViewById(R.id.userAccountButton);
             Button discoverDealsButton = (Button) findViewById(R.id.discoverDealsButton);
