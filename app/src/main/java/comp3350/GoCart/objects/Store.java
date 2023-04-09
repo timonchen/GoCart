@@ -6,9 +6,7 @@ import android.os.Parcelable;
 
 
 
-public class Store implements Parcelable {
-    
-
+public class Store {
     private String storeID;
     private String storeName;
     private String storeAddress; // zones
@@ -29,40 +27,6 @@ public class Store implements Parcelable {
         storeName = null;
         storeAddress = null;
     }
-
-    // The next following three methods are so that this class is parcelable. A parcelable class can be sent between activities.
-    protected Store(Parcel in) {
-        storeName = in.readString();
-        storeAddress = in.readString();
-        distToUser = in.readDouble();
-        storeID = in.readString();
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(storeName);
-        dest.writeString(storeAddress);
-        dest.writeDouble(distToUser);
-        dest.writeString(storeID);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-    // End of parcel methods
-
-    public static final Creator<Store> CREATOR = new Creator<Store>() {
-        @Override
-        public Store createFromParcel(Parcel in) {
-            return new Store(in);
-        }
-
-        @Override
-        public Store[] newArray(int size) {
-            return new Store[size];
-        }
-    };
 
     public String getStoreName(){
         return storeName;
