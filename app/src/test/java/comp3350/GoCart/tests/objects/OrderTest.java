@@ -1,4 +1,4 @@
-package comp3350.GoCart.tests;
+package comp3350.GoCart.tests.objects;
 
 import org.junit.Test;
 
