@@ -22,13 +22,8 @@ public class AccessOrdersTest extends TestCase {
         super();
         orderPersistence = mock(OrderPersistence.class);
         accessOrders = new AccessOrders(orderPersistence);
-    }
 
-    @Test
-    public void testGetSortedOrdersCustomerPresent() {
-        System.out.println("Starting testGetSortedOrdersCustomerPresent");
         List<Order> orders = new ArrayList<>();
-
         orders.add(new Order("5", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build()));
         orders.add(new Order("2", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build()));
         orders.add(new Order("4", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build()));
@@ -36,6 +31,11 @@ public class AccessOrdersTest extends TestCase {
         orders.add(new Order("3", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build()));
 
         when(orderPersistence.getAllOrders(1)).thenReturn(orders);
+    }
+
+    @Test
+    public void testGetSortedOrdersCustomerPresent() {
+        System.out.println("Starting testGetSortedOrdersCustomerPresent");
 
         List<Order> sortedByOrder = accessOrders.getSortedOrders(1);
 
@@ -51,15 +51,6 @@ public class AccessOrdersTest extends TestCase {
     public void testGetSortedOrdersCustomerNotThere() {
         System.out.println("Starting testGetSortedOrdersCustomerNotThere");
 
-        List<Order> orders = new ArrayList<>();
-
-        orders.add(new Order("5", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build()));
-        orders.add(new Order("2", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build()));
-        orders.add(new Order("4", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build()));
-        orders.add(new Order("1", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build()));
-        orders.add(new Order("3", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build()));
-
-        when(orderPersistence.getAllOrders(1)).thenReturn(orders);
 
         List<Order> sortedByOrder = accessOrders.getSortedOrders(15);
 

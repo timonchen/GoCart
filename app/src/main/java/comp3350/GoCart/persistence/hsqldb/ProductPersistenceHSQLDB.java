@@ -25,7 +25,7 @@ public class ProductPersistenceHSQLDB implements ProductPersistence {
         final boolean hasAllergy =rs.getBoolean("HAS_ALLERGY");
         final String category =rs.getString("CATEGORY");
 
-        return new Product(productID, name,hasAllergy,category);
+        return new Product(productID, name, hasAllergy, category);
     }
     public ProductPersistenceHSQLDB(final String dbPath){
         this.dbPath = dbPath;

@@ -25,6 +25,22 @@ public class AccessOrderLinesTest extends TestCase {
         super();
         orderLinePersistence = mock(OrderLinePersistence.class);
         orderLines = new AccessOrderLines(orderLinePersistence); //inject the stub
+
+        Order order = new Order.OrderBuilder().orderID("4").build();
+        //create the order line items with the order we created
+        OrderLineItem oli1 = new OrderLineItem(order, new Product.ProductBuilder().productID("5").build(), new BigDecimal(5.24));
+        OrderLineItem oli2 = new OrderLineItem(order, new Product.ProductBuilder().productID("24").build(), new BigDecimal(9.99));
+        OrderLineItem oli3 = new OrderLineItem(order, new Product.ProductBuilder().productID("4").build(), new BigDecimal(20.44));
+
+        //need to return what we inserted
+        when(orderLinePersistence.insertOrderLine(oli1)).thenReturn(oli1);
+        when(orderLinePersistence.insertOrderLine(oli2)).thenReturn(oli2);
+        when(orderLinePersistence.insertOrderLine(oli3)).thenReturn(oli3);
+
+        //need to also make sure we return the right stuff from the get
+        when(orderLinePersistence.getOrderLineItem(4, 5)).thenReturn(oli1);
+        when(orderLinePersistence.getOrderLineItem(4, 24)).thenReturn(oli2);
+        when(orderLinePersistence.getOrderLineItem(4, 4)).thenReturn(oli3);
     }
 
 
@@ -51,16 +67,6 @@ public class AccessOrderLinesTest extends TestCase {
         OrderLineItem oli2 = new OrderLineItem(order, new Product.ProductBuilder().productID("24").build(), new BigDecimal(9.99));
         OrderLineItem oli3 = new OrderLineItem(order, new Product.ProductBuilder().productID("4").build(), new BigDecimal(20.44));
 
-        //make sure the mock returns the right stuff for the, needs to return the inserted item
-        when(orderLinePersistence.insertOrderLine(oli1)).thenReturn(oli1);
-        when(orderLinePersistence.insertOrderLine(oli2)).thenReturn(oli2);
-        when(orderLinePersistence.insertOrderLine(oli3)).thenReturn(oli3);
-
-        //needs to return the order line item
-        when(orderLinePersistence.getOrderLineItem(4, 5)).thenReturn(oli1);
-        when(orderLinePersistence.getOrderLineItem(4, 24)).thenReturn(oli2);
-        when(orderLinePersistence.getOrderLineItem(4, 4)).thenReturn(oli3);
-
         lineItems.add(oli1);
         lineItems.add(oli2);
         lineItems.add(oli3);
@@ -84,16 +90,6 @@ public class AccessOrderLinesTest extends TestCase {
         OrderLineItem oli1 = new OrderLineItem(order, new Product.ProductBuilder().productID("5").build(), new BigDecimal(5.24));
         OrderLineItem oli2 = new OrderLineItem(order, new Product.ProductBuilder().productID("24").build(), new BigDecimal(9.99));
         OrderLineItem oli3 = new OrderLineItem(order, new Product.ProductBuilder().productID("4").build(), new BigDecimal(20.44));
-
-        //need to return what we inserted
-        when(orderLinePersistence.insertOrderLine(oli1)).thenReturn(oli1);
-        when(orderLinePersistence.insertOrderLine(oli2)).thenReturn(oli2);
-        when(orderLinePersistence.insertOrderLine(oli3)).thenReturn(oli3);
-
-        //need to also make sure we return the right stuff from the get
-        when(orderLinePersistence.getOrderLineItem(4, 5)).thenReturn(oli1);
-        when(orderLinePersistence.getOrderLineItem(4, 24)).thenReturn(oli2);
-        when(orderLinePersistence.getOrderLineItem(4, 4)).thenReturn(oli3);
 
         OrderLineItem first = orderLines.insertOrderLineItem(oli1);
         OrderLineItem second = orderLines.insertOrderLineItem(oli2);

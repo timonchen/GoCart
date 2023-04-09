@@ -42,11 +42,7 @@ public class DistanceCalculatorTest extends TestCase {
         stub = new DistanceCalculatorRandom();
         storePersistence = mock(StorePersistence.class);
         accessStores = new AccessStores(storePersistence);
-    }
 
-    @Test
-    public void testNullLocation() throws Exception {
-        System.out.println("\nStarting testDistanceCalculator: null location");
         List<Store> storeList = new ArrayList<>();
         //stores to return for mock
         storeList.add(new Store("1","Walmart", "35 Lakewood Blvd Winnipeg"));
@@ -57,6 +53,11 @@ public class DistanceCalculatorTest extends TestCase {
         storeList.add(new Store("6","Safeway", "655 Osborne Winnipeg"));
 
         when(storePersistence.getAllStores()).thenReturn(storeList);
+    }
+
+    @Test
+    public void testNullLocation() throws Exception {
+        System.out.println("\nStarting testDistanceCalculator: null location");
 
         List<Store> test = accessStores.getStores();
         List<Store> firstCheck = stub.calculateNearestStores(null, test);
@@ -78,16 +79,6 @@ public class DistanceCalculatorTest extends TestCase {
     public void testValidData() throws Exception {
         System.out.println("\nStarting testDistanceCalculator: valid data");
 
-        List<Store> storeList = new ArrayList<>();
-        //stores to return for mock
-        storeList.add(new Store("1","Walmart", "35 Lakewood Blvd Winnipeg"));
-        storeList.add(new Store("6","Safeway", "655 Osborne Winnipeg"));
-        storeList.add(new Store("2","Walmart", "1576 Regent Ave Winnipeg"));
-        storeList.add(new Store("3","Costco", "1499 Regent Ave W Winnipeg"));
-        storeList.add(new Store("4","Costco", "2365 McGillivray Blvd Winnipeg"));
-        storeList.add(new Store("5","Safeway", "2025 Corydon Ave Winnipeg"));
-
-        when(storePersistence.getAllStores()).thenReturn(storeList);
 
         List<Store> test = accessStores.getNearestStores("50 shoreview bay winnipeg");
 
@@ -112,17 +103,6 @@ public class DistanceCalculatorTest extends TestCase {
     @Test
     public void testEmptyString() throws Exception {
         System.out.println("\nStarting testDistanceCalculator: empty String");
-
-        List<Store> storeList = new ArrayList<>();
-        //stores to return for mock
-        storeList.add(new Store("1","Walmart", "35 Lakewood Blvd Winnipeg"));
-        storeList.add(new Store("2","Walmart", "1576 Regent Ave Winnipeg"));
-        storeList.add(new Store("3","Costco", "1499 Regent Ave W Winnipeg"));
-        storeList.add(new Store("4","Costco", "2365 McGillivray Blvd Winnipeg"));
-        storeList.add(new Store("5","Safeway", "2025 Corydon Ave Winnipeg"));
-        storeList.add(new Store("6","Safeway", "655 Osborne Winnipeg"));
-
-        when(storePersistence.getAllStores()).thenReturn(storeList);
 
         List<Store> test = accessStores.getStores();
 
@@ -149,17 +129,6 @@ public class DistanceCalculatorTest extends TestCase {
     @Test
     public void testIncompleteAddress() throws Exception {
         System.out.println("\nStarting testDistanceCalculator: incomplete address");
-
-        List<Store> storeList = new ArrayList<>();
-        //stores to return for mock
-        storeList.add(new Store("1","Walmart", "35 Lakewood Blvd Winnipeg"));
-        storeList.add(new Store("2","Walmart", "1576 Regent Ave Winnipeg"));
-        storeList.add(new Store("3","Costco", "1499 Regent Ave W Winnipeg"));
-        storeList.add(new Store("4","Costco", "2365 McGillivray Blvd Winnipeg"));
-        storeList.add(new Store("5","Safeway", "2025 Corydon Ave Winnipeg"));
-        storeList.add(new Store("6","Safeway", "655 Osborne Winnipeg"));
-
-        when(storePersistence.getAllStores()).thenReturn(storeList);
 
         List<Store> test = accessStores.getStores();
 
