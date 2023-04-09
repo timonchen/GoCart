@@ -1,19 +1,12 @@
 package comp3350.GoCart.tests.business;
 
 
-
 import static org.mockito.Mockito.*;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
-
 import static org.mockito.Mockito.when;
-
-
-import junit.framework.TestCase;
-
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +14,6 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-
 
 import comp3350.GoCart.business.*;
 import comp3350.GoCart.objects.*;
@@ -31,15 +23,9 @@ import comp3350.GoCart.persistence.StoreProductPersistence;
 public class CheapestStoreTest{
 
     private List<Product> products;
-
-    private List<Store> stores;
-    private List<StoreProduct> storeProduct;
     private StoreProduct result;
-
-    private AccessProducts accessProducts ;
-    private AccessStores accessStores;
     private AccessStoreProduct accessStoreProduct;
-    private Product prod1,prod2;
+    private Product product1,product2;
     private List<Store> storeList;
     private Store store1,store2;
     private StoreProduct store1Product1,store1Product2,store2Product1,store2Product2;
@@ -54,19 +40,17 @@ public class CheapestStoreTest{
 
     @Before
     public void initalize(){
-        accessStores = mock(AccessStores.class);
-        accessProducts = mock(AccessProducts.class);
 
         store1 = new Store("1","Walmart", "1576 Regent Ave Winnipeg");
         store2 = new Store("2","Costco", "1499 Regent Ave W Winnipeg");
-        prod1 = new Product("4521","Banana",false,"produce");
-        prod2 = new Product("6849","Rye Bread",true, "bakery");
+        product1 = new Product("4521","Banana",false,"produce");
+        product2 = new Product("6849","Rye Bread",true, "bakery");
 
-        store1Product1 = new StoreProduct(store1,prod1,new BigDecimal(1.00));
-        store1Product2 = new StoreProduct(store1,prod2,new BigDecimal(2.00));
+        store1Product1 = new StoreProduct(store1,product1,new BigDecimal(1.00));
+        store1Product2 = new StoreProduct(store1,product2,new BigDecimal(2.00));
 
-        store2Product1 = new StoreProduct(store2,prod1,new BigDecimal(1.10));
-        store2Product2 = new StoreProduct(store2,prod2,new BigDecimal(2.10));
+        store2Product1 = new StoreProduct(store2,product1,new BigDecimal(1.10));
+        store2Product2 = new StoreProduct(store2,product2,new BigDecimal(2.10));
 
         store1ProductList = new ArrayList<>();
         store1ProductList.add(store1Product1);
@@ -100,7 +84,7 @@ public class CheapestStoreTest{
     public void testValidData(){
         System.out.println("Start Test:  valid data ");
 
-        products.add(prod1);
+        products.add(product1);
         quant.add(1);
 
         result = accessStoreProduct.findCheapestStore(products,quant,storeList);
@@ -108,6 +92,9 @@ public class CheapestStoreTest{
         assertEquals("Store 1 is cheapest" , "1",result.getStoreId());
         assertEquals("should equal ",new BigDecimal("1.00")  , result.getPrice() );
         System.out.println("End Test: valid data \n");
+        verify(mockStoreProductPersistence).getStoreProducts("1");
+        verify(mockStoreProductPersistence).getStoreProducts("2");
+
 
     }
 
@@ -118,7 +105,7 @@ public class CheapestStoreTest{
 
         System.out.println("Start Test: null store list ");
 
-        products.add(prod1);
+        products.add(product1);
         quant.add(1);
 
         result = accessStoreProduct.findCheapestStore(products,quant,null);
@@ -126,6 +113,7 @@ public class CheapestStoreTest{
         assertNotNull(result);
         assertEquals("no store returned/no stores given","Emptystore",result.getStoreId());
         System.out.println("End Test: null store list \n");
+
 
     }
 
@@ -141,6 +129,7 @@ public class CheapestStoreTest{
         assertEquals("no store returned/no products given","Emptystore",result.getStoreId());
         System.out.println("End Test: null product list \n");
 
+
     }
 
     @Test
@@ -152,6 +141,8 @@ public class CheapestStoreTest{
         assertNotNull(result);
         assertEquals("no store returned/no stores given" ,"Emptystore",result.getStoreId());
         System.out.println("End Test: empty store list \n");
+
+
     }
 
     @Test
@@ -164,6 +155,7 @@ public class CheapestStoreTest{
         assertNotNull(result);
         assertEquals("no store returned/no products given","Emptystore",result.getStoreId());
         System.out.println("End Test: empty product list \n");
+
     }
 
     @Test
@@ -184,6 +176,8 @@ public class CheapestStoreTest{
         assertNotNull(result);
         assertEquals("First Store is cheapest","1",result.getStoreId());
         System.out.println("End Test: some wrong product name \n");
+        verify(mockStoreProductPersistence).getStoreProducts("1");
+        verify(mockStoreProductPersistence).getStoreProducts("2");
     }
 
 

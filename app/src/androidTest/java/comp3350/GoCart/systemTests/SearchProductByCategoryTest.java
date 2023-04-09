@@ -40,11 +40,7 @@ public class SearchProductByCategoryTest {
     public void dietaryRestriction (){
 
         //login to account
-        onView(ViewMatchers.withId(R.id.loginButtonOnStart)).perform(click());
-        onView(withId(R.id.editLoginEmail)).perform(typeText("testuser@gmail.com"));
-        onView(withId(R.id.editLoginPassword)).perform(typeText("testuser"));
-        onView(withId(R.id.button)).perform(click());
-        onView(withText("Enjoy shopping with GoCart!")).perform(ViewActions.pressBack());
+        Const.login(Const.User1Name,Const.User1pass);
 
 
         //Finds store "Walmart" by name and selects it

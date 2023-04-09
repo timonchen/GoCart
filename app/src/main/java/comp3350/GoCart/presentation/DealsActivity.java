@@ -57,6 +57,7 @@ public class DealsActivity extends Activity {
 
         avgPrices = new BigDecimal[products.size()];
         currDisplayIndex = 0;
+        prevButton.setVisibility(View.INVISIBLE);
 
         // Initialize first item on display
         updateProductsDisplay();
@@ -67,14 +68,19 @@ public class DealsActivity extends Activity {
             @Override
             public void onClick(View v) {
                 // There are products.size() products that we can display. Prevent user from going beyond that
+                prevButton.setVisibility(View.VISIBLE);
                 if (currDisplayIndex +1 < products.size()) {
                     currDisplayIndex++;
 
                     // There are more products to display, so update our list to add it
-                    if (currDisplayIndex >= productsOnDisplay.size())
+                    if (currDisplayIndex >= productsOnDisplay.size()){
                         updateProductsDisplay();
+                        nextButton.setVisibility(View.VISIBLE);
+                    }
 
                     displayProduct();
+                } else {
+                    nextButton.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -84,9 +90,14 @@ public class DealsActivity extends Activity {
             @Override
             public void onClick(View v) {
                 currDisplayIndex--;
+                nextButton.setVisibility(View.VISIBLE);
 
-                if (currDisplayIndex >= 0)
+                if(currDisplayIndex ==0)
+                    prevButton.setVisibility(View.INVISIBLE);
+
+                if (currDisplayIndex >= 0) {
                     displayProduct();
+                }
                 else    // Can't have negative index, set it back to 0
                     currDisplayIndex = 0;
             }
@@ -105,8 +116,8 @@ public class DealsActivity extends Activity {
         storeName.setText(store.getStoreName());
         storeAddress.setText(store.getStoreAddress());
         productName.setText(productToDisplay.getProductName());
-        salePrice.setText("$ " + productToDisplay.getPrice().toString());
-        avgPrice.setText("$ " + avgPrices[currDisplayIndex].toString());
+        salePrice.setText("$" + productToDisplay.getPrice().toString());
+        avgPrice.setText("$" + avgPrices[currDisplayIndex].toString());
     }
 
     /* Only call this method if currDisplayIndex >= productsOnDisplay.length
