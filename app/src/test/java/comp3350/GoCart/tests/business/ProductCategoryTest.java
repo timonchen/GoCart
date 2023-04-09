@@ -19,6 +19,7 @@ public class ProductCategoryTest {
     private AccessProducts accessProducts;
     private ProductPersistence mockProductPersistence;
 
+    // Initialize mock objects and setup the behavior for the mockProductPersistence
     @Before
     public void initialize() {
         List<Product> productList = new ArrayList<>();
@@ -38,6 +39,7 @@ public class ProductCategoryTest {
         when(mockProductPersistence.productCategory("meat")).thenReturn(filterByCategory(productList, "meat"));
     }
 
+    // Helper function to filter products by category
     private List<Product> filterByCategory(List<Product> products, String category) {
         List<Product> filteredProducts = new ArrayList<>();
         for (Product product : products) {
@@ -48,6 +50,7 @@ public class ProductCategoryTest {
         return filteredProducts;
     }
 
+    // Test searching for products within a specific category (dairy)
     @Test
     public void testSpecificCategorySearch() {
         System.out.println("\nTest: searching products with dairy category");
@@ -59,6 +62,7 @@ public class ProductCategoryTest {
         System.out.println("Finished test: searching products with specific category successful");
     }
 
+    // Test searching for products within a specific category (meat)
     @Test
     public void testGetCategory() {
         System.out.println("\nTest: searching products with meat category");
@@ -70,6 +74,7 @@ public class ProductCategoryTest {
         System.out.println("Finished test: searching products with specific category successful");
     }
 
+    // Test searching for products with a null category
     @Test
     public void testNullCategorySearch() {
         System.out.println("\nTest: searching products with null category");
@@ -80,6 +85,7 @@ public class ProductCategoryTest {
         System.out.println("Finished test: searching products with null category");
     }
 
+    // Test searching for products with an invalid category
     @Test
     public void testInvalidCategorySearch() {
         System.out.println("\nTest: searching products with invalid category");
