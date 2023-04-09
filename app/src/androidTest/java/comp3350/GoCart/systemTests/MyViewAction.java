@@ -1,4 +1,4 @@
-package comp3350.GoCart;
+package comp3350.GoCart.systemTests;
 
 import android.view.View;
 import android.widget.EditText;
@@ -11,6 +11,7 @@ import org.hamcrest.Matcher;
 
 public class MyViewAction {
 
+    // Click on a child view with a specified id
     public static ViewAction clickChildViewWithId(final int id) {
         return new ViewAction() {
             @Override
@@ -30,7 +31,9 @@ public class MyViewAction {
             }
         };
     }
-    public static ViewAction enterValueIntoTextView(final int id,final String value) {
+
+    // Enter a value into an EditText child view with a specified id
+    public static ViewAction enterValueIntoTextView(final int id, final String value) {
         return new ViewAction() {
             @Override
             public Matcher<View> getConstraints() {
@@ -50,6 +53,7 @@ public class MyViewAction {
         };
     }
 
+    // Check the text of a TextView child view with a specified id and compare it with the expected text
     public static ViewAction checkChildTextViewWithId(final int id, final String expectedText) {
         return new ViewAction() {
             @Override
@@ -71,9 +75,4 @@ public class MyViewAction {
             }
         };
     }
-
-
-
-
-
 }

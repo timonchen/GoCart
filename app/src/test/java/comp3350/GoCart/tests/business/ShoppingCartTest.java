@@ -24,10 +24,7 @@ import comp3350.GoCart.objects.Store;
 
 
 import java.math.BigDecimal;
-import java.util.AbstractMap;
-import java.util.HashMap;
 import java.util.List;
-import java.util.ArrayList;
 
 
 public class ShoppingCartTest{

@@ -39,6 +39,8 @@ public class OrderLinePersistenceHSQLDB implements OrderLinePersistence {
             statement.setInt(1, Integer.parseInt(toInsert.getOrderID()));
             statement.setInt(2, Integer.parseInt(toInsert.getProductID()));
             statement.setBigDecimal(3, toInsert.getPrice());
+
+            statement.executeUpdate();
             return toInsert;
         } catch (SQLException e) {
             throw new PersistenceException(e);

@@ -1,4 +1,4 @@
-package comp3350.GoCart;
+package comp3350.GoCart.systemTests;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -9,25 +9,21 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 
 import androidx.test.espresso.action.ViewActions;
-import androidx.test.espresso.contrib.RecyclerViewActions;
 
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
 import java.io.File;
-import java.io.IOException;
 
-import comp3350.GoCart.business.AccessProducts;
-import comp3350.GoCart.persistence.ProductPersistence;
-import comp3350.GoCart.persistence.hsqldb.ProductPersistenceHSQLDB;
+import comp3350.GoCart.R;
 import comp3350.GoCart.presentation.HomeActivity;
 
 @RunWith(AndroidJUnit4.class)
@@ -42,14 +38,14 @@ public class UserAccountTest {
     public void login() {
 
         //login to account
-        Const.login();
+        Const.login(Const.User1Name,Const.User1pass);
         //Verify user is logged in
-        onView(withId(R.id.userAccountButton)).check(matches(withText("TU")));
+        onView(ViewMatchers.withId(R.id.userAccountButton)).check(matches(withText("TU")));
     }
     @Test
     public void logout() {
         //login to account
-        Const.login();
+        Const.login(Const.User1Name,Const.User1pass);
         //Verify user is logged in
         onView(withId(R.id.userAccountButton)).check(matches(withText("TU")));
         onView(withId(R.id.userAccountButton)).perform(click());
@@ -60,16 +56,18 @@ public class UserAccountTest {
     }
 
     @Test
-    public void viewAccount(){
+    public void viewAccount() {
         //login to account
-        Const.login();
+        Const.login(Const.User1Name,Const.User1pass);
+
         //Verify user is logged in
         onView(withId(R.id.userAccountButton)).check(matches(withText("TU")));
         onView(withId(R.id.userAccountButton)).perform(click());
 
-        onView(withId(R.id.editViewUserName)).check( matches(withText("test user")));
-        onView(withId(R.id.editViewUserPhone)).check( matches(withText("0")));
-        onView(withId(R.id.editViewUserEmail)).check( matches(withText("testuser@gmail.com")));
+
+        onView(withId(R.id.textViewUserName)).check( matches(withText("test user")));
+        onView(withId(R.id.textViewUserPhone)).check( matches(withText("0")));
+        onView(withId(R.id.textViewUserEmail)).check( matches(withText("testuser@gmail.com")));
     }
 
 

@@ -44,8 +44,8 @@ public class AccessProducts{
         products = productPersistence.getAllProducts();
         return Collections.unmodifiableList(products);
     }
-    public List<Product> searchProductsByCategory(String category) {
-        products = productPersistence.searchProductsByCategory(category);
+    public List<Product> productCatogory(String category) {
+        products = productPersistence.productCategory(category);
         return Collections.unmodifiableList(products);
     }
 

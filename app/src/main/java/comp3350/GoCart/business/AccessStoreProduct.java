@@ -97,7 +97,7 @@ public class AccessStoreProduct {
 
     // Given a list of StoreProduct, this method will search for a StoreProduct in the list that contains a Product with a category we want
     private List<StoreProduct> categorizeStoreProducts(List<StoreProduct> storeProducts, String categoryName) {
-        List<Product> matchingCategory = accessProducts.searchProductsByCategory(categoryName); // Products with a matching category
+        List<Product> matchingCategory = accessProducts.productCatogory(categoryName); // Products with a matching category
         List<StoreProduct> result = new ArrayList<>();
 
         // For every StoreProduct in storeProducts, see if the StoreProduct's Product matches a Product in matchingCategory

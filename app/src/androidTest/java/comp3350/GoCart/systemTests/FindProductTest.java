@@ -1,33 +1,26 @@
-package comp3350.GoCart;
+package comp3350.GoCart.systemTests;
 
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.clearText;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.pressKey;
 import static androidx.test.espresso.action.ViewActions.typeText;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
 
-import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-
-import android.content.res.Resources;
-import android.view.KeyEvent;
-import android.widget.EditText;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 
-import androidx.test.espresso.ViewAction;
-import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.contrib.RecyclerViewActions;
 
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
+import comp3350.GoCart.R;
 import comp3350.GoCart.presentation.HomeActivity;
 
 @RunWith(AndroidJUnit4.class)
@@ -39,10 +32,10 @@ public class FindProductTest {
 
     @Test
     public void findProduct(){
-        Const.login();
+        Const.login(Const.User1Name,Const.User1pass);
 
         //Finds store "Walmart" by name and selects it
-        onView(withId(R.id.findStoreButton)).perform(click());
+        onView(ViewMatchers.withId(R.id.findStoreButton)).perform(click());
         onView(withId(R.id.strByNameButton)).perform(click());
         onView(withId(R.id.searchBar)).perform(typeText("Walmart"));
         onView(withId(R.id.searchButton)).perform(click());
@@ -60,7 +53,7 @@ public class FindProductTest {
     @Test
     public void dietaryRestriction (){
         //login to account
-        Const.login();
+        Const.login(Const.User1Name,Const.User1pass);;
 
 
         //Finds store "Walmart" by name and selects it
