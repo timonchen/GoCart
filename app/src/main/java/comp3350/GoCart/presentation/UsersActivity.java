@@ -22,6 +22,7 @@ import java.util.List;
 
 import comp3350.GoCart.R;
 import comp3350.GoCart.business.AccessUsers;
+import comp3350.GoCart.business.ShoppingCart;
 import comp3350.GoCart.objects.User;
 
 public class UsersActivity extends Activity
@@ -95,6 +96,7 @@ public class UsersActivity extends Activity
         String email = null;
         String password = null;
         boolean valid = true;
+        ShoppingCart.getInstance().clearCart();
 
         EditText editEmail = (EditText)findViewById(R.id.editLoginEmail);
         if (!TextUtils.isEmpty(editEmail.getText().toString())) {
@@ -216,7 +218,7 @@ public class UsersActivity extends Activity
 
             if (!zipCode.isEmpty()) {
                 if (zipCode.length() != 6) {
-                    editZipCode.setError("Zip Code must be of length 6");
+                    editZipCode.setError("Postal Code must be of length 6");
                 }
             } else {
                 editZipCode.setError("Zip Code cannot be empty");
@@ -517,6 +519,7 @@ public class UsersActivity extends Activity
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirmation");
         builder.setMessage("Are you sure you want to delete user account?");
+        ShoppingCart cart = ShoppingCart.getInstance();
 
         // Add the "Yes" button
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -526,14 +529,7 @@ public class UsersActivity extends Activity
                 accessUsers.deleteUser(loggedInUser);
                 Intent intent = new Intent(UsersActivity.this, HomeActivity.class);
                 UsersActivity.this.startActivity(intent);
-            }
-        });
-
-        // Add the "No" button
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // User cancelled, do nothing
+                cart.clearCart();
             }
         });
 
@@ -544,9 +540,11 @@ public class UsersActivity extends Activity
 
     public void buttonLogoutOnClick(View v)
     {
+        ShoppingCart cart = ShoppingCart.getInstance();
         Intent result = new Intent();
         result.putExtra(EXTRA_USER, (String) null);
         setResult(RESULT_OK, result);
+        cart.clearCart();
         finish();
     }
 }

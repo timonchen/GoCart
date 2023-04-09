@@ -41,11 +41,7 @@ public class SearchProductByCategoryTest {
     public void dietaryRestriction (){
 
         //login to account
-        onView(withId(R.id.loginButtonOnStart)).perform(click());
-        onView(withId(R.id.editLoginEmail)).perform(typeText("testuser@gmail.com"));
-        onView(withId(R.id.editLoginPassword)).perform(typeText("testuser"));
-        onView(withId(R.id.button)).perform(click());
-        onView(withText("Enjoy shopping with GoCart!")).perform(ViewActions.pressBack());
+        Const.login();
 
 
         //Finds store "Walmart" by name and selects it
@@ -65,9 +61,6 @@ public class SearchProductByCategoryTest {
 
         //verifying that the product displayed is meat
         onView(withId(R.id.productsRecView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, MyViewAction.checkChildTextViewWithId(R.id.productName, "Beef Jerkey")));
-
-
-
 
     }
 

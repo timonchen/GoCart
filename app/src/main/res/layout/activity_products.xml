@@ -63,6 +63,7 @@
                     android:layout_marginTop="30dp"
                     android:queryHint="Search for a Product"
                     android:background="@drawable/search_view_bg"
+                    android:iconifiedByDefault="false"
                     />
 
                 <!-- Divider -->

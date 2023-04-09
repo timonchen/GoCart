@@ -7,9 +7,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".presentation.enterHomeAddress"
-            android:exported="false" />
-        <activity
             android:name=".presentation.ShoppingCartActivity"
             android:exported="false" /> <!-- DEBUG Change android:name to presentation.HomeActivity -->
         <activity

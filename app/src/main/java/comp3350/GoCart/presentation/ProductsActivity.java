@@ -66,10 +66,12 @@ public class ProductsActivity extends Activity {
         categorySpinner = findViewById(R.id.categorySpinner);
         Switch allergenSwitch = findViewById(R.id.allergenSwitch);
 
+
         // Initialize instance variables
         lastSearch = "";
         currCategory = DEFAULT_CATEGORY;
         accessStores = new AccessStores();
+
 
 
 
@@ -111,6 +113,7 @@ public class ProductsActivity extends Activity {
             // Runs when user hits enter. This method is redundant in this application, so it is left empty
             @Override
             public boolean onQueryTextSubmit(String query) {
+                updateProductList(query);
                 return false;
             }
 
