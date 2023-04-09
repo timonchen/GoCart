@@ -1,5 +1,4 @@
-package comp3350.GoCart.tests;
-
+package comp3350.GoCart.tests.objects;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
