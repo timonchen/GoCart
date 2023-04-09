@@ -1,5 +1,7 @@
 package comp3350.GoCart.tests.business;
 
+import static org.mockito.Mockito.mock;
+
 import junit.framework.TestCase;
 
 import org.junit.Test;
@@ -9,11 +11,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.GoCart.business.AccessOrderLines;
+import comp3350.GoCart.objects.Order;
 import comp3350.GoCart.objects.OrderLineItem;
-import comp3350.GoCart.persistence.stubs.OrderLinePersistenceStub;
+import comp3350.GoCart.objects.Product;
+import comp3350.GoCart.persistence.OrderLinePersistence;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class AccessOrderLinesTest extends TestCase {
     private AccessOrderLines orderLines;
+    private OrderLinePersistence orderLinePersistence;
 
     public AccessOrderLinesTest() {
         super();
@@ -66,9 +74,9 @@ public class AccessOrderLinesTest extends TestCase {
 
         assertTrue("Should be able to insert", orderLines.insertAllItems(lineItems));
 
-        assertTrue("Should be able to get the OrderLineItem now", orderLines.getOrderLineItem(4, 5).equals(new OrderLineItem(4, 5, new BigDecimal(5.24))));
-        assertTrue("Should be able to get the OrderLineItem now", orderLines.getOrderLineItem(4, 24).equals(new OrderLineItem(4, 24, new BigDecimal(9.99))));
-        assertTrue("Should be able to get the OrderLineItem now", orderLines.getOrderLineItem(4, 4).equals(new OrderLineItem(4, 4, new BigDecimal(20.44))));
+        assertTrue("Should be able to get the OrderLineItem now", orderLines.getOrderLineItem(4, 5).equals(oli1));
+        assertTrue("Should be able to get the OrderLineItem now", orderLines.getOrderLineItem(4, 24).equals(oli2));
+        assertTrue("Should be able to get the OrderLineItem now", orderLines.getOrderLineItem(4, 4).equals(oli3));
     }
 
 
@@ -100,8 +108,13 @@ public class AccessOrderLinesTest extends TestCase {
     public void testInsertOrderLineItemNotPresent() {
         System.out.println("Starting  testInsertOrderLineItemNotPresent ");
 
-        assertTrue("Should be null", orderLines.getOrderLineItem(8, 99).equals(new OrderLineItem(-1, -1, new BigDecimal(-1))));
+        OrderLineItem oli = new OrderLineItem(new Order.OrderBuilder().orderID("-1").build(), new Product.ProductBuilder().productID("-1").build(), new BigDecimal(-1));
+        when(orderLinePersistence.getOrderLineItem(8, 99)).thenReturn(oli);
+
+        OrderLineItem test = orderLines.getOrderLineItem(8, 99);
+        assertTrue("Should be null", test.equals(new OrderLineItem(new Order.OrderBuilder().orderID("-1").build(), new Product.ProductBuilder().productID("-1").build(), new BigDecimal(-1))));
 
         System.out.println("Starting  testInsertOrderLineItemNotPresent ");
+
     }
 }

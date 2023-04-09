@@ -4,14 +4,22 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.GoCart.business.AccessOrders;
 import comp3350.GoCart.objects.Order;
-import comp3350.GoCart.persistence.stubs.OrderPresistenceStub;
+import comp3350.GoCart.objects.Store;
+import comp3350.GoCart.objects.User;
+import comp3350.GoCart.persistence.OrderPersistence;
+import static org.mockito.Mockito.*;
+
+
 
 public class AccessOrdersTest extends TestCase {
     private AccessOrders accessOrders;
+    private OrderPersistence orderPersistence;
+
 
     public AccessOrdersTest() {
         super();
@@ -35,10 +43,11 @@ public class AccessOrdersTest extends TestCase {
         List<Order> sortedByOrder = accessOrders.getSortedOrders(1);
 
         for(int i = 0; i < sortedByOrder.size()-1; i++) {
-            assertTrue("Orders should be sorted", sortedByOrder.get(i).getOrderID() < sortedByOrder.get(i+1).getOrderID());
+            assertTrue("Orders should be sorted" , Integer.parseInt(sortedByOrder.get(i).getOrderID()) < Integer.parseInt(sortedByOrder.get(i+1).getOrderID()));
         }
 
         System.out.println("Finished testGetSortedOrdersCustomerPresent");
+
 
     }
 
@@ -60,14 +69,27 @@ public class AccessOrdersTest extends TestCase {
     @Test
     public void testInsertingOrders() {
         System.out.println("Starting testInsertingOrders");
+        Order order1 = new Order("7", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build());
+        Order order2 = new Order("8", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build());
+        Order order3 = new Order("9", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build());
 
-        Order first = accessOrders.insertOrder(new Order(13, 5, 4));
-        Order second = accessOrders.insertOrder(new Order(14, 6, 4));
-        Order third = accessOrders.insertOrder(new Order(15, 7, 4));
+        when(orderPersistence.insertOrder(order1)).thenReturn(order1);
+        when(orderPersistence.insertOrder(order2)).thenReturn(order2);
+        when(orderPersistence.insertOrder(order3)).thenReturn(order3);
 
-        assertTrue("Order should be added and able to get", first.equals(accessOrders.getOrder(first.getOrderID())));
-        assertTrue("Order should be added and able to get", second.equals(accessOrders.getOrder(second.getOrderID())));
-        assertTrue("Order should be added and able to get", third.equals(accessOrders.getOrder(third.getOrderID())));
+        Order first = accessOrders.insertOrder(order1);
+        Order second = accessOrders.insertOrder(order2);
+        Order third = accessOrders.insertOrder(order3);
+
+        when(orderPersistence.getOrder(7)).thenReturn(first);
+        when(orderPersistence.getOrder(8)).thenReturn(second);
+        when(orderPersistence.getOrder(9)).thenReturn(third);
+
+
+        assertTrue("Order should be added and able to get", first.equals(accessOrders.getOrder(Integer.parseInt(first.getOrderID()))));
+        assertTrue("Order should be added and able to get", second.equals(accessOrders.getOrder(Integer.parseInt(second.getOrderID()))));
+        assertTrue("Order should be added and able to get", third.equals(accessOrders.getOrder(Integer.parseInt(third.getOrderID()))));
+
 
 
         System.out.println("Finished testInsertingOrders");
@@ -78,10 +100,12 @@ public class AccessOrdersTest extends TestCase {
     public void getOrderNotThere() {
         System.out.println("Starting getOrderNotThere");
 
-        assertTrue("Order should be impossible order values returned", accessOrders.getOrder(99).equals(new Order(-1, -1, -1)));
+        when(accessOrders.getOrder(99)).thenReturn(new Order("-1", new User.UserBuilder().userID(-1).build(), new Store.StoreBuilder().storeID("-1").build()));
 
+        assertEquals("Order should be impossible order values returned", accessOrders.getOrder(99), new Order("-1", new User.UserBuilder().userID(-1).build(), new Store.StoreBuilder().storeID("-1").build()));
 
         System.out.println("Finished getOrderNotThere");
+        ;
 
     }
 
