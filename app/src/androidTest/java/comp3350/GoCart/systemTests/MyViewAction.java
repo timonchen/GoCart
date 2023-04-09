@@ -1,4 +1,4 @@
-package comp3350.GoCart;
+package comp3350.GoCart.systemTests;
 
 import android.view.View;
 import android.widget.EditText;

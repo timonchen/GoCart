@@ -1,10 +1,15 @@
-package comp3350.GoCart;
+package comp3350.GoCart.systemTests;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
 
+import static androidx.test.espresso.Espresso.onData;
+import static androidx.test.espresso.matcher.RootMatchers.isPlatformPopup;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.hasToString;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.instanceOf;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
@@ -13,19 +18,20 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 
-import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.contrib.RecyclerViewActions;
 
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
+import comp3350.GoCart.R;
 import comp3350.GoCart.presentation.HomeActivity;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class DietaryRestrictionTest {
+public class SearchProductByCategoryTest {
     @Rule
     public ActivityTestRule<HomeActivity> rule = new ActivityTestRule<>(HomeActivity.class);
 
@@ -34,7 +40,7 @@ public class DietaryRestrictionTest {
     public void dietaryRestriction (){
 
         //login to account
-        onView(withId(R.id.loginButtonOnStart)).perform(click());
+        onView(ViewMatchers.withId(R.id.loginButtonOnStart)).perform(click());
         onView(withId(R.id.editLoginEmail)).perform(typeText("testuser@gmail.com"));
         onView(withId(R.id.editLoginPassword)).perform(typeText("testuser"));
         onView(withId(R.id.button)).perform(click());
@@ -49,13 +55,17 @@ public class DietaryRestrictionTest {
         onView(withId(R.id.storesRecView)).perform(RecyclerViewActions.actionOnItemAtPosition(0,click()));
 
         //Select peanut free product button and click
-        onView(withId(R.id.allergenSwitch)).perform(click());
+        onView(withId(R.id.categorySpinner)).perform(click());
 
-        // Verify product names of dpeanut free products
-        String[] productNames = {"Beef Jerkey", "Ice-cream", "toilet paper", "Banana"}; // Replace with expected product names
-        for (int i = 0; i < productNames.length; i++) {
-            onView(withId(R.id.productsRecView)).perform(RecyclerViewActions.actionOnItemAtPosition(i, MyViewAction.checkChildTextViewWithId(R.id.productName, productNames[i])));
-        }
+        // Select the sub-category "meat" from the spinner
+        onData(allOf(is(instanceOf(String.class)), hasToString("meat")))
+                .inRoot(isPlatformPopup())
+                .perform(click());
+
+        //verifying that the product displayed is meat
+        onView(withId(R.id.productsRecView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, MyViewAction.checkChildTextViewWithId(R.id.productName, "Beef Jerkey")));
+
+
 
 
     }
