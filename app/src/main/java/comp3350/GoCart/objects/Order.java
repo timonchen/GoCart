@@ -27,7 +27,7 @@ public class Order {
 
     public boolean equals(Object otherOrder) {
         if(otherOrder instanceof Order) {
-            return orderID == ((Order) otherOrder).getOrderID();
+            return orderID.equals(((Order) otherOrder).getOrderID());
         }
 
         return false;

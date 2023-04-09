@@ -13,10 +13,12 @@ import org.junit.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import comp3350.GoCart.business.AccessStores;
 import comp3350.GoCart.objects.Store;
+import comp3350.GoCart.persistence.StorePersistence;
 
 
 /*
@@ -25,10 +27,23 @@ import comp3350.GoCart.objects.Store;
 public class GetClosetStoresTest {
 
     private AccessStores accessStores;
+    private StorePersistence storePersistence;
 
     public GetClosetStoresTest() {
         super();
-        accessStores = mock(AccessStores.class);
+        storePersistence = mock(StorePersistence.class);
+        accessStores = new AccessStores(storePersistence);
+
+        List<Store> storeList = new ArrayList<>();
+        //stores to return for mock
+        storeList.add(new Store("1","Walmart", "35 Lakewood Blvd Winnipeg"));
+        storeList.add(new Store("2","Walmart", "1576 Regent Ave Winnipeg"));
+        storeList.add(new Store("3","Costco", "1499 Regent Ave W Winnipeg"));
+        storeList.add(new Store("4","Costco", "2365 McGillivray Blvd Winnipeg"));
+        storeList.add(new Store("5","Safeway", "2025 Corydon Ave Winnipeg"));
+        storeList.add(new Store("6","Safeway", "655 Osborne Winnipeg"));
+
+        when(storePersistence.getAllStores()).thenReturn(storeList);
     }
 
 
@@ -45,6 +60,7 @@ public class GetClosetStoresTest {
     @Test
     public void testValidAddress() throws Exception {
         System.out.println("\nStarting GetClosestStores: valid address");
+
 
         List<Store> nearestStores = accessStores.getNearestStores("50 shoreview bay");
 

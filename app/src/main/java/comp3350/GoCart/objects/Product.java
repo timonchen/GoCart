@@ -13,7 +13,7 @@ public class Product {
     private  boolean peanutAllergy;
 
     private Product() {}
-    public Product(final String newProductID, final String newProductName,boolean peanutAllergy, final String category){
+    public Product(final String newProductID, final String newProductName, boolean peanutAllergy, final String category){
         productID = newProductID;
         productName = newProductName;
         this.peanutAllergy = peanutAllergy;

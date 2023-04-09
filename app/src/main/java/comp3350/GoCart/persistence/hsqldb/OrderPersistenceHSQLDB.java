@@ -46,6 +46,7 @@ public class OrderPersistenceHSQLDB implements OrderPersistence {
             statement.setInt(1, Integer.parseInt(toInsert.getOrderID()));
             statement.setInt(2, toInsert.getCustomerID());
             statement.setInt(3, Integer.parseInt(toInsert.getStoreID()));
+            statement.executeUpdate();
             return toInsert;
         } catch (SQLException e) {
             throw new PersistenceException(e);

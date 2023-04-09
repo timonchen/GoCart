@@ -15,12 +15,23 @@ public class AccessOrdersTest extends TestCase {
 
     public AccessOrdersTest() {
         super();
-        accessOrders = new AccessOrders(new OrderPresistenceStub());
+        orderPersistence = mock(OrderPersistence.class);
+        accessOrders = new AccessOrders(orderPersistence);
+
+        List<Order> orders = new ArrayList<>();
+        orders.add(new Order("5", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build()));
+        orders.add(new Order("2", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build()));
+        orders.add(new Order("4", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build()));
+        orders.add(new Order("1", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build()));
+        orders.add(new Order("3", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build()));
+
+        when(orderPersistence.getAllOrders(1)).thenReturn(orders);
     }
 
     @Test
     public void testGetSortedOrdersCustomerPresent() {
         System.out.println("Starting testGetSortedOrdersCustomerPresent");
+
         List<Order> sortedByOrder = accessOrders.getSortedOrders(1);
 
         for(int i = 0; i < sortedByOrder.size()-1; i++) {
@@ -34,6 +45,8 @@ public class AccessOrdersTest extends TestCase {
     @Test
     public void testGetSortedOrdersCustomerNotThere() {
         System.out.println("Starting testGetSortedOrdersCustomerNotThere");
+
+
         List<Order> sortedByOrder = accessOrders.getSortedOrders(15);
 
 
