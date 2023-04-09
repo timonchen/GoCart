@@ -16,7 +16,7 @@ import comp3350.GoCart.tests.utils.TestUtils;
 import java.util.ArrayList;
 import static org.junit.Assert.*;
 
-public class SearchProductsByCategoryTest {
+public class ProductCategoryIT {
     private AccessProducts accessProducts;
     private List<Product> products;
     private List<String> allCategories;
@@ -34,7 +34,7 @@ public class SearchProductsByCategoryTest {
     public void testNullSearch() {
         System.out.println("\nTest: searching products with null");
 
-        products = accessProducts.searchProductsByCategory(null);
+        products = accessProducts.productCatogory(null);
         assertTrue("It should not return any product because searching with null category", products.isEmpty());
 
         System.out.println("Finished test: searching products with null category");
@@ -48,7 +48,7 @@ public class SearchProductsByCategoryTest {
 
         products = new ArrayList<>();
         products.add(new Product("3846", "Ice-cream", false, "diary"));
-        List<Product> matchingProducts = accessProducts.searchProductsByCategory("dairy");
+        List<Product> matchingProducts = accessProducts.productCatogory("dairy");
         System.out.println(matchingProducts.toString());
         assertEquals("Should return the correct product searched irrespective of the case.", products, matchingProducts);
 
@@ -75,7 +75,7 @@ public class SearchProductsByCategoryTest {
     public void getCategoryTest() {
         System.out.println("\nTest: searching products with meat");
 
-        products = accessProducts.searchProductsByCategory("meat");
+        products = accessProducts.productCatogory("meat");
 
         assertTrue("1st product in the list should have meat as category", products.get(0).getProductCategory().equals("meat"));
 

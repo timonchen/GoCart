@@ -57,7 +57,7 @@ public class ProductPersistenceHSQLDB implements ProductPersistence {
     }
 
     @Override
-    public List<Product> searchProductsByCategory(String category) {
+    public List<Product> productCategory(String category) {
         List<Product> matchingProducts = new ArrayList<>();
 
         try (final Connection c = connection()) {
