@@ -363,8 +363,10 @@ public class UsersActivity extends Activity
                     editPhone.setError("Phone must contain 10 digits.");
                 }
                 else {
+                    System.out.println("pre update " + loggedInUser.getPhone());
                     loggedInUser.updatePhone(phone);
                     accessUsers.updateUser(loggedInUser);
+                    System.out.println("pre update " + loggedInUser.getPhone());
                     TextView textView = (TextView) findViewById(R.id.textViewUserPhone);
                     textView.setText(loggedInUser.getPhone() + "");
                     textView.setVisibility(View.VISIBLE);

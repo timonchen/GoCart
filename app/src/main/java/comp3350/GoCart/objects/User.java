@@ -175,10 +175,7 @@ public class User implements Parcelable
         }
     }
 
-    public void updatePhone(int phone)
-    {
-        this.phone = phone;
-    }
+    public void updatePhone(int phone){ this.phone = phone; }
 
     public void updateEmail(String email)
     {
