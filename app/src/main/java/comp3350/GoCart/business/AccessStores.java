@@ -39,7 +39,6 @@ public class AccessStores{
         return Collections.unmodifiableList(stores);
     }
 
-    // This needs to be refactored to use int ids instead of strings
     public Store getStoreByID(String id) {
         stores = getStores();
         Store matchingStore = null;

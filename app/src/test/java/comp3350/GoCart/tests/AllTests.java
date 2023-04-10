@@ -15,6 +15,7 @@ import comp3350.GoCart.tests.business.DistanceCalculatorTest;
 import comp3350.GoCart.tests.business.GetClosetStoresTest;
 import comp3350.GoCart.tests.business.ShoppingCartTest;
 import comp3350.GoCart.tests.business.CheapestStoreTest;
+import comp3350.GoCart.tests.business.UserAccountsTest;
 import comp3350.GoCart.tests.objects.OrderLineTest;
 import comp3350.GoCart.tests.objects.OrderTest;
 import comp3350.GoCart.tests.objects.ProductTest;
@@ -39,9 +40,7 @@ import comp3350.GoCart.tests.objects.UserTest;
         ProductTest.class,
         StoreTest.class,
         UserTest.class,
-
-        //UserAccountsTest.class
-
+        UserAccountsTest.class
 })
 
 public class AllTests {
