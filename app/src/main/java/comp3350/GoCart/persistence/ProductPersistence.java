@@ -6,7 +6,7 @@ import comp3350.GoCart.objects.Product;
 
 public interface ProductPersistence {
 
-    //likely wont be needed
+
     List<Product> getDietaryRestrictedProducts();
 
     List<Product> searchProductsByName(String productName);
