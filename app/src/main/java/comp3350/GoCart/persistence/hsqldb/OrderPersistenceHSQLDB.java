@@ -1,5 +1,8 @@
 package comp3350.GoCart.persistence.hsqldb;
 
+/*
+This is the OrderPersistenceHSQLDB class which deals with all querying for our DB with regards to Orders
+ */
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -22,10 +25,13 @@ public class OrderPersistenceHSQLDB implements OrderPersistence {
         this.dbPath = dbPath;
     }
 
+    //opens a connection to the DB with the account
     private Connection connection() throws SQLException {
         return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
     }
 
+    //This takes a result set that is generated from a query
+    //It generates an approriate order from the restult set and returns this
     private Order fromResultSet(final ResultSet rs) throws SQLException {
         final String orderID = rs.getString("OID");
         final int customerID = Integer.parseInt(rs.getString("CID"));
@@ -39,6 +45,8 @@ public class OrderPersistenceHSQLDB implements OrderPersistence {
 
     }
 
+    //this inserts an order into the db
+    //It does so by executing an update
     @Override
     public Order insertOrder(Order toInsert) {
         try(Connection conn = connection()) {
@@ -55,6 +63,8 @@ public class OrderPersistenceHSQLDB implements OrderPersistence {
 
     }
 
+    //this simply gets order from the given order ID as a paramters
+    //returns this order if it was found
     @Override
     public Order getOrder(int orderID) {
         try(Connection conn = connection()) {
@@ -72,6 +82,8 @@ public class OrderPersistenceHSQLDB implements OrderPersistence {
         }
     }
 
+    //this simply gets all the orders from the order table where the cID matches the paramter given
+    //returns a list of all the ordres after
     @Override
     public List<Order> getAllOrders(int customerID) {
         List<Order> allOrders = new ArrayList<>();

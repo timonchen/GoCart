@@ -1,5 +1,10 @@
 package comp3350.GoCart.persistence.hsqldb;
 
+/*
+This is the access Orders class and deals with all logic needed for the orders in our app
+IT interacts with the DB through the orderPersistence interface
+ */
+
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
