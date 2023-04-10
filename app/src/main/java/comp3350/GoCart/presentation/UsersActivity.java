@@ -61,8 +61,6 @@ public class UsersActivity extends Activity
             userPhone.setText((loggedInUser.getPhone()) + "");
 
             TextView userEmail = (TextView) findViewById(R.id.textViewUserEmail);
-            System.out.println("            TextView userEmail = (TextView) findViewById(R.id.textViewUserEmail);\n");
-            System.out.println("user email: " + loggedInUser.getEmail());
             userEmail.setText(loggedInUser.getEmail());
         }
     }
@@ -265,7 +263,6 @@ public class UsersActivity extends Activity
 
     public void buttonInitializeUpdateUserNameOnClick(View v)
     {
-        System.out.println("Inside buttonInitializeUpdateUserNameOnClick");
         TextView textView = (TextView) findViewById(R.id.textViewUserName);
         EditText editText = (EditText) findViewById(R.id.editViewUserName);
         editText.setText(loggedInUser.getName());
@@ -324,7 +321,6 @@ public class UsersActivity extends Activity
     }
 
     public void buttonInitializeUpdateUserPhoneOnClick(View v) {
-        System.out.println("Inside buttonInitializeUpdateUserPhoneOnClick");
         TextView textView = (TextView) findViewById(R.id.textViewUserPhone);
         EditText editText = (EditText) findViewById(R.id.editViewUserPhone);
         editText.setText(loggedInUser.getPhone() + "");
@@ -350,7 +346,6 @@ public class UsersActivity extends Activity
 
     public void buttonCompleteUpdateUserPhoneOnClick(View v)
     {
-        System.out.println("Inside buttonCompleteUpdateUserPhoneOnClick");
         EditText editPhone = (EditText) findViewById(R.id.editViewUserPhone);
         int phone = 0;
         if (!TextUtils.isEmpty(editPhone.getText().toString())) {
@@ -372,7 +367,6 @@ public class UsersActivity extends Activity
                     ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) textViewEmail.getLayoutParams();
                     layoutParams.topToBottom = R.id.textViewUserPhone;
                     textViewEmail.setLayoutParams(layoutParams);
-                    System.out.println("end");
 
                     Button initializeUpdatePhoneButton = (Button) findViewById(R.id.buttonInitializeUpdatePhone);
                     Button completeUpdatePhoneButton = (Button) findViewById(R.id.buttonCompleteUpdatePhone);
@@ -400,7 +394,6 @@ public class UsersActivity extends Activity
 
     public void buttonInitializeUpdateUserEmailOnClick(View v)
     {
-        System.out.println("Inside buttonInitializeUpdateUserEmailOnClick");
         TextView textView = (TextView) findViewById(R.id.textViewUserEmail);
         EditText editText = (EditText) findViewById(R.id.editViewUserEmail);
         editText.setText(loggedInUser.getEmail());
@@ -416,11 +409,9 @@ public class UsersActivity extends Activity
 
     public void buttonCompleteUpdateUserEmailOnClick(View v)
     {
-        System.out.println("Inside buttonCompleteUpdateUserEmailOnClick");
         EditText editEmail = (EditText) findViewById(R.id.editViewUserEmail);
         String email;
         if (!TextUtils.isEmpty(editEmail.getText().toString())) {
-            System.out.println("inside !TextUtils.isEmpty(editEmail.getText().toString()))");
             email = editEmail.getText().toString();
             if (!email.contains("@") || !email.contains("."))
             {
@@ -429,7 +420,6 @@ public class UsersActivity extends Activity
             else {
                 loggedInUser.updateEmail(email);
                 accessUsers.updateUser(loggedInUser);
-                System.out.println("email = " + email);
                 TextView textView = (TextView) findViewById(R.id.textViewUserEmail);
                 textView.setText(loggedInUser.getEmail());
                 textView.setVisibility(View.VISIBLE);

@@ -119,11 +119,11 @@ public class UserPersistenceHSQLDB implements UserPersistence
         return new User(cID, firstName, lastName, address, city, province, zipCode, phone, email, password);
     }
 
-    public void updateUserName(User user, String newName)
+    public void updateUser(User user)
     {
-        try (final Connection connection = connection()){
+        try (final Connection connection = connection()) {
             int cID = user.getUserID();
-            String query = "update customers FIRSTNAME = ?, LASTNAME = ?, ADDRESS = ?, CITY = ?, PROVINCE = ?, ZIPCODE = ?, PHONE = ?, EMAIL = ?, PASSWORD = ? where CID = ?";
+            String query = "update customers set FIRSTNAME = ?, LASTNAME = ?, ADDRESS = ?, CITY = ?, PROVINCE = ?, ZIPCODE = ?, PHONE = ?, EMAIL = ?, PASSWORD = ? where CID = ?";
             final PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, user.getFirstName());
             statement.setString(2, user.getLastName());
@@ -136,18 +136,6 @@ public class UserPersistenceHSQLDB implements UserPersistence
             statement.setString(9, user.getPassword());
             statement.setInt(10, cID);
             statement.executeUpdate();
-        }
-        catch (final SQLException e)
-        {
-            throw new PersistenceException(e);
-        }
-    }
-
-
-    public void updateUser(User user)
-    {
-        try (final Connection c = connection()) {
-            String query = "delete from customers where CID = ?";
         } catch (final SQLException e) {
             throw new PersistenceException(e);
         }
