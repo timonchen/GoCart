@@ -13,10 +13,10 @@ import comp3350.GoCart.R;
 
 public class Const {
     private Const(){}
-    public static final String User1Name = "testuser@gmail.com";
-    public static final String User1pass = "testuser";
-    public static final String User2Name = "testuser@gmail.com";
-    public static final String User2pass = "testuser";
+    public static final String User1Name = "testuser1@gmail.com";
+    public static final String User1pass = "testuser1";
+    public static final String User2Name = "testuser2@gmail.com";
+    public static final String User2pass = "testuser2";
 
     public static final void login(String uName,String pass){
         onView(ViewMatchers.withId(R.id.loginButtonOnStart)).perform(click());

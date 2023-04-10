@@ -64,10 +64,9 @@ public class UserAccountTest {
         onView(withId(R.id.userAccountButton)).check(matches(withText("TU")));
         onView(withId(R.id.userAccountButton)).perform(click());
 
-
-        onView(withId(R.id.textViewUserName)).check( matches(withText("test user")));
-        onView(withId(R.id.textViewUserPhone)).check( matches(withText("0")));
-        onView(withId(R.id.textViewUserEmail)).check( matches(withText("testuser@gmail.com")));
+        onView(withId(R.id.textViewUserName)).check( matches(withText("test1 user1")));
+        onView(withId(R.id.textViewUserPhone)).check( matches(withText("User Phone")));
+        onView(withId(R.id.textViewUserEmail)).check( matches(withText("testuser1@gmail.com")));
     }
 
 
