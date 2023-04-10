@@ -1,8 +1,9 @@
 # Purpose of the project
-The purpose of this project is to create an app that allows users to shop for their groceries and easily find the cheapest order.
-
+The purpose of this project is to create an app that allows users to order groceries from local stores, compare prices between stores and find the best deal 
+for a shopping list the user might have.
 # How to run the project
-To run this project, you need to open the project folder in android studio and run the app.
+To build the project, on android studio Select `File` » `New` » `Project from version control` and paste the gitlab url. Build the app and then run.
+
 
 # Other md files
 VISION.md
@@ -13,3 +14,6 @@ https://code.cs.umanitoba.ca/comp3350-winter2023/a02-g02-frontrow/-/blob/main/AR
 <br />
 RETROSPECTIVE.md
 https://code.cs.umanitoba.ca/comp3350-winter2023/a02-g02-frontrow/-/blob/main/RETROSPECTIVE.md
+
+
+
