@@ -125,6 +125,12 @@ public class AccessUsers
         return userPersistence.getUser(email, password);
     }
 
+    public int getNumUsers()
+    {
+        return userPersistence.getNumUsers();
+    }
+
+
     public void updateUser(User theUser)
     {
         userPersistence.updateUser(theUser);
