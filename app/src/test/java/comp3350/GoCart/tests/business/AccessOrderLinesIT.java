@@ -45,8 +45,8 @@ public class AccessOrderLinesIT {
         this.accessOrders = new AccessOrders(orderPersistence);
 
         //enter some orders into the DB so we can add order line items
-        accessOrders.insertOrder(new Order("1", new User.UserBuilder().userID(60).build(), new Store.StoreBuilder().storeID("1").build()));
-        accessOrders.insertOrder(new Order("2", new User.UserBuilder().userID(60).build(), new Store.StoreBuilder().storeID("2").build()));
+        accessOrders.insertOrder(new Order("1", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build()));
+        accessOrders.insertOrder(new Order("2", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("2").build()));
     }
 
     @Test

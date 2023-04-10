@@ -32,9 +32,9 @@ public class AccessOrdersIT {
         this.accessOrders = new AccessOrders(persistence);
 
         //insert some orders
-        Order order1 = new Order("1", new User.UserBuilder().userID(60).build(), new Store.StoreBuilder().storeID("1").build());
-        Order order2 = new Order("2", new User.UserBuilder().userID(60).build(), new Store.StoreBuilder().storeID("2").build());
-        Order order3 = new Order("3", new User.UserBuilder().userID(60).build(), new Store.StoreBuilder().storeID("1").build());
+        Order order1 = new Order("1", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build());
+        Order order2 = new Order("2", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("2").build());
+        Order order3 = new Order("3", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build());
         accessOrders.insertOrder(order1);
         accessOrders.insertOrder(order2);
         accessOrders.insertOrder(order3);
@@ -44,9 +44,9 @@ public class AccessOrdersIT {
     public void insertOrders() {
         System.out.println("Testing inserting orders with DB");
         //insert some orders
-        Order order1 = new Order("4", new User.UserBuilder().userID(60).build(), new Store.StoreBuilder().storeID("1").build());
-        Order order2 = new Order("5", new User.UserBuilder().userID(60).build(), new Store.StoreBuilder().storeID("2").build());
-        Order order3 = new Order("6", new User.UserBuilder().userID(60).build(), new Store.StoreBuilder().storeID("1").build());
+        Order order1 = new Order("4", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build());
+        Order order2 = new Order("5", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("2").build());
+        Order order3 = new Order("6", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build());
 
         //insert the orders to the DB
         accessOrders.insertOrder(order1);
