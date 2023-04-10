@@ -13,8 +13,8 @@ public class UserTest
         User user;
         System.out.println("\nStarting testUser1");
 
-        user = new User(1178, "Samuel", "Smith", "117 Becontree Bay", "Winnipeg", "MB", "R2M 0T7", 1111111111, "samsmith11@gmail.com", "smith783");
-        assertEquals(1178, user.getUserID());
+        user = new User("1178", "Samuel", "Smith", "117 Becontree Bay", "Winnipeg", "MB", "R2M 0T7", 1111111111, "samsmith11@gmail.com", "smith783");
+        assertTrue("1178".equals(user.getUserID()));
         assertEquals("Samuel", user.getFirstName());
         assertEquals("Smith", user.getLastName());
         assertEquals("117 Becontree Bay", user.getAddress());

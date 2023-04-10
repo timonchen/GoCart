@@ -35,7 +35,7 @@ public class UserPersistenceHSQLDB implements UserPersistence
             String query = "INSERT INTO CUSTOMERS VALUES(?,?,?,?,?,?,?,?,?,?)";
             final PreparedStatement statement = connection.prepareStatement(query);
 
-            newUser.setUserID(getNumUsers() + 1);
+            newUser.setUserID(String.valueOf(getNumUsers() + 1));
 
             statement.setString(1, String.valueOf(getNumUsers() + 1));
             statement.setString(2, newUser.getFirstName());
@@ -113,13 +113,13 @@ public class UserPersistenceHSQLDB implements UserPersistence
         final String email = resultSet.getString("EMAIL");
         final String password = resultSet.getString("PASSWORD");
 
-        return new User(cID, firstName, lastName, address, city, province, zipCode, phone, email, password);
+        return new User(String.valueOf(cID), firstName, lastName, address, city, province, zipCode, phone, email, password);
     }
 
     public void updateUser(User user)
     {
         try (final Connection connection = connection()) {
-            int cID = user.getUserID();
+            String cID = user.getUserID();
             String query = "update customers set FIRSTNAME = ?, LASTNAME = ?, ADDRESS = ?, CITY = ?, PROVINCE = ?, ZIPCODE = ?, PHONE = ?, EMAIL = ?, PASSWORD = ? where CID = ?";
             final PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, user.getFirstName());
@@ -131,7 +131,7 @@ public class UserPersistenceHSQLDB implements UserPersistence
             statement.setString(7, String.valueOf(user.getPhone()));
             statement.setString(8, user.getEmail());
             statement.setString(9, user.getPassword());
-            statement.setInt(10, cID);
+            statement.setInt(10, Integer.parseInt(cID));
             statement.executeUpdate();
         } catch (final SQLException e) {
             throw new PersistenceException(e);

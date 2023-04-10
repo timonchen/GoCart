@@ -2,7 +2,7 @@ package comp3350.GoCart.objects;
 
 public class User
 {
-    private int userID;
+    private String userID;
     private String firstName;
     private String lastName;
     private String address;
@@ -15,7 +15,7 @@ public class User
 
 
     private User() {}
-    public User(int userID, final String firstName, final String lastName, final String address, final String city, final String province, final String zipCode, final int phone, final String email, final String password) {
+    public User(String userID, final String firstName, final String lastName, final String address, final String city, final String province, final String zipCode, final int phone, final String email, final String password) {
         this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -33,7 +33,7 @@ public class User
         return Character.toUpperCase(this.firstName.charAt(0)) + "" + Character.toUpperCase(this.lastName.charAt(0));
     }
 
-    public int getUserID()
+    public String getUserID()
     {
         return userID;
     }
@@ -89,7 +89,7 @@ public class User
         return password;
     }
 
-    public void setUserID(int userID)
+    public void setUserID(String userID)
     {
         this.userID = userID;
     }
@@ -134,7 +134,7 @@ public class User
             this.user = new User();
         }
 
-        public UserBuilder userID(int userID) {
+        public UserBuilder userID(String userID) {
             this.user.userID = userID;
             return this;
         }

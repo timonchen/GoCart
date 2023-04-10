@@ -27,11 +27,11 @@ public class AccessOrdersTest extends TestCase {
         accessOrders = new AccessOrders(orderPersistence);
 
         List<Order> orders = new ArrayList<>();
-        orders.add(new Order("5", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build()));
-        orders.add(new Order("2", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build()));
-        orders.add(new Order("4", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build()));
-        orders.add(new Order("1", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build()));
-        orders.add(new Order("3", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build()));
+        orders.add(new Order("5", new User.UserBuilder().userID("1").build(), new Store.StoreBuilder().storeID("1").build()));
+        orders.add(new Order("2", new User.UserBuilder().userID("1").build(), new Store.StoreBuilder().storeID("1").build()));
+        orders.add(new Order("4", new User.UserBuilder().userID("1").build(), new Store.StoreBuilder().storeID("1").build()));
+        orders.add(new Order("1", new User.UserBuilder().userID("1").build(), new Store.StoreBuilder().storeID("1").build()));
+        orders.add(new Order("3", new User.UserBuilder().userID("1").build(), new Store.StoreBuilder().storeID("1").build()));
 
         when(orderPersistence.getAllOrders(1)).thenReturn(orders);
     }
@@ -69,9 +69,9 @@ public class AccessOrdersTest extends TestCase {
     @Test
     public void testInsertingOrders() {
         System.out.println("Starting testInsertingOrders");
-        Order order1 = new Order("7", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build());
-        Order order2 = new Order("8", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build());
-        Order order3 = new Order("9", new User.UserBuilder().userID(1).build(), new Store.StoreBuilder().storeID("1").build());
+        Order order1 = new Order("7", new User.UserBuilder().userID("1").build(), new Store.StoreBuilder().storeID("1").build());
+        Order order2 = new Order("8", new User.UserBuilder().userID("1").build(), new Store.StoreBuilder().storeID("1").build());
+        Order order3 = new Order("9", new User.UserBuilder().userID("1").build(), new Store.StoreBuilder().storeID("1").build());
 
         when(orderPersistence.insertOrder(order1)).thenReturn(order1);
         when(orderPersistence.insertOrder(order2)).thenReturn(order2);
@@ -100,9 +100,9 @@ public class AccessOrdersTest extends TestCase {
     public void getOrderNotThere() {
         System.out.println("Starting getOrderNotThere");
 
-        when(accessOrders.getOrder(99)).thenReturn(new Order("-1", new User.UserBuilder().userID(-1).build(), new Store.StoreBuilder().storeID("-1").build()));
+        when(accessOrders.getOrder(99)).thenReturn(new Order("-1", new User.UserBuilder().userID("-1").build(), new Store.StoreBuilder().storeID("-1").build()));
 
-        assertEquals("Order should be impossible order values returned", accessOrders.getOrder(99), new Order("-1", new User.UserBuilder().userID(-1).build(), new Store.StoreBuilder().storeID("-1").build()));
+        assertEquals("Order should be impossible order values returned", accessOrders.getOrder(99), new Order("-1", new User.UserBuilder().userID("-1").build(), new Store.StoreBuilder().storeID("-1").build()));
 
         System.out.println("Finished getOrderNotThere");
         ;

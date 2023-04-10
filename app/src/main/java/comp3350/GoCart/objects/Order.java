@@ -17,7 +17,7 @@ public class Order {
         return orderID;
     }
 
-    public int getCustomerID() {
+    public String getCustomerID() {
         return user.getUserID();
     }
 
