@@ -65,14 +65,11 @@ public class UserPersistenceHSQLDB implements UserPersistence
             statement.setString(2, password);
 
             final ResultSet resultSet = statement.executeQuery();
-            System.out.println(" Query before result");
+
             while (resultSet.next())
             {
-                System.out.println("while");
                 user = fromResultSet(resultSet);
-                System.out.println("user:" + user.getName());
             }
-            System.out.println(" Query after result");
             resultSet.close();
             statement.close();
         }

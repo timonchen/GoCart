@@ -27,7 +27,6 @@ public class StorePersistenceHSQLDB implements StorePersistence{
 
     }
     private Connection connection() throws SQLException {
-        System.out.println("dbpath: " + dbPath);
         return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
     }
     private Store fromResultSet(final ResultSet rs) throws SQLException {
@@ -41,7 +40,6 @@ public class StorePersistenceHSQLDB implements StorePersistence{
         final List<Store> stores = new ArrayList<>();
 
         try (final Connection c = connection()) {
-            System.out.println("Connection worked");
             final Statement st = c.createStatement();
             final ResultSet rs = st.executeQuery("SELECT * FROM STORES");
             while (rs.next()) {

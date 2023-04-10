@@ -109,10 +109,7 @@ public class User
         }
     }
 
-    public void updatePhone(int phone)
-    {
-        this.phone = phone;
-    }
+    public void updatePhone(int phone){ this.phone = phone; }
 
     public void updateEmail(String email)
     {

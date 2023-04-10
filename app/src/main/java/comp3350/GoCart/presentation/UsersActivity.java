@@ -58,7 +58,6 @@ public class UsersActivity extends Activity
             userName.setText(loggedInUser.getName());
             
             TextView userPhone = (TextView) findViewById(R.id.textViewUserPhone);
-            userPhone.setText((loggedInUser.getPhone()) + "");
 
             TextView userEmail = (TextView) findViewById(R.id.textViewUserEmail);
             userEmail.setText(loggedInUser.getEmail());
@@ -356,8 +355,10 @@ public class UsersActivity extends Activity
                     editPhone.setError("Phone must contain 10 digits.");
                 }
                 else {
+
                     loggedInUser.updatePhone(phone);
                     accessUsers.updateUser(loggedInUser);
+
                     TextView textView = (TextView) findViewById(R.id.textViewUserPhone);
                     textView.setText(loggedInUser.getPhone() + "");
                     textView.setVisibility(View.VISIBLE);

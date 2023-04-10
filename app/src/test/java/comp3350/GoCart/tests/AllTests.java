@@ -39,6 +39,7 @@ import comp3350.GoCart.tests.objects.UserTest;
         ProductTest.class,
         StoreTest.class,
         UserTest.class,
+
         //UserAccountsTest.class
 
 })
