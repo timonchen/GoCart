@@ -30,18 +30,13 @@ public class AccessProductsTest {
         mockProductPersistence = mock(ProductPersistence.class);
         accessProducts = new AccessProducts(mockProductPersistence);
 
-
-
-
-
-
     }
 
     @Test
     // Method to test passing null as product name while searching
     public void testNullSearch()
     {
-        when(accessProducts.searchProductsByName(null)).thenReturn(new ArrayList<>());
+        when(mockProductPersistence.searchProductsByName(null)).thenReturn(new ArrayList<>());
 
         products = accessProducts.searchProductsByName(null);
 
@@ -58,7 +53,7 @@ public class AccessProductsTest {
         System.out.println("\nTest: searching products with empty string");
         List<Product> products = new ArrayList<>();
         products.add(new Product("4521", "Banana", false, "produce"));
-        when(accessProducts.searchProductsByName("")).thenReturn(products);
+        when(mockProductPersistence.searchProductsByName("")).thenReturn(products);
         List<Product> matchingProducts = accessProducts.searchProductsByName("");
         assertFalse("It should return all the products because no filter was put.", matchingProducts.isEmpty());    //returns all the products (no filter)
 
@@ -75,22 +70,22 @@ public class AccessProductsTest {
 
         products = new ArrayList<>();
         products.add(new Product("4521","Banana",false,"produce"));
-        when(accessProducts.searchProductsByName("banana")).thenReturn(products);
+        when(mockProductPersistence.searchProductsByName("banana")).thenReturn(products);
         List<Product> matchingProducts = accessProducts.searchProductsByName("banana");
         assertEquals("Should return the correct product searched irrespective of the case.", products, matchingProducts);
 
 
         products = new ArrayList<>();
         products.add(new Product( "6849","Rye Bread", true,"Bakery"));
-        when(accessProducts.searchProductsByName("RYE BREAD")).thenReturn(products);
-
+        when(mockProductPersistence.searchProductsByName("RYE BREAD")).thenReturn(products);
 
         matchingProducts = accessProducts.searchProductsByName("RYE BREAD");
         assertEquals("Should return the correct product searched irrespective of the case.", products, matchingProducts);
 
         products = new ArrayList<>();
         products.add(new Product( "6917","Whole Wheat Bread", true,"Bakery"));
-        when(accessProducts.searchProductsByName("wHOLE wHEAT bREAD")).thenReturn(products);
+        when(mockProductPersistence.searchProductsByName("wHOLE wHEAT bREAD")).thenReturn(products);
+
         matchingProducts = accessProducts.searchProductsByName("wHOLE wHEAT bREAD");
         assertEquals("Should return the correct product searched irrespective of the case.", products, matchingProducts);
 
@@ -111,7 +106,7 @@ public class AccessProductsTest {
         products.add(new Product("3818", "Lucky Charms", true, "bakery"));
         products.add(new Product("3984", "toilet paper", false, "house hold"));
         products.add(new Product("3846", "Ice-cream", false, "dairy"));
-        when(accessProducts.searchProductsByName("a")).thenReturn(products);
+        when(mockProductPersistence.searchProductsByName("a")).thenReturn(products);
 
         List<Product> matchingProducts = accessProducts.searchProductsByName("a");
         assertTrue("Should be same size", products.size() == matchingProducts.size());
@@ -133,7 +128,7 @@ public class AccessProductsTest {
 
         products.add(new Product("6849", "Rye Bread", true, "bakery"));
         products.add(new Product("6917", "Whole Wheat Bread", true, "bakery"));
-        when(accessProducts.searchProductsByName("bread")).thenReturn(products);
+        when(mockProductPersistence.searchProductsByName("bread")).thenReturn(products);
 
 
         List<Product> matchingProducts = accessProducts.searchProductsByName("bread");
@@ -160,7 +155,7 @@ public class AccessProductsTest {
         products.add(new Product("3818", "Lucky Charms", true, "bakery"));
         products.add(new Product("3984", "toilet paper", false, "house hold"));
         products.add(new Product("3846", "Ice-cream", false, "dairy"));
-        when(accessProducts.searchProductsByName(" ")).thenReturn(products);
+        when(mockProductPersistence.searchProductsByName(" ")).thenReturn(products);
         List<Product> matchingProducts = accessProducts.searchProductsByName(" ");
         assertTrue("Should be same size", products.size() == matchingProducts.size());
         for(int i = 0; i < products.size(); i++) {

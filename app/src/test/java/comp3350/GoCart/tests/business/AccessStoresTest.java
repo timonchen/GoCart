@@ -24,6 +24,7 @@ import comp3350.GoCart.persistence.StorePersistence;
 public class AccessStoresTest {
     private AccessStores accessStores;
     private StorePersistence storePersistence;
+    private List<Store> storeList;
 
 
     @Before
@@ -31,7 +32,7 @@ public class AccessStoresTest {
         storePersistence = mock(StorePersistence.class);
         accessStores = new AccessStores(storePersistence);
 
-        List<Store> storeList = new ArrayList<>();
+        storeList = new ArrayList<>();
         //stores to return for mock
         storeList.add(new Store("1","Walmart", "35 Lakewood Blvd Winnipeg"));
         storeList.add(new Store("2","Walmart", "1576 Regent Ave Winnipeg"));
@@ -46,9 +47,7 @@ public class AccessStoresTest {
     // Search for a store that does not exist
     @Test
     public void testNoStoresFound() {
-
         List<Store> result = accessStores.getStoresByName("SuperStore");
-
         assertTrue("List should be empty", result.isEmpty());
     }
 
