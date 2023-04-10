@@ -47,7 +47,7 @@ public class AccessStoreProduct {
     }
 
     /*
-    returns all products with matching name inside given store
+    returns all StoreProducts with a matching prdoduct name and storeID combination
      */
     public List<StoreProduct> getStoreProductsByName(String storeID, String productName) {
         storeProducts = getStoresProducts(storeID);
@@ -55,6 +55,7 @@ public class AccessStoreProduct {
 
         if (productName != null && storeID != null)
         {
+            // Go through all storeProducts with storeID, and look for storeProducts with the matching productName
             for (int i = 0; i < storeProducts.size(); i++)
             {
                 StoreProduct currStoreProduct = storeProducts.get(i);
