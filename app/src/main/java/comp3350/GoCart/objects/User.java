@@ -127,6 +127,7 @@ public class User
                 " Phone: " + phone + " Email: " + email + " Password: " + password;
     }
 
+    //this is the user build, used so we can build a user with whichever fields and then simply build all in one line
     public static class UserBuilder {
         private User user;
 

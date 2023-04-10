@@ -1,4 +1,9 @@
 package comp3350.GoCart.objects;
+/*
+* This is the orderline item which is exactly what it sounds like
+* Each order has order line items which have an order ID product ID and price paid
+* We use Order and Product to represent these fields
+*/
 
 import java.math.BigDecimal;
 

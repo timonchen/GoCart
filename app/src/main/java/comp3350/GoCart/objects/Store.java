@@ -9,7 +9,7 @@ import android.os.Parcelable;
 public class Store {
     private String storeID;
     private String storeName;
-    private String storeAddress; // zones
+    private String storeAddress;
     private double distToUser;
 
 
@@ -18,7 +18,7 @@ public class Store {
     public Store(final String newStoreID , final String newStoreName, final String newStoreAddress){
         storeAddress = newStoreAddress;
         storeName = newStoreName;
-        distToUser = 0;
+        distToUser = 0; //initally set to 0
         storeID = newStoreID;
     }
 
@@ -60,6 +60,7 @@ public class Store {
         return distToUser;
     }
 
+    //comparte to method to compre stores distances
     public double compareTo(Store other) {
         return distToUser - other.distToUser;
     }

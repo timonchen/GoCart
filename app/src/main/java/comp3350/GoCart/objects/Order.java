@@ -1,5 +1,9 @@
 package comp3350.GoCart.objects;
-
+/*
+ * This is the order objec which is exactly what it sounds like
+ * Each order has order line items which have an order ID a User ID and a Store ID
+ * We use User and Store to represent these fields
+ */
 public class Order {
 
     private String orderID;
@@ -33,6 +37,7 @@ public class Order {
         return false;
     }
 
+    //this is the order builder, used to build orders with whatever parametrs are needed
     public static class OrderBuilder {
         private Order order;
 
