@@ -35,7 +35,7 @@ public class DistanceCalculatorRandom implements DistanceCalculator{
             }
         }
 
-        System.out.println(count);
+
         Collections.sort(nearest, new Comparator<Store>() {
             @Override
             public int compare(Store s1, Store s2) {

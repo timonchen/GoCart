@@ -64,7 +64,6 @@ public class HomeActivity extends Activity {
     }
 
     private void copyDatabaseToDevice() {
-        System.out.println("here2");
 
         final String DB_PATH = "db";
 
@@ -90,8 +89,6 @@ public class HomeActivity extends Activity {
     }
 
     public void copyAssetsToDirectory(String[] assets, File directory) throws IOException {
-        System.out.println("here2");
-
         AssetManager assetManager = getAssets();
 
         for (String asset : assets) {
@@ -139,7 +136,6 @@ public class HomeActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
-        System.out.println("here6");
 
         if (requestCode == REQUEST_LOGIN && resultCode == RESULT_OK) {
             isLoggedIn = data.getBooleanExtra("loggedInStatus", false);  // defaultValue (false) is used if no result with key "loggedInStatus" was returned

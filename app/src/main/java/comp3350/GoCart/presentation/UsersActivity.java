@@ -58,11 +58,8 @@ public class UsersActivity extends Activity
             userName.setText(loggedInUser.getName());
             
             TextView userPhone = (TextView) findViewById(R.id.textViewUserPhone);
-            userPhone.setText((loggedInUser.getPhone()) + "");
 
             TextView userEmail = (TextView) findViewById(R.id.textViewUserEmail);
-            System.out.println("            TextView userEmail = (TextView) findViewById(R.id.textViewUserEmail);\n");
-            System.out.println("user email: " + loggedInUser.getEmail());
             userEmail.setText(loggedInUser.getEmail());
         }
     }
@@ -265,7 +262,6 @@ public class UsersActivity extends Activity
 
     public void buttonInitializeUpdateUserNameOnClick(View v)
     {
-        System.out.println("Inside buttonInitializeUpdateUserNameOnClick");
         TextView textView = (TextView) findViewById(R.id.textViewUserName);
         EditText editText = (EditText) findViewById(R.id.editViewUserName);
         editText.setText(loggedInUser.getName());
@@ -324,7 +320,6 @@ public class UsersActivity extends Activity
     }
 
     public void buttonInitializeUpdateUserPhoneOnClick(View v) {
-        System.out.println("Inside buttonInitializeUpdateUserPhoneOnClick");
         TextView textView = (TextView) findViewById(R.id.textViewUserPhone);
         EditText editText = (EditText) findViewById(R.id.editViewUserPhone);
         editText.setText(loggedInUser.getPhone() + "");
@@ -350,7 +345,6 @@ public class UsersActivity extends Activity
 
     public void buttonCompleteUpdateUserPhoneOnClick(View v)
     {
-        System.out.println("Inside buttonCompleteUpdateUserPhoneOnClick");
         EditText editPhone = (EditText) findViewById(R.id.editViewUserPhone);
         int phone = 0;
         if (!TextUtils.isEmpty(editPhone.getText().toString())) {
@@ -361,10 +355,10 @@ public class UsersActivity extends Activity
                     editPhone.setError("Phone must contain 10 digits.");
                 }
                 else {
-                    System.out.println("pre update " + loggedInUser.getPhone());
+
                     loggedInUser.updatePhone(phone);
                     accessUsers.updateUser(loggedInUser);
-                    System.out.println("pre update " + loggedInUser.getPhone());
+
                     TextView textView = (TextView) findViewById(R.id.textViewUserPhone);
                     textView.setText(loggedInUser.getPhone() + "");
                     textView.setVisibility(View.VISIBLE);
@@ -374,7 +368,6 @@ public class UsersActivity extends Activity
                     ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) textViewEmail.getLayoutParams();
                     layoutParams.topToBottom = R.id.textViewUserPhone;
                     textViewEmail.setLayoutParams(layoutParams);
-                    System.out.println("end");
 
                     Button initializeUpdatePhoneButton = (Button) findViewById(R.id.buttonInitializeUpdatePhone);
                     Button completeUpdatePhoneButton = (Button) findViewById(R.id.buttonCompleteUpdatePhone);

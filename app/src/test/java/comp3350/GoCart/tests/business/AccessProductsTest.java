@@ -41,7 +41,6 @@ public class AccessProductsTest {
     // Method to test passing null as product name while searching
     public void testNullSearch()
     {
-        System.out.println("\nTest: searching products with null");
         when(accessProducts.searchProductsByName(null)).thenReturn(new ArrayList<>());
 
         products = accessProducts.searchProductsByName(null);
