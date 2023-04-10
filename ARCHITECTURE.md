@@ -1,6 +1,6 @@
-# COMP3350 G06 Iteration 2
+# COMP3350 G06 Iteration 3
 ## GoCart Architecture
-Due: March 10, 2023
+Due: April 10, 2023
 
 ### Packages
 * Application
@@ -8,27 +8,28 @@ Due: March 10, 2023
 * Objects(comp3350.GoCart.objects)
 * Persistence(comp3350.GoCart.persistence)
     * HSQLDB
-    * stubs
 * Presentation(comp3350.GoCart.presentation)
+* Android Test(package comp3350.GoCart)
+    * systemTests
 * Test(comp3350.GoCart.test)
 	* Business(comp3350.GoCart.tests.business)
-	* Objects(ss(comp3350.GoCart.tests.objects)
+	* Objects(comp3350.GoCart.tests.objects)
 
 ### Layers
-| Presentation/UI     |      Logic/Business   	  	 |  Persistence/Data   		   |
-|---------------------|--------------------------------|-------------------------------|
-| Home page           | Access nearby stores	  	 | OrderPersistenceHSQLDB 	   |
-| Find store by name  | Access Srores by name  	  	 | ProductPersistenceHSQLDB      |
-| Find nearby stores  | Store Distance calculator	 | StorePersistenceHSQLDB	   |
-| Error Messages 	    | location Distance calculator   | StoreProductPersistenceHSQLDB |
-| find products	    | Access products by name		 | UserPersistenceHSQLDB         |
-| find products	    | Access Orders			 | OrderLinePersistenceHSQLDB    |
-| find products	    | Access OrderLineItem		 | OrderLinePersistenceStub	   |
-| Shopping cart       | Access users			 | OrderPresistenceStub      	   |
-| 			    | Shopping cart			 | ProductPersistenceStub        |
-| 			    | 					 | StorePersistenceStub          |
-| 			    | 					 | StoreProductPersistenceStub   |
-|     	          | 					 | UserPersistenceStub           |
+| Presentation/UI     |      Logic/Business   	  	 |  Persistence/Data   		       |
+|---------------------|------------------------------|---------------------------------|
+| Home page           | Access nearby stores	  	 | OrderPersistenceHSQLDB 	       |
+| Find store by name  | Access Srores by name  	  	 | ProductPersistenceHSQLDB        |
+| Find nearby stores  | Store Distance calculator	 | StorePersistenceHSQLDB	       |
+| Error Messages 	  | location Distance calculator | StoreProductPersistenceHSQLDB   |
+| find products	      | Access products by name		 | UserPersistenceHSQLDB           |
+| find products	      | Access Orders			     | OrderLinePersistenceHSQLDB      |
+| find products	      | Access OrderLineItem		 | 	 PersistenceException          |
+| Shopping cart       | Access users			     |                          	   |
+| User activity       | Shopping cart			     |                                 |
+| login/sign up	      |          					 |                                 |
+| Category            |                              |                                 |
+| get Deals           |                              |                                 |
 
 
 
@@ -49,17 +50,22 @@ classDiagram
     }
 
  class business{
+    AccessOrderLines
+    AccessOrders
 	AccessProducts
 	AccessStrores
+    AccessStroreProduct
 	DistanceCalculator
 	DistaanceCalculatorAPIs
 	DistanceCalculatorRandom
+    ShoppingCart
 
 
 
 }
 
 class objects{
+EmptyStore
 Product
 Store
 StoreProduct
@@ -69,19 +75,30 @@ User
 }
 
 class persistence{
+    OrderLinePersistence
+    OrderPersistence
 ProductPersistence
 StorePersistence
+StoreProductPersistence
+UserPersistence
 
 }
 
 class presentation{
 ClosestStoreRecViewAdapter
+DealsActivity
+enterHomeAddress
 FindClosetStoreActivity
 FindStoreActivity
 FindStoreByNameActivity
 HomeActivity
+Messages
+ProductActivity
+ProductsRecViewAdapter
+ShoppingCartActivity
+ShoppingCartAdapter
 StoresRecViewAdapter
-
+UserActivty
 
 }
 
@@ -93,6 +110,7 @@ StoresRecViewAdapter
     DSO <|-- Order
     DSO <|-- OrderLineItem
     DSO <|-- User
+    DSO <|-- EmptyStore
 
 class DSO{  
   }
@@ -106,6 +124,8 @@ BigDecimal getProductPrice()
 hasPeanutAllergy()
 boolean equals(Object other)
 toString()
+getProductCAtegory()
+ProductBuilder()
 
 }
 class Store{
@@ -120,6 +140,7 @@ setDistToUser(double dist)
 getDistToUser()
 compareTo(@NonNull Store other) 
 toString()
+storeBuilder()
 }
 class StoreProduct{
 Store store
@@ -130,6 +151,7 @@ Store getStore()
 String getProductID()
 String getProductName()
 BigDecimal getPrice()
+
 }
 class Order{
 int orderID
@@ -139,6 +161,7 @@ public Order(int oID, int cID, int sID)String getStoreName()
 int getOrderID()
 int getCustomerID()setDistToUser(double dist)
 boolean equal
+OrderBuilder()
 }
 class OrderLineItem{
 int orderID
@@ -162,10 +185,11 @@ String password
 public User(String firstName,String lastName,String address,String city,String province,String zipCode,int phone,String email,String password)
 boolean verifyUser(String email, String password)
 String getInitials()
+UserBuilder()
 }
 ```
 ### Tier 1 Presentation / User Interface
->This layer generates what the user sees and interacts with. There are currently 13 classes in the presentation layer, which implements our the UI of our app the features "find stores","user accounts","find products" and "get cheapest order". Our UI implements these features by creating a tandem with activities and communicating with the logic layer to present it to the user.
+>This layer generates what the user sees and interacts with. There are currently 13 classes in the presentation layer, which implements our the UI of our app the features "find stores","user accounts","find products", "get cheapest order", "get deals" and "product category" features. Our UI implements these features by creating a tandem with activities and communicating with the logic layer to present it to the user.
 
 
 ### Tier 2 Business / Logic
