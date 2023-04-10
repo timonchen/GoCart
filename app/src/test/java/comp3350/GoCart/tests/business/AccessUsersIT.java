@@ -2,6 +2,7 @@ package comp3350.GoCart.tests.business;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.Before;
@@ -37,7 +38,7 @@ public class AccessUsersIT
         getUser = accessUsers.getUser("testuser1@gmail.com", "testuser1");
 
         assertNotNull(getUser);
-        assertEquals("The user ID of the first user should be 1", 1, getUser.getUserID());
+        assertTrue("The user ID of the first user should be 1", "1".equals(getUser.getUserID()));
         assertEquals("First name should match.", "test1", getUser.getFirstName());
         assertEquals("The last name should match.", "user1", getUser.getLastName());
         assertEquals("The address should match.", "address1", getUser.getAddress());
@@ -63,7 +64,7 @@ public class AccessUsersIT
 
         getUser = accessUsers.getUser("samsmith11@gmail.com", "smith783");
         assertNotNull(getUser);
-        assertEquals("The user ID of the first user should be 3", 3, getUser.getUserID());
+        assertTrue("The user ID of the first user should be 3", "3".equals(getUser.getUserID()));
         assertEquals("The first name should match.", "Samuel", getUser.getFirstName());
         assertEquals("The last name should match.", "Smith", getUser.getLastName());
         assertEquals("The address should match.", "117 Becontree Bay", getUser.getAddress());

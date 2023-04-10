@@ -2,6 +2,7 @@ package comp3350.GoCart.tests.business;
 
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.assertTrue;
 
 import comp3350.GoCart.business.AccessUsers;
 import comp3350.GoCart.objects.User;
@@ -36,13 +37,13 @@ public class UserAccountsTest
 
         System.out.println("\nStarting testAddAndGetUser");
         final List<User> users = new ArrayList<>();
-        users.add(new User(1, "Samuel", "Smith", "117 Becontree Bay", "Winnipeg", "MB", "R2M0T7", 1111111111, "samsmith11@gmail.com", "smith783"));
+        users.add(new User("1", "Samuel", "Smith", "117 Becontree Bay", "Winnipeg", "MB", "R2M0T7", 1111111111, "samsmith11@gmail.com", "smith783"));
         when(userPersistence.getUser("samsmith11@gmail.com", "smith783")).thenReturn(users.get(0));
 
         getUser = accessUsers.getUser("samsmith11@gmail.com", "smith783");
 
         assertNotNull(getUser);
-        assertEquals("The user ID of the first user should be 1", 1, getUser.getUserID());
+        assertTrue("The user ID of the first user should be 1", "1".equals(getUser.getUserID()));
         assertEquals("The first name should match.", "Samuel", getUser.getFirstName());
         assertEquals("The last name should match.", "Smith", getUser.getLastName());
         assertEquals("The address should match.", "117 Becontree Bay", getUser.getAddress());
@@ -65,8 +66,8 @@ public class UserAccountsTest
 
         System.out.println("\nStarting testGetNumUsers");
         final List<User> users = new ArrayList<>();
-        users.add(new User(1, "Samuel", "Smith", "117 Becontree Bay", "Winnipeg", "MB", "R2M 0T7", 1111111111, "samsmith11@gmail.com", "smith783"));
-        users.add(new User(2, "Joey", "Williams", "209 Becontree Bay", "Winnipeg", "MB", "R2M 0T7", 1111118123, "joeywilliams01@gmail.com", "joey621"));
+        users.add(new User("1", "Samuel", "Smith", "117 Becontree Bay", "Winnipeg", "MB", "R2M 0T7", 1111111111, "samsmith11@gmail.com", "smith783"));
+        users.add(new User("2", "Joey", "Williams", "209 Becontree Bay", "Winnipeg", "MB", "R2M 0T7", 1111118123, "joeywilliams01@gmail.com", "joey621"));
 
         when(userPersistence.getNumUsers()).thenReturn(users.size());
 
@@ -85,7 +86,7 @@ public class UserAccountsTest
 
         System.out.println("\nStarting testDeleteUser");
         final List<User> users = new ArrayList<>();
-        users.add(new User(1, "Samuel", "Smith", "117 Becontree Bay", "Winnipeg", "MB", "R2M 0T7", 1111111111, "samsmith11@gmail.com", "smith783"));
+        users.add(new User("1", "Samuel", "Smith", "117 Becontree Bay", "Winnipeg", "MB", "R2M 0T7", 1111111111, "samsmith11@gmail.com", "smith783"));
 
         when(userPersistence.getUser("samsmith11@gmail.com", "smith783")).thenReturn(users.get(0));
         user = accessUsers.getUser("samsmith11@gmail.com", "smith783");
@@ -111,8 +112,8 @@ public class UserAccountsTest
         System.out.println("\nStarting testUpdateUser");
 
         final List<User> users = new ArrayList<>();
-        users.add(new User(1, "Samuel", "Smith", "117 Becontree Bay", "Winnipeg", "MB", "R2M 0T7", 1111111111, "samsmith11@gmail.com", "smith783"));
-        final User updateUser = new User(1, "updatedTest1", "updatedUser1", "117 Becontree Bay", "Winnipeg", "MB", "R2M 0T7", 1111111112, "samsmith11@gmail.com", "smith783");
+        users.add(new User("1", "Samuel", "Smith", "117 Becontree Bay", "Winnipeg", "MB", "R2M 0T7", 1111111111, "samsmith11@gmail.com", "smith783"));
+        final User updateUser = new User("1", "updatedTest1", "updatedUser1", "117 Becontree Bay", "Winnipeg", "MB", "R2M 0T7", 1111111112, "samsmith11@gmail.com", "smith783");
 
         doAnswer(invocation -> {
             users.get(0).updateName("updatedTest1 updatedUser1");

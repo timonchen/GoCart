@@ -113,7 +113,7 @@ public class AccessUsers
 
         if (valid)
         {
-            newUser = new User(0, firstName, lastName, address, city, province, zipCode, phone, email, password);
+            newUser = new User("0", firstName, lastName, address, city, province, zipCode, phone, email, password);
             userPersistence.addUser(newUser);
         }
 
