@@ -1,5 +1,9 @@
 package comp3350.GoCart.business;
 
+/*
+This is the access Stores class and deals with all logic needed for the stores in our app
+IT interacts with the DB through the storePressistence interface
+ */
 
 
 import java.util.ArrayList;
