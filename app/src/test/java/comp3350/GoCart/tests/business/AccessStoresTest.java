@@ -82,4 +82,10 @@ public class AccessStoresTest {
         assertTrue("The proper store should still be returned even if input is incomplete", result.get(0).getStoreName().equals("Walmart"));
     }
 
+    @Test
+    public void testGetStoreByID() {
+        Store result = accessStores.getStoreByID("1");
+        assertTrue("Store id returned should be 1", result.getStoreID().equals("1"));
+    }
+
 }

@@ -12,6 +12,7 @@ import comp3350.GoCart.objects.EmptyStore;
 import comp3350.GoCart.objects.Product;
 import comp3350.GoCart.objects.Store;
 import comp3350.GoCart.objects.StoreProduct;
+import comp3350.GoCart.persistence.ProductPersistence;
 import comp3350.GoCart.persistence.StoreProductPersistence;
 
 public class AccessStoreProduct {
@@ -31,6 +32,13 @@ public class AccessStoreProduct {
     public AccessStoreProduct(StoreProductPersistence storeProductPersistence){
         this();
         this.storeProductPersistence = storeProductPersistence;
+    }
+
+    // Constructor with mock StoreProductPersistence and mock ProductPersistence
+    public AccessStoreProduct(StoreProductPersistence storeProductPersistence, ProductPersistence productPersistence){
+        this.storeProductPersistence = storeProductPersistence;
+        accessProducts = new AccessProducts(productPersistence);
+        storeProducts = null;
     }
 
     public List<StoreProduct> getStoresProducts(String StoreID) {
@@ -225,7 +233,7 @@ public class AccessStoreProduct {
             avgPrice = avgPrice.add(matchingStoreProducts.get(i).getPrice());
         }
 
-        // Divide by length to find average
+        // Divide by length and round down to 2 decimal places to find average
         avgPrice = avgPrice.divide(BigDecimal.valueOf(length), 2, RoundingMode.DOWN);
 
         return avgPrice;
