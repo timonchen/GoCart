@@ -68,10 +68,12 @@ public class AccessStores{
         return Collections.unmodifiableList(results);
     }
 
+    // Given a list of stores, get all elements in the list which has the same name as storeWanted
     private List<Store> matchStores(String storeWanted, List<Store> stores) {
-        List<Store> results = new ArrayList<Store>();
-        storeWanted = storeWanted.toLowerCase();
+        List<Store> results = new ArrayList<>();
+        storeWanted = storeWanted.toLowerCase();    // store name of the store that the user wants
 
+        // Go through all stores and
         for (int i = 0; i < stores.size(); i++) {
             Store store = stores.get(i);
             String storeName = store.getStoreName().toLowerCase();

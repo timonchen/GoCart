@@ -174,6 +174,7 @@ public class HomeActivity extends Activity {
         }
     }
 
+    // Updates what is displayed in the activity based on if user is logged ins
     private void updateActivity() {
         if (isLoggedIn) {
 
